@@ -78,7 +78,7 @@ This front-end application connects to Group 8's Credentials API backend, Group 
  
 - **MD Khan (Shanto)** 
 
-- **Pham Nguyen** Designed the main page layout and interface on Figma, focusing on clear navigation, visual hierarchy, and user-friendly interaction flow to enhance the overall user experience.
+- **Pham Nguyen** - Designed the main page layout and interface on Figma, focusing on clear navigation, visual hierarchy, and user-friendly interaction flow to enhance the overall user experience.
 
 ## 🗺️ Development Roadmap
 
