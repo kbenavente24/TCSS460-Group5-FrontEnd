@@ -68,7 +68,7 @@ Our application must implement the following core functionality:
 
 ## 🔌 API Integration
 
-This front-end application connects to Group 8's Credentials API backend, Group 6's TV Show API, and Group 7's Movie API;.
+This front-end application connects to Group 8's Credentials API backend, Group 6's TV Show API, and Group 7's Movie API.
 
 ## 👥 Team Contributions
 
