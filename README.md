@@ -27,6 +27,11 @@ The standout feature of our application is the **personalized Top 10 ranking sys
 3. **Select Your Favorites** - Browse results and pick shows or movies
 4. **Rank Your Top 10** - Arrange your selections in your preferred order
 
+## 🎨 Design Assets
+View our complete mockup designs and user flow diagrams on Figma:
+
+[Group 5 Design File](https://www.figma.com/design/Rd5diwQyQHicwcu4e7WKx7/group-5?node-id=18-2&t=BP7qIy3ceWIuPv9N-1)
+
 ## ✅ Minimum Requirements
 
 Our application must implement the following core functionality:
@@ -72,7 +77,7 @@ This front-end application connects to Group 8's Credentials API backend, Group 
 
 ## 👥 Team Contributions
 
-- **Kobe Benavente** 
+- **Kobe Benavente** Designed the the login page layout/flow, ensuring that we had conceptual designs for logging in, registering, resetting a password, and password reset confirmation. I also assisted with additional design ideas for the main pages as well. 
  
 - **Balkirat Singh** I put together the Top 10 Dashboard page, including the layout, buttons, and the cards that represent each list. I also built the Create New List popup and added the fields, buttons, and placeholders for the search results and Top 10 ranking. I went through all three APIs assigned to our group to make sure the design lines up with the data and features we can actually pull from the backend.
   
