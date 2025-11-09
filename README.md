@@ -74,8 +74,8 @@ This front-end application connects to Group 8's Credentials API backend, Group 
 
 - **Kobe Benavente** 
  
-- **Balkirat Singh** 
- 
+- **Balkirat Singh** I put together the Top 10 Dashboard page, including the layout, buttons, and the cards that represent each list. I also built the Create New List popup and added the fields, buttons, and placeholders for the search results and Top 10 ranking. I went through all three APIs assigned to our group to make sure the design lines up with the data and features we can actually pull from the backend.
+- 
 - **MD Khan (Shanto)** - Helped with the Figma designs for the Alpha Sprint, including the Login page, Movies page, and Top-10 list builder screen. Also assisted with exporting and uploading the design assets into the repository so the team can reference them during development.
 
 - **Pham Nguyen** - Designed the main page layout and interface on Figma, focusing on clear navigation, visual hierarchy, and user-friendly interaction flow to enhance the overall user experience.
