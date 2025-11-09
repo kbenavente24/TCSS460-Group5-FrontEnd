@@ -76,7 +76,7 @@ This front-end application connects to Group 8's Credentials API backend, Group 
  
 - **Balkirat Singh** 
  
-- **MD Khan (Shanto)** 
+- **MD Khan (Shanto)** - Helped with the Figma designs for the Alpha Sprint, including the Login page, Movies page, and Top-10 list builder screen. Also assisted with exporting and uploading the design assets into the repository so the team can reference them during development.
 
 - **Pham Nguyen** - Designed the main page layout and interface on Figma, focusing on clear navigation, visual hierarchy, and user-friendly interaction flow to enhance the overall user experience.
 
