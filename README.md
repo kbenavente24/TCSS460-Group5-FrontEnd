@@ -9,11 +9,11 @@ Our web application allows users to interact with comprehensive TV show and movi
 The standout feature of our application is the **personalized Top 10 ranking system**. Rather than simply browsing content, users can create custom-themed Top 10 lists that reflect their unique tastes and preferences.
 
 **Example Top 10 Lists:**
-- 🎬 My Top 10 Action Movies
-- 📅 My Top 10 Shows of 2024
-- 🔴 My Top 10 Netflix Originals
-- ☕ My Top 10 Comfort Watches
-- 💎 My Top 10 Underrated Gems
+-  My Top 10 Action Movies
+-  My Top 10 Shows of 2024
+-  My Top 10 Netflix Originals
+-  My Top 10 Comfort Watches
+-  My Top 10 Underrated Gems
 
 ### 🔄 How It Works
 
