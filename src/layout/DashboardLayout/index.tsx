@@ -10,11 +10,9 @@ import Toolbar from '@mui/material/Toolbar';
 // project import
 import Header from './Header';
 import Footer from './Footer';
-import Loader from 'components/Loader';
 // import Breadcrumbs from 'components/@extended/Breadcrumbs';
 
 import useConfig from 'hooks/useConfig';
-import { useGetMenuMaster } from 'api/menu';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -23,10 +21,7 @@ interface Props {
 }
 
 export default function DashboardLayout({ children }: Props) {
-  const { menuMasterLoading } = useGetMenuMaster();
   const { container } = useConfig();
-
-  if (menuMasterLoading) return <Loader />;
 
   return (
     <Box sx={{ width: '100%' }}>
