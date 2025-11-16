@@ -99,6 +99,7 @@ This front-end application connects to:
 - **MD Khan (Shanto)** - I added TV shows list and detail pages with mock data, implemented the change password form with validation, and fixed environment variable handling to prevent application crashes. These features add TV show browsing functionality and password management UI to the dashboard.
 - **Kobe Benavente** -   Developed the Movies page with single-view and multi-view modes, pagination, and navigation features. Redesigned parts of the application UI. Successfully deployed the application to Vercel by configuring environment variables, resolving build errors, and updating project documentation to Beta I status.
 - **Pham Nguyen** - I updated the register and login forms to meet the 3rd-party Auth API requirements and ensured the client-side validation matched the server-side rules. I integrated the web app’s functionality with the external Auth API to enable full user registration and authentication. I also updated src/utils/authOptions.tsx to ensure seamless compatibility with the new API.
+- **Balkirat Singh** -  We had a small bug where our Supabase database had, for some reason, paused and, when trying to restore it, it was causing issues. So our render wasn't deploying properly. So I ended up making a new Supabase database for our credentials API and updated the appropriate team. Also helped Shanto with some of the mock data and validation implementations.
 
 ## 📅 Beta Sprint Meetings
 
