@@ -4,7 +4,7 @@ This repository contains the Group 5 Front-End application for the TCSS 460 cour
 
 ## 🎯 Overview
 
-Our web application allows users to interact with comprehensive TV show and movie information. Users can search, filter, view detailed information, and manage their entertainment preferences all in one place.
+Our web application will allow users to interact with comprehensive TV show and movie information. Users will be able to search, filter, and view detailed information all in one place.
 
 The standout feature of our application is the **personalized Top 10 ranking system**. Rather than simply browsing content, users can create custom-themed Top 10 lists that reflect their unique tastes and preferences.
 
@@ -35,12 +35,12 @@ View our complete mockup designs and user flow diagrams on Figma:
 
 ## 📊 Current Status
 
-**Beta Version I** - The application is now in active development with core features implemented. Users can browse movies, manage authentication, and navigate through a responsive UI.
+**Beta Version I** - The application is now in active development with core features implemented. Users can browse movies and tv shows via mock data, manage authentication, and navigate through a responsive UI.
 
 ## ✨ Current Features
 
 ### 🎥 Movies
-- **Browse Movies** - View paginated grid of movies (6 per page)
+- **Browse Movies** - View paginated grid of movies (6 per page currently--more options will be implemented).
 - **Single Movie View** - Detailed information including poster, title, rating, runtime, genres, overview, director, budget, and revenue
 - **Navigation** - Cycle through movies using left/right arrows
 - **View Modes** - Toggle between single movie view and multi-movie grid
@@ -59,50 +59,7 @@ View our complete mockup designs and user flow diagrams on Figma:
 - **Custom Branding** - "Group 5's Movie & TV Show App" branding
 - **Navigation Header** - Quick access to Home, My Top 10s, Movies, and TV Shows
 - **Welcome Page** - Homepage with current functionality overview
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/kbenavente24/TCSS460-Group5-FrontEnd.git
-cd TCSS460-Group5-FrontEnd
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Set up environment variables
-Create a `.env` file in the root directory with the following:
-```
-NEXTAUTH_SECRET=your-secret-key
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_JWT_TIMEOUT=86400
-```
-
-4. Run the development server
-```bash
-npm run dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-### Available Scripts
-
-- `npm run dev` - Start development server on port 3000
-- `npm run build` - Build the application for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint errors
-- `npm run prettier` - Format code with Prettier
-
+  
 ## 🔌 API Integration
 
 This front-end application connects to:
@@ -120,9 +77,7 @@ This front-end application connects to:
 ### Phase 2: Minimum Requirements (In Progress)
 - [x] User authentication flow (Register/Login/Forgot Password/Change Password)
 - [x] Movies: Search, view (paginated list + individual)
-- [ ] Movies: Update functionality
-- [ ] TV Shows: Search, view (paginated list + individual)
-- [ ] TV Shows: Update functionality
+- [x] TV Shows: Search, view (paginated list + individual)
 - [x] Basic UI components and layouts
 
 ### Phase 3: Top 10 Lists Feature
