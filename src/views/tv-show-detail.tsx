@@ -14,7 +14,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 
 // icons
 import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
