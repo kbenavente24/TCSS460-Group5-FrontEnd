@@ -96,7 +96,24 @@ This front-end application connects to:
 
 - **MD Khan (Shanto)** - I added TV shows list and detail pages with mock data, implemented the change password form with validation, and fixed environment variable handling to prevent application crashes. These features add TV show browsing functionality and password management UI to the dashboard.
 - **Kobe Benavente** -   Developed the Movies page with single-view and multi-view modes, pagination, and navigation features. Redesigned parts of the application UI. Successfully deployed the application to Vercel by configuring environment variables, resolving build errors, and updating project documentation to Beta I status.
-  
+
+## 📅 Beta Sprint Meetings
+
+### Meeting Overview
+The team conducted regular meetings throughout the Beta Sprint to coordinate development efforts and resolve technical challenges.
+
+**Primary Communication Channel:** Discord
+
+**Meeting Activities:**
+- **Role & Responsibility Division** - Team members met to assign development tasks and establish ownership of different features (Movies page, TV Shows page, authentication, UI/UX design)
+- **Initial Setup & Configuration** - Coordinated environment setup, API integration planning, and development workflow establishment
+- **Bug Resolution** - Collaborated to identify and fix a critical bug in the Credentials API integration affecting user authentication
+- **Progress Sync** - Regular check-ins to discuss implementation progress, share code updates, and resolve merge conflicts
+
+**Meeting Format:**
+- Platform: Discord voice channels and text chat
+- Frequency: Multiple sessions throughout the sprint as needed
+- Format: Synchronous discussions for decision-making and asynchronous updates via text channels
 ---
 
 **Version:** Beta I
