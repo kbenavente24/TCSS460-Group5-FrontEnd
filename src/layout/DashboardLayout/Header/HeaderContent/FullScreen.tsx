@@ -37,7 +37,6 @@ export default function FullScreen() {
     };
   }, []);
 
-  const iconBackColorOpen = theme.palette.mode === ThemeMode.DARK ? 'background.default' : 'grey.100';
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
       <Tooltip title={open ? 'Exit Fullscreen' : 'Fullscreen'}>
