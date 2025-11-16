@@ -1,5 +1,7 @@
 # 📺 TCSS 460 Group 5 Front-end Version Beta I
 
+Production URL: https://tcss460-group5.vercel.app
+
 This repository contains the Group 5 Front-End application for the TCSS 460 course project. This web interface provides an interactive platform for discovering and ranking TV shows and movies, connecting to our assigned TV show, Movies, and Credentials API backend.
 
 ## 🎯 Overview
