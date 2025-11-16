@@ -95,7 +95,8 @@ This front-end application connects to:
 ## 👥 Team Contributions
 
 - **MD Khan (Shanto)** - I added TV shows list and detail pages with mock data, implemented the change password form with validation, and fixed environment variable handling to prevent application crashes. These features add TV show browsing functionality and password management UI to the dashboard.
-
+- **Kobe Benavente** -   Developed the Movies page with single-view and multi-view modes, pagination, and navigation features. Redesigned parts of the application UI. Successfully deployed the application to Vercel by configuring environment variables, resolving build errors, and updating project documentation to Beta I status.
+  
 ---
 
 **Version:** Beta I
