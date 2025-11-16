@@ -3,33 +3,70 @@ import { getSession } from 'next-auth/react';
 
 // ==============================|| ENVIRONMENT VALIDATION ||============================== //
 
-if (!process.env.CREDENTIALS_API_URL) {
-  throw new Error(
-    'CREDENTIALS_API_URL environment variable is not set. ' +
-      'Please add CREDENTIALS_API_URL to your .env and/or next.config.js file(s). ' +
-      'Example: CREDENTIALS_API_URL=http://localhost:8008'
-  );
-}
+// Use defaults for development, but log warnings
+const getCredentialsApiUrl = () => {
+  const url = process.env.CREDENTIALS_API_URL || process.env.NEXT_PUBLIC_CREDENTIALS_API_URL;
+  if (!url) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        '⚠️ CREDENTIALS_API_URL environment variable is not set. ' +
+          'Using placeholder. Please add CREDENTIALS_API_URL to your .env.local file. ' +
+          'Example: CREDENTIALS_API_URL=http://localhost:8008'
+      );
+      return 'http://localhost:8008'; // Default for development
+    }
+    throw new Error(
+      'CREDENTIALS_API_URL environment variable is not set. ' +
+        'Please add CREDENTIALS_API_URL to your .env and/or next.config.js file(s). ' +
+        'Example: CREDENTIALS_API_URL=http://localhost:8008'
+    );
+  }
+  return url;
+};
 
-if (!process.env.MESSAGES_WEB_API_URL) {
-  throw new Error(
-    'MESSAGES_WEB_API_URL environment variable is not set. ' +
-      'Please add MESSAGES_WEB_API_URL to your .env and/or next.config.js file(s). ' +
-      'Example: MESSAGES_WEB_API_URL=http://localhost:8000'
-  );
-}
+const getMessagesApiUrl = () => {
+  const url = process.env.MESSAGES_WEB_API_URL || process.env.NEXT_PUBLIC_MESSAGES_WEB_API_URL;
+  if (!url) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        '⚠️ MESSAGES_WEB_API_URL environment variable is not set. ' +
+          'Using placeholder. Please add MESSAGES_WEB_API_URL to your .env.local file. ' +
+          'Example: MESSAGES_WEB_API_URL=http://localhost:8000'
+      );
+      return 'http://localhost:8000'; // Default for development
+    }
+    throw new Error(
+      'MESSAGES_WEB_API_URL environment variable is not set. ' +
+        'Please add MESSAGES_WEB_API_URL to your .env and/or next.config.js file(s). ' +
+        'Example: MESSAGES_WEB_API_URL=http://localhost:8000'
+    );
+  }
+  return url;
+};
 
-if (!process.env.MESSAGES_WEB_API_KEY) {
-  throw new Error(
-    'MESSAGE_WEB_API_KEY environment variable is not set. ' +
-      'Please add MESSAGE_WEB_API_KEY to your .env and/or next.config.js file(s). ' +
-      'Example: MESSAGE_WEB_API_KEY=your-api-key-here'
-  );
-}
+const getMessagesApiKey = () => {
+  const key = process.env.MESSAGES_WEB_API_KEY || process.env.NEXT_PUBLIC_MESSAGES_WEB_API_KEY;
+  if (!key) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        '⚠️ MESSAGES_WEB_API_KEY environment variable is not set. ' +
+          'Using placeholder. Please add MESSAGES_WEB_API_KEY to your .env.local file. ' +
+          'Example: MESSAGES_WEB_API_KEY=your-api-key-here'
+      );
+      return 'dev-api-key-placeholder'; // Default for development
+    }
+    throw new Error(
+      'MESSAGES_WEB_API_KEY environment variable is not set. ' +
+        'Please add MESSAGES_WEB_API_KEY to your .env and/or next.config.js file(s). ' +
+        'Example: MESSAGES_WEB_API_KEY=your-api-key-here'
+    );
+  }
+  return key;
+};
 
 // ==============================|| CREDENTIALS SERVICE ||============================== //
 
-const credentialsService = axios.create({ baseURL: process.env.CREDENTIALS_API_URL });
+const credentialsService = axios.create({ baseURL: getCredentialsApiUrl() });
 
 credentialsService.interceptors.request.use(
   async (config) => {
@@ -62,11 +99,11 @@ credentialsService.interceptors.response.use(
 
 // ==============================|| MESSAGES SERVICE ||============================== //
 
-const messagesService = axios.create({ baseURL: process.env.MESSAGES_WEB_API_URL });
+const messagesService = axios.create({ baseURL: getMessagesApiUrl() });
 
 messagesService.interceptors.request.use(
   async (config) => {
-    config.headers['X-API-Key'] = process.env.MESSAGES_WEB_API_KEY;
+    config.headers['X-API-Key'] = getMessagesApiKey();
     return config;
   },
   (error) => Promise.reject(error)
