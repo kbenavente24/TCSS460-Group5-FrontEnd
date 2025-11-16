@@ -51,8 +51,22 @@ export default function SamplePage() {
           </ListItem>
           <ListItem>
             <ListItemText
+              primary="TV Shows Page"
+              secondary="Browse and view detailed information about TV shows with single and multi-view modes"
+              primaryTypographyProps={{ variant: 'h5' }}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
               primary="User Authentication"
-              secondary="Login, logout, and session management"
+              secondary="Login, register, logout, and session management"
+              primaryTypographyProps={{ variant: 'h5' }}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="Password Reset"
+              secondary="Reset your password from the profile menu"
               primaryTypographyProps={{ variant: 'h5' }}
             />
           </ListItem>
