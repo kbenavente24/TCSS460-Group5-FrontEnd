@@ -94,7 +94,7 @@ This front-end application connects to:
 
 ## 👥 Team Contributions
 
-** MD Khan (Shanto)** - I added TV shows list and detail pages with mock data, implemented the change password form with validation, and fixed environment variable handling to prevent application crashes. These features add TV show browsing functionality and password management UI to the dashboard.
+- **MD Khan (Shanto)** - I added TV shows list and detail pages with mock data, implemented the change password form with validation, and fixed environment variable handling to prevent application crashes. These features add TV show browsing functionality and password management UI to the dashboard.
 
 ---
 
