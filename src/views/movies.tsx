@@ -265,7 +265,7 @@ export default function MoviesPage() {
   const displayedMovies = viewMode === 'multi' ? MOCK_MOVIES.slice((page - 1) * moviesPerPage, page * moviesPerPage) : [selectedMovie];
 
   return (
-    <Box sx={{ height: 'calc(100vh - 100px)', p: 3 }}>
+    <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
         <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
@@ -313,10 +313,24 @@ export default function MoviesPage() {
       <MainCard
         sx={{
           width: '100%',
-          height: 'calc(100% - 60px)',
+          height: 'calc(100% - 50px)',
           overflow: 'auto',
+          overflowY: 'scroll',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          '&::-webkit-scrollbar': {
+            width: '12px'
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: 'background.paper'
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#424242',
+            borderRadius: '6px',
+            '&:hover': {
+              backgroundColor: '#303030'
+            }
+          }
         }}
       >
         {viewMode === 'single' ? (

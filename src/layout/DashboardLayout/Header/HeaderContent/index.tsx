@@ -25,7 +25,7 @@ export default function HeaderContent() {
       <Typography
         variant="h3"
         component={Link}
-        href="/sample-page"
+        href="/home"
         sx={{
           fontWeight: 700,
           color: '#FFFFFF',
@@ -45,7 +45,7 @@ export default function HeaderContent() {
       {/* Navigation Links - Top Right */}
       {!downLG && (
         <Stack direction="row" spacing={4} sx={{ mr: 3 }}>
-          <Button component={Link} href="/sample-page" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+          <Button component={Link} href="/home" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
             Home
           </Button>
           <Button component={Link} href="/top10" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
