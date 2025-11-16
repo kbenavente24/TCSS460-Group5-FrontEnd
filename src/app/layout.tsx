@@ -7,8 +7,8 @@ import ProviderWrapper from './ProviderWrapper';
 import { publicSans } from 'config';
 
 export const metadata: Metadata = {
-  title: 'TCSS 460 UI Template',
-  description: 'TCSS 460 UI Template'
+  title: "Group 5's Movie & TV Show App",
+  description: "Group 5's Movie & TV Show Application"
 };
 
 export const viewport: Viewport = {

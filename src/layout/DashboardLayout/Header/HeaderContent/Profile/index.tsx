@@ -16,6 +16,10 @@ import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 // project import
 import Avatar from 'components/@extended/Avatar';
@@ -24,9 +28,12 @@ import Transitions from 'components/@extended/Transitions';
 import IconButton from 'components/@extended/IconButton';
 
 import useUser from 'hooks/useUser';
+import ModeSwitch from 'components/ModeSwitch';
 
 // assets
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
+import KeyOutlined from '@ant-design/icons/KeyOutlined';
+import BulbOutlined from '@ant-design/icons/BulbOutlined';
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
@@ -38,6 +45,11 @@ export default function Profile() {
   const handleLogout = () => {
     signOut({ redirect: false });
     router.push('/login');
+  };
+
+  const handleResetPassword = () => {
+    setOpen(false);
+    router.push('/reset-password');
   };
 
   const anchorRef = useRef<any>(null);
@@ -58,7 +70,7 @@ export default function Profile() {
       <ButtonBase
         sx={(theme) => ({
           p: 0.25,
-          borderRadius: 1,
+          borderRadius: '50%',
           '&:hover': {
             bgcolor: 'secondary.lighter',
             ...theme.applyStyles('dark', {
@@ -76,14 +88,7 @@ export default function Profile() {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        {user && (
-          <Stack direction="row" spacing={1.25} alignItems="center" sx={{ p: 0.5 }}>
-            <Avatar alt={user.name} src={user.avatar} size="sm" />
-            <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-              {user.name && user.name}
-            </Typography>
-          </Stack>
-        )}
+        {user && <Avatar alt={user.name} src={user.avatar} size="sm" />}
       </ButtonBase>
       <Popper
         placement="bottom-end"
@@ -130,15 +135,33 @@ export default function Profile() {
                           </Stack>
                         )}
                       </Grid>
-                      <Grid item>
-                        <Tooltip title="Logout">
-                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={handleLogout}>
-                            <LogoutOutlined />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
                     </Grid>
                   </CardContent>
+                  <Box sx={{ borderTop: 1, borderColor: 'divider' }}>
+                    <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <BulbOutlined />
+                        </ListItemIcon>
+                        <ListItemText primary="Theme" />
+                        <Box sx={{ ml: 'auto' }}>
+                          <ModeSwitch />
+                        </Box>
+                      </ListItemButton>
+                      <ListItemButton onClick={handleResetPassword}>
+                        <ListItemIcon>
+                          <KeyOutlined />
+                        </ListItemIcon>
+                        <ListItemText primary="Reset Password" />
+                      </ListItemButton>
+                      <ListItemButton onClick={handleLogout}>
+                        <ListItemIcon>
+                          <LogoutOutlined />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                      </ListItemButton>
+                    </List>
+                  </Box>
                 </MainCard>
               </ClickAwayListener>
             </Paper>

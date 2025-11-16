@@ -46,11 +46,11 @@ export default function FullScreen() {
           variant="light"
           sx={[
             {
-              color: 'text.primary'
+              color: '#FFFFFF'
             },
             open
               ? {
-                  bgcolor: iconBackColorOpen
+                  bgcolor: 'rgba(255, 255, 255, 0.1)'
                 }
               : {
                   bgcolor: 'transparent'

@@ -2,29 +2,64 @@
 import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+// next
+import Link from 'next/link';
 
 // project import
 import Profile from './Profile';
 import FullScreen from './FullScreen';
 import MobileSection from './MobileSection';
 
-import { MenuOrientation } from 'config';
-import useConfig from 'hooks/useConfig';
-import DrawerHeader from 'layout/DashboardLayout/Drawer/DrawerHeader';
-import ModeSwitch from 'components/ModeSwitch';
-
 // ==============================|| HEADER - CONTENT ||============================== //
 
 export default function HeaderContent() {
-  const { menuOrientation } = useConfig();
-
   const downLG = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
 
   return (
     <>
-      {menuOrientation === MenuOrientation.HORIZONTAL && !downLG && <DrawerHeader open={true} />}
+      {/* App Name - Top Left */}
+      <Typography
+        variant="h3"
+        component={Link}
+        href="/sample-page"
+        sx={{
+          fontWeight: 700,
+          color: '#FFFFFF',
+          textDecoration: 'none',
+          ml: 2,
+          whiteSpace: 'nowrap',
+          '&:hover': {
+            color: '#E0E0E0'
+          }
+        }}
+      >
+        Group 5&apos;s Movie & TV Show App
+      </Typography>
+
       <Box sx={{ width: '100%', ml: 1 }} />
-      <ModeSwitch />
+
+      {/* Navigation Links - Top Right */}
+      {!downLG && (
+        <Stack direction="row" spacing={4} sx={{ mr: 3 }}>
+          <Button component={Link} href="/sample-page" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+            Home
+          </Button>
+          <Button component={Link} href="/top10" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+            My Top 10s
+          </Button>
+          <Button component={Link} href="/movies" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+            Movies
+          </Button>
+          <Button component={Link} href="/tv-shows" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+            TV Shows
+          </Button>
+        </Stack>
+      )}
+
       {!downLG && <FullScreen />}
       {!downLG && <Profile />}
       {downLG && <MobileSection />}
