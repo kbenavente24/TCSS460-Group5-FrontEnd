@@ -27,19 +27,11 @@ const getCredentialsApiUrl = () => {
 const getMessagesApiUrl = () => {
   const url = process.env.MESSAGES_WEB_API_URL || process.env.NEXT_PUBLIC_MESSAGES_WEB_API_URL;
   if (!url) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(
-        '⚠️ MESSAGES_WEB_API_URL environment variable is not set. ' +
-          'Using placeholder. Please add MESSAGES_WEB_API_URL to your .env.local file. ' +
-          'Example: MESSAGES_WEB_API_URL=http://localhost:8000'
-      );
-      return 'http://localhost:8000'; // Default for development
-    }
-    throw new Error(
-      'MESSAGES_WEB_API_URL environment variable is not set. ' +
-        'Please add MESSAGES_WEB_API_URL to your .env and/or next.config.js file(s). ' +
-        'Example: MESSAGES_WEB_API_URL=http://localhost:8000'
+    console.warn(
+      '⚠️ MESSAGES_WEB_API_URL environment variable is not set. ' +
+        'Using placeholder. Messages API will not be functional.'
     );
+    return 'http://localhost:8000'; // Placeholder - messages API not used
   }
   return url;
 };
@@ -47,19 +39,11 @@ const getMessagesApiUrl = () => {
 const getMessagesApiKey = () => {
   const key = process.env.MESSAGES_WEB_API_KEY || process.env.NEXT_PUBLIC_MESSAGES_WEB_API_KEY;
   if (!key) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(
-        '⚠️ MESSAGES_WEB_API_KEY environment variable is not set. ' +
-          'Using placeholder. Please add MESSAGES_WEB_API_KEY to your .env.local file. ' +
-          'Example: MESSAGES_WEB_API_KEY=your-api-key-here'
-      );
-      return 'dev-api-key-placeholder'; // Default for development
-    }
-    throw new Error(
-      'MESSAGES_WEB_API_KEY environment variable is not set. ' +
-        'Please add MESSAGES_WEB_API_KEY to your .env and/or next.config.js file(s). ' +
-        'Example: MESSAGES_WEB_API_KEY=your-api-key-here'
+    console.warn(
+      '⚠️ MESSAGES_WEB_API_KEY environment variable is not set. ' +
+        'Using placeholder. Messages API will not be functional.'
     );
+    return 'placeholder-api-key'; // Placeholder - messages API not used
   }
   return key;
 };
