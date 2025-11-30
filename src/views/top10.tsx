@@ -47,7 +47,7 @@ interface Top10List {
 }
 
 export default function Top10Page() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [lists, setLists] = useState<Top10List[]>([]);
   const [selectedList, setSelectedList] = useState<Top10List | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
@@ -254,26 +254,14 @@ export default function Top10Page() {
           <Box>
             {/* Back Button and Share Button */}
             <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
-              <Button
-                startIcon={<LeftOutlined />}
-                onClick={handleBackToDashboard}
-              >
+              <Button startIcon={<LeftOutlined />} onClick={handleBackToDashboard}>
                 Save and Return to Dashboard
               </Button>
               <Stack direction="row" spacing={2}>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  startIcon={<DeleteOutlined />}
-                  onClick={() => handleDeleteClick(selectedList)}
-                >
+                <Button variant="outlined" color="error" startIcon={<DeleteOutlined />} onClick={() => handleDeleteClick(selectedList)}>
                   Delete List
                 </Button>
-                <Button
-                  variant="contained"
-                  startIcon={<ShareAltOutlined />}
-                  onClick={handleShareList}
-                >
+                <Button variant="contained" startIcon={<ShareAltOutlined />} onClick={handleShareList}>
                   Share Your List
                 </Button>
               </Stack>
@@ -387,13 +375,7 @@ export default function Top10Page() {
               </Typography>
 
               {/* Create New List Button */}
-              <Button
-                variant="contained"
-                size="large"
-                startIcon={<PlusOutlined />}
-                onClick={handleCreateNewList}
-                sx={{ mt: 2, mb: 3 }}
-              >
+              <Button variant="contained" size="large" startIcon={<PlusOutlined />} onClick={handleCreateNewList} sx={{ mt: 2, mb: 3 }}>
                 Create New List
               </Button>
 
@@ -508,11 +490,7 @@ export default function Top10Page() {
         <DialogTitle>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="h3">Create New List</Typography>
-            <Button
-              onClick={handleCloseDialog}
-              sx={{ minWidth: 'auto', p: 1 }}
-              color="inherit"
-            >
+            <Button onClick={handleCloseDialog} sx={{ minWidth: 'auto', p: 1 }} color="inherit">
               <CloseOutlined />
             </Button>
           </Box>
@@ -543,7 +521,7 @@ export default function Top10Page() {
             {/* Max Items Info */}
             <Box sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
               <Typography variant="body2" color="text.secondary">
-                You can add up to 10 items to your list. You'll be able to rank and reorder them after creation.
+                You can add up to 10 items to your list. You&apos;ll be able to rank and reorder them after creation.
               </Typography>
             </Box>
           </Stack>
@@ -552,12 +530,7 @@ export default function Top10Page() {
           <Button onClick={handleCloseDialog} variant="outlined" size="large">
             Cancel
           </Button>
-          <Button
-            onClick={handleCreateList}
-            variant="contained"
-            size="large"
-            disabled={!listName}
-          >
+          <Button onClick={handleCreateList} variant="contained" size="large" disabled={!listName}>
             Create List
           </Button>
         </DialogActions>
@@ -699,9 +672,7 @@ export default function Top10Page() {
       <Dialog open={deleteConfirmOpen} onClose={handleCloseDeleteConfirm} maxWidth="xs" fullWidth>
         <DialogTitle>Delete List?</DialogTitle>
         <DialogContent>
-          <Typography>
-            Are you sure you want to delete &quot;{listToDelete?.title}&quot;? This action cannot be undone.
-          </Typography>
+          <Typography>Are you sure you want to delete &quot;{listToDelete?.title}&quot;? This action cannot be undone.</Typography>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
           <Button onClick={handleCloseDeleteConfirm} variant="outlined">

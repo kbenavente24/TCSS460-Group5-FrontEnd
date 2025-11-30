@@ -11,10 +11,7 @@ export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const userId = session.id;
@@ -56,13 +53,9 @@ export async function GET(request: NextRequest) {
       success: true,
       data: listsWithCounts
     });
-
   } catch (error) {
     console.error('Error fetching lists:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch lists' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch lists' }, { status: 500 });
   }
 }
 
@@ -73,10 +66,7 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const userId = session.id;
@@ -85,18 +75,12 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!title || !type) {
-      return NextResponse.json(
-        { error: 'Title and type are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Title and type are required' }, { status: 400 });
     }
 
     // Validate type
     if (!['movies', 'tv-shows', 'mixed'].includes(type)) {
-      return NextResponse.json(
-        { error: 'Invalid list type' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid list type' }, { status: 400 });
     }
 
     // Insert the new list
@@ -112,28 +96,22 @@ export async function POST(request: NextRequest) {
         updated_at as "updatedAt"
     `;
 
-    const result = await pool.query(insertQuery, [
-      userId,
-      title,
-      type,
-      description || null
-    ]);
+    const result = await pool.query(insertQuery, [userId, title, type, description || null]);
 
     const newList = result.rows[0];
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        ...newList,
-        itemCount: 0
-      }
-    }, { status: 201 });
-
+    return NextResponse.json(
+      {
+        success: true,
+        data: {
+          ...newList,
+          itemCount: 0
+        }
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error creating list:', error);
-    return NextResponse.json(
-      { error: 'Failed to create list' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create list' }, { status: 500 });
   }
 }

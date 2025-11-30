@@ -27,10 +27,7 @@ const getCredentialsApiUrl = () => {
 const getMessagesApiUrl = () => {
   const url = process.env.MESSAGES_WEB_API_URL || process.env.NEXT_PUBLIC_MESSAGES_WEB_API_URL;
   if (!url) {
-    console.warn(
-      '⚠️ MESSAGES_WEB_API_URL environment variable is not set. ' +
-        'Using placeholder. Messages API will not be functional.'
-    );
+    console.warn('⚠️ MESSAGES_WEB_API_URL environment variable is not set. ' + 'Using placeholder. Messages API will not be functional.');
     return 'http://localhost:8000'; // Placeholder - messages API not used
   }
   return url;
@@ -39,10 +36,7 @@ const getMessagesApiUrl = () => {
 const getMessagesApiKey = () => {
   const key = process.env.MESSAGES_WEB_API_KEY || process.env.NEXT_PUBLIC_MESSAGES_WEB_API_KEY;
   if (!key) {
-    console.warn(
-      '⚠️ MESSAGES_WEB_API_KEY environment variable is not set. ' +
-        'Using placeholder. Messages API will not be functional.'
-    );
+    console.warn('⚠️ MESSAGES_WEB_API_KEY environment variable is not set. ' + 'Using placeholder. Messages API will not be functional.');
     return 'placeholder-api-key'; // Placeholder - messages API not used
   }
   return key;

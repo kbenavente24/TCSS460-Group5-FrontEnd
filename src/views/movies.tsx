@@ -54,7 +54,8 @@ const MOCK_MOVIES = [
     genres: 'Drama, History, Thriller',
     release_date: '2024-11-07T00:00:00.000Z',
     runtime_minutes: 94,
-    overview: 'During the 1972 Munich Olympics, an American sports broadcasting crew finds itself thrust into covering the hostage crisis involving Israeli athletes.',
+    overview:
+      'During the 1972 Munich Olympics, an American sports broadcasting crew finds itself thrust into covering the hostage crisis involving Israeli athletes.',
     budget: '0',
     revenue: '852000',
     mpa_rating: 'R',
@@ -101,7 +102,8 @@ const MOCK_MOVIES = [
     genres: 'Comedy, Romance',
     release_date: '2024-06-27T00:00:00.000Z',
     runtime_minutes: 114,
-    overview: 'The only thing worse than being the assistant to a high-maintenance movie star who doesn&apos;t take you seriously? Finding out he&apos;s smitten with your mom.',
+    overview:
+      'The only thing worse than being the assistant to a high-maintenance movie star who doesn&apos;t take you seriously? Finding out he&apos;s smitten with your mom.',
     budget: '0',
     revenue: '0',
     mpa_rating: 'PG-13',
@@ -235,7 +237,7 @@ export default function MoviesPage() {
   const moviesPerPage = 6;
 
   // Cache to store fetched movies and reduce redundant API calls
-  const [movieCache, setMovieCache] = useState<Map<string, { data: Movie[], totalPages: number, timestamp: number }>>(new Map());
+  const [movieCache, setMovieCache] = useState<Map<string, { data: Movie[]; totalPages: number; timestamp: number }>>(new Map());
 
   // Fetch movies from API with debounce for search
   useEffect(() => {
@@ -254,7 +256,7 @@ export default function MoviesPage() {
         const now = Date.now();
         const cacheExpiry = 5 * 60 * 1000; // 5 minutes
 
-        if (cached && (now - cached.timestamp) < cacheExpiry) {
+        if (cached && now - cached.timestamp < cacheExpiry) {
           console.log('Using cached data for:', cacheKey);
           setMovies(cached.data);
           setTotalPages(cached.totalPages);
@@ -275,11 +277,16 @@ export default function MoviesPage() {
         setTotalPages(response.pagination.totalPages);
 
         // Update cache
-        setMovieCache(new Map(movieCache.set(cacheKey, {
-          data: response.data,
-          totalPages: response.pagination.totalPages,
-          timestamp: now
-        })));
+        setMovieCache(
+          (prevCache) =>
+            new Map(
+              prevCache.set(cacheKey, {
+                data: response.data,
+                totalPages: response.pagination.totalPages,
+                timestamp: now
+              })
+            )
+        );
 
         // Reset selected movie index when data changes
         setSelectedMovieIndex(0);
@@ -295,11 +302,15 @@ export default function MoviesPage() {
     };
 
     // Debounce search
-    const timeoutId = setTimeout(() => {
-      fetchMovies();
-    }, searchText ? 500 : 0); // 500ms debounce for search, immediate for other changes
+    const timeoutId = setTimeout(
+      () => {
+        fetchMovies();
+      },
+      searchText ? 500 : 0
+    ); // 500ms debounce for search, immediate for other changes
 
     return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText, page, viewMode]);
 
   const selectedMovie = movies[selectedMovieIndex];
@@ -334,7 +345,7 @@ export default function MoviesPage() {
     setViewMode('single');
   };
 
-  const displayedMovies = viewMode === 'multi' ? movies : (selectedMovie ? [selectedMovie] : []);
+  const displayedMovies = viewMode === 'multi' ? movies : selectedMovie ? [selectedMovie] : [];
 
   // Show loading or error states
   if (loading) {
@@ -348,7 +359,9 @@ export default function MoviesPage() {
   if (error) {
     return (
       <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Typography variant="h4" color="error">{error}</Typography>
+        <Typography variant="h4" color="error">
+          {error}
+        </Typography>
       </Box>
     );
   }
@@ -443,86 +456,86 @@ export default function MoviesPage() {
 
             {/* Movie Content */}
             <Grid container spacing={3} sx={{ flex: 1 }}>
-            {/* Movie Poster */}
-            <Grid item xs={12} md={4}>
-              <Card elevation={0}>
-                <CardMedia
-                  component="img"
-                  image={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_url}`}
-                  alt={selectedMovie.title}
-                  sx={{ borderRadius: 2 }}
-                />
-              </Card>
-            </Grid>
-
-            {/* Movie Details */}
-            <Grid item xs={12} md={8}>
-            <Stack spacing={3}>
-              {/* Title and Rating */}
-              <Box>
-                <Typography variant="h2" gutterBottom>
-                  {selectedMovie.title}
-                </Typography>
-                {selectedMovie.original_title !== selectedMovie.title && (
-                  <Typography variant="h5" color="text.secondary" gutterBottom>
-                    Original Title: {selectedMovie.original_title}
-                  </Typography>
-                )}
-                <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                  <Chip label={selectedMovie.mpa_rating} color="primary" size="small" />
-                  <Chip label={`${selectedMovie.runtime_minutes} min`} variant="outlined" size="small" />
-                  <Chip label={formatDate(selectedMovie.release_date)} variant="outlined" size="small" />
-                </Stack>
-              </Box>
-
-              {/* Genres */}
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                  Genres
-                </Typography>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  {selectedMovie.genres.split(', ').map((genre) => (
-                    <Chip key={genre} label={genre} size="small" />
-                  ))}
-                </Stack>
-              </Box>
-
-              {/* Overview */}
-              <Box>
-                <Typography variant="h5" gutterBottom>
-                  Overview
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  {selectedMovie.overview}
-                </Typography>
-              </Box>
-
-              {/* Director */}
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary">
-                  Director
-                </Typography>
-                <Typography variant="body1">{selectedMovie.directors}</Typography>
-              </Box>
-
-              {/* Budget and Revenue */}
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" color="text.secondary">
-                    Budget
-                  </Typography>
-                  <Typography variant="h6">{formatCurrency(selectedMovie.budget)}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" color="text.secondary">
-                    Revenue
-                  </Typography>
-                  <Typography variant="h6">{formatCurrency(selectedMovie.revenue)}</Typography>
-                </Grid>
+              {/* Movie Poster */}
+              <Grid item xs={12} md={4}>
+                <Card elevation={0}>
+                  <CardMedia
+                    component="img"
+                    image={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_url}`}
+                    alt={selectedMovie.title}
+                    sx={{ borderRadius: 2 }}
+                  />
+                </Card>
               </Grid>
-            </Stack>
-          </Grid>
-        </Grid>
+
+              {/* Movie Details */}
+              <Grid item xs={12} md={8}>
+                <Stack spacing={3}>
+                  {/* Title and Rating */}
+                  <Box>
+                    <Typography variant="h2" gutterBottom>
+                      {selectedMovie.title}
+                    </Typography>
+                    {selectedMovie.original_title !== selectedMovie.title && (
+                      <Typography variant="h5" color="text.secondary" gutterBottom>
+                        Original Title: {selectedMovie.original_title}
+                      </Typography>
+                    )}
+                    <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
+                      <Chip label={selectedMovie.mpa_rating} color="primary" size="small" />
+                      <Chip label={`${selectedMovie.runtime_minutes} min`} variant="outlined" size="small" />
+                      <Chip label={formatDate(selectedMovie.release_date)} variant="outlined" size="small" />
+                    </Stack>
+                  </Box>
+
+                  {/* Genres */}
+                  <Box>
+                    <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                      Genres
+                    </Typography>
+                    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                      {selectedMovie.genres.split(', ').map((genre) => (
+                        <Chip key={genre} label={genre} size="small" />
+                      ))}
+                    </Stack>
+                  </Box>
+
+                  {/* Overview */}
+                  <Box>
+                    <Typography variant="h5" gutterBottom>
+                      Overview
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      {selectedMovie.overview}
+                    </Typography>
+                  </Box>
+
+                  {/* Director */}
+                  <Box>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Director
+                    </Typography>
+                    <Typography variant="body1">{selectedMovie.directors}</Typography>
+                  </Box>
+
+                  {/* Budget and Revenue */}
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <Typography variant="subtitle2" color="text.secondary">
+                        Budget
+                      </Typography>
+                      <Typography variant="h6">{formatCurrency(selectedMovie.budget)}</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="subtitle2" color="text.secondary">
+                        Revenue
+                      </Typography>
+                      <Typography variant="h6">{formatCurrency(selectedMovie.revenue)}</Typography>
+                    </Grid>
+                  </Grid>
+                </Stack>
+              </Grid>
+            </Grid>
 
             {/* Right Arrow */}
             <IconButton onClick={handleNextMovie} sx={{ flexShrink: 0, height: 'fit-content' }} size="large">
@@ -550,39 +563,39 @@ export default function MoviesPage() {
                       }}
                       onClick={() => handleMovieClick(index)}
                     >
-                    <CardMedia
-                      component="img"
-                      height="300"
-                      image={`https://image.tmdb.org/t/p/w500${movie.poster_url}`}
-                      alt={movie.title}
-                    />
-                    <Box sx={{ p: 2, flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant="h5" gutterBottom>
-                        {movie.title}
-                      </Typography>
-                      <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
-                        <Chip label={movie.mpa_rating} size="small" color="primary" />
-                        <Chip label={`${movie.runtime_minutes} min`} size="small" variant="outlined" />
-                      </Stack>
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                        {movie.genres}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: 'vertical'
-                        }}
-                      >
-                        {movie.overview}
-                      </Typography>
-                    </Box>
-                  </Card>
-                </Grid>
+                      <CardMedia
+                        component="img"
+                        height="300"
+                        image={`https://image.tmdb.org/t/p/w500${movie.poster_url}`}
+                        alt={movie.title}
+                      />
+                      <Box sx={{ p: 2, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        <Typography variant="h5" gutterBottom>
+                          {movie.title}
+                        </Typography>
+                        <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
+                          <Chip label={movie.mpa_rating} size="small" color="primary" />
+                          <Chip label={`${movie.runtime_minutes} min`} size="small" variant="outlined" />
+                        </Stack>
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                          {movie.genres}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: 'vertical'
+                          }}
+                        >
+                          {movie.overview}
+                        </Typography>
+                      </Box>
+                    </Card>
+                  </Grid>
                 );
               })}
             </Grid>

@@ -14,11 +14,7 @@ export default function Header() {
   const headerContent = useMemo(() => <HeaderContent />, []);
 
   // common header
-  const mainHeader: ReactNode = (
-    <Toolbar>
-      {headerContent}
-    </Toolbar>
-  );
+  const mainHeader: ReactNode = <Toolbar>{headerContent}</Toolbar>;
 
   // app-bar params
   const appBar: AppBarProps = {

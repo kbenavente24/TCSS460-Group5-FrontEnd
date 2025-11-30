@@ -53,58 +53,57 @@ export const authOptions: NextAuthOptions = {
 
     // ================= REGISTER PROVIDER =================
     // ================= REGISTER PROVIDER =================
-CredentialsProvider({
-  id: 'register',
-  name: 'Register',
-  credentials: {
-    firstname: { label: 'First Name', type: 'text' },
-    lastname: { label: 'Last Name', type: 'text' },
-    email: { label: 'Email', type: 'email' },
-    password: { label: 'Password', type: 'password' },
-    username: { label: 'Username', type: 'text' },
-    phone: { label: 'Phone', type: 'text' }
-  },
-  async authorize(credentials) {
-    // Validate required fields
-    if (
-      !credentials?.firstname?.trim() ||
-      !credentials?.lastname?.trim() ||
-      !credentials?.email?.trim() ||
-      !credentials?.password ||
-      !credentials?.username?.trim() ||
-      !credentials?.phone?.trim()
-    ) {
-      throw new Error('All fields are required');
-    }
+    CredentialsProvider({
+      id: 'register',
+      name: 'Register',
+      credentials: {
+        firstname: { label: 'First Name', type: 'text' },
+        lastname: { label: 'Last Name', type: 'text' },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
+        username: { label: 'Username', type: 'text' },
+        phone: { label: 'Phone', type: 'text' }
+      },
+      async authorize(credentials) {
+        // Validate required fields
+        if (
+          !credentials?.firstname?.trim() ||
+          !credentials?.lastname?.trim() ||
+          !credentials?.email?.trim() ||
+          !credentials?.password ||
+          !credentials?.username?.trim() ||
+          !credentials?.phone?.trim()
+        ) {
+          throw new Error('All fields are required');
+        }
 
-    try {
-      // Call the API
-      const response = await authApi.register({
-        firstname: credentials.firstname.trim(),
-        lastname: credentials.lastname.trim(),
-        email: credentials.email.trim(),
-        password: credentials.password,
-        username: credentials.username.trim(),
-        phone: credentials.phone.trim()
-      });
+        try {
+          // Call the API
+          const response = await authApi.register({
+            firstname: credentials.firstname.trim(),
+            lastname: credentials.lastname.trim(),
+            email: credentials.email.trim(),
+            password: credentials.password,
+            username: credentials.username.trim(),
+            phone: credentials.phone.trim()
+          });
 
-      // Flexible handling for different response shapes
-      const data = response?.data?.data || response?.data;
-      if (!data || !data.user || !data.accessToken) {
-        console.error('Full registration response:', response.data);
-        throw new Error('Invalid registration response from server');
+          // Flexible handling for different response shapes
+          const data = response?.data?.data || response?.data;
+          if (!data || !data.user || !data.accessToken) {
+            console.error('Full registration response:', response.data);
+            throw new Error('Invalid registration response from server');
+          }
+
+          // Return the user object with accessToken
+          return { ...data.user, accessToken: data.accessToken };
+        } catch (err: any) {
+          console.error('Registration error:', err);
+          const errorMessage = err?.response?.data?.message || err?.message || 'Registration failed';
+          throw new Error(errorMessage);
+        }
       }
-
-      // Return the user object with accessToken
-      return { ...data.user, accessToken: data.accessToken };
-    } catch (err: any) {
-      console.error('Registration error:', err);
-      const errorMessage = err?.response?.data?.message || err?.message || 'Registration failed';
-      throw new Error(errorMessage);
-    }
-  }
-})
-
+    })
   ],
 
   // ================= CALLBACKS =================

@@ -10,11 +10,11 @@ import Loader from 'components/Loader';
 function TVShowDetailContent() {
   const params = useParams();
   const id = params?.id as string;
-  
+
   if (!id) {
     return <Loader />;
   }
-  
+
   return <TVShowDetailPage id={id} />;
 }
 

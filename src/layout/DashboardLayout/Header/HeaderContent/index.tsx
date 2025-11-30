@@ -45,16 +45,32 @@ export default function HeaderContent() {
       {/* Navigation Links - Top Right */}
       {!downLG && (
         <Stack direction="row" spacing={4} sx={{ mr: 3 }}>
-          <Button component={Link} href="/home" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+          <Button
+            component={Link}
+            href="/home"
+            sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
+          >
             Home
           </Button>
-          <Button component={Link} href="/top10" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+          <Button
+            component={Link}
+            href="/top10"
+            sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
+          >
             My Top 10s
           </Button>
-          <Button component={Link} href="/movies" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+          <Button
+            component={Link}
+            href="/movies"
+            sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
+          >
             Movies
           </Button>
-          <Button component={Link} href="/tv-shows" sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}>
+          <Button
+            component={Link}
+            href="/tv-shows"
+            sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
+          >
             TV Shows
           </Button>
         </Stack>

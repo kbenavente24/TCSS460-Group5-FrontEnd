@@ -9,7 +9,7 @@ const movieApiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'X-API-Key': API_KEY,
-    'accept': 'application/json'
+    accept: 'application/json'
   }
 });
 
@@ -75,17 +75,19 @@ export const movieApi = {
     // Transform the response to match our interface
     return {
       data: response.data.data || response.data,
-      pagination: response.data.meta ? {
-        page: response.data.meta.page,
-        limit: response.data.meta.limit,
-        total: response.data.meta.total,
-        totalPages: response.data.meta.pages
-      } : {
-        page: 1,
-        limit: filters?.limit || 20,
-        total: (response.data.data || response.data).length,
-        totalPages: 1
-      }
+      pagination: response.data.meta
+        ? {
+            page: response.data.meta.page,
+            limit: response.data.meta.limit,
+            total: response.data.meta.total,
+            totalPages: response.data.meta.pages
+          }
+        : {
+            page: 1,
+            limit: filters?.limit || 20,
+            total: (response.data.data || response.data).length,
+            totalPages: 1
+          }
     };
   },
 

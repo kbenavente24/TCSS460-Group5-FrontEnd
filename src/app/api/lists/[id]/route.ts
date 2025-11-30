@@ -5,18 +5,12 @@ import { authOptions } from 'utils/authOptions';
 import pool from 'lib/db';
 
 // GET /api/lists/:id - Get a specific list with all its items
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const userId = session.id;
@@ -38,10 +32,7 @@ export async function GET(
     const listResult = await pool.query(listQuery, [listId, userId]);
 
     if (listResult.rows.length === 0) {
-      return NextResponse.json(
-        { error: 'List not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'List not found' }, { status: 404 });
     }
 
     const list = listResult.rows[0];
@@ -88,29 +79,19 @@ export async function GET(
         items
       }
     });
-
   } catch (error) {
     console.error('Error fetching list:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch list' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch list' }, { status: 500 });
   }
 }
 
 // DELETE /api/lists/:id - Delete a list
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const userId = session.id;
@@ -126,39 +107,26 @@ export async function DELETE(
     const result = await pool.query(deleteQuery, [listId, userId]);
 
     if (result.rows.length === 0) {
-      return NextResponse.json(
-        { error: 'List not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'List not found' }, { status: 404 });
     }
 
     return NextResponse.json({
       success: true,
       message: 'List deleted successfully'
     });
-
   } catch (error) {
     console.error('Error deleting list:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete list' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to delete list' }, { status: 500 });
   }
 }
 
 // PUT /api/lists/:id - Update list metadata (title, description)
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const userId = session.id;
@@ -167,10 +135,7 @@ export async function PUT(
     const { title, description } = body;
 
     if (!title) {
-      return NextResponse.json(
-        { error: 'Title is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Title is required' }, { status: 400 });
     }
 
     // Update the list
@@ -187,30 +152,18 @@ export async function PUT(
         updated_at as "updatedAt"
     `;
 
-    const result = await pool.query(updateQuery, [
-      title,
-      description || null,
-      listId,
-      userId
-    ]);
+    const result = await pool.query(updateQuery, [title, description || null, listId, userId]);
 
     if (result.rows.length === 0) {
-      return NextResponse.json(
-        { error: 'List not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'List not found' }, { status: 404 });
     }
 
     return NextResponse.json({
       success: true,
       data: result.rows[0]
     });
-
   } catch (error) {
     console.error('Error updating list:', error);
-    return NextResponse.json(
-      { error: 'Failed to update list' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to update list' }, { status: 500 });
   }
 }

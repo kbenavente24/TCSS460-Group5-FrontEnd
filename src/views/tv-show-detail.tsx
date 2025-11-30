@@ -35,7 +35,7 @@ const MOCK_TV_SHOWS = [
     number_of_episodes: 62,
     episode_run_time: 47,
     overview:
-      'A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family\'s future.',
+      "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
     networks: 'AMC',
     production_companies: 'High Bridge Entertainment, Gran Via Productions',
     vote_average: 9.5,
@@ -111,7 +111,7 @@ const MOCK_TV_SHOWS = [
     number_of_episodes: 60,
     episode_run_time: 58,
     overview:
-      'Follows the political rivalries and romance of Queen Elizabeth II\'s reign and the events that shaped the second half of the twentieth century.',
+      "Follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the twentieth century.",
     networks: 'Netflix',
     production_companies: 'Left Bank Pictures, Sony Pictures Television',
     vote_average: 8.2,
@@ -167,8 +167,7 @@ const MOCK_TV_SHOWS = [
     number_of_seasons: 3,
     number_of_episodes: 30,
     episode_run_time: 30,
-    overview:
-      'A young chef from the fine dining world returns to Chicago to run his family\'s Italian beef sandwich shop.',
+    overview: "A young chef from the fine dining world returns to Chicago to run his family's Italian beef sandwich shop.",
     networks: 'FX',
     production_companies: 'FX Productions',
     vote_average: 8.6,
@@ -206,7 +205,7 @@ const MOCK_TV_SHOWS = [
     number_of_episodes: 34,
     episode_run_time: 30,
     overview:
-      'Ted Lasso, an American football coach, moves to England when he\'s hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?',
+      "Ted Lasso, an American football coach, moves to England when he's hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
     networks: 'Apple TV+',
     production_companies: 'Doozer Productions, Universal Television, Warner Bros. Television',
     vote_average: 8.7,
@@ -257,7 +256,7 @@ const MOCK_TV_SHOWS = [
 
 export default function TVShowDetailPage({ id }: { id?: string }) {
   const router = useRouter();
-  const [tvShow, setTvShow] = useState<typeof MOCK_TV_SHOWS[0] | null>(null);
+  const [tvShow, setTvShow] = useState<(typeof MOCK_TV_SHOWS)[0] | null>(null);
 
   useEffect(() => {
     if (!id) {
@@ -293,12 +292,7 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Back Button */}
-      <Button
-        startIcon={<ArrowLeftOutlined />}
-        onClick={() => router.push('/tv-shows')}
-        sx={{ mb: 2 }}
-        variant="outlined"
-      >
+      <Button startIcon={<ArrowLeftOutlined />} onClick={() => router.push('/tv-shows')} sx={{ mb: 2 }} variant="outlined">
         Back to TV Shows
       </Button>
 
