@@ -5,7 +5,7 @@ import { authOptions } from 'utils/authOptions';
 import pool from 'lib/db';
 
 // GET /api/lists/:id - Get a specific list with all its items
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     }
 
     const userId = session.id;
-    const listId = params.id;
+    const { id: listId } = await params;
 
     // Get the list details and verify ownership
     const listQuery = `
@@ -86,7 +86,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 // DELETE /api/lists/:id - Delete a list
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -95,7 +95,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     const userId = session.id;
-    const listId = params.id;
+    const { id: listId } = await params;
 
     // Verify ownership and delete (CASCADE will handle list_items)
     const deleteQuery = `
@@ -121,7 +121,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 }
 
 // PUT /api/lists/:id - Update list metadata (title, description)
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -130,7 +130,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     const userId = session.id;
-    const listId = params.id;
+    const { id: listId } = await params;
     const body = await request.json();
     const { title, description } = body;
 
