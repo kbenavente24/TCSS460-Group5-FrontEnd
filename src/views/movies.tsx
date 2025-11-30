@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import Box from '@mui/material/Box';
@@ -26,8 +26,9 @@ import RightOutlined from '@ant-design/icons/RightOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
+import { movieApi, type Movie } from 'services/movieApi';
 
-// Mock movie data
+// Mock movie data (kept for fallback)
 const MOCK_MOVIES = [
   {
     movie_id: 18,
@@ -227,9 +228,81 @@ export default function MoviesPage() {
   const [searchText, setSearchText] = useState('');
   const [viewMode, setViewMode] = useState<'single' | 'multi'>('single');
   const [page, setPage] = useState(1);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [totalPages, setTotalPages] = useState(1);
   const moviesPerPage = 6;
 
-  const selectedMovie = MOCK_MOVIES[selectedMovieIndex];
+  // Cache to store fetched movies and reduce redundant API calls
+  const [movieCache, setMovieCache] = useState<Map<string, { data: Movie[], totalPages: number, timestamp: number }>>(new Map());
+
+  // Fetch movies from API with debounce for search
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Create cache key based on search parameters
+        const limit = viewMode === 'multi' ? moviesPerPage : 20; // Reduced from 100 to 20
+        const currentPage = viewMode === 'multi' ? page : 1;
+        const cacheKey = `${searchText || 'all'}-${currentPage}-${limit}`;
+
+        // Check cache first (cache valid for 5 minutes)
+        const cached = movieCache.get(cacheKey);
+        const now = Date.now();
+        const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+
+        if (cached && (now - cached.timestamp) < cacheExpiry) {
+          console.log('Using cached data for:', cacheKey);
+          setMovies(cached.data);
+          setTotalPages(cached.totalPages);
+          setSelectedMovieIndex(0);
+          setLoading(false);
+          return;
+        }
+
+        // Fetch from API if not in cache or cache expired
+        console.log('Fetching from API:', cacheKey);
+        const response = await movieApi.getMovies({
+          title: searchText || undefined,
+          page: currentPage,
+          limit: limit
+        });
+
+        setMovies(response.data);
+        setTotalPages(response.pagination.totalPages);
+
+        // Update cache
+        setMovieCache(new Map(movieCache.set(cacheKey, {
+          data: response.data,
+          totalPages: response.pagination.totalPages,
+          timestamp: now
+        })));
+
+        // Reset selected movie index when data changes
+        setSelectedMovieIndex(0);
+      } catch (err) {
+        console.error('Error fetching movies:', err);
+        setError('Failed to load movies. Please try again.');
+        // Fallback to mock data on error
+        setMovies(MOCK_MOVIES);
+        setTotalPages(Math.ceil(MOCK_MOVIES.length / moviesPerPage));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Debounce search
+    const timeoutId = setTimeout(() => {
+      fetchMovies();
+    }, searchText ? 500 : 0); // 500ms debounce for search, immediate for other changes
+
+    return () => clearTimeout(timeoutId);
+  }, [searchText, page, viewMode]);
+
+  const selectedMovie = movies[selectedMovieIndex];
 
   const formatCurrency = (amount: string) => {
     const num = parseInt(amount);
@@ -249,11 +322,11 @@ export default function MoviesPage() {
   };
 
   const handlePreviousMovie = () => {
-    setSelectedMovieIndex((prev) => (prev > 0 ? prev - 1 : MOCK_MOVIES.length - 1));
+    setSelectedMovieIndex((prev) => (prev > 0 ? prev - 1 : movies.length - 1));
   };
 
   const handleNextMovie = () => {
-    setSelectedMovieIndex((prev) => (prev < MOCK_MOVIES.length - 1 ? prev + 1 : 0));
+    setSelectedMovieIndex((prev) => (prev < movies.length - 1 ? prev + 1 : 0));
   };
 
   const handleMovieClick = (index: number) => {
@@ -261,8 +334,32 @@ export default function MoviesPage() {
     setViewMode('single');
   };
 
-  const totalPages = Math.ceil(MOCK_MOVIES.length / moviesPerPage);
-  const displayedMovies = viewMode === 'multi' ? MOCK_MOVIES.slice((page - 1) * moviesPerPage, page * moviesPerPage) : [selectedMovie];
+  const displayedMovies = viewMode === 'multi' ? movies : (selectedMovie ? [selectedMovie] : []);
+
+  // Show loading or error states
+  if (loading) {
+    return (
+      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4">Loading movies...</Typography>
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4" color="error">{error}</Typography>
+      </Box>
+    );
+  }
+
+  if (movies.length === 0) {
+    return (
+      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4">No movies found</Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
@@ -282,7 +379,10 @@ export default function MoviesPage() {
         <TextField
           placeholder="Search movies..."
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setPage(1); // Reset to page 1 when searching
+          }}
           sx={{
             width: 400,
             '& .MuiOutlinedInput-root': {
@@ -434,7 +534,6 @@ export default function MoviesPage() {
           <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Grid container spacing={3}>
               {displayedMovies.map((movie, index) => {
-                const actualIndex = (page - 1) * moviesPerPage + index;
                 return (
                   <Grid item xs={12} sm={6} md={4} key={movie.movie_id}>
                     <Card
@@ -449,7 +548,7 @@ export default function MoviesPage() {
                           boxShadow: 4
                         }
                       }}
-                      onClick={() => handleMovieClick(actualIndex)}
+                      onClick={() => handleMovieClick(index)}
                     >
                     <CardMedia
                       component="img"
