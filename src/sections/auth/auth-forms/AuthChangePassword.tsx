@@ -118,7 +118,8 @@ export default function AuthChangePassword() {
           if (scriptedRef.current) {
             setStatus({ success: false });
             setErrors({
-              submit: err.response?.data?.message || err.message || 'Failed to change password. Please check your current password and try again.'
+              submit:
+                err.response?.data?.message || err.message || 'Failed to change password. Please check your current password and try again.'
             });
             setSubmitting(false);
           }
@@ -201,7 +202,14 @@ export default function AuthChangePassword() {
               <FormControl fullWidth sx={{ mt: 2 }}>
                 <Grid container spacing={2} alignItems="center">
                   <Grid item>
-                    <Box sx={{ bgcolor: level?.color, width: 85, height: 8, borderRadius: '7px' }} />
+                    <Box
+                      sx={{
+                        bgcolor: level?.color,
+                        width: 85,
+                        height: 8,
+                        borderRadius: '7px'
+                      }}
+                    />
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle1" fontSize="0.75rem">

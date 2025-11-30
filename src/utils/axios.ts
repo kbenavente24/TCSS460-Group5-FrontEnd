@@ -49,7 +49,7 @@ const credentialsService = axios.create({ baseURL: apiUrl });
 
 credentialsService.interceptors.request.use(
   async (config) => {
-    console.log('🚀 Making request to:', config.baseURL + config.url);
+    console.log('🚀 Making request to:', (config.baseURL || '') + (config.url || ''));
     // Only attach token for protected endpoints (not login/register)
     if (!config.url?.includes('/auth/register') && !config.url?.includes('/auth/login')) {
       const session = await getSession();

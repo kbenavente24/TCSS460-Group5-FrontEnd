@@ -129,177 +129,184 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           <form noValidate onSubmit={handleSubmit}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <Grid container spacing={3}>
-            {/* First Name */}
-            <Grid item xs={6}>
-              <Stack spacing={1}>
-                <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="firstname-signup"
-                  type="text"
-                  name="firstname"
-                  value={values.firstname}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="Enter your First Name"
-                  error={Boolean(touched.firstname && errors.firstname)}
-                />
-              </Stack>
-              {touched.firstname && errors.firstname && <FormHelperText error>{errors.firstname}</FormHelperText>}
-            </Grid>
-
-            {/* Last Name */}
-            <Grid item xs={6}>
-              <Stack spacing={1}>
-                <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="lastname-signup"
-                  type="text"
-                  name="lastname"
-                  value={values.lastname}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="Enter your Last Name"
-                  error={Boolean(touched.lastname && errors.lastname)}
-                />
-              </Stack>
-              {touched.lastname && errors.lastname && <FormHelperText error>{errors.lastname}</FormHelperText>}
-            </Grid>
-
-            {/* Username */}
-            <Grid item xs={12}>
-              <Stack spacing={1}>
-                <InputLabel htmlFor="username-signup">Username*</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="username-signup"
-                  type="text"
-                  name="username"
-                  value={values.username}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="Enter your username"
-                  error={Boolean(touched.username && errors.username)}
-                />
-              </Stack>
-              {touched.username && errors.username && <FormHelperText error>{errors.username}</FormHelperText>}
-            </Grid>
-
-            {/* Phone */}
-            <Grid item xs={12}>
-              <Stack spacing={1}>
-                <InputLabel htmlFor="phone-signup">Phone Number*</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="phone-signup"
-                  type="text"
-                  name="phone"
-                  value={values.phone}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="Enter your phone number"
-                  error={Boolean(touched.phone && errors.phone)}
-                />
-              </Stack>
-              {touched.phone && errors.phone && <FormHelperText error>{errors.phone}</FormHelperText>}
-            </Grid>
-
-            {/* Email */}
-            <Grid item xs={12}>
-              <Stack spacing={1}>
-                <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="email-signup"
-                  type="email"
-                  name="email"
-                  value={values.email}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  error={Boolean(touched.email && errors.email)}
-                />
-              </Stack>
-              {touched.email && errors.email && <FormHelperText error>{errors.email}</FormHelperText>}
-            </Grid>
-
-            {/* Password */}
-            <Grid item xs={12}>
-              <Stack spacing={1}>
-                <InputLabel htmlFor="password-signup">Password*</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="password-signup"
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  value={values.password}
-                  onBlur={handleBlur}
-                  onChange={(e) => {
-                    handleChange(e);
-                    changePassword(e.target.value);
-                  }}
-                  placeholder="Enter password"
-                  error={Boolean(touched.password && errors.password)}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                        color="secondary"
-                      >
-                        {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </Stack>
-              {touched.password && errors.password && <FormHelperText error>{errors.password}</FormHelperText>}
-              <FormControl fullWidth sx={{ mt: 2 }}>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid item>
-                    <Box sx={{ bgcolor: level?.color, width: 85, height: 8, borderRadius: '7px' }} />
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1" fontSize="0.75rem">
-                      {level?.label}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </FormControl>
-            </Grid>
-
-            {/* Terms */}
-            <Grid item xs={12} sx={{ mt: -1 }}>
-              <Typography variant="body2">
-                By Signing up, you agree to our &nbsp;
-                <Link component={NextLink} href="/" variant="subtitle2">
-                  Terms of Service
-                </Link>
-                &nbsp; and &nbsp;
-                <Link component={NextLink} href="/" variant="subtitle2">
-                  Privacy Policy
-                </Link>
-              </Typography>
-            </Grid>
-
-            {/* Submission Error */}
-            {errors.submit && (
-              <Grid item xs={12}>
-                <FormHelperText error>{errors.submit}</FormHelperText>
+              {/* First Name */}
+              <Grid item xs={6}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    id="firstname-signup"
+                    type="text"
+                    name="firstname"
+                    value={values.firstname}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter your First Name"
+                    error={Boolean(touched.firstname && errors.firstname)}
+                  />
+                </Stack>
+                {touched.firstname && errors.firstname && <FormHelperText error>{errors.firstname}</FormHelperText>}
               </Grid>
-            )}
 
-            {/* Submit Button */}
-            <Grid item xs={12}>
-              <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                  Create Account
-                </Button>
-              </AnimateButton>
-            </Grid>
+              {/* Last Name */}
+              <Grid item xs={6}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    id="lastname-signup"
+                    type="text"
+                    name="lastname"
+                    value={values.lastname}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter your Last Name"
+                    error={Boolean(touched.lastname && errors.lastname)}
+                  />
+                </Stack>
+                {touched.lastname && errors.lastname && <FormHelperText error>{errors.lastname}</FormHelperText>}
+              </Grid>
+
+              {/* Username */}
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="username-signup">Username*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    id="username-signup"
+                    type="text"
+                    name="username"
+                    value={values.username}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter your username"
+                    error={Boolean(touched.username && errors.username)}
+                  />
+                </Stack>
+                {touched.username && errors.username && <FormHelperText error>{errors.username}</FormHelperText>}
+              </Grid>
+
+              {/* Phone */}
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="phone-signup">Phone Number*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    id="phone-signup"
+                    type="text"
+                    name="phone"
+                    value={values.phone}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter your phone number"
+                    error={Boolean(touched.phone && errors.phone)}
+                  />
+                </Stack>
+                {touched.phone && errors.phone && <FormHelperText error>{errors.phone}</FormHelperText>}
+              </Grid>
+
+              {/* Email */}
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    id="email-signup"
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                    error={Boolean(touched.email && errors.email)}
+                  />
+                </Stack>
+                {touched.email && errors.email && <FormHelperText error>{errors.email}</FormHelperText>}
+              </Grid>
+
+              {/* Password */}
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="password-signup">Password*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    id="password-signup"
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    value={values.password}
+                    onBlur={handleBlur}
+                    onChange={(e) => {
+                      handleChange(e);
+                      changePassword(e.target.value);
+                    }}
+                    placeholder="Enter password"
+                    error={Boolean(touched.password && errors.password)}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                          color="secondary"
+                        >
+                          {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </Stack>
+                {touched.password && errors.password && <FormHelperText error>{errors.password}</FormHelperText>}
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item>
+                      <Box
+                        sx={{
+                          bgcolor: level?.color,
+                          width: 85,
+                          height: 8,
+                          borderRadius: '7px'
+                        }}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subtitle1" fontSize="0.75rem">
+                        {level?.label}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </FormControl>
+              </Grid>
+
+              {/* Terms */}
+              <Grid item xs={12} sx={{ mt: -1 }}>
+                <Typography variant="body2">
+                  By Signing up, you agree to our &nbsp;
+                  <Link component={NextLink} href="/" variant="subtitle2">
+                    Terms of Service
+                  </Link>
+                  &nbsp; and &nbsp;
+                  <Link component={NextLink} href="/" variant="subtitle2">
+                    Privacy Policy
+                  </Link>
+                </Typography>
+              </Grid>
+
+              {/* Submission Error */}
+              {errors.submit && (
+                <Grid item xs={12}>
+                  <FormHelperText error>{errors.submit}</FormHelperText>
+                </Grid>
+              )}
+
+              {/* Submit Button */}
+              <Grid item xs={12}>
+                <AnimateButton>
+                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                    Create Account
+                  </Button>
+                </AnimateButton>
+              </Grid>
             </Grid>
           </form>
         )}
@@ -316,7 +323,8 @@ export default function AuthRegister({ providers, csrfToken }: any) {
         <DialogTitle id="welcome-dialog-title">Welcome to Our App!</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Thank you for registering! We've sent a verification email to your inbox. Please check your email and click the verification link to activate your account.
+            Thank you for registering! We&apos;ve sent a verification email to your inbox. Please check your email and click the
+            verification link to activate your account.
             <br />
             <br />
             <strong>Note:</strong> The verification link will expire in 48 hours.

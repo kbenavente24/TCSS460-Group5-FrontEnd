@@ -1,6 +1,3 @@
-// third-party
-import { FormattedMessage } from 'react-intl';
-
 // assets
 import VideoCameraOutlined from '@ant-design/icons/VideoCameraOutlined';
 import PlusCircleOutlined from '@ant-design/icons/PlusCircleOutlined';
