@@ -40,7 +40,7 @@ import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 
 // ============================|| CHANGE PASSWORD ||============================ //
 
-export default function ChangePassword() {
+export default function AuthChangePassword() {
   const scriptedRef = useScriptRef();
   const router = useRouter();
 

@@ -18,6 +18,11 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
 
 // third party
 import * as Yup from 'yup';
@@ -26,6 +31,7 @@ import { Formik } from 'formik';
 // project import
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
+import { authApi } from 'services/authApi';
 
 import { APP_DEFAULT_PATH } from 'config';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
@@ -40,6 +46,7 @@ import { StringColorProps } from 'types/password';
 export default function AuthRegister({ providers, csrfToken }: any) {
   const [level, setLevel] = useState<StringColorProps>();
   const [showPassword, setShowPassword] = useState(false);
+  const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -59,50 +66,69 @@ export default function AuthRegister({ providers, csrfToken }: any) {
   }, []);
 
   return (
-    <Formik
-      initialValues={{
-        firstname: '',
-        lastname: '',
-        username: '',
-        phone: '',
-        email: '',
-        password: '',
-        submit: null
-      }}
-      validationSchema={Yup.object().shape({
-        firstname: Yup.string().max(255).required('First Name is required'),
-        lastname: Yup.string().max(255).required('Last Name is required'),
-        username: Yup.string().max(50).required('Username is required'),
-        phone: Yup.string().required('Phone number is required'),
-        email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-        password: Yup.string()
-          .required('Password is required')
-          .test('no-leading-trailing-whitespace', 'Password cannot start or end with spaces', (value) => value === value?.trim())
-          .max(10, 'Password must be less than 10 characters')
-      })}
-      onSubmit={async (values, { setErrors, setSubmitting }) => {
-        const trimmedEmail = values.email.trim();
-        signIn('register', {
-          redirect: false,
-          firstname: values.firstname,
-          lastname: values.lastname,
-          username: values.username,
-          phone: values.phone,
-          email: trimmedEmail,
-          password: values.password,
-          callbackUrl: APP_DEFAULT_PATH
-        }).then((res: any) => {
-          if (res?.error) {
-            setErrors({ submit: res.error });
-            setSubmitting(false);
-          }
-        });
-      }}
-    >
-      {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-        <form noValidate onSubmit={handleSubmit}>
-          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-          <Grid container spacing={3}>
+    <>
+      <Formik
+        initialValues={{
+          firstname: '',
+          lastname: '',
+          username: '',
+          phone: '',
+          email: '',
+          password: '',
+          submit: null
+        }}
+        validationSchema={Yup.object().shape({
+          firstname: Yup.string().max(255).required('First Name is required'),
+          lastname: Yup.string().max(255).required('Last Name is required'),
+          username: Yup.string()
+            .min(3, 'Username must be at least 3 characters')
+            .max(50, 'Username must be less than 50 characters')
+            .matches(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, underscores, and hyphens')
+            .required('Username is required'),
+          phone: Yup.string()
+            .matches(/^\d{10,}$/, 'Phone number must be at least 10 digits')
+            .required('Phone number is required'),
+          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+          password: Yup.string()
+            .required('Password is required')
+            .min(8, 'Password must be at least 8 characters')
+            .max(128, 'Password must be less than 128 characters')
+        })}
+        onSubmit={async (values, { setErrors, setSubmitting }) => {
+          const trimmedEmail = values.email.trim();
+          signIn('register', {
+            redirect: false,
+            firstname: values.firstname,
+            lastname: values.lastname,
+            username: values.username,
+            phone: values.phone,
+            email: trimmedEmail,
+            password: values.password,
+            callbackUrl: APP_DEFAULT_PATH
+          }).then(async (res: any) => {
+            if (res?.error) {
+              setErrors({ submit: res.error });
+              setSubmitting(false);
+            } else if (res?.ok) {
+              // Registration successful, send verification email
+              try {
+                await authApi.sendEmailVerification();
+                console.log('✅ Verification email sent successfully');
+                // Show welcome dialog
+                setShowWelcomeDialog(true);
+              } catch (error) {
+                console.error('Failed to send verification email:', error);
+                // Show welcome dialog anyway
+                setShowWelcomeDialog(true);
+              }
+            }
+          });
+        }}
+      >
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+          <form noValidate onSubmit={handleSubmit}>
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+            <Grid container spacing={3}>
             {/* First Name */}
             <Grid item xs={6}>
               <Stack spacing={1}>
@@ -274,9 +300,34 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                 </Button>
               </AnimateButton>
             </Grid>
-          </Grid>
-        </form>
-      )}
-    </Formik>
+            </Grid>
+          </form>
+        )}
+      </Formik>
+
+      {/* Welcome Dialog */}
+      <Dialog
+        open={showWelcomeDialog}
+        onClose={() => setShowWelcomeDialog(false)}
+        aria-labelledby="welcome-dialog-title"
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle id="welcome-dialog-title">Welcome to Our App!</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Thank you for registering! We've sent a verification email to your inbox. Please check your email and click the verification link to activate your account.
+            <br />
+            <br />
+            <strong>Note:</strong> The verification link will expire in 48 hours.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowWelcomeDialog(false)} color="primary" variant="contained" autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }

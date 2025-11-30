@@ -24,6 +24,7 @@ import { Formik } from 'formik';
 // project import
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
+import { authApi } from 'services/authApi';
 
 import { openSnackbar } from 'api/snackbar';
 import useScriptRef from 'hooks/useScriptRef';
@@ -65,26 +66,34 @@ export default function AuthResetPassword() {
   return (
     <Formik
       initialValues={{
+        token: '',
         password: '',
         confirmPassword: '',
         submit: null
       }}
       validationSchema={Yup.object().shape({
-        password: Yup.string().max(255).required('Password is required'),
+        token: Yup.string().required('Reset token is required'),
+        password: Yup.string()
+          .min(8, 'Password must be at least 8 characters')
+          .required('Password is required'),
         confirmPassword: Yup.string()
           .required('Confirm Password is required')
           .test('confirmPassword', 'Both Password must be match!', (confirmPassword, yup) => yup.parent.password === confirmPassword)
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          // password reset
-          if (scriptedRef.current) {
+          const response = await authApi.resetPasswordWithToken({
+            token: values.token.trim(),
+            password: values.password
+          });
+
+          if (response?.data?.success) {
             setStatus({ success: true });
             setSubmitting(false);
 
             openSnackbar({
               open: true,
-              message: 'Successfuly reset password.',
+              message: 'Password reset successful! You can now login with your new password.',
               variant: 'alert',
               alert: {
                 color: 'success'
@@ -94,12 +103,14 @@ export default function AuthResetPassword() {
             setTimeout(() => {
               router.push('/login');
             }, 1500);
+          } else {
+            throw new Error(response?.data?.message || 'Failed to reset password');
           }
         } catch (err: any) {
           console.error(err);
           if (scriptedRef.current) {
             setStatus({ success: false });
-            setErrors({ submit: err.message });
+            setErrors({ submit: err.response?.data?.message || err.message || 'Failed to reset password. Please check your token and try again.' });
             setSubmitting(false);
           }
         }
@@ -110,7 +121,28 @@ export default function AuthResetPassword() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Stack spacing={1}>
-                <InputLabel htmlFor="password-reset">Password</InputLabel>
+                <InputLabel htmlFor="token-reset">Reset Token</InputLabel>
+                <OutlinedInput
+                  fullWidth
+                  error={Boolean(touched.token && errors.token)}
+                  id="token-reset"
+                  type="text"
+                  value={values.token}
+                  name="token"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Enter reset token from email"
+                />
+              </Stack>
+              {touched.token && errors.token && (
+                <FormHelperText error id="helper-text-token-reset">
+                  {errors.token}
+                </FormHelperText>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <Stack spacing={1}>
+                <InputLabel htmlFor="password-reset">New Password</InputLabel>
                 <OutlinedInput
                   fullWidth
                   error={Boolean(touched.password && errors.password)}

@@ -7,6 +7,7 @@ interface UserProps {
   avatar: string;
   thumb: string;
   role: string;
+  emailVerified?: boolean;
 }
 
 export default function useUser() {
@@ -30,7 +31,8 @@ export default function useUser() {
       email: user!.email!,
       avatar: user?.image!,
       thumb,
-      role: 'registered user'
+      role: 'registered user',
+      emailVerified: (session as any)?.user?.emailVerified || false
     };
 
     return newUser;

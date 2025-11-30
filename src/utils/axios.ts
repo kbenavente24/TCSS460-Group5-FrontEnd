@@ -10,15 +10,14 @@ const getCredentialsApiUrl = () => {
     if (process.env.NODE_ENV === 'development') {
       console.warn(
         '⚠️ CREDENTIALS_API_URL environment variable is not set. ' +
-          'Using placeholder. Please add CREDENTIALS_API_URL to your .env.local file. ' +
-          'Example: CREDENTIALS_API_URL=http://localhost:8008'
+          'Using default Heroku API. Please add CREDENTIALS_API_URL to your .env.local file if you want to use a different API.'
       );
-      return 'http://localhost:8008'; // Default for development
+      return 'https://credentials-api-f267039abb9d.herokuapp.com'; // Default API
     }
     throw new Error(
       'CREDENTIALS_API_URL environment variable is not set. ' +
         'Please add CREDENTIALS_API_URL to your .env and/or next.config.js file(s). ' +
-        'Example: CREDENTIALS_API_URL=http://localhost:8008'
+        'Example: CREDENTIALS_API_URL=https://credentials-api-f267039abb9d.herokuapp.com'
     );
   }
   return url;
@@ -44,10 +43,13 @@ const getMessagesApiKey = () => {
 
 // ==============================|| CREDENTIALS SERVICE ||============================== //
 
-const credentialsService = axios.create({ baseURL: getCredentialsApiUrl() });
+const apiUrl = getCredentialsApiUrl();
+console.log('🔗 Credentials API URL:', apiUrl);
+const credentialsService = axios.create({ baseURL: apiUrl });
 
 credentialsService.interceptors.request.use(
   async (config) => {
+    console.log('🚀 Making request to:', config.baseURL + config.url);
     // Only attach token for protected endpoints (not login/register)
     if (!config.url?.includes('/auth/register') && !config.url?.includes('/auth/login')) {
       const session = await getSession();

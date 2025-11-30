@@ -7,10 +7,13 @@ import { authApi } from 'services/authApi';
 interface AuthUser {
   id: string;
   email: string;
-  firstname?: string;
+  name?: string;
   lastname?: string;
   username?: string;
-  phone?: string;
+  role?: string;
+  emailVerified?: boolean;
+  phoneVerified?: boolean;
+  accountStatus?: string;
   accessToken?: string;
 }
 
@@ -35,14 +38,19 @@ export const authOptions: NextAuthOptions = {
             password: credentials.password
           });
 
-          // Ensure the response exists
-          const data = response?.data?.data;
-          if (!data || !data.user || !data.accessToken) {
-            throw new Error('Invalid login response from server');
+          // Handle new API response format
+          const responseData = response?.data;
+          if (!responseData?.success || !responseData?.data) {
+            throw new Error(responseData?.message || 'Invalid login response from server');
+          }
+
+          const { accessToken, user } = responseData.data;
+          if (!user || !accessToken) {
+            throw new Error('Invalid login response structure');
           }
 
           // Return user with accessToken
-          return { ...data.user, accessToken: data.accessToken };
+          return { ...user, id: String(user.id), accessToken };
         } catch (err: any) {
           console.error('Login error:', err);
           const errorMessage = err?.response?.data?.message || err?.message || 'Login failed';
@@ -88,15 +96,20 @@ export const authOptions: NextAuthOptions = {
             phone: credentials.phone.trim()
           });
 
-          // Flexible handling for different response shapes
-          const data = response?.data?.data || response?.data;
-          if (!data || !data.user || !data.accessToken) {
+          // Handle new API response format
+          const responseData = response?.data;
+          if (!responseData?.success || !responseData?.data) {
             console.error('Full registration response:', response.data);
-            throw new Error('Invalid registration response from server');
+            throw new Error(responseData?.message || 'Invalid registration response from server');
+          }
+
+          const { accessToken, user } = responseData.data;
+          if (!user || !accessToken) {
+            throw new Error('Invalid registration response structure');
           }
 
           // Return the user object with accessToken
-          return { ...data.user, accessToken: data.accessToken };
+          return { ...user, id: String(user.id), accessToken };
         } catch (err: any) {
           console.error('Registration error:', err);
           const errorMessage = err?.response?.data?.message || err?.message || 'Registration failed';

@@ -19,6 +19,7 @@ import { Formik } from 'formik';
 // project import
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'components/@extended/AnimateButton';
+import { authApi } from 'services/authApi';
 
 import { openSnackbar } from 'api/snackbar';
 
@@ -42,25 +43,32 @@ export default function AuthForgotPassword() {
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          setStatus({ success: true });
-          setSubmitting(false);
+          const trimmedEmail = values.email.trim();
+          const response = await authApi.requestPasswordReset({ email: trimmedEmail });
 
-          openSnackbar({
-            open: true,
-            message: 'Check mail for reset password link',
-            variant: 'alert',
-            alert: {
-              color: 'success'
-            }
-          } as SnackbarProps);
+          if (response?.data?.success) {
+            setStatus({ success: true });
+            setSubmitting(false);
 
-          setTimeout(() => {
-            router.push('/check-mail');
-          }, 1500);
+            openSnackbar({
+              open: true,
+              message: 'If an account exists with this email, you will receive a password reset link',
+              variant: 'alert',
+              alert: {
+                color: 'success'
+              }
+            } as SnackbarProps);
+
+            setTimeout(() => {
+              router.push('/check-mail');
+            }, 1500);
+          } else {
+            throw new Error(response?.data?.message || 'Failed to send reset email');
+          }
         } catch (err: any) {
           if (scriptedRef.current) {
             setStatus({ success: false });
-            setErrors({ submit: err.message });
+            setErrors({ submit: err.response?.data?.message || err.message || 'Failed to send reset email' });
             setSubmitting(false);
           }
         }

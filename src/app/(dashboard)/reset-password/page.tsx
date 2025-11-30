@@ -16,9 +16,6 @@ export default function ChangePasswordPage() {
             <Stack sx={{ mb: { xs: -0.5, sm: 0.5 } }} spacing={1}>
               <Typography variant="h3">Change Password</Typography>
               <Typography color="text.secondary">Update your account password</Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                Note: Password change functionality will be connected to the API in a future sprint.
-              </Typography>
             </Stack>
           </Grid>
           <Grid item xs={12}>
