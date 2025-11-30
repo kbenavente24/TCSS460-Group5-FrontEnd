@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -25,7 +24,6 @@ import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
-import { movieApi } from 'services/movieApi';
 
 interface Studio {
   studio_name: string;
@@ -98,8 +96,7 @@ export default function AddMovieView() {
     setStudios(newStudios);
   };
 
-  const handleAddCast = () =>
-    setCast([...cast, { actor_name: '', character_name: '', actor_order: cast.length + 1, profile_url: '' }]);
+  const handleAddCast = () => setCast([...cast, { actor_name: '', character_name: '', actor_order: cast.length + 1, profile_url: '' }]);
   const handleRemoveCast = (index: number) => setCast(cast.filter((_, i) => i !== index));
   const handleCastChange = (index: number, field: keyof CastMember, value: string | number) => {
     const newCast = [...cast];

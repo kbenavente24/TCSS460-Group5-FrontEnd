@@ -118,7 +118,8 @@ export default function ChangePassword() {
           if (scriptedRef.current) {
             setStatus({ success: false });
             setErrors({
-              submit: err.response?.data?.message || err.message || 'Failed to change password. Please check your current password and try again.'
+              submit:
+                err.response?.data?.message || err.message || 'Failed to change password. Please check your current password and try again.'
             });
             setSubmitting(false);
           }

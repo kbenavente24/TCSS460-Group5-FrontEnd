@@ -73,9 +73,7 @@ export default function AuthResetPassword() {
       }}
       validationSchema={Yup.object().shape({
         token: Yup.string().required('Reset token is required'),
-        password: Yup.string()
-          .min(8, 'Password must be at least 8 characters')
-          .required('Password is required'),
+        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
         confirmPassword: Yup.string()
           .required('Confirm Password is required')
           .test('confirmPassword', 'Both Password must be match!', (confirmPassword, yup) => yup.parent.password === confirmPassword)
@@ -110,7 +108,9 @@ export default function AuthResetPassword() {
           console.error(err);
           if (scriptedRef.current) {
             setStatus({ success: false });
-            setErrors({ submit: err.response?.data?.message || err.message || 'Failed to reset password. Please check your token and try again.' });
+            setErrors({
+              submit: err.response?.data?.message || err.message || 'Failed to reset password. Please check your token and try again.'
+            });
             setSubmitting(false);
           }
         }
