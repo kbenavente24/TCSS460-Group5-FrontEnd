@@ -97,7 +97,7 @@ This front-end application connects to:
 
 - **MD Khan (Shanto)** - For this sprint, with the help of my team, I built the Create Movie/Show page, including a full form with all required fields based on the 3rd-party Web API, while keeping it UI-only to avoid affecting the live database. I also helped implement the Search page, allowing logged-in users to search Movies and TV Shows in all supported ways and displaying live results using the list component from the previous sprint. In addition, I designed the Delete feature UI/UX, including the delete button and confirmation modal, as a design-only requirement without connecting it to the backend.
 - **Kobe Benavente** - 
-- **Pham Nguyen** - 
+- **Pham Nguyen** - Implemented a page in the web app that allows users to view a list of Movies and Shows after logging in. Developed a detailed view for individual Movies and Shows to improve user interaction. Tested and refined the UI to enhance consistency, usability, and overall user experience.
 - **Balkirat Singh** -  Worked on getting the credentials API bug where verification wasn't working to resolve. Kobe was a big help and main factor in fixing. All work together on fixing the small bugs such as:
 - delete button not being on our front-end
 - some linking issues
