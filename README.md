@@ -1,4 +1,4 @@
-# 📺 TCSS 460 Group 5 Front-end Version Beta I
+# 📺 TCSS 460 Group 5 Front-end Version Beta II
 
 Production URL: https://tcss460-group5.vercel.app
 
@@ -6,7 +6,7 @@ This repository contains the Group 5 Front-End application for the TCSS 460 cour
 
 ## 🎯 Overview
 
-Our web application will allow users to interact with comprehensive TV show and movie information. Users will be able to search, filter, and view detailed information all in one place.
+Our web application allows users to interact with comprehensive TV show and movie information. Users are able to search, filter, and view detailed information all in one place.
 
 The standout feature of our application is the **personalized Top 10 ranking system**. Rather than simply browsing content, users can create custom-themed Top 10 lists that reflect their unique tastes and preferences.
 
@@ -37,23 +37,22 @@ View our complete mockup designs and user flow diagrams on Figma:
 
 ## 📊 Current Status
 
-**Beta Version I** - The application is now in active development with core features implemented. Users can browse movies and tv shows via mock data, manage authentication, and navigate through a responsive UI.
+**Beta Version II** - The application is now nearing the final production stage with core features implemented. Users can browse movies and tv shows, manage authentication, and navigate through a responsive UI.
 
 ## ✨ Current Features
 
-### 🎥 Movies
-- **Browse Movies** - View paginated grid of movies (6 per page currently--more options will be implemented).
-- **Single Movie View** - Detailed information including poster, title, rating, runtime, genres, overview, director, budget, and revenue
-- **Navigation** - Cycle through movies using left/right arrows
-- **View Modes** - Toggle between single movie view and multi-movie grid
-- **Search Bar** - Search interface (functionality pending)
+### 🎥 Movies and TV Shows
+- **Browse** - View paginated grid of movies/show.
+- **Navigation** - Cycle through movies/shows using left/right arrows and via a paginated list.
+- **Toggle View Modes** - Toggle between single movie/shows view and multi-movie/shows grid.
+- **Search Bar and Search Page** - Advanced Searching Features tailored to our assigned apis.
 
 ### 🔐 Authentication
 - **User Login** - Sign in with email and password
 - **User Registration** - Create new accounts
 - **Session Management** - Persistent login sessions (1 day duration)
 - **Logout** - Secure sign out functionality
-- **Password Reset** - Reset password option in profile menu
+- **Password Reset** - Reset password option in profile menu as well as in the login page.
 
 ### 🎨 User Interface
 - **Responsive Design** - Clean, modern interface
@@ -76,19 +75,19 @@ This front-end application connects to:
 - [x] Mockup design
 - [x] Project setup
 
-### Phase 2: Minimum Requirements (In Progress)
+### Phase 2: Minimum Requirements ✅ (Complete)
 - [x] User authentication flow (Register/Login/Forgot Password/Change Password)
 - [x] Movies: Search, view (paginated list + individual)
 - [x] TV Shows: Search, view (paginated list + individual)
 - [x] Basic UI components and layouts
 
-### Phase 3: Top 10 Lists Feature
-- [ ] List creation interface
-- [ ] List management system
-- [ ] Ranking functionality
-- [ ] Save and share lists
+### Phase 3: Top 10 Lists Feature ✅ (Complete)
+- [x] List creation interface
+- [x] List management system
+- [x] Ranking functionality
+- [x] Save lists
 
-### Phase 4: Polish & Deploy
+### Phase 4: Polish & Deploy Final Production
 - [ ] Responsive design optimization
 - [ ] Testing and bug fixes
 - [ ] Performance optimization
@@ -96,15 +95,19 @@ This front-end application connects to:
 
 ## 👥 Team Contributions
 
-- **MD Khan (Shanto)** - I added TV shows list and detail pages with mock data, implemented the change password form with validation, and fixed environment variable handling to prevent application crashes. These features add TV show browsing functionality and password management UI to the dashboard.
-- **Kobe Benavente** -   Developed the Movies page with single-view and multi-view modes, pagination, and navigation features. Redesigned parts of the application UI. Successfully deployed the application to Vercel by configuring environment variables, resolving build errors, and updating project documentation to Beta I status.
-- **Pham Nguyen** - I updated the register and login forms to meet the 3rd-party Auth API requirements and ensured the client-side validation matched the server-side rules. I integrated the web app’s functionality with the external Auth API to enable full user registration and authentication. I also updated src/utils/authOptions.tsx to ensure seamless compatibility with the new API.
-- **Balkirat Singh** -  We had a small bug where our Supabase database had, for some reason, paused and, when trying to restore it, it was causing issues. So our render wasn't deploying properly. So I ended up making a new Supabase database for our credentials API and updated the appropriate team. Also helped Shanto with some of the mock data and validation implementations.
+- **MD Khan (Shanto)** - For this sprint, with the help of my team, I built the Create Movie/Show page, including a full form with all required fields based on the 3rd-party Web API, while keeping it UI-only to avoid affecting the live database. I also helped implement the Search page, allowing logged-in users to search Movies and TV Shows in all supported ways and displaying live results using the list component from the previous sprint. In addition, I designed the Delete feature UI/UX, including the delete button and confirmation modal, as a design-only requirement without connecting it to the backend.
+- **Kobe Benavente** - Helped implement our unique feature of creating top 10s list. Also helped with configuring the credentials API for user authentication functionality. Collaborated with group members to fix various bugs and UI issues.
+- **Pham Nguyen** - Implemented a page in the web app that allows users to view a list of Movies and Shows after logging in. Developed a detailed view for individual Movies and Shows to improve user interaction. Tested and refined the UI to enhance consistency, usability, and overall user experience.
+- **Balkirat Singh** -  Worked on getting the credentials API bug where verification wasn't working to resolve. Kobe was a big help and main factor in fixing. All work together on fixing the small bugs such as:
+- delete button not being on our front-end
+- some linking issues
+Updated the README file slightly.
+
 
 ## 📅 Beta Sprint Meetings
 
 ### Meeting Overview
-The team conducted regular meetings throughout the Beta Sprint to coordinate development efforts and resolve technical challenges.
+The team conducted regular meetings throughout the Beta Sprint II to coordinate development efforts and resolve technical challenges.
 
 **Primary Communication Channel:** Discord
 
@@ -119,6 +122,17 @@ The team conducted regular meetings throughout the Beta Sprint to coordinate dev
 - Frequency: Multiple sessions throughout the sprint as needed
 - Format: Synchronous discussions for decision-making and asynchronous updates via text channels
 ---
+## Issues We Faced in Beta II
 
-**Version:** Beta I
+- **API Configuration**: Resolved challenges with configuring credentials for API authentication and integration.
+- **Movie Navigation Links**: Fixed an issue where clicking on movies in multi-view and search results wasn't navigating to the correct movie detail page.
+- **Next.js Search Crash**: Resolved a critical bug that was causing Next.js to crash when performing search operations.
+- **Advanced Search Implementation**: Successfully integrated the advanced search feature to allow filtering by multiple criteria.
+- **Top 10 Lists Feature**: Implemented the top 10 movies and TV shows list functionality.
+- **Delete Button Inconsistencies**: Addressed UI issues where the delete button had incorrect behavior when selecting specific movies. Newly created movies
+  still lack a delete button implementation.
+ - **TV Show Creation Backend**: Unable to fully implement the create TV show backend functionality due to missing Group 7 API credentials. The UI button remains
+  visible but is not fully functional.
+
+**Version:** Beta II
 **Last Updated:** November 2025
