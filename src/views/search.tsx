@@ -234,10 +234,16 @@ export default function SearchPage() {
 
   // Handle result click
   const handleResultClick = (item: ResultItem) => {
+    if (!item || typeof item !== 'object') {
+      return;
+    }
+    
     if ('movie_id' in item) {
-      router.push(`/movies`);
+      const movie = item as Movie;
+      router.push(`/movies/${movie.movie_id}`);
     } else if ('tv_show_id' in item) {
-      router.push(`/tv-shows/${item.tv_show_id}`);
+      const tvShow = item as TVShow;
+      router.push(`/tv-shows/${tvShow.tv_show_id}`);
     }
   };
 
@@ -443,7 +449,13 @@ export default function SearchPage() {
                           boxShadow: 4
                         }
                       }}
-                      onClick={() => handleResultClick(item)}
+                      onClick={() => {
+                        if (movie) {
+                          handleResultClick(movie);
+                        } else if (tvShow) {
+                          handleResultClick(tvShow);
+                        }
+                      }}
                     >
                       <CardMedia
                         component="img"

@@ -107,9 +107,7 @@ export default function AddTVShowView() {
         production_companies: productionCompanies.filter((p) => p.trim())
       };
 
-      // Note: This is design-only, not connecting to API for this sprint
-      // If API allows, uncomment below:
-      /*
+      // Connect to TV Show API (optional for this sprint, but enabled)
       const response = await fetch(`${process.env.NEXT_PUBLIC_TV_SHOW_API_URL}/tv-shows`, {
         method: 'POST',
         headers: {
@@ -123,9 +121,7 @@ export default function AddTVShowView() {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to create TV show');
       }
-      */
 
-      // Simulate success for design-only
       setSuccess(true);
       setTimeout(() => {
         router.push('/tv-shows');

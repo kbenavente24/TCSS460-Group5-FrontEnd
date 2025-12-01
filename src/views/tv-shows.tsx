@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 // next
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 // material-ui
 import Box from '@mui/material/Box';
@@ -28,6 +29,7 @@ import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
 import LeftOutlined from '@ant-design/icons/LeftOutlined';
 import RightOutlined from '@ant-design/icons/RightOutlined';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
@@ -322,16 +324,28 @@ export default function TVShowsPage() {
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-        <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
-          <ToggleButton value="single" aria-label="single view">
-            <ProfileOutlined style={{ marginRight: 8 }} />
-            Single View
-          </ToggleButton>
-          <ToggleButton value="multi" aria-label="multi view">
-            <AppstoreOutlined style={{ marginRight: 8 }} />
-            Multi View
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
+            <ToggleButton value="single" aria-label="single view">
+              <ProfileOutlined style={{ marginRight: 8 }} />
+              Single View
+            </ToggleButton>
+            <ToggleButton value="multi" aria-label="multi view">
+              <AppstoreOutlined style={{ marginRight: 8 }} />
+              Multi View
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Button
+            component={Link}
+            href="/add-tv-show"
+            variant="contained"
+            startIcon={<PlusOutlined />}
+            size="medium"
+            sx={{ whiteSpace: 'nowrap' }}
+          >
+            Add TV Show
+          </Button>
+        </Stack>
 
         <TextField
           placeholder="Search TV shows..."

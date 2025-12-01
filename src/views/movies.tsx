@@ -2,6 +2,10 @@
 
 import { useState, useEffect } from 'react';
 
+// next
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
 // material-ui
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -25,6 +29,7 @@ import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
 import LeftOutlined from '@ant-design/icons/LeftOutlined';
 import RightOutlined from '@ant-design/icons/RightOutlined';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
@@ -229,6 +234,7 @@ const MOCK_MOVIES = [
 // ==============================|| MOVIES PAGE ||============================== //
 
 export default function MoviesPage() {
+  const router = useRouter();
   const [selectedMovieIndex, setSelectedMovieIndex] = useState(0);
   const [searchText, setSearchText] = useState('');
   const [viewMode, setViewMode] = useState<'single' | 'multi'>('single');
@@ -346,12 +352,8 @@ export default function MoviesPage() {
   };
 
   const handleMovieClick = (movie: Movie) => {
-    // Find the actual index of the movie in the full movies array
-    const actualIndex = movies.findIndex((m) => m.movie_id === movie.movie_id);
-    if (actualIndex !== -1) {
-      setSelectedMovieIndex(actualIndex);
-      setViewMode('single');
-    }
+    // Navigate to movie detail page
+    router.push(`/movies/${movie.movie_id}`);
   };
 
   // DESIGN-ONLY: Delete functionality - no backend API calls
@@ -401,16 +403,28 @@ export default function MoviesPage() {
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-        <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
-          <ToggleButton value="single" aria-label="single view">
-            <ProfileOutlined style={{ marginRight: 8 }} />
-            Single View
-          </ToggleButton>
-          <ToggleButton value="multi" aria-label="multi view">
-            <AppstoreOutlined style={{ marginRight: 8 }} />
-            Multi View
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
+            <ToggleButton value="single" aria-label="single view">
+              <ProfileOutlined style={{ marginRight: 8 }} />
+              Single View
+            </ToggleButton>
+            <ToggleButton value="multi" aria-label="multi view">
+              <AppstoreOutlined style={{ marginRight: 8 }} />
+              Multi View
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Button
+            component={Link}
+            href="/add-movie"
+            variant="contained"
+            startIcon={<PlusOutlined />}
+            size="medium"
+            sx={{ whiteSpace: 'nowrap' }}
+          >
+            Add Movie
+          </Button>
+        </Stack>
 
         <TextField
           placeholder="Search movies..."
@@ -481,7 +495,18 @@ export default function MoviesPage() {
             <Grid container spacing={3} sx={{ flex: 1 }}>
               {/* Movie Poster */}
               <Grid item xs={12} md={4}>
-                <Card elevation={0}>
+                <Card
+                  elevation={0}
+                  sx={{
+                    cursor: 'pointer',
+                    transition: 'transform 0.2s, box-shadow 0.2s',
+                    '&:hover': {
+                      transform: 'scale(1.02)',
+                      boxShadow: 4
+                    }
+                  }}
+                  onClick={() => router.push(`/movies/${selectedMovie.movie_id}`)}
+                >
                   <CardMedia
                     component="img"
                     image={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_url}`}
