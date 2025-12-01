@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 // next
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 // material-ui
 import Box from '@mui/material/Box';
@@ -19,6 +20,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Pagination from '@mui/material/Pagination';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 // icons
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
@@ -26,9 +28,12 @@ import AppstoreOutlined from '@ant-design/icons/AppstoreOutlined';
 import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
 import LeftOutlined from '@ant-design/icons/LeftOutlined';
 import RightOutlined from '@ant-design/icons/RightOutlined';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
+import DeleteConfirmationModal from 'components/DeleteConfirmationModal';
 
 // Mock TV show data
 const MOCK_TV_SHOWS = [
@@ -269,6 +274,8 @@ export default function TVShowsPage() {
   const [searchText, setSearchText] = useState('');
   const [viewMode, setViewMode] = useState<'single' | 'multi'>('single');
   const [page, setPage] = useState(1);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [showToDelete, setShowToDelete] = useState<typeof MOCK_TV_SHOWS[0] | null>(null);
   const showsPerPage = 6;
 
   const selectedShow = MOCK_TV_SHOWS[selectedShowIndex];
@@ -296,6 +303,20 @@ export default function TVShowsPage() {
     router.push(`/tv-shows/${id}`);
   };
 
+  // DESIGN-ONLY: Delete functionality - no backend API calls
+  // This only opens/closes the modal for UI/UX demonstration
+  const handleDeleteClick = (e: React.MouseEvent, show: typeof MOCK_TV_SHOWS[0]) => {
+    e.stopPropagation(); // Prevent card click
+    setShowToDelete(show);
+    setDeleteModalOpen(true);
+  };
+
+  // DESIGN-ONLY: Only closes the modal, no actual deletion
+  const handleCloseDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setShowToDelete(null);
+  };
+
   const totalPages = Math.ceil(MOCK_TV_SHOWS.length / showsPerPage);
   const displayedShows = viewMode === 'multi' ? MOCK_TV_SHOWS.slice((page - 1) * showsPerPage, page * showsPerPage) : [selectedShow];
 
@@ -303,16 +324,28 @@ export default function TVShowsPage() {
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-        <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
-          <ToggleButton value="single" aria-label="single view">
-            <ProfileOutlined style={{ marginRight: 8 }} />
-            Single View
-          </ToggleButton>
-          <ToggleButton value="multi" aria-label="multi view">
-            <AppstoreOutlined style={{ marginRight: 8 }} />
-            Multi View
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
+            <ToggleButton value="single" aria-label="single view">
+              <ProfileOutlined style={{ marginRight: 8 }} />
+              Single View
+            </ToggleButton>
+            <ToggleButton value="multi" aria-label="multi view">
+              <AppstoreOutlined style={{ marginRight: 8 }} />
+              Multi View
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Button
+            component={Link}
+            href="/add-tv-show"
+            variant="contained"
+            startIcon={<PlusOutlined />}
+            size="medium"
+            sx={{ whiteSpace: 'nowrap' }}
+          >
+            Add TV Show
+          </Button>
+        </Stack>
 
         <TextField
           placeholder="Search TV shows..."
@@ -396,9 +429,20 @@ export default function TVShowsPage() {
                 <Stack spacing={3}>
                   {/* Title and Rating */}
                   <Box>
-                    <Typography variant="h2" gutterBottom>
-                      {selectedShow.name}
-                    </Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
+                      <Typography variant="h2" gutterBottom>
+                        {selectedShow.name}
+                      </Typography>
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        startIcon={<DeleteOutlined />}
+                        onClick={() => handleDeleteClick({ stopPropagation: () => {} } as React.MouseEvent, selectedShow)}
+                        sx={{ ml: 2 }}
+                      >
+                        Delete
+                      </Button>
+                    </Box>
                     {selectedShow.original_name !== selectedShow.name && (
                       <Typography variant="h5" color="text.secondary" gutterBottom>
                         Original Name: {selectedShow.original_name}
@@ -495,6 +539,7 @@ export default function TVShowsPage() {
                       flexDirection: 'column',
                       cursor: 'pointer',
                       transition: 'transform 0.2s, box-shadow 0.2s',
+                      position: 'relative',
                       '&:hover': {
                         transform: 'scale(1.02)',
                         boxShadow: 4
@@ -502,6 +547,25 @@ export default function TVShowsPage() {
                     }}
                     onClick={() => handleShowClick(show.tv_show_id)}
                   >
+                    {/* Delete Icon Button */}
+                    <IconButton
+                      onClick={(e) => handleDeleteClick(e, show)}
+                      sx={{
+                        position: 'absolute',
+                        top: 8,
+                        right: 8,
+                        zIndex: 10,
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        '&:hover': {
+                          backgroundColor: 'error.light',
+                          color: 'error.contrastText'
+                        }
+                      }}
+                      color="error"
+                      size="small"
+                    >
+                      <DeleteOutlined />
+                    </IconButton>
                     <CardMedia component="img" height="300" image={`https://image.tmdb.org/t/p/w500${show.poster_url}`} alt={show.name} />
                     <Box sx={{ p: 2, flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <Typography variant="h5" gutterBottom>
@@ -541,6 +605,15 @@ export default function TVShowsPage() {
           </Box>
         )}
       </MainCard>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        open={deleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        title="Delete TV Show"
+        itemName={showToDelete?.name || ''}
+        itemType="tv-show"
+      />
     </Box>
   );
 }
