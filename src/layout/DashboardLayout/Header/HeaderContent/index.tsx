@@ -73,6 +73,13 @@ export default function HeaderContent() {
           >
             TV Shows
           </Button>
+          <Button
+            component={Link}
+            href="/search"
+            sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
+          >
+            Search
+          </Button>
         </Stack>
       )}
 

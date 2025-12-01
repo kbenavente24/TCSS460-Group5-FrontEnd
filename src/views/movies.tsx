@@ -16,6 +16,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Pagination from '@mui/material/Pagination';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 // icons
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
@@ -23,10 +24,12 @@ import AppstoreOutlined from '@ant-design/icons/AppstoreOutlined';
 import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
 import LeftOutlined from '@ant-design/icons/LeftOutlined';
 import RightOutlined from '@ant-design/icons/RightOutlined';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
 import { movieApi, type Movie } from 'services/movieApi';
+import DeleteConfirmationModal from 'components/DeleteConfirmationModal';
 
 // Mock movie data (kept for fallback)
 const MOCK_MOVIES = [
@@ -234,6 +237,8 @@ export default function MoviesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(1);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [movieToDelete, setMovieToDelete] = useState<Movie | null>(null);
   const moviesPerPage = 6;
 
   // Cache to store fetched movies and reduce redundant API calls
@@ -340,9 +345,27 @@ export default function MoviesPage() {
     setSelectedMovieIndex((prev) => (prev < movies.length - 1 ? prev + 1 : 0));
   };
 
-  const handleMovieClick = (index: number) => {
-    setSelectedMovieIndex(index);
-    setViewMode('single');
+  const handleMovieClick = (movie: Movie) => {
+    // Find the actual index of the movie in the full movies array
+    const actualIndex = movies.findIndex((m) => m.movie_id === movie.movie_id);
+    if (actualIndex !== -1) {
+      setSelectedMovieIndex(actualIndex);
+      setViewMode('single');
+    }
+  };
+
+  // DESIGN-ONLY: Delete functionality - no backend API calls
+  // This only opens/closes the modal for UI/UX demonstration
+  const handleDeleteClick = (e: React.MouseEvent, movie: Movie) => {
+    e.stopPropagation(); // Prevent card click
+    setMovieToDelete(movie);
+    setDeleteModalOpen(true);
+  };
+
+  // DESIGN-ONLY: Only closes the modal, no actual deletion
+  const handleCloseDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setMovieToDelete(null);
   };
 
   const displayedMovies = viewMode === 'multi' ? movies : selectedMovie ? [selectedMovie] : [];
@@ -473,9 +496,20 @@ export default function MoviesPage() {
                 <Stack spacing={3}>
                   {/* Title and Rating */}
                   <Box>
-                    <Typography variant="h2" gutterBottom>
-                      {selectedMovie.title}
-                    </Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
+                      <Typography variant="h2" gutterBottom>
+                        {selectedMovie.title}
+                      </Typography>
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        startIcon={<DeleteOutlined />}
+                        onClick={() => handleDeleteClick({ stopPropagation: () => {} } as React.MouseEvent, selectedMovie)}
+                        sx={{ ml: 2 }}
+                      >
+                        Delete
+                      </Button>
+                    </Box>
                     {selectedMovie.original_title !== selectedMovie.title && (
                       <Typography variant="h5" color="text.secondary" gutterBottom>
                         Original Title: {selectedMovie.original_title}
@@ -556,13 +590,33 @@ export default function MoviesPage() {
                         flexDirection: 'column',
                         cursor: 'pointer',
                         transition: 'transform 0.2s, box-shadow 0.2s',
+                        position: 'relative',
                         '&:hover': {
                           transform: 'scale(1.02)',
                           boxShadow: 4
                         }
                       }}
-                      onClick={() => handleMovieClick(index)}
+                      onClick={() => handleMovieClick(movie)}
                     >
+                      {/* Delete Icon Button */}
+                      <IconButton
+                        onClick={(e) => handleDeleteClick(e, movie)}
+                        sx={{
+                          position: 'absolute',
+                          top: 8,
+                          right: 8,
+                          zIndex: 10,
+                          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                          '&:hover': {
+                            backgroundColor: 'error.light',
+                            color: 'error.contrastText'
+                          }
+                        }}
+                        color="error"
+                        size="small"
+                      >
+                        <DeleteOutlined />
+                      </IconButton>
                       <CardMedia
                         component="img"
                         height="300"
@@ -607,6 +661,15 @@ export default function MoviesPage() {
           </Box>
         )}
       </MainCard>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        open={deleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        title="Delete Movie"
+        itemName={movieToDelete?.title || ''}
+        itemType="movie"
+      />
     </Box>
   );
 }

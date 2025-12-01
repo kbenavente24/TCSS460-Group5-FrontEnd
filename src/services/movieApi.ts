@@ -73,19 +73,34 @@ export const movieApi = {
 
     // The API returns { data: [...], meta: {...} } but we expect pagination
     // Transform the response to match our interface
+    const responseData = response.data;
+    let movies: Movie[] = [];
+    
+    // Handle different response structures
+    if (Array.isArray(responseData)) {
+      movies = responseData;
+    } else if (responseData?.data && Array.isArray(responseData.data)) {
+      movies = responseData.data;
+    } else if (responseData?.data && typeof responseData.data === 'object' && !Array.isArray(responseData.data)) {
+      // Single movie object wrapped in data
+      movies = [responseData.data];
+    } else {
+      movies = [];
+    }
+
     return {
-      data: response.data.data || response.data,
-      pagination: response.data.meta
+      data: movies,
+      pagination: responseData?.meta
         ? {
-            page: response.data.meta.page,
-            limit: response.data.meta.limit,
-            total: response.data.meta.total,
-            totalPages: response.data.meta.pages
+            page: responseData.meta.page || 1,
+            limit: responseData.meta.limit || filters?.limit || 20,
+            total: responseData.meta.total || movies.length,
+            totalPages: responseData.meta.pages || 1
           }
         : {
             page: 1,
             limit: filters?.limit || 20,
-            total: (response.data.data || response.data).length,
+            total: movies.length,
             totalPages: 1
           }
     };
