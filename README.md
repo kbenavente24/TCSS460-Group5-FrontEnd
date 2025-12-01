@@ -98,7 +98,11 @@ This front-end application connects to:
 - **MD Khan (Shanto)** - 
 - **Kobe Benavente** - 
 - **Pham Nguyen** - 
-- **Balkirat Singh** -  
+- **Balkirat Singh** -  Worked on getting the credentials API bug where verification wasn't working to resolve. Kobe was a big help and main factor in fixing. All work together on fixing the small bugs such as:
+- delete button not being on our front-end
+- some linking issues
+Updated the README file slightly.
+
 
 ## 📅 Beta Sprint Meetings
 
@@ -118,6 +122,17 @@ The team conducted regular meetings throughout the Beta Sprint II to coordinate 
 - Frequency: Multiple sessions throughout the sprint as needed
 - Format: Synchronous discussions for decision-making and asynchronous updates via text channels
 ---
+## Issues We Faced in Beta II
+
+- **API Configuration**: Resolved challenges with configuring credentials for API authentication and integration.
+- **Movie Navigation Links**: Fixed an issue where clicking on movies in multi-view and search results wasn't navigating to the correct movie detail page.
+- **Next.js Search Crash**: Resolved a critical bug that was causing Next.js to crash when performing search operations.
+- **Advanced Search Implementation**: Successfully integrated the advanced search feature to allow filtering by multiple criteria.
+- **Top 10 Lists Feature**: Implemented the top 10 movies and TV shows list functionality.
+- **Delete Button Inconsistencies**: Addressed UI issues where the delete button had incorrect behavior when selecting specific movies. Newly created movies
+  still lack a delete button implementation.
+ - **TV Show Creation Backend**: Unable to fully implement the create TV show backend functionality due to missing Group 7 API credentials. The UI button remains
+  visible but is not fully functional.
 
 **Version:** Beta II
 **Last Updated:** November 2025
