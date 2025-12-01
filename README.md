@@ -1,4 +1,4 @@
-# 📺 TCSS 460 Group 5 Front-end Version Beta I
+# 📺 TCSS 460 Group 5 Front-end Version Beta II
 
 Production URL: https://tcss460-group5.vercel.app
 
@@ -6,7 +6,7 @@ This repository contains the Group 5 Front-End application for the TCSS 460 cour
 
 ## 🎯 Overview
 
-Our web application will allow users to interact with comprehensive TV show and movie information. Users will be able to search, filter, and view detailed information all in one place.
+Our web application allows users to interact with comprehensive TV show and movie information. Users are able to search, filter, and view detailed information all in one place.
 
 The standout feature of our application is the **personalized Top 10 ranking system**. Rather than simply browsing content, users can create custom-themed Top 10 lists that reflect their unique tastes and preferences.
 
@@ -37,23 +37,22 @@ View our complete mockup designs and user flow diagrams on Figma:
 
 ## 📊 Current Status
 
-**Beta Version I** - The application is now in active development with core features implemented. Users can browse movies and tv shows via mock data, manage authentication, and navigate through a responsive UI.
+**Beta Version II** - The application is now nearing the final production stage with core features implemented. Users can browse movies and tv shows, manage authentication, and navigate through a responsive UI.
 
 ## ✨ Current Features
 
-### 🎥 Movies
-- **Browse Movies** - View paginated grid of movies (6 per page currently--more options will be implemented).
-- **Single Movie View** - Detailed information including poster, title, rating, runtime, genres, overview, director, budget, and revenue
-- **Navigation** - Cycle through movies using left/right arrows
-- **View Modes** - Toggle between single movie view and multi-movie grid
-- **Search Bar** - Search interface (functionality pending)
+### 🎥 Movies and TV Shows
+- **Browse** - View paginated grid of movies/show.
+- **Navigation** - Cycle through movies/shows using left/right arrows and via a paginated list.
+- **Toggle View Modes** - Toggle between single movie/shows view and multi-movie/shows grid.
+- **Search Bar and Search Page** - Advanced Searching Features tailored to our assigned apis.
 
 ### 🔐 Authentication
 - **User Login** - Sign in with email and password
 - **User Registration** - Create new accounts
 - **Session Management** - Persistent login sessions (1 day duration)
 - **Logout** - Secure sign out functionality
-- **Password Reset** - Reset password option in profile menu
+- **Password Reset** - Reset password option in profile menu as well as in the login page.
 
 ### 🎨 User Interface
 - **Responsive Design** - Clean, modern interface
@@ -83,12 +82,12 @@ This front-end application connects to:
 - [x] Basic UI components and layouts
 
 ### Phase 3: Top 10 Lists Feature
-- [ ] List creation interface
-- [ ] List management system
-- [ ] Ranking functionality
-- [ ] Save and share lists
+- [x] List creation interface
+- [x] List management system
+- [x] Ranking functionality
+- [x] Save lists
 
-### Phase 4: Polish & Deploy
+### Phase 4: Polish & Deploy Final Production
 - [ ] Responsive design optimization
 - [ ] Testing and bug fixes
 - [ ] Performance optimization
@@ -96,15 +95,15 @@ This front-end application connects to:
 
 ## 👥 Team Contributions
 
-- **MD Khan (Shanto)** - I added TV shows list and detail pages with mock data, implemented the change password form with validation, and fixed environment variable handling to prevent application crashes. These features add TV show browsing functionality and password management UI to the dashboard.
-- **Kobe Benavente** -   Developed the Movies page with single-view and multi-view modes, pagination, and navigation features. Redesigned parts of the application UI. Successfully deployed the application to Vercel by configuring environment variables, resolving build errors, and updating project documentation to Beta I status.
-- **Pham Nguyen** - I updated the register and login forms to meet the 3rd-party Auth API requirements and ensured the client-side validation matched the server-side rules. I integrated the web app’s functionality with the external Auth API to enable full user registration and authentication. I also updated src/utils/authOptions.tsx to ensure seamless compatibility with the new API.
-- **Balkirat Singh** -  We had a small bug where our Supabase database had, for some reason, paused and, when trying to restore it, it was causing issues. So our render wasn't deploying properly. So I ended up making a new Supabase database for our credentials API and updated the appropriate team. Also helped Shanto with some of the mock data and validation implementations.
+- **MD Khan (Shanto)** - 
+- **Kobe Benavente** - 
+- **Pham Nguyen** - 
+- **Balkirat Singh** -  
 
 ## 📅 Beta Sprint Meetings
 
 ### Meeting Overview
-The team conducted regular meetings throughout the Beta Sprint to coordinate development efforts and resolve technical challenges.
+The team conducted regular meetings throughout the Beta Sprint II to coordinate development efforts and resolve technical challenges.
 
 **Primary Communication Channel:** Discord
 
@@ -120,5 +119,5 @@ The team conducted regular meetings throughout the Beta Sprint to coordinate dev
 - Format: Synchronous discussions for decision-making and asynchronous updates via text channels
 ---
 
-**Version:** Beta I
+**Version:** Beta II
 **Last Updated:** November 2025
