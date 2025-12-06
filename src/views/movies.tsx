@@ -237,7 +237,7 @@ export default function MoviesPage() {
   const router = useRouter();
   const [selectedMovieIndex, setSelectedMovieIndex] = useState(0);
   const [searchText, setSearchText] = useState('');
-  const [viewMode, setViewMode] = useState<'single' | 'multi'>('single');
+  const [viewMode, setViewMode] = useState<'single' | 'multi'>('multi');
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -245,7 +245,7 @@ export default function MoviesPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [movieToDelete, setMovieToDelete] = useState<Movie | null>(null);
-  const moviesPerPage = 6;
+  const moviesPerPage = 9;
 
   // Cache to store fetched movies and reduce redundant API calls
   const [movieCache, setMovieCache] = useState<Map<string, { data: Movie[]; totalPages: number; timestamp: number }>>(new Map());
@@ -278,8 +278,12 @@ export default function MoviesPage() {
 
         // Fetch from API if not in cache or cache expired
         console.log('Fetching from API:', cacheKey);
+
+        // Only include title filter if search text has at least 2 characters
+        const titleFilter = searchText && searchText.length >= 2 ? searchText : undefined;
+
         const response = await movieApi.getMovies({
-          title: searchText || undefined,
+          title: titleFilter,
           page: currentPage,
           limit: limit
         });
@@ -391,27 +395,19 @@ export default function MoviesPage() {
     );
   }
 
-  if (movies.length === 0) {
-    return (
-      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Typography variant="h4">No movies found</Typography>
-      </Box>
-    );
-  }
-
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
         <Stack direction="row" spacing={2} alignItems="center">
           <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
-            <ToggleButton value="single" aria-label="single view">
-              <ProfileOutlined style={{ marginRight: 8 }} />
-              Single View
-            </ToggleButton>
             <ToggleButton value="multi" aria-label="multi view">
               <AppstoreOutlined style={{ marginRight: 8 }} />
               Multi View
+            </ToggleButton>
+            <ToggleButton value="single" aria-label="single view">
+              <ProfileOutlined style={{ marginRight: 8 }} />
+              Single View
             </ToggleButton>
           </ToggleButtonGroup>
           <Button
@@ -483,7 +479,14 @@ export default function MoviesPage() {
           }
         }}
       >
-        {viewMode === 'single' ? (
+        {movies.length === 0 ? (
+          /* No Movies Found */
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+            <Typography variant="h4" color="text.secondary">
+              No movies found
+            </Typography>
+          </Box>
+        ) : viewMode === 'single' ? (
           /* Single Movie View */
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, height: '100%' }}>
             {/* Left Arrow */}

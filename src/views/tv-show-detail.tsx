@@ -380,13 +380,13 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
                     Original Name: {tvShow.original_name}
                   </Typography>
                 )}
-                <Stack direction="row" spacing={1} sx={{ mt: 1 }} flexWrap="wrap" useFlexGap>
-                  <Chip label={`⭐ ${tvShow.vote_average}/10`} color="primary" size="small" />
-                  {tvShow.episode_run_time > 0 && (
-                    <Chip label={`${tvShow.episode_run_time} min/episode`} variant="outlined" size="small" />
-                  )}
-                  <Chip label={`${tvShow.number_of_seasons} Seasons`} variant="outlined" size="small" />
-                  <Chip label={`${tvShow.number_of_episodes} Episodes`} variant="outlined" size="small" />
+                <Stack direction="row" spacing={1} sx={{ mt: 2 }} flexWrap="wrap" useFlexGap>
+                  <Chip label={`⭐ ${tvShow.vote_average}/10`} color="primary" />
+                  <Chip label={`${tvShow.number_of_seasons} Seasons`} variant="outlined" />
+                  <Chip label={`${tvShow.number_of_episodes} Episodes`} variant="outlined" />
+                  {tvShow.status && <Chip label={tvShow.status} color="secondary" variant="outlined" />}
+                  {tvShow.popularity && <Chip label={`Popularity: ${Number(tvShow.popularity).toFixed(0)}`} variant="outlined" />}
+                  {tvShow.vote_count && <Chip label={`${tvShow.vote_count.toLocaleString()} votes`} variant="outlined" />}
                 </Stack>
               </Box>
 
@@ -420,28 +420,6 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
                   </Typography>
                   <Typography variant="body1">{tvShow.creators}</Typography>
                 </Box>
-              )}
-
-              {/* Networks and Production - Only show if available */}
-              {(tvShow.networks !== 'N/A' || tvShow.production_companies !== 'N/A') && (
-                <Grid container spacing={3}>
-                  {tvShow.networks !== 'N/A' && (
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                        Network
-                      </Typography>
-                      <Typography variant="body1">{tvShow.networks}</Typography>
-                    </Grid>
-                  )}
-                  {tvShow.production_companies !== 'N/A' && (
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                        Production Companies
-                      </Typography>
-                      <Typography variant="body1">{tvShow.production_companies}</Typography>
-                    </Grid>
-                  )}
-                </Grid>
               )}
 
               {/* Air Dates */}

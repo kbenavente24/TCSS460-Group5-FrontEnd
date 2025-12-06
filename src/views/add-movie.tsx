@@ -15,6 +15,10 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
 // icons
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
@@ -24,6 +28,28 @@ import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
+
+// TMDB Movie Genres (standard movie database genres)
+const MOVIE_GENRES = [
+  'Action',
+  'Adventure',
+  'Animation',
+  'Comedy',
+  'Crime',
+  'Documentary',
+  'Drama',
+  'Family',
+  'Fantasy',
+  'History',
+  'Horror',
+  'Music',
+  'Mystery',
+  'Romance',
+  'Science Fiction',
+  'Thriller',
+  'War',
+  'Western'
+];
 
 interface Studio {
   studio_name: string;
@@ -334,12 +360,23 @@ export default function AddMovieView() {
                 <Stack spacing={2}>
                   {genres.map((genre, index) => (
                     <Stack direction="row" spacing={2} key={index}>
-                      <TextField
-                        label={`Genre ${index + 1}`}
-                        value={genre}
-                        onChange={(e) => handleGenreChange(index, e.target.value)}
-                        fullWidth
-                      />
+                      <FormControl fullWidth>
+                        <InputLabel>Genre {index + 1}</InputLabel>
+                        <Select
+                          value={genre}
+                          label={`Genre ${index + 1}`}
+                          onChange={(e) => handleGenreChange(index, e.target.value)}
+                        >
+                          <MenuItem value="">
+                            <em>Select a genre</em>
+                          </MenuItem>
+                          {MOVIE_GENRES.map((g) => (
+                            <MenuItem key={g} value={g}>
+                              {g}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                       {genres.length > 1 && (
                         <IconButton onClick={() => handleRemoveGenre(index)} color="error">
                           <DeleteOutlined />

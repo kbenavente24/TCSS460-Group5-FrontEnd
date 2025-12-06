@@ -61,48 +61,62 @@ export interface MovieFilters {
 export const movieApi = {
   // Get all movies with optional filters
   getMovies: async (filters?: MovieFilters): Promise<MoviesResponse> => {
-    console.log('Fetching movies with filters:', filters);
-    console.log('API Base URL:', API_BASE_URL);
+    try {
+      console.log('Fetching movies with filters:', filters);
+      console.log('API Base URL:', API_BASE_URL);
 
-    const response = await movieApiClient.get('', {
-      params: filters
-    });
+      const response = await movieApiClient.get('', {
+        params: filters
+      });
 
-    console.log('API Response:', response.data);
+      console.log('API Response:', response.data);
 
-    // The API returns { data: [...], meta: {...} } but we expect pagination
-    // Transform the response to match our interface
-    const responseData = response.data;
-    let movies: Movie[] = [];
-    
-    // Handle different response structures
-    if (Array.isArray(responseData)) {
-      movies = responseData;
-    } else if (responseData?.data && Array.isArray(responseData.data)) {
-      movies = responseData.data;
-    } else if (responseData?.data && typeof responseData.data === 'object' && !Array.isArray(responseData.data)) {
-      // Single movie object wrapped in data
-      movies = [responseData.data];
-    } else {
-      movies = [];
+      // The API returns { data: [...], meta: {...} } but we expect pagination
+      // Transform the response to match our interface
+      const responseData = response.data;
+      let movies: Movie[] = [];
+
+      // Handle different response structures
+      if (Array.isArray(responseData)) {
+        movies = responseData;
+      } else if (responseData?.data && Array.isArray(responseData.data)) {
+        movies = responseData.data;
+      } else if (responseData?.data && typeof responseData.data === 'object' && !Array.isArray(responseData.data)) {
+        // Single movie object wrapped in data
+        movies = [responseData.data];
+      } else {
+        movies = [];
+      }
+
+      return {
+        data: movies,
+        pagination: responseData?.meta
+          ? {
+              page: responseData.meta.page || 1,
+              limit: responseData.meta.limit || filters?.limit || 20,
+              total: responseData.meta.total || movies.length,
+              totalPages: responseData.meta.pages || 1
+            }
+          : {
+              page: 1,
+              limit: filters?.limit || 20,
+              total: movies.length,
+              totalPages: 1
+            }
+      };
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+      // Return empty result instead of throwing
+      return {
+        data: [],
+        pagination: {
+          page: 1,
+          limit: filters?.limit || 20,
+          total: 0,
+          totalPages: 0
+        }
+      };
     }
-
-    return {
-      data: movies,
-      pagination: responseData?.meta
-        ? {
-            page: responseData.meta.page || 1,
-            limit: responseData.meta.limit || filters?.limit || 20,
-            total: responseData.meta.total || movies.length,
-            totalPages: responseData.meta.pages || 1
-          }
-        : {
-            page: 1,
-            limit: filters?.limit || 20,
-            total: movies.length,
-            totalPages: 1
-          }
-    };
   },
 
   // Get a single movie by ID

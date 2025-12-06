@@ -27,6 +27,7 @@ import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
+import ContentPicker, { type SelectedContent } from 'components/ContentPicker';
 
 // ==============================|| TOP 10S PAGE ||============================== //
 
@@ -35,6 +36,7 @@ interface ListItem {
   movieId?: number;
   title?: string;
   posterUrl?: string;
+  contentType?: 'movie' | 'tv-show';
 }
 
 interface Top10List {
@@ -58,6 +60,8 @@ export default function Top10Page() {
   const [error, setError] = useState('');
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [listToDelete, setListToDelete] = useState<Top10List | null>(null);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [selectedRank, setSelectedRank] = useState<number | null>(null);
 
   // Fetch lists from the API
   useEffect(() => {
@@ -156,7 +160,17 @@ export default function Top10Page() {
     }
   };
 
-  const handleBackToDashboard = () => {
+  const handleBackToDashboard = async () => {
+    // Refresh the lists to update item counts
+    try {
+      const response = await fetch('/api/lists');
+      if (response.ok) {
+        const result = await response.json();
+        setLists(result.data || []);
+      }
+    } catch (err) {
+      console.error('Error refreshing lists:', err);
+    }
     setSelectedList(null);
   };
 
@@ -206,6 +220,75 @@ export default function Top10Page() {
       console.error('Error deleting list:', err);
       setError(err.message || 'Failed to delete list');
       handleCloseDeleteConfirm();
+    }
+  };
+
+  const handleAddItemClick = (rank: number) => {
+    setSelectedRank(rank);
+    setPickerOpen(true);
+  };
+
+  const handleCloseContentPicker = () => {
+    setPickerOpen(false);
+    setSelectedRank(null);
+  };
+
+  const handleSelectContent = async (content: SelectedContent) => {
+    if (!selectedList || selectedRank === null) return;
+
+    try {
+      const response = await fetch(`/api/lists/${selectedList.id}/items`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          rank: selectedRank,
+          contentId: content.id,
+          contentType: content.type,
+          title: content.title,
+          posterUrl: content.posterUrl
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add item');
+      }
+
+      // Refresh the list to get updated items
+      const listResponse = await fetch(`/api/lists/${selectedList.id}`);
+      if (listResponse.ok) {
+        const result = await listResponse.json();
+        setSelectedList(result.data);
+      }
+    } catch (err: any) {
+      console.error('Error adding item:', err);
+      setError(err.message || 'Failed to add item');
+    }
+  };
+
+  const handleRemoveItem = async (rank: number) => {
+    if (!selectedList) return;
+
+    try {
+      const response = await fetch(`/api/lists/${selectedList.id}/items?rank=${rank}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove item');
+      }
+
+      // Update the list locally
+      const updatedItems = selectedList.items.map((item) => (item.rank === rank ? { rank: item.rank } : item));
+
+      setSelectedList({
+        ...selectedList,
+        items: updatedItems
+      });
+    } catch (err: any) {
+      console.error('Error removing item:', err);
+      setError(err.message || 'Failed to remove item');
     }
   };
 
@@ -299,10 +382,12 @@ export default function Top10Page() {
                     alignItems: 'center',
                     p: 2,
                     transition: 'box-shadow 0.2s',
+                    cursor: item.movieId ? 'default' : 'pointer',
                     '&:hover': {
                       boxShadow: 4
                     }
                   }}
+                  onClick={() => !item.movieId && handleAddItemClick(item.rank)}
                 >
                   {/* Rank Number */}
                   <Box
@@ -321,7 +406,7 @@ export default function Top10Page() {
                     <Typography variant="h3">{item.rank}</Typography>
                   </Box>
 
-                  {/* Movie/Show Placeholder */}
+                  {/* Movie/Show Content */}
                   {item.movieId ? (
                     <>
                       <Box
@@ -336,9 +421,33 @@ export default function Top10Page() {
                           backgroundPosition: 'center'
                         }}
                       />
-                      <Box>
+                      <Box sx={{ flex: 1 }}>
                         <Typography variant="h5">{item.title}</Typography>
+                        {item.contentType && (
+                          <Typography variant="caption" color="text.secondary">
+                            {item.contentType === 'movie' ? 'Movie' : 'TV Show'}
+                          </Typography>
+                        )}
                       </Box>
+                      <Stack direction="row" spacing={1}>
+                        <Button variant="outlined" size="small" onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddItemClick(item.rank);
+                        }}>
+                          Change
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          color="error"
+                          size="small"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemoveItem(item.rank);
+                          }}
+                        >
+                          Remove
+                        </Button>
+                      </Stack>
                     </>
                   ) : (
                     <Box
@@ -636,9 +745,16 @@ export default function Top10Page() {
                             backgroundPosition: 'center'
                           }}
                         />
-                        <Typography variant="body2" sx={{ flex: 1, fontSize: '0.875rem' }}>
-                          {item.title}
-                        </Typography>
+                        <Box sx={{ flex: 1 }}>
+                          <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
+                            {item.title}
+                          </Typography>
+                          {item.contentType && (
+                            <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
+                              {item.contentType === 'movie' ? 'Movie' : 'TV Show'}
+                            </Typography>
+                          )}
+                        </Box>
                       </>
                     ) : (
                       <Typography variant="body2" color="text.secondary" sx={{ flex: 1, fontSize: '0.8rem' }}>
@@ -683,6 +799,17 @@ export default function Top10Page() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Content Picker Dialog */}
+      {selectedList && selectedRank !== null && (
+        <ContentPicker
+          open={pickerOpen}
+          onClose={handleCloseContentPicker}
+          onSelect={handleSelectContent}
+          listType={selectedList.type as 'movies' | 'tv-shows' | 'mixed'}
+          currentRank={selectedRank}
+        />
+      )}
     </Box>
   );
 }

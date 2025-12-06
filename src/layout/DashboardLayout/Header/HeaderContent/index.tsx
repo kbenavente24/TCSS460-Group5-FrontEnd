@@ -54,13 +54,6 @@ export default function HeaderContent() {
           </Button>
           <Button
             component={Link}
-            href="/top10"
-            sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
-          >
-            My Top 10s
-          </Button>
-          <Button
-            component={Link}
             href="/movies"
             sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
           >
@@ -79,6 +72,13 @@ export default function HeaderContent() {
             sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
           >
             Search
+          </Button>
+          <Button
+            component={Link}
+            href="/top10"
+            sx={{ color: '#FFFFFF', whiteSpace: 'nowrap', fontSize: '1.1rem', fontWeight: 500, '&:hover': { color: '#E0E0E0' } }}
+          >
+            My Top 10s
           </Button>
         </Stack>
       )}

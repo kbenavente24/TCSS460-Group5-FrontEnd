@@ -273,12 +273,12 @@ export default function TVShowsPage() {
   const router = useRouter();
   const [selectedShowIndex, setSelectedShowIndex] = useState(0);
   const [searchText, setSearchText] = useState('');
-  const [viewMode, setViewMode] = useState<'single' | 'multi'>('single');
+  const [viewMode, setViewMode] = useState<'single' | 'multi'>('multi');
   const [page, setPage] = useState(1);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [showToDelete, setShowToDelete] = useState<TVShow | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  const showsPerPage = 6;
+  const showsPerPage = 9;
 
   // API state management
   const [tvShows, setTVShows] = useState<TVShow[]>([]);
@@ -439,28 +439,19 @@ export default function TVShowsPage() {
     );
   }
 
-  // Show empty state
-  if (tvShows.length === 0) {
-    return (
-      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Typography variant="h4">No TV shows found</Typography>
-      </Box>
-    );
-  }
-
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
         <Stack direction="row" spacing={2} alignItems="center">
           <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
-            <ToggleButton value="single" aria-label="single view">
-              <ProfileOutlined style={{ marginRight: 8 }} />
-              Single View
-            </ToggleButton>
             <ToggleButton value="multi" aria-label="multi view">
               <AppstoreOutlined style={{ marginRight: 8 }} />
               Multi View
+            </ToggleButton>
+            <ToggleButton value="single" aria-label="single view">
+              <ProfileOutlined style={{ marginRight: 8 }} />
+              Single View
             </ToggleButton>
           </ToggleButtonGroup>
           <Button
@@ -532,7 +523,14 @@ export default function TVShowsPage() {
           }
         }}
       >
-        {viewMode === 'single' ? (
+        {tvShows.length === 0 ? (
+          /* No TV Shows Found */
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+            <Typography variant="h4" color="text.secondary">
+              No TV shows found
+            </Typography>
+          </Box>
+        ) : viewMode === 'single' ? (
           /* Single TV Show View */
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, height: '100%' }}>
             {/* Left Arrow */}

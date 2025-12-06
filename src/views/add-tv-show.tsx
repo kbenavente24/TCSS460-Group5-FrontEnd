@@ -15,6 +15,10 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
 // icons
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
@@ -24,6 +28,31 @@ import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
+
+// TV Show Genres (from TMDB API)
+const TV_SHOW_GENRES = [
+  'Action & Adventure',
+  'Animation',
+  'Comedy',
+  'Crime',
+  'Documentary',
+  'Drama',
+  'Family',
+  'History',
+  'Kids',
+  'Mystery',
+  'News',
+  'Reality',
+  'Romance',
+  'Sci-Fi & Fantasy',
+  'Soap',
+  'Talk',
+  'War & Politics',
+  'Western'
+];
+
+// TV Show Status Options
+const TV_SHOW_STATUSES = ['Canceled', 'Ended', 'Pilot', 'Returning Series'];
 
 export default function AddTVShowView() {
   const router = useRouter();
@@ -38,9 +67,11 @@ export default function AddTVShowView() {
   const [lastAirDate, setLastAirDate] = useState('');
   const [numberOfSeasons, setNumberOfSeasons] = useState('');
   const [numberOfEpisodes, setNumberOfEpisodes] = useState('');
-  const [episodeRunTime, setEpisodeRunTime] = useState('');
+  const [status, setStatus] = useState('');
   const [overview, setOverview] = useState('');
-  const [voteAverage, setVoteAverage] = useState('');
+  const [popularity, setPopularity] = useState('');
+  const [tmdbRating, setTmdbRating] = useState('');
+  const [voteCount, setVoteCount] = useState('');
   const [posterUrl, setPosterUrl] = useState('');
   const [backdropUrl, setBackdropUrl] = useState('');
 
@@ -89,38 +120,64 @@ export default function AddTVShowView() {
     setSuccess(false);
 
     try {
-      const tvShowData = {
+      // Filter and prepare data
+      const filteredGenres = genres.filter((g) => g.trim());
+      const filteredCreators = creators.filter((c) => c.trim()).map((c) => ({ creator_name: c }));
+      const filteredNetworks = networks.filter((n) => n.trim()).map((n) => ({ network_name: n }));
+      const filteredStudios = productionCompanies.filter((p) => p.trim()).map((p) => ({ studio_name: p }));
+
+      const tvShowData: any = {
         name,
         original_name: originalName || name,
         first_air_date: firstAirDate,
-        last_air_date: lastAirDate || undefined,
-        number_of_seasons: parseInt(numberOfSeasons) || 1,
-        number_of_episodes: parseInt(numberOfEpisodes) || 0,
-        episode_run_time: parseInt(episodeRunTime) || 0,
+        last_air_date: lastAirDate || firstAirDate, // API requires this field, use first_air_date as default
+        seasons: parseInt(numberOfSeasons) || 1,
+        episodes: parseInt(numberOfEpisodes) || 0,
+        status: status || 'Unknown',
         overview,
-        vote_average: parseFloat(voteAverage) || 0,
-        poster_url: posterUrl || undefined,
-        backdrop_url: backdropUrl || undefined,
-        genres: genres.filter((g) => g.trim()),
-        creators: creators.filter((c) => c.trim()),
-        networks: networks.filter((n) => n.trim()),
-        production_companies: productionCompanies.filter((p) => p.trim())
+        popularity: parseFloat(popularity) || 0,
+        tmdb_rating: parseFloat(tmdbRating) || 0,
+        vote_count: parseInt(voteCount) || 0,
+        genres: filteredGenres.length > 0 ? filteredGenres : ['Unknown'] // API requires genres array
       };
 
-      // Connect to TV Show API (optional for this sprint, but enabled)
-      const response = await fetch(`${process.env.NEXT_PUBLIC_TV_SHOW_API_URL}/tv-shows`, {
+      // Add optional fields only if they have values
+      if (posterUrl) tvShowData.poster_url = posterUrl;
+      if (backdropUrl) tvShowData.backdrop_url = backdropUrl;
+      if (filteredCreators.length > 0) tvShowData.creators = filteredCreators;
+      if (filteredNetworks.length > 0) tvShowData.networks = filteredNetworks;
+      if (filteredStudios.length > 0) tvShowData.studios = filteredStudios;
+
+      console.log('Sending TV Show Data:', JSON.stringify(tvShowData, null, 2));
+
+      // Use local Next.js API route
+      const response = await fetch('/api/tv-shows', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'X-API-Key': process.env.NEXT_PUBLIC_TV_SHOW_API_KEY || ''
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(tvShowData)
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create TV show');
+        console.error('API Error Response:', errorData);
+
+        // Extract detailed error message
+        let errorMessage = 'Failed to create TV show';
+        if (errorData.details?.errors) {
+          errorMessage = errorData.details.errors.map((e: any) => `${e.path}: ${e.msg}`).join(', ');
+        } else if (errorData.error) {
+          errorMessage = errorData.error;
+        } else if (errorData.message) {
+          errorMessage = errorData.message;
+        }
+
+        throw new Error(errorMessage);
       }
+
+      const result = await response.json();
+      console.log('TV Show created successfully:', result);
 
       setSuccess(true);
       setTimeout(() => {
@@ -128,6 +185,7 @@ export default function AddTVShowView() {
       }, 2000);
     } catch (err: any) {
       console.error('Error creating TV show:', err);
+      console.error('Error details:', err.message);
       setError(err.message || 'Failed to create TV show. Please try again.');
     } finally {
       setLoading(false);
@@ -213,15 +271,19 @@ export default function AddTVShowView() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <TextField
-                      label="Vote Average"
-                      type="number"
-                      value={voteAverage}
-                      onChange={(e) => setVoteAverage(e.target.value)}
-                      fullWidth
-                      inputProps={{ min: 0, max: 10, step: 0.1 }}
-                      helperText="Rating out of 10"
-                    />
+                    <FormControl fullWidth>
+                      <InputLabel>Status</InputLabel>
+                      <Select value={status} label="Status" onChange={(e) => setStatus(e.target.value)}>
+                        <MenuItem value="">
+                          <em>Select a status</em>
+                        </MenuItem>
+                        {TV_SHOW_STATUSES.map((s) => (
+                          <MenuItem key={s} value={s}>
+                            {s}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </Grid>
                   <Grid item xs={12} md={4}>
                     <TextField
@@ -247,13 +309,35 @@ export default function AddTVShowView() {
                   </Grid>
                   <Grid item xs={12} md={4}>
                     <TextField
-                      label="Episode Run Time (minutes)"
+                      label="Popularity"
                       type="number"
-                      value={episodeRunTime}
-                      onChange={(e) => setEpisodeRunTime(e.target.value)}
+                      value={popularity}
+                      onChange={(e) => setPopularity(e.target.value)}
                       fullWidth
-                      required
-                      inputProps={{ min: 1 }}
+                      inputProps={{ min: 0, step: 0.001 }}
+                      helperText="Popularity score"
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <TextField
+                      label="TMDB Rating"
+                      type="number"
+                      value={tmdbRating}
+                      onChange={(e) => setTmdbRating(e.target.value)}
+                      fullWidth
+                      inputProps={{ min: 0, max: 10, step: 0.1 }}
+                      helperText="Rating out of 10"
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <TextField
+                      label="Vote Count"
+                      type="number"
+                      value={voteCount}
+                      onChange={(e) => setVoteCount(e.target.value)}
+                      fullWidth
+                      inputProps={{ min: 0 }}
+                      helperText="Number of votes"
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -313,12 +397,23 @@ export default function AddTVShowView() {
                 <Stack spacing={2}>
                   {genres.map((genre, index) => (
                     <Stack direction="row" spacing={2} key={index}>
-                      <TextField
-                        label={`Genre ${index + 1}`}
-                        value={genre}
-                        onChange={(e) => handleGenreChange(index, e.target.value)}
-                        fullWidth
-                      />
+                      <FormControl fullWidth>
+                        <InputLabel>Genre {index + 1}</InputLabel>
+                        <Select
+                          value={genre}
+                          label={`Genre ${index + 1}`}
+                          onChange={(e) => handleGenreChange(index, e.target.value)}
+                        >
+                          <MenuItem value="">
+                            <em>Select a genre</em>
+                          </MenuItem>
+                          {TV_SHOW_GENRES.map((g) => (
+                            <MenuItem key={g} value={g}>
+                              {g}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                       {genres.length > 1 && (
                         <IconButton onClick={() => handleRemoveGenre(index)} color="error">
                           <DeleteOutlined />
