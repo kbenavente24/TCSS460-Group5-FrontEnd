@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // next
 import { useRouter } from 'next/navigation';
@@ -34,6 +34,7 @@ import PlusOutlined from '@ant-design/icons/PlusOutlined';
 // project imports
 import MainCard from 'components/MainCard';
 import DeleteConfirmationModal from 'components/DeleteConfirmationModal';
+import { tvShowApi, type TVShow } from 'services/tvShowApi';
 
 // Mock TV show data
 const MOCK_TV_SHOWS = [
@@ -275,14 +276,113 @@ export default function TVShowsPage() {
   const [viewMode, setViewMode] = useState<'single' | 'multi'>('single');
   const [page, setPage] = useState(1);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [showToDelete, setShowToDelete] = useState<typeof MOCK_TV_SHOWS[0] | null>(null);
+  const [showToDelete, setShowToDelete] = useState<TVShow | null>(null);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
   const showsPerPage = 6;
 
-  const selectedShow = MOCK_TV_SHOWS[selectedShowIndex];
+  // API state management
+  const [tvShows, setTVShows] = useState<TVShow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Cache to store fetched shows and reduce redundant API calls
+  const [showCache, setShowCache] = useState<Map<string, {
+    data: TVShow[];
+    totalPages: number;
+    timestamp: number
+  }>>(new Map());
+
+  const selectedShow = tvShows[selectedShowIndex];
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
+
+  const handleImageError = (showId: number) => {
+    setImageErrors((prev) => new Set(prev).add(showId));
+  };
+
+  const getImageUrl = (show: TVShow) => {
+    if (imageErrors.has(show.tv_show_id)) {
+      return 'https://placehold.co/500x750/1a1a1a/ffffff?text=No+Image+Available';
+    }
+    return `https://image.tmdb.org/t/p/w500${show.poster_url}`;
+  };
+
+  // Fetch TV shows from API with debounce for search
+  useEffect(() => {
+    const fetchTVShows = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Create cache key based on search parameters
+        const limit = viewMode === 'multi' ? showsPerPage : 20;
+        const currentPage = viewMode === 'multi' ? page : 1;
+        const cacheKey = `${searchText || 'all'}-${currentPage}-${limit}`;
+
+        // Check cache first (cache valid for 5 minutes)
+        const cached = showCache.get(cacheKey);
+        const now = Date.now();
+        const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+
+        if (cached && now - cached.timestamp < cacheExpiry) {
+          console.log('Using cached data for:', cacheKey);
+          setTVShows(cached.data);
+          setTotalPages(cached.totalPages);
+          setSelectedShowIndex(0);
+          setLoading(false);
+          return;
+        }
+
+        // Fetch from API if not in cache or cache expired
+        console.log('Fetching from API:', cacheKey);
+        const response = await tvShowApi.getTVShows({
+          name: searchText || undefined,
+          page: currentPage,
+          limit: limit
+        });
+
+        setTVShows(response.data);
+        setTotalPages(response.pagination.totalPages);
+
+        // Update cache
+        setShowCache(
+          (prevCache) =>
+            new Map(
+              prevCache.set(cacheKey, {
+                data: response.data,
+                totalPages: response.pagination.totalPages,
+                timestamp: now
+              })
+            )
+        );
+
+        // Reset selected show index when data changes
+        setSelectedShowIndex(0);
+      } catch (err) {
+        console.error('Error fetching TV shows:', err);
+        setError('Failed to load TV shows. Please try again.');
+        // Fallback to mock data on error
+        setTVShows(MOCK_TV_SHOWS);
+        setTotalPages(Math.ceil(MOCK_TV_SHOWS.length / showsPerPage));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Debounce search
+    const timeoutId = setTimeout(
+      () => {
+        fetchTVShows();
+      },
+      searchText ? 500 : 0
+    ); // 500ms debounce for search, immediate for other changes
+
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchText, page, viewMode]);
 
   const handleViewChange = (_event: React.MouseEvent<HTMLElement>, newView: 'single' | 'multi' | null) => {
     if (newView !== null) {
@@ -292,11 +392,11 @@ export default function TVShowsPage() {
   };
 
   const handlePreviousShow = () => {
-    setSelectedShowIndex((prev) => (prev > 0 ? prev - 1 : MOCK_TV_SHOWS.length - 1));
+    setSelectedShowIndex((prev) => (prev > 0 ? prev - 1 : tvShows.length - 1));
   };
 
   const handleNextShow = () => {
-    setSelectedShowIndex((prev) => (prev < MOCK_TV_SHOWS.length - 1 ? prev + 1 : 0));
+    setSelectedShowIndex((prev) => (prev < tvShows.length - 1 ? prev + 1 : 0));
   };
 
   const handleShowClick = (id: number) => {
@@ -317,8 +417,36 @@ export default function TVShowsPage() {
     setShowToDelete(null);
   };
 
-  const totalPages = Math.ceil(MOCK_TV_SHOWS.length / showsPerPage);
-  const displayedShows = viewMode === 'multi' ? MOCK_TV_SHOWS.slice((page - 1) * showsPerPage, page * showsPerPage) : [selectedShow];
+  const displayedShows = viewMode === 'multi' ? tvShows : selectedShow ? [selectedShow] : [];
+
+  // Show loading state
+  if (loading) {
+    return (
+      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4">Loading TV shows...</Typography>
+      </Box>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4" color="error">
+          {error}
+        </Typography>
+      </Box>
+    );
+  }
+
+  // Show empty state
+  if (tvShows.length === 0) {
+    return (
+      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4">No TV shows found</Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
@@ -350,7 +478,10 @@ export default function TVShowsPage() {
         <TextField
           placeholder="Search TV shows..."
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setPage(1); // Reset to page 1 when searching
+          }}
           sx={{
             width: 400,
             '& .MuiOutlinedInput-root': {
@@ -416,10 +547,11 @@ export default function TVShowsPage() {
                 <Card elevation={0}>
                   <CardMedia
                     component="img"
-                    image={`https://image.tmdb.org/t/p/w500${selectedShow.poster_url}`}
+                    image={getImageUrl(selectedShow)}
                     alt={selectedShow.name}
                     sx={{ borderRadius: 2, cursor: 'pointer' }}
                     onClick={() => handleShowClick(selectedShow.tv_show_id)}
+                    onError={() => handleImageError(selectedShow.tv_show_id)}
                   />
                 </Card>
               </Grid>
@@ -450,7 +582,9 @@ export default function TVShowsPage() {
                     )}
                     <Stack direction="row" spacing={1} sx={{ mt: 1 }} flexWrap="wrap" useFlexGap>
                       <Chip label={`⭐ ${selectedShow.vote_average}/10`} color="primary" size="small" />
-                      <Chip label={`${selectedShow.episode_run_time} min/ep`} variant="outlined" size="small" />
+                      {selectedShow.episode_run_time > 0 && (
+                        <Chip label={`${selectedShow.episode_run_time} min/ep`} variant="outlined" size="small" />
+                      )}
                       <Chip label={`${selectedShow.number_of_seasons} Seasons`} variant="outlined" size="small" />
                       <Chip label={`${selectedShow.number_of_episodes} Episodes`} variant="outlined" size="small" />
                     </Stack>
@@ -478,29 +612,37 @@ export default function TVShowsPage() {
                     </Typography>
                   </Box>
 
-                  {/* Creators */}
-                  <Box>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Creators
-                    </Typography>
-                    <Typography variant="body1">{selectedShow.creators}</Typography>
-                  </Box>
+                  {/* Creators - Hide if N/A */}
+                  {selectedShow.creators !== 'N/A' && (
+                    <Box>
+                      <Typography variant="subtitle2" color="text.secondary">
+                        Creators
+                      </Typography>
+                      <Typography variant="body1">{selectedShow.creators}</Typography>
+                    </Box>
+                  )}
 
-                  {/* Networks and Production */}
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="subtitle2" color="text.secondary">
-                        Network
-                      </Typography>
-                      <Typography variant="body1">{selectedShow.networks}</Typography>
+                  {/* Networks and Production - Only show if available */}
+                  {(selectedShow.networks !== 'N/A' || selectedShow.production_companies !== 'N/A') && (
+                    <Grid container spacing={2}>
+                      {selectedShow.networks !== 'N/A' && (
+                        <Grid item xs={12} sm={6}>
+                          <Typography variant="subtitle2" color="text.secondary">
+                            Network
+                          </Typography>
+                          <Typography variant="body1">{selectedShow.networks}</Typography>
+                        </Grid>
+                      )}
+                      {selectedShow.production_companies !== 'N/A' && (
+                        <Grid item xs={12} sm={6}>
+                          <Typography variant="subtitle2" color="text.secondary">
+                            Production Companies
+                          </Typography>
+                          <Typography variant="body1">{selectedShow.production_companies}</Typography>
+                        </Grid>
+                      )}
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="subtitle2" color="text.secondary">
-                        Production Companies
-                      </Typography>
-                      <Typography variant="body1">{selectedShow.production_companies}</Typography>
-                    </Grid>
-                  </Grid>
+                  )}
 
                   {/* Air Dates */}
                   <Grid container spacing={2}>
@@ -566,7 +708,13 @@ export default function TVShowsPage() {
                     >
                       <DeleteOutlined />
                     </IconButton>
-                    <CardMedia component="img" height="300" image={`https://image.tmdb.org/t/p/w500${show.poster_url}`} alt={show.name} />
+                    <CardMedia
+                      component="img"
+                      height="300"
+                      image={getImageUrl(show)}
+                      alt={show.name}
+                      onError={() => handleImageError(show.tv_show_id)}
+                    />
                     <Box sx={{ p: 2, flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <Typography variant="h5" gutterBottom>
                         {show.name}

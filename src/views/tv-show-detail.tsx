@@ -20,6 +20,7 @@ import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
 
 // project imports
 import MainCard from 'components/MainCard';
+import { tvShowApi, type TVShow } from 'services/tvShowApi';
 
 // Mock TV show data (same as in tv-shows.tsx)
 const MOCK_TV_SHOWS = [
@@ -256,31 +257,66 @@ const MOCK_TV_SHOWS = [
 
 export default function TVShowDetailPage({ id }: { id?: string }) {
   const router = useRouter();
-  const [tvShow, setTvShow] = useState<(typeof MOCK_TV_SHOWS)[0] | null>(null);
+  const [tvShow, setTvShow] = useState<TVShow | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!id) {
-      setTvShow(null);
-      return;
-    }
-    const parsedId = parseInt(id);
-    if (isNaN(parsedId)) {
-      setTvShow(null);
-      return;
-    }
-    const show = MOCK_TV_SHOWS.find((s) => s.tv_show_id === parsedId);
-    setTvShow(show || null);
+    const fetchTVShow = async () => {
+      if (!id) {
+        setTvShow(null);
+        setLoading(false);
+        return;
+      }
+
+      const parsedId = parseInt(id);
+      if (isNaN(parsedId)) {
+        setTvShow(null);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch from API
+        const show = await tvShowApi.getTVShowById(parsedId);
+        setTvShow(show);
+      } catch (err) {
+        console.error('Error fetching TV show:', err);
+        setError('Failed to load TV show details');
+
+        // Fallback to mock data on error
+        const mockShow = MOCK_TV_SHOWS.find((s) => s.tv_show_id === parsedId);
+        setTvShow(mockShow || null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTVShow();
   }, [id]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
+  // Show loading state
+  if (loading) {
+    return (
+      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4">Loading TV show details...</Typography>
+      </Box>
+    );
+  }
+
+  // Show error or not found state
   if (!tvShow) {
     return (
       <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <MainCard sx={{ p: 4, textAlign: 'center' }}>
-          <Typography variant="h4">TV Show not found</Typography>
+          <Typography variant="h4">{error || 'TV Show not found'}</Typography>
           <Button variant="contained" sx={{ mt: 2 }} onClick={() => router.push('/tv-shows')}>
             Back to TV Shows
           </Button>
@@ -346,7 +382,9 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
                 )}
                 <Stack direction="row" spacing={1} sx={{ mt: 1 }} flexWrap="wrap" useFlexGap>
                   <Chip label={`⭐ ${tvShow.vote_average}/10`} color="primary" size="small" />
-                  <Chip label={`${tvShow.episode_run_time} min/episode`} variant="outlined" size="small" />
+                  {tvShow.episode_run_time > 0 && (
+                    <Chip label={`${tvShow.episode_run_time} min/episode`} variant="outlined" size="small" />
+                  )}
                   <Chip label={`${tvShow.number_of_seasons} Seasons`} variant="outlined" size="small" />
                   <Chip label={`${tvShow.number_of_episodes} Episodes`} variant="outlined" size="small" />
                 </Stack>
@@ -374,29 +412,37 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
                 </Typography>
               </Box>
 
-              {/* Creators */}
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                  Creators
-                </Typography>
-                <Typography variant="body1">{tvShow.creators}</Typography>
-              </Box>
+              {/* Creators - Hide if N/A */}
+              {tvShow.creators !== 'N/A' && (
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                    Creators
+                  </Typography>
+                  <Typography variant="body1">{tvShow.creators}</Typography>
+                </Box>
+              )}
 
-              {/* Networks and Production */}
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                    Network
-                  </Typography>
-                  <Typography variant="body1">{tvShow.networks}</Typography>
+              {/* Networks and Production - Only show if available */}
+              {(tvShow.networks !== 'N/A' || tvShow.production_companies !== 'N/A') && (
+                <Grid container spacing={3}>
+                  {tvShow.networks !== 'N/A' && (
+                    <Grid item xs={12} sm={6}>
+                      <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                        Network
+                      </Typography>
+                      <Typography variant="body1">{tvShow.networks}</Typography>
+                    </Grid>
+                  )}
+                  {tvShow.production_companies !== 'N/A' && (
+                    <Grid item xs={12} sm={6}>
+                      <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                        Production Companies
+                      </Typography>
+                      <Typography variant="body1">{tvShow.production_companies}</Typography>
+                    </Grid>
+                  )}
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                    Production Companies
-                  </Typography>
-                  <Typography variant="body1">{tvShow.production_companies}</Typography>
-                </Grid>
-              </Grid>
+              )}
 
               {/* Air Dates */}
               <Grid container spacing={3}>

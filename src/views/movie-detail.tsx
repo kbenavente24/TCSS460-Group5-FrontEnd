@@ -157,35 +157,41 @@ export default function MovieDetailPage({ id }: { id?: string }) {
                 </Stack>
               </Box>
 
-              {/* Genres */}
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                  Genres
-                </Typography>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  {movie.genres.split(', ').map((genre) => (
-                    <Chip key={genre} label={genre} size="small" />
-                  ))}
-                </Stack>
-              </Box>
+              {/* Genres - Only show if available */}
+              {movie.genres && (
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                    Genres
+                  </Typography>
+                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                    {movie.genres.split(', ').map((genre) => (
+                      <Chip key={genre} label={genre} size="small" />
+                    ))}
+                  </Stack>
+                </Box>
+              )}
 
-              {/* Overview */}
-              <Box>
-                <Typography variant="h5" gutterBottom>
-                  Overview
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  {movie.overview}
-                </Typography>
-              </Box>
+              {/* Overview - Only show if available */}
+              {movie.overview && (
+                <Box>
+                  <Typography variant="h5" gutterBottom>
+                    Overview
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    {movie.overview}
+                  </Typography>
+                </Box>
+              )}
 
-              {/* Director */}
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                  Director
-                </Typography>
-                <Typography variant="body1">{movie.directors}</Typography>
-              </Box>
+              {/* Director - Only show if available */}
+              {movie.directors && (
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                    Director
+                  </Typography>
+                  <Typography variant="body1">{movie.directors}</Typography>
+                </Box>
+              )}
 
               {/* Budget and Revenue */}
               <Grid container spacing={3}>

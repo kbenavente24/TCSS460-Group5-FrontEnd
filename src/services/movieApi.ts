@@ -1,14 +1,14 @@
 // src/services/movieApi.ts
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_MOVIE_API_URL;
-const API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
+// Use local Next.js API routes to avoid CORS issues
+const API_BASE_URL = '/api/movies';
 
 // Create axios instance with default config
+// No API key needed here since the Next.js API route handles it
 const movieApiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    'X-API-Key': API_KEY,
     accept: 'application/json'
   }
 });
@@ -63,9 +63,8 @@ export const movieApi = {
   getMovies: async (filters?: MovieFilters): Promise<MoviesResponse> => {
     console.log('Fetching movies with filters:', filters);
     console.log('API Base URL:', API_BASE_URL);
-    console.log('API Key:', API_KEY ? 'Present' : 'Missing');
 
-    const response = await movieApiClient.get('/movies', {
+    const response = await movieApiClient.get('', {
       params: filters
     });
 
@@ -108,7 +107,7 @@ export const movieApi = {
 
   // Get a single movie by ID
   getMovieById: async (id: number): Promise<Movie> => {
-    const response = await movieApiClient.get(`/movies/${id}`);
+    const response = await movieApiClient.get(`/${id}`);
     return response.data;
   },
 
