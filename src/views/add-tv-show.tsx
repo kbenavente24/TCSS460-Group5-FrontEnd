@@ -122,6 +122,13 @@ export default function AddTVShowView() {
     try {
       // Filter and prepare data
       const filteredGenres = genres.filter((g) => g.trim());
+
+      // Validate that at least one genre is selected
+      if (filteredGenres.length === 0) {
+        setError('Please select at least one genre before submitting.');
+        setLoading(false);
+        return;
+      }
       const filteredCreators = creators.filter((c) => c.trim()).map((c) => ({ creator_name: c }));
       const filteredNetworks = networks.filter((n) => n.trim()).map((n) => ({ network_name: n }));
       const filteredStudios = productionCompanies.filter((p) => p.trim()).map((p) => ({ studio_name: p }));
@@ -389,7 +396,9 @@ export default function AddTVShowView() {
             <Card variant="outlined">
               <CardContent>
                 <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-                  <Typography variant="h4">Genres</Typography>
+                  <Typography variant="h4">
+                    Genres <span style={{ color: '#d32f2f' }}>*</span>
+                  </Typography>
                   <Button startIcon={<PlusOutlined />} onClick={handleAddGenre} size="small">
                     Add Genre
                   </Button>

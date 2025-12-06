@@ -25,6 +25,13 @@ interface DeleteConfirmationModalProps {
 }
 
 export default function DeleteConfirmationModal({ open, onClose, title, itemName, itemType }: DeleteConfirmationModalProps) {
+  // DESIGN-ONLY: Prevent any delete action
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Do nothing - this is design-only
+  };
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
@@ -52,6 +59,7 @@ export default function DeleteConfirmationModal({ open, onClose, title, itemName
         </Button>
         {/* DESIGN-ONLY: Delete button is disabled - no backend functionality */}
         <Button
+          onClick={handleDeleteClick}
           variant="contained"
           color="error"
           startIcon={<DeleteOutlined />}
