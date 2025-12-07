@@ -170,7 +170,7 @@ export default function SearchPage() {
 
       if (searchText) filters.name = searchText;
       if (genre) filters.genre = genre;
-      if (year) filters.year = Number(year);
+      // Year filter removed - not supported by TV Shows API backend
       if (tvActor) filters.actor = tvActor;
       if (network) filters.network = network;
       if (tvStudio) filters.studio = tvStudio;
@@ -325,17 +325,23 @@ export default function SearchPage() {
             )}
           </Grid>
 
-          {/* Year Filter */}
-          <Grid item xs={12} sm={6} md={2}>
-            <TextField
-              fullWidth
-              label="Year"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              placeholder="e.g., 2024"
-              type="number"
-            />
-          </Grid>
+          {/* Year Filter (Movies) / Network Filter (TV Shows) */}
+          {activeTab === 'movies' ? (
+            <Grid item xs={12} sm={6} md={2}>
+              <TextField
+                fullWidth
+                label="Year"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                placeholder="e.g., 2024"
+                type="number"
+              />
+            </Grid>
+          ) : (
+            <Grid item xs={12} sm={6} md={2}>
+              <TextField fullWidth label="Network" value={network} onChange={(e) => setNetwork(e.target.value)} placeholder="e.g., HBO" />
+            </Grid>
+          )}
 
           {/* Search Button */}
           <Grid item xs={12} sm={6} md={2}>
@@ -363,16 +369,13 @@ export default function SearchPage() {
         {/* TV Show-specific Filters */}
         {activeTab === 'tv-shows' && (
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={4}>
               <TextField fullWidth label="Actor" value={tvActor} onChange={(e) => setTvActor(e.target.value)} placeholder="Actor name" />
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <TextField fullWidth label="Network" value={network} onChange={(e) => setNetwork(e.target.value)} placeholder="e.g., HBO" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={4}>
               <TextField fullWidth label="Studio" value={tvStudio} onChange={(e) => setTvStudio(e.target.value)} placeholder="Studio name" />
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={4}>
               <FormControl fullWidth disabled={loadingOptions}>
                 <InputLabel>Status</InputLabel>
                 <Select value={status} label="Status" onChange={(e) => setStatus(e.target.value)}>
