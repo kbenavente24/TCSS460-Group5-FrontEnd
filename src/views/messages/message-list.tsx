@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import EmailIcon from "@mui/icons-material/Email";
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import EmailIcon from '@mui/icons-material/Email';
 
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Divider, List } from "@mui/material";
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { Divider, List } from '@mui/material';
 
 // project import
-import { messagesApi } from "services/messagesApi";
-import { IMessage } from "types/message";
-import PrioritySelector from "components/PrioritySelector";
-import { NoMessage, MessageListItem } from "components/MessageListItem";
+import { messagesApi } from 'services/messagesApi';
+import { IMessage } from 'types/message';
+import PrioritySelector from 'components/PrioritySelector';
+import { NoMessage, MessageListItem } from 'components/MessageListItem';
 
 export default function MessagesList() {
   const [messages, setMessages] = React.useState<IMessage[]>([]);
@@ -48,14 +48,14 @@ export default function MessagesList() {
   const messagesAsComponents = messages
     .filter((msg) => priority == 0 || priority == msg.priority)
     .map((msg, index, messages) => (
-      <React.Fragment key={"msg list item: " + index}>
+      <React.Fragment key={'msg list item: ' + index}>
         <MessageListItem message={msg} onDelete={handleDelete} />
         {index < messages.length - 1 && (
           <Divider
             sx={(theme) => ({
-              borderColor: "grey.A800",
-              ...theme.applyStyles("dark", {
-                borderColor: "#555555",
+              borderColor: 'grey.A800',
+              ...theme.applyStyles('dark', {
+                borderColor: '#555555',
               }),
             })}
             variant="middle"
@@ -71,12 +71,12 @@ export default function MessagesList() {
       <Box
         sx={{
           marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <EmailIcon />
         </Avatar>
         <Typography component="h1" variant="h5">

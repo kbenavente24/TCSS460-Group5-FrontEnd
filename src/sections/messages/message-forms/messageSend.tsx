@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
 // next
 
 // material-ui
-import Button from "@mui/material/Button";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Stack from "@mui/material/Stack";
+import Button from '@mui/material/Button';
+import FormHelperText from '@mui/material/FormHelperText';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
 
 // third party
-import * as Yup from "yup";
-import { Formik } from "formik";
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 
 // project import
-import AnimateButton from "components/@extended/AnimateButton";
+import AnimateButton from 'components/@extended/AnimateButton';
 
-import { messagesApi } from "services/messagesApi";
+import { messagesApi } from 'services/messagesApi';
 
 export default function SendMessage({
   priority,
@@ -33,13 +33,13 @@ export default function SendMessage({
   return (
     <Formik
       initialValues={{
-        sender: "",
-        message: "",
+        sender: '',
+        message: '',
         submit: null,
       }}
       validationSchema={Yup.object().shape({
-        sender: Yup.string().max(255).required("Name is required"),
-        message: Yup.string().max(255).required("Message is required"),
+        sender: Yup.string().max(255).required('Name is required'),
+        message: Yup.string().max(255).required('Message is required'),
       })}
       onSubmit={(
         values,
@@ -51,8 +51,8 @@ export default function SendMessage({
             setSubmitting(false);
             resetForm({
               values: {
-                sender: "",
-                message: "",
+                sender: '',
+                message: '',
                 submit: null,
               },
             });

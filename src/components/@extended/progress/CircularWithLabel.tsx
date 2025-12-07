@@ -1,9 +1,9 @@
 // material-ui
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
 import CircularProgress, {
   CircularProgressProps,
-} from "@mui/material/CircularProgress";
-import Typography from "@mui/material/Typography";
+} from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
 
 // ==============================|| PROGRESS - CIRCULAR LABEL ||============================== //
 
@@ -12,7 +12,7 @@ export default function CircularWithLabel({
   ...others
 }: CircularProgressProps) {
   return (
-    <Box sx={{ position: "relative", display: "inline-flex" }}>
+    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress variant="determinate" value={value} {...others} />
       <Box
         sx={{
@@ -20,10 +20,10 @@ export default function CircularWithLabel({
           left: 0,
           bottom: 0,
           right: 0,
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Typography

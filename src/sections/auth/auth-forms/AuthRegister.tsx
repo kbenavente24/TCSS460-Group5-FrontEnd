@@ -1,46 +1,46 @@
-"use client";
+'use client';
 
-import { useEffect, useState, SyntheticEvent } from "react";
+import { useEffect, useState, SyntheticEvent } from 'react';
 
 // next
-import NextLink from "next/link";
-import { signIn } from "next-auth/react";
+import NextLink from 'next/link';
+import { signIn } from 'next-auth/react';
 
 // material-ui
-import Button from "@mui/material/Button";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import InputAdornment from "@mui/material/InputAdornment";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogActions from "@mui/material/DialogActions";
+import Button from '@mui/material/Button';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
 
 // third party
-import * as Yup from "yup";
-import { Formik } from "formik";
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 
 // project import
-import IconButton from "components/@extended/IconButton";
-import AnimateButton from "components/@extended/AnimateButton";
+import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
 
-import { APP_DEFAULT_PATH } from "config";
-import { strengthColor, strengthIndicator } from "utils/password-strength";
+import { APP_DEFAULT_PATH } from 'config';
+import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 // assets
-import EyeOutlined from "@ant-design/icons/EyeOutlined";
-import EyeInvisibleOutlined from "@ant-design/icons/EyeInvisibleOutlined";
+import EyeOutlined from '@ant-design/icons/EyeOutlined';
+import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 
 // types
-import { StringColorProps } from "types/password";
+import { StringColorProps } from 'types/password';
 
 export default function AuthRegister({ providers, csrfToken }: any) {
   const [level, setLevel] = useState<StringColorProps>();
@@ -61,47 +61,47 @@ export default function AuthRegister({ providers, csrfToken }: any) {
   };
 
   useEffect(() => {
-    changePassword("");
+    changePassword('');
   }, []);
 
   return (
     <>
       <Formik
         initialValues={{
-          firstname: "",
-          lastname: "",
-          username: "",
-          phone: "",
-          email: "",
-          password: "",
+          firstname: '',
+          lastname: '',
+          username: '',
+          phone: '',
+          email: '',
+          password: '',
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          firstname: Yup.string().max(255).required("First Name is required"),
-          lastname: Yup.string().max(255).required("Last Name is required"),
+          firstname: Yup.string().max(255).required('First Name is required'),
+          lastname: Yup.string().max(255).required('Last Name is required'),
           username: Yup.string()
-            .min(3, "Username must be at least 3 characters")
-            .max(50, "Username must be less than 50 characters")
+            .min(3, 'Username must be at least 3 characters')
+            .max(50, 'Username must be less than 50 characters')
             .matches(
               /^[a-zA-Z0-9_-]+$/,
-              "Username can only contain letters, numbers, underscores, and hyphens",
+              'Username can only contain letters, numbers, underscores, and hyphens',
             )
-            .required("Username is required"),
+            .required('Username is required'),
           phone: Yup.string()
-            .matches(/^\d{10,}$/, "Phone number must be at least 10 digits")
-            .required("Phone number is required"),
+            .matches(/^\d{10,}$/, 'Phone number must be at least 10 digits')
+            .required('Phone number is required'),
           email: Yup.string()
-            .email("Must be a valid email")
+            .email('Must be a valid email')
             .max(255)
-            .required("Email is required"),
+            .required('Email is required'),
           password: Yup.string()
-            .required("Password is required")
-            .min(8, "Password must be at least 8 characters")
-            .max(128, "Password must be less than 128 characters"),
+            .required('Password is required')
+            .min(8, 'Password must be at least 8 characters')
+            .max(128, 'Password must be less than 128 characters'),
         })}
         onSubmit={async (values, { setErrors, setSubmitting }) => {
           const trimmedEmail = values.email.trim();
-          signIn("register", {
+          signIn('register', {
             redirect: false,
             firstname: values.firstname,
             lastname: values.lastname,
@@ -247,7 +247,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                   <OutlinedInput
                     fullWidth
                     id="password-signup"
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     value={values.password}
                     onBlur={handleBlur}
@@ -287,7 +287,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                           bgcolor: level?.color,
                           width: 85,
                           height: 8,
-                          borderRadius: "7px",
+                          borderRadius: '7px',
                         }}
                       />
                     </Grid>

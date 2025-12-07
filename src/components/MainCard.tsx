@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { forwardRef, CSSProperties, ReactElement, Ref } from "react";
+import { forwardRef, CSSProperties, ReactElement, Ref } from 'react';
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
-import Card, { CardProps } from "@mui/material/Card";
-import CardContent, { CardContentProps } from "@mui/material/CardContent";
-import CardHeader, { CardHeaderProps } from "@mui/material/CardHeader";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
+import { useTheme } from '@mui/material/styles';
+import Card, { CardProps } from '@mui/material/Card';
+import CardContent, { CardContentProps } from '@mui/material/CardContent';
+import CardHeader, { CardHeaderProps } from '@mui/material/CardHeader';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
 // project-import
-import { ThemeMode } from "config";
+import { ThemeMode } from 'config';
 
 // types
-import { KeyedObject } from "types/root";
+import { KeyedObject } from 'types/root';
 
 // header style
 const headerSX = {
   p: 2.5,
-  "& .MuiCardHeader-action": { m: "0px auto", alignSelf: "center" },
+  '& .MuiCardHeader-action': { m: '0px auto', alignSelf: 'center' },
 };
 
 // ==============================|| CUSTOM - MAIN CARD ||============================== //
@@ -31,11 +31,11 @@ export interface MainCardProps extends KeyedObject {
   subheader?: ReactElement | string;
   style?: CSSProperties;
   content?: boolean;
-  contentSX?: CardContentProps["sx"];
+  contentSX?: CardContentProps['sx'];
   darkTitle?: boolean;
   divider?: boolean;
-  sx?: CardProps["sx"];
-  secondary?: CardHeaderProps["action"];
+  sx?: CardProps['sx'];
+  secondary?: CardHeaderProps['action'];
   shadow?: string;
   title?: ReactElement | string;
   modal?: boolean;
@@ -67,29 +67,29 @@ function MainCard(
   return (
     <Card
       sx={(theme) => ({
-        position: modal ? "absolute" : "relative",
+        position: modal ? 'absolute' : 'relative',
         borderRadius: 1,
-        borderColor: "grey.A800",
+        borderColor: 'grey.A800',
         boxShadow:
           boxShadow && (!border || theme.palette.mode === ThemeMode.DARK)
             ? shadow || theme.customShadows.z1
-            : "none",
-        border: border ? "1px solid" : "none",
-        ":hover": {
-          boxShadow: boxShadow ? shadow || theme.customShadows.z1 : "none",
+            : 'none',
+        border: border ? '1px solid' : 'none',
+        ':hover': {
+          boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'none',
         },
         ...(theme.palette.mode === ThemeMode.DARK && {
-          borderColor: "divider",
-          backgroundImage: "none",
+          borderColor: 'divider',
+          backgroundImage: 'none',
         }),
         ...(modal && {
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: { xs: `calc( 100% - 50px)`, sm: "auto" },
-          "& .MuiCardContent-root": {
-            overflowY: "auto",
-            minHeight: "auto",
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: { xs: `calc( 100% - 50px)`, sm: 'auto' },
+          '& .MuiCardContent-root': {
+            overflowY: 'auto',
+            minHeight: 'auto',
             maxHeight: `calc(100vh - 200px)`,
           },
         }),
@@ -106,7 +106,7 @@ function MainCard(
           action={secondary}
           subheader={subheader}
           slotProps={{
-            title: { variant: "subtitle1" },
+            title: { variant: 'subtitle1' },
           }}
         />
       )}

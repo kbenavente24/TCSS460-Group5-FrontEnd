@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import SendIcon from "@mui/icons-material/Send";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Alert } from "@mui/material";
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import SendIcon from '@mui/icons-material/Send';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { Alert } from '@mui/material';
 
 // Project imports
-import PrioritySelector from "components/PrioritySelector";
-import SendMessage from "sections/messages/message-forms/messageSend";
+import PrioritySelector from 'components/PrioritySelector';
+import SendMessage from 'sections/messages/message-forms/messageSend';
 
 interface IAlert {
   showAlert: boolean;
@@ -21,8 +21,8 @@ interface IAlert {
 
 const EMPTY_ALERT: IAlert = {
   showAlert: false,
-  alertMessage: "",
-  alertSeverity: "",
+  alertMessage: '',
+  alertSeverity: '',
 };
 
 export default function MessageSend() {
@@ -32,16 +32,16 @@ export default function MessageSend() {
   const onSuccess = () => {
     setAlert({
       showAlert: true,
-      alertMessage: "The message was sent!",
-      alertSeverity: "success",
+      alertMessage: 'The message was sent!',
+      alertSeverity: 'success',
     });
   };
 
   const onError = (message: string) => {
     setAlert({
       showAlert: true,
-      alertMessage: "Message NOT sent! Error: " + message,
-      alertSeverity: "error",
+      alertMessage: 'Message NOT sent! Error: ' + message,
+      alertSeverity: 'error',
     });
   };
 
@@ -67,12 +67,12 @@ export default function MessageSend() {
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <SendIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

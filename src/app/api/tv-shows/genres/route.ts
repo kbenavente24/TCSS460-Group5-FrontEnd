@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
+import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 
 const TV_SHOW_API_URL = process.env.NEXT_PUBLIC_TV_SHOW_API_URL;
 const TV_SHOW_API_KEY = process.env.NEXT_PUBLIC_TV_SHOW_API_KEY;
@@ -14,19 +14,19 @@ export async function GET(request: NextRequest) {
       params[key] = value;
     });
 
-    console.log("📡 Proxying TV show genres request");
+    console.log('📡 Proxying TV show genres request');
 
     const response = await axios.get(`${TV_SHOW_API_URL}/genres`, {
       params,
       headers: {
-        "X-API-Key": TV_SHOW_API_KEY,
-        accept: "application/json",
+        'X-API-Key': TV_SHOW_API_KEY,
+        accept: 'application/json',
       },
     });
 
     return NextResponse.json(response.data);
   } catch (error) {
-    console.error("❌ Error proxying TV show genres request:", error);
+    console.error('❌ Error proxying TV show genres request:', error);
 
     if (axios.isAxiosError(error)) {
       return NextResponse.json(
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: 'Internal server error' },
       { status: 500 },
     );
   }

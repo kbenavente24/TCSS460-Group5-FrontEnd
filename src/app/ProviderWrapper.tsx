@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 // next
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider } from 'next-auth/react';
 
 // project import
-import ThemeCustomization from "themes";
+import ThemeCustomization from 'themes';
 
-import Locales from "components/Locales";
-import ScrollTop from "components/ScrollTop";
-import Snackbar from "components/@extended/Snackbar";
-import Notistack from "components/third-party/Notistack";
-import { ConfigProvider } from "contexts/ConfigContext";
+import Locales from 'components/Locales';
+import ScrollTop from 'components/ScrollTop';
+import Snackbar from 'components/@extended/Snackbar';
+import Notistack from 'components/third-party/Notistack';
+import { ConfigProvider } from 'contexts/ConfigContext';
 
 // ==============================|| APP - THEME, ROUTER, LOCAL ||============================== //
 

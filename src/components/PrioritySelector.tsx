@@ -1,6 +1,6 @@
-import { Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Stack, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
-import PriorityAvatar from "../components/Priority";
+import PriorityAvatar from '../components/Priority';
 
 export default function PrioritySelector({
   initialValue,

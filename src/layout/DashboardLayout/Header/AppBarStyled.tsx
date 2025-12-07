@@ -1,9 +1,9 @@
 // material-ui
-import { styled } from "@mui/material/styles";
-import AppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { styled } from '@mui/material/styles';
+import AppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 // project import
-import { DRAWER_WIDTH } from "config";
+import { DRAWER_WIDTH } from 'config';
 
 // ==============================|| HEADER - APP BAR STYLED ||============================== //
 
@@ -12,10 +12,10 @@ interface Props extends MuiAppBarProps {
 }
 
 const AppBarStyled = styled(AppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
+  shouldForwardProp: (prop) => prop !== 'open',
 })<Props>(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
+  transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
@@ -31,7 +31,7 @@ const AppBarStyled = styled(AppBar, {
       style: {
         marginLeft: DRAWER_WIDTH,
         width: `calc(100% - ${DRAWER_WIDTH}px)`,
-        transition: theme.transitions.create(["width", "margin"], {
+        transition: theme.transitions.create(['width', 'margin'], {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.enteringScreen,
         }),
