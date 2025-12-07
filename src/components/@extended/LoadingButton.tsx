@@ -10,11 +10,7 @@ import getColors from 'utils/getColors';
 import getShadow from 'utils/getShadow';
 
 // types
-import {
-  ButtonVariantProps,
-  ExtendedStyleProps,
-  IconButtonShapeProps
-} from 'types/extended';
+import { ButtonVariantProps, ExtendedStyleProps, IconButtonShapeProps } from 'types/extended';
 
 // ==============================|| LOADING BUTTON - COLOR STYLE ||============================== //
 
@@ -23,12 +19,7 @@ interface LoadingButtonStyleProps extends ExtendedStyleProps {
   loadingPosition?: LoadingButtonProps['loadingPosition'];
 }
 
-function getColorStyle({
-  variant,
-  theme,
-  color,
-  loadingPosition
-}: LoadingButtonStyleProps) {
+function getColorStyle({ variant, theme, color, loadingPosition }: LoadingButtonStyleProps) {
   const colors = getColors(theme, color);
   const { lighter, main, dark, contrastText } = colors;
 
@@ -146,155 +137,146 @@ interface StyleProps extends LoadingButtonStyleProps {
 }
 
 const LoadingButtonStyle = styled(MuiLoadingButton, {
-  shouldForwardProp: (prop) =>
-    prop !== 'shape' && prop !== 'variant' && prop !== 'color'
-})(
-  ({
-    theme,
-    variant = 'text',
-    color = 'primary',
-    loadingPosition
-  }: StyleProps) => ({
-    '::after': {
-      content: '""',
-      display: 'block',
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      width: '100%',
-      height: '100%',
-      borderRadius: 4,
-      opacity: 0,
-      transition: 'all 0.5s'
-    },
-    ':active::after': {
-      position: 'absolute',
-      borderRadius: 4,
-      left: 0,
-      top: 0,
-      opacity: 1,
-      transition: '0s'
-    },
-    '&.Mui-disabled': {},
-    variants: [
-      {
-        props: {
-          shape: 'rounded'
-        },
-        style: {
-          '::after': {
-            borderRadius: '50%'
-          }
-        }
+  shouldForwardProp: (prop) => prop !== 'shape' && prop !== 'variant' && prop !== 'color'
+})(({ theme, variant = 'text', color = 'primary', loadingPosition }: StyleProps) => ({
+  '::after': {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
+    borderRadius: 4,
+    opacity: 0,
+    transition: 'all 0.5s'
+  },
+  ':active::after': {
+    position: 'absolute',
+    borderRadius: 4,
+    left: 0,
+    top: 0,
+    opacity: 1,
+    transition: '0s'
+  },
+  '&.Mui-disabled': {},
+  variants: [
+    {
+      props: {
+        shape: 'rounded'
       },
-      {
-        props: {
-          shape: 'rounded'
-        },
-        style: {
-          ':active::after': {
-            borderRadius: '50%'
-          }
-        }
-      },
-      {
-        props: {
-          variant: 'text'
-        },
-        style: {
-          ...getColorStyle({ variant, theme, color, loadingPosition }),
-          '&.MuiButton-sizeMedium': {
-            height: 36
-          },
-          '&.MuiButton-sizeSmall': {
-            height: 30
-          },
-          '&.MuiButton-sizeLarge': {
-            height: 44
-          }
-        }
-      },
-      {
-        props: {
-          shape: 'square'
-        },
-        style: {
-          minWidth: 0,
-          '&.MuiButton-sizeMedium': {
-            width: 36,
-            height: 36
-          },
-          '&.MuiButton-sizeSmall': {
-            width: 30,
-            height: 30
-          },
-          '&.MuiButton-sizeLarge': {
-            width: 44,
-            height: 44
-          }
-        }
-      },
-      {
-        props: {
-          shape: 'rounded'
-        },
-        style: {
-          minWidth: 0,
-          '&.MuiButton-sizeMedium': {
-            width: 36,
-            height: 36
-          },
-          '&.MuiButton-sizeSmall': {
-            width: 30,
-            height: 30
-          },
-          '&.MuiButton-sizeLarge': {
-            width: 44,
-            height: 44
-          },
+      style: {
+        '::after': {
           borderRadius: '50%'
         }
+      }
+    },
+    {
+      props: {
+        shape: 'rounded'
       },
-      {
-        props: {
-          variant: 'outlined'
-        },
-        style: {
-          border: '1px solid'
-        }
-      },
-      {
-        props: {
-          variant: 'dashed'
-        },
-        style: {
-          border: '1px dashed'
-        }
-      },
-      {
-        props: ({ loading, variant }) =>
-          (variant === 'contained' || variant === 'shadow') && loading,
-        style: {
-          color: '#fff'
-        }
-      },
-      {
-        props: ({ variant }) => variant !== 'text',
-        style: {
-          ...getColorStyle({ variant, theme, color, loadingPosition })
-        }
-      },
-      {
-        props: ({ variant }) => variant !== 'text',
-        style: {
-          '&.Mui-disabled': {
-            ...getColorStyle({ variant, theme, color, loadingPosition })
-          }
+      style: {
+        ':active::after': {
+          borderRadius: '50%'
         }
       }
-    ]
-  })
-);
+    },
+    {
+      props: {
+        variant: 'text'
+      },
+      style: {
+        ...getColorStyle({ variant, theme, color, loadingPosition }),
+        '&.MuiButton-sizeMedium': {
+          height: 36
+        },
+        '&.MuiButton-sizeSmall': {
+          height: 30
+        },
+        '&.MuiButton-sizeLarge': {
+          height: 44
+        }
+      }
+    },
+    {
+      props: {
+        shape: 'square'
+      },
+      style: {
+        minWidth: 0,
+        '&.MuiButton-sizeMedium': {
+          width: 36,
+          height: 36
+        },
+        '&.MuiButton-sizeSmall': {
+          width: 30,
+          height: 30
+        },
+        '&.MuiButton-sizeLarge': {
+          width: 44,
+          height: 44
+        }
+      }
+    },
+    {
+      props: {
+        shape: 'rounded'
+      },
+      style: {
+        minWidth: 0,
+        '&.MuiButton-sizeMedium': {
+          width: 36,
+          height: 36
+        },
+        '&.MuiButton-sizeSmall': {
+          width: 30,
+          height: 30
+        },
+        '&.MuiButton-sizeLarge': {
+          width: 44,
+          height: 44
+        },
+        borderRadius: '50%'
+      }
+    },
+    {
+      props: {
+        variant: 'outlined'
+      },
+      style: {
+        border: '1px solid'
+      }
+    },
+    {
+      props: {
+        variant: 'dashed'
+      },
+      style: {
+        border: '1px dashed'
+      }
+    },
+    {
+      props: ({ loading, variant }) => (variant === 'contained' || variant === 'shadow') && loading,
+      style: {
+        color: '#fff'
+      }
+    },
+    {
+      props: ({ variant }) => variant !== 'text',
+      style: {
+        ...getColorStyle({ variant, theme, color, loadingPosition })
+      }
+    },
+    {
+      props: ({ variant }) => variant !== 'text',
+      style: {
+        '&.Mui-disabled': {
+          ...getColorStyle({ variant, theme, color, loadingPosition })
+        }
+      }
+    }
+  ]
+}));
 
 // ==============================|| EXTENDED - LOADING BUTTON ||============================== //
 
@@ -305,10 +287,7 @@ interface Props extends LoadingButtonProps {
   children: ReactNode;
 }
 
-function LoadingButton(
-  { variant = 'text', shape, children, color = 'primary', ...others }: Props,
-  ref: Ref<HTMLButtonElement>
-) {
+function LoadingButton({ variant = 'text', shape, children, color = 'primary', ...others }: Props, ref: Ref<HTMLButtonElement>) {
   const theme = useTheme();
 
   return (

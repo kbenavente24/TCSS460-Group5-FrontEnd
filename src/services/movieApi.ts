@@ -81,11 +81,7 @@ export const movieApi = {
         movies = responseData;
       } else if (responseData?.data && Array.isArray(responseData.data)) {
         movies = responseData.data;
-      } else if (
-        responseData?.data &&
-        typeof responseData.data === 'object' &&
-        !Array.isArray(responseData.data)
-      ) {
+      } else if (responseData?.data && typeof responseData.data === 'object' && !Array.isArray(responseData.data)) {
         // Single movie object wrapped in data
         movies = [responseData.data];
       } else {
@@ -130,11 +126,7 @@ export const movieApi = {
   },
 
   // Search movies by title
-  searchMovies: async (
-    title: string,
-    page = 1,
-    limit = 20
-  ): Promise<MoviesResponse> => {
+  searchMovies: async (title: string, page = 1, limit = 20): Promise<MoviesResponse> => {
     return movieApi.getMovies({ title, page, limit });
   }
 };

@@ -73,16 +73,10 @@ export default function AuthResetPassword() {
       }}
       validationSchema={Yup.object().shape({
         token: Yup.string().required('Reset token is required'),
-        password: Yup.string()
-          .min(8, 'Password must be at least 8 characters')
-          .required('Password is required'),
+        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
         confirmPassword: Yup.string()
           .required('Confirm Password is required')
-          .test(
-            'confirmPassword',
-            'Both Password must be match!',
-            (confirmPassword, yup) => yup.parent.password === confirmPassword
-          )
+          .test('confirmPassword', 'Both Password must be match!', (confirmPassword, yup) => yup.parent.password === confirmPassword)
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
@@ -97,8 +91,7 @@ export default function AuthResetPassword() {
 
             openSnackbar({
               open: true,
-              message:
-                'Password reset successful! You can now login with your new password.',
+              message: 'Password reset successful! You can now login with your new password.',
               variant: 'alert',
               alert: {
                 color: 'success'
@@ -109,34 +102,21 @@ export default function AuthResetPassword() {
               router.push('/login');
             }, 1500);
           } else {
-            throw new Error(
-              response?.data?.message || 'Failed to reset password'
-            );
+            throw new Error(response?.data?.message || 'Failed to reset password');
           }
         } catch (err: any) {
           console.error(err);
           if (scriptedRef.current) {
             setStatus({ success: false });
             setErrors({
-              submit:
-                err.response?.data?.message ||
-                err.message ||
-                'Failed to reset password. Please check your token and try again.'
+              submit: err.response?.data?.message || err.message || 'Failed to reset password. Please check your token and try again.'
             });
             setSubmitting(false);
           }
         }
       }}
     >
-      {({
-        errors,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        touched,
-        values
-      }) => (
+      {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -184,11 +164,7 @@ export default function AuthResetPassword() {
                         edge="end"
                         color="secondary"
                       >
-                        {showPassword ? (
-                          <EyeOutlined />
-                        ) : (
-                          <EyeInvisibleOutlined />
-                        )}
+                        {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -222,14 +198,10 @@ export default function AuthResetPassword() {
             </Grid>
             <Grid item xs={12}>
               <Stack spacing={1}>
-                <InputLabel htmlFor="confirm-password-reset">
-                  Confirm Password
-                </InputLabel>
+                <InputLabel htmlFor="confirm-password-reset">Confirm Password</InputLabel>
                 <OutlinedInput
                   fullWidth
-                  error={Boolean(
-                    touched.confirmPassword && errors.confirmPassword
-                  )}
+                  error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                   id="confirm-password-reset"
                   type="password"
                   value={values.confirmPassword}
@@ -253,15 +225,7 @@ export default function AuthResetPassword() {
             )}
             <Grid item xs={12}>
               <AnimateButton>
-                <Button
-                  disableElevation
-                  disabled={isSubmitting}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
+                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                   Reset Password
                 </Button>
               </AnimateButton>

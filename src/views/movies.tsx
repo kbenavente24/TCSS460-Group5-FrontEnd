@@ -158,8 +158,7 @@ const MOCK_MOVIES = [
     genres: 'Horror, Science Fiction, Thriller',
     release_date: '2024-06-26T00:00:00.000Z',
     runtime_minutes: 100,
-    overview:
-      'As New York City is invaded by alien creatures who hunt by sound, a woman named Sam fights to survive with her cat.',
+    overview: 'As New York City is invaded by alien creatures who hunt by sound, a woman named Sam fights to survive with her cat.',
     budget: '67000000',
     revenue: '261907653',
     mpa_rating: 'PG-13',
@@ -249,9 +248,7 @@ export default function MoviesPage() {
   const moviesPerPage = 9;
 
   // Cache to store fetched movies and reduce redundant API calls
-  const [movieCache, setMovieCache] = useState<
-    Map<string, { data: Movie[]; totalPages: number; timestamp: number }>
-  >(new Map());
+  const [movieCache, setMovieCache] = useState<Map<string, { data: Movie[]; totalPages: number; timestamp: number }>>(new Map());
 
   // Fetch movies from API with debounce for search
   useEffect(() => {
@@ -283,8 +280,7 @@ export default function MoviesPage() {
         console.log('Fetching from API:', cacheKey);
 
         // Only include title filter if search text has at least 2 characters
-        const titleFilter =
-          searchText && searchText.length >= 2 ? searchText : undefined;
+        const titleFilter = searchText && searchText.length >= 2 ? searchText : undefined;
 
         const response = await movieApi.getMovies({
           title: titleFilter,
@@ -352,10 +348,7 @@ export default function MoviesPage() {
     });
   };
 
-  const handleViewChange = (
-    _event: React.MouseEvent<HTMLElement>,
-    newView: 'single' | 'multi' | null
-  ) => {
+  const handleViewChange = (_event: React.MouseEvent<HTMLElement>, newView: 'single' | 'multi' | null) => {
     if (newView !== null) {
       setViewMode(newView);
       setPage(1);
@@ -389,8 +382,7 @@ export default function MoviesPage() {
     setMovieToDelete(null);
   };
 
-  const displayedMovies =
-    viewMode === 'multi' ? movies : selectedMovie ? [selectedMovie] : [];
+  const displayedMovies = viewMode === 'multi' ? movies : selectedMovie ? [selectedMovie] : [];
 
   // Show loading or error states
   if (loading) {
@@ -430,19 +422,9 @@ export default function MoviesPage() {
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mb: 2 }}
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
         <Stack direction="row" spacing={2} alignItems="center">
-          <ToggleButtonGroup
-            value={viewMode}
-            exclusive
-            onChange={handleViewChange}
-            size="small"
-          >
+          <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
             <ToggleButton value="multi" aria-label="multi view">
               <AppstoreOutlined style={{ marginRight: 8 }} />
               Multi View
@@ -546,11 +528,7 @@ export default function MoviesPage() {
             }}
           >
             {/* Left Arrow */}
-            <IconButton
-              onClick={handlePreviousMovie}
-              sx={{ flexShrink: 0, height: 'fit-content' }}
-              size="large"
-            >
+            <IconButton onClick={handlePreviousMovie} sx={{ flexShrink: 0, height: 'fit-content' }} size="large">
               <LeftOutlined style={{ fontSize: '2rem' }} />
             </IconButton>
 
@@ -568,9 +546,7 @@ export default function MoviesPage() {
                       boxShadow: 4
                     }
                   }}
-                  onClick={() =>
-                    router.push(`/movies/${selectedMovie.movie_id}`)
-                  }
+                  onClick={() => router.push(`/movies/${selectedMovie.movie_id}`)}
                 >
                   <CardMedia
                     component="img"
@@ -601,60 +577,30 @@ export default function MoviesPage() {
                         variant="outlined"
                         color="error"
                         startIcon={<DeleteOutlined />}
-                        onClick={() =>
-                          handleDeleteClick(
-                            { stopPropagation: () => {} } as React.MouseEvent,
-                            selectedMovie
-                          )
-                        }
+                        onClick={() => handleDeleteClick({ stopPropagation: () => {} } as React.MouseEvent, selectedMovie)}
                         sx={{ ml: 2 }}
                       >
                         Delete
                       </Button>
                     </Box>
                     {selectedMovie.original_title !== selectedMovie.title && (
-                      <Typography
-                        variant="h5"
-                        color="text.secondary"
-                        gutterBottom
-                      >
+                      <Typography variant="h5" color="text.secondary" gutterBottom>
                         Original Title: {selectedMovie.original_title}
                       </Typography>
                     )}
                     <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                      <Chip
-                        label={selectedMovie.mpa_rating}
-                        color="primary"
-                        size="small"
-                      />
-                      <Chip
-                        label={`${selectedMovie.runtime_minutes} min`}
-                        variant="outlined"
-                        size="small"
-                      />
-                      <Chip
-                        label={formatDate(selectedMovie.release_date)}
-                        variant="outlined"
-                        size="small"
-                      />
+                      <Chip label={selectedMovie.mpa_rating} color="primary" size="small" />
+                      <Chip label={`${selectedMovie.runtime_minutes} min`} variant="outlined" size="small" />
+                      <Chip label={formatDate(selectedMovie.release_date)} variant="outlined" size="small" />
                     </Stack>
                   </Box>
 
                   {/* Genres */}
                   <Box>
-                    <Typography
-                      variant="subtitle2"
-                      color="text.secondary"
-                      gutterBottom
-                    >
+                    <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                       Genres
                     </Typography>
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      flexWrap="wrap"
-                      useFlexGap
-                    >
+                    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
                       {selectedMovie.genres.split(', ').map((genre) => (
                         <Chip key={genre} label={genre} size="small" />
                       ))}
@@ -676,9 +622,7 @@ export default function MoviesPage() {
                     <Typography variant="subtitle2" color="text.secondary">
                       Director
                     </Typography>
-                    <Typography variant="body1">
-                      {selectedMovie.directors}
-                    </Typography>
+                    <Typography variant="body1">{selectedMovie.directors}</Typography>
                   </Box>
 
                   {/* Budget and Revenue */}
@@ -687,17 +631,13 @@ export default function MoviesPage() {
                       <Typography variant="subtitle2" color="text.secondary">
                         Budget
                       </Typography>
-                      <Typography variant="h6">
-                        {formatCurrency(selectedMovie.budget)}
-                      </Typography>
+                      <Typography variant="h6">{formatCurrency(selectedMovie.budget)}</Typography>
                     </Grid>
                     <Grid item xs={6}>
                       <Typography variant="subtitle2" color="text.secondary">
                         Revenue
                       </Typography>
-                      <Typography variant="h6">
-                        {formatCurrency(selectedMovie.revenue)}
-                      </Typography>
+                      <Typography variant="h6">{formatCurrency(selectedMovie.revenue)}</Typography>
                     </Grid>
                   </Grid>
                 </Stack>
@@ -705,11 +645,7 @@ export default function MoviesPage() {
             </Grid>
 
             {/* Right Arrow */}
-            <IconButton
-              onClick={handleNextMovie}
-              sx={{ flexShrink: 0, height: 'fit-content' }}
-              size="large"
-            >
+            <IconButton onClick={handleNextMovie} sx={{ flexShrink: 0, height: 'fit-content' }} size="large">
               <RightOutlined style={{ fontSize: '2rem' }} />
             </IconButton>
           </Box>
@@ -772,22 +708,10 @@ export default function MoviesPage() {
                           {movie.title}
                         </Typography>
                         <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
-                          <Chip
-                            label={movie.mpa_rating}
-                            size="small"
-                            color="primary"
-                          />
-                          <Chip
-                            label={`${movie.runtime_minutes} min`}
-                            size="small"
-                            variant="outlined"
-                          />
+                          <Chip label={movie.mpa_rating} size="small" color="primary" />
+                          <Chip label={`${movie.runtime_minutes} min`} size="small" variant="outlined" />
                         </Stack>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 1 }}
-                        >
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                           {movie.genres}
                         </Typography>
                         <Typography
@@ -812,12 +736,7 @@ export default function MoviesPage() {
 
             {/* Pagination */}
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-              <Pagination
-                count={totalPages}
-                page={page}
-                onChange={(_e, value) => setPage(value)}
-                color="primary"
-              />
+              <Pagination count={totalPages} page={page} onChange={(_e, value) => setPage(value)} color="primary" />
             </Box>
           </Box>
         )}

@@ -95,15 +95,7 @@ interface Props {
   selectedLevel: number;
 }
 
-export default function NavCollapse({
-  menu,
-  level,
-  parentId,
-  setSelectedItems,
-  selectedItems,
-  setSelectedLevel,
-  selectedLevel
-}: Props) {
+export default function NavCollapse({ menu, level, parentId, setSelectedItems, selectedItems, setSelectedLevel, selectedLevel }: Props) {
   const theme = useTheme();
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
@@ -115,19 +107,12 @@ export default function NavCollapse({
 
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null | undefined>(null);
-  const [anchorEl, setAnchorEl] = useState<
-    VirtualElement | (() => VirtualElement) | null | undefined
-  >(null);
+  const [anchorEl, setAnchorEl] = useState<VirtualElement | (() => VirtualElement) | null | undefined>(null);
 
-  const [anchorElCollapse, setAnchorElCollapse] =
-    React.useState<null | HTMLElement>(null);
+  const [anchorElCollapse, setAnchorElCollapse] = React.useState<null | HTMLElement>(null);
 
   const openCollapse = Boolean(anchorElCollapse);
-  const handleClickCollapse = (
-    event:
-      | React.MouseEvent<HTMLAnchorElement>
-      | React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  const handleClickCollapse = (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setAnchorElCollapse(event.currentTarget);
   };
   const handleCloseCollapse = () => {
@@ -154,12 +139,7 @@ export default function NavCollapse({
     }
   };
 
-  const handleHover = (
-    event:
-      | React.MouseEvent<HTMLAnchorElement>
-      | React.MouseEvent<HTMLDivElement, MouseEvent>
-      | undefined
-  ) => {
+  const handleHover = (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
     setAnchorEl(event?.currentTarget);
   };
 
@@ -191,14 +171,7 @@ export default function NavCollapse({
         }
       }
     }
-  }, [
-    selectedItems,
-    level,
-    selected,
-    miniMenuOpened,
-    drawerOpen,
-    selectedLevel
-  ]);
+  }, [selectedItems, level, selected, miniMenuOpened, drawerOpen, selectedLevel]);
 
   const pathname = usePathname();
 
@@ -294,17 +267,11 @@ export default function NavCollapse({
     }
   });
   const isSelected = selected === menu.id;
-  const borderIcon =
-    level === 1 ? <BorderOutlined style={{ fontSize: '1rem' }} /> : false;
+  const borderIcon = level === 1 ? <BorderOutlined style={{ fontSize: '1rem' }} /> : false;
   const Icon = menu.icon!;
-  const menuIcon = menu.icon ? (
-    <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} />
-  ) : (
-    borderIcon
-  );
+  const menuIcon = menu.icon ? <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} /> : borderIcon;
   const textColor = mode === ThemeMode.DARK ? 'grey.400' : 'text.primary';
-  const iconSelectedColor =
-    mode === ThemeMode.DARK && drawerOpen ? 'text.primary' : 'primary.main';
+  const iconSelectedColor = mode === ThemeMode.DARK && drawerOpen ? 'text.primary' : 'primary.main';
   const popperId = miniMenuOpened ? `collapse-pop-${menu.id}` : undefined;
   const FlexBox = {
     display: 'flex',
@@ -444,10 +411,7 @@ export default function NavCollapse({
             {(drawerOpen || (!drawerOpen && level !== 1)) && (
               <ListItemText
                 primary={
-                  <Typography
-                    variant="h6"
-                    color={selected === menu.id ? 'primary' : textColor}
-                  >
+                  <Typography variant="h6" color={selected === menu.id ? 'primary' : textColor}>
                     {menu.title}
                   </Typography>
                 }
@@ -519,9 +483,7 @@ export default function NavCollapse({
                       }}
                     />
                   ) : (
-                    <DownOutlined
-                      style={{ fontSize: '0.625rem', marginLeft: 1 }}
-                    />
+                    <DownOutlined style={{ fontSize: '0.625rem', marginLeft: 1 }} />
                   )}
                 </>
               ))}

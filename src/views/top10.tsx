@@ -271,21 +271,16 @@ export default function Top10Page() {
     if (!selectedList) return;
 
     try {
-      const response = await fetch(
-        `/api/lists/${selectedList.id}/items?rank=${rank}`,
-        {
-          method: 'DELETE'
-        }
-      );
+      const response = await fetch(`/api/lists/${selectedList.id}/items?rank=${rank}`, {
+        method: 'DELETE'
+      });
 
       if (!response.ok) {
         throw new Error('Failed to remove item');
       }
 
       // Update the list locally
-      const updatedItems = selectedList.items.map((item) =>
-        item.rank === rank ? { rank: item.rank } : item
-      );
+      const updatedItems = selectedList.items.map((item) => (item.rank === rank ? { rank: item.rank } : item));
 
       setSelectedList({
         ...selectedList,
@@ -345,9 +340,7 @@ export default function Top10Page() {
           alignItems: 'center'
         }}
       >
-        <Typography variant="h5">
-          Please sign in to view your Top 10s
-        </Typography>
+        <Typography variant="h5">Please sign in to view your Top 10s</Typography>
       </Box>
     );
   }
@@ -367,32 +360,15 @@ export default function Top10Page() {
           /* Detailed List View */
           <Box>
             {/* Back Button and Share Button */}
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={{ mb: 3 }}
-            >
-              <Button
-                startIcon={<LeftOutlined />}
-                onClick={handleBackToDashboard}
-              >
+            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
+              <Button startIcon={<LeftOutlined />} onClick={handleBackToDashboard}>
                 Save and Return to Dashboard
               </Button>
               <Stack direction="row" spacing={2}>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  startIcon={<DeleteOutlined />}
-                  onClick={() => handleDeleteClick(selectedList)}
-                >
+                <Button variant="outlined" color="error" startIcon={<DeleteOutlined />} onClick={() => handleDeleteClick(selectedList)}>
                   Delete List
                 </Button>
-                <Button
-                  variant="contained"
-                  startIcon={<ShareAltOutlined />}
-                  onClick={handleShareList}
-                >
+                <Button variant="contained" startIcon={<ShareAltOutlined />} onClick={handleShareList}>
                   Share Your List
                 </Button>
               </Stack>
@@ -404,23 +380,16 @@ export default function Top10Page() {
                 {selectedList.title}
               </Typography>
               {selectedList.description && (
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  sx={{ mb: 2 }}
-                >
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
                   {selectedList.description}
                 </Typography>
               )}
               <Stack direction="row" spacing={2}>
                 <Typography variant="body2" color="text.secondary">
-                  Type:{' '}
-                  {selectedList.type.charAt(0).toUpperCase() +
-                    selectedList.type.slice(1)}
+                  Type: {selectedList.type.charAt(0).toUpperCase() + selectedList.type.slice(1)}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Created:{' '}
-                  {new Date(selectedList.createdAt).toLocaleDateString()}
+                  Created: {new Date(selectedList.createdAt).toLocaleDateString()}
                 </Typography>
               </Stack>
             </Box>
@@ -471,9 +440,7 @@ export default function Top10Page() {
                           bgcolor: 'action.hover',
                           borderRadius: 1,
                           mr: 2,
-                          backgroundImage: item.posterUrl
-                            ? `url(${item.posterUrl})`
-                            : 'none',
+                          backgroundImage: item.posterUrl ? `url(${item.posterUrl})` : 'none',
                           backgroundSize: 'cover',
                           backgroundPosition: 'center'
                         }}
@@ -541,18 +508,11 @@ export default function Top10Page() {
                 Top 10s Dashboard
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-                Rank your top 10 favorite movies or TV shows and share them with
-                others!
+                Rank your top 10 favorite movies or TV shows and share them with others!
               </Typography>
 
               {/* Create New List Button */}
-              <Button
-                variant="contained"
-                size="large"
-                startIcon={<PlusOutlined />}
-                onClick={handleCreateNewList}
-                sx={{ mt: 2, mb: 3 }}
-              >
+              <Button variant="contained" size="large" startIcon={<PlusOutlined />} onClick={handleCreateNewList} sx={{ mt: 2, mb: 3 }}>
                 Create New List
               </Button>
 
@@ -622,16 +582,11 @@ export default function Top10Page() {
                         <Typography variant="h5" gutterBottom sx={{ pr: 4 }}>
                           {list.title}
                         </Typography>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 1 }}
-                        >
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                           {(list as any).itemCount || 0} / 10 items
                         </Typography>
                         <Typography variant="caption" color="text.secondary">
-                          Created:{' '}
-                          {new Date(list.createdAt).toLocaleDateString()}
+                          Created: {new Date(list.createdAt).toLocaleDateString()}
                         </Typography>
                       </CardContent>
                     </Card>
@@ -678,11 +633,7 @@ export default function Top10Page() {
             }}
           >
             <Typography variant="h3">Create New List</Typography>
-            <Button
-              onClick={handleCloseDialog}
-              sx={{ minWidth: 'auto', p: 1 }}
-              color="inherit"
-            >
+            <Button onClick={handleCloseDialog} sx={{ minWidth: 'auto', p: 1 }} color="inherit">
               <CloseOutlined />
             </Button>
           </Box>
@@ -713,8 +664,7 @@ export default function Top10Page() {
             {/* Max Items Info */}
             <Box sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
               <Typography variant="body2" color="text.secondary">
-                You can add up to 10 items to your list. You&apos;ll be able to
-                rank and reorder them after creation.
+                You can add up to 10 items to your list. You&apos;ll be able to rank and reorder them after creation.
               </Typography>
             </Box>
           </Stack>
@@ -723,12 +673,7 @@ export default function Top10Page() {
           <Button onClick={handleCloseDialog} variant="outlined" size="large">
             Cancel
           </Button>
-          <Button
-            onClick={handleCreateList}
-            variant="contained"
-            size="large"
-            disabled={!listName}
-          >
+          <Button onClick={handleCreateList} variant="contained" size="large" disabled={!listName}>
             Create List
           </Button>
         </DialogActions>
@@ -756,11 +701,7 @@ export default function Top10Page() {
             }}
           >
             <Typography variant="h3">Share Your List</Typography>
-            <Button
-              onClick={handleCloseShareDialog}
-              sx={{ minWidth: 'auto', p: 1 }}
-              color="inherit"
-            >
+            <Button onClick={handleCloseShareDialog} sx={{ minWidth: 'auto', p: 1 }} color="inherit">
               <CloseOutlined />
             </Button>
           </Box>
@@ -782,17 +723,12 @@ export default function Top10Page() {
                   {selectedList.title}
                 </Typography>
                 {selectedList.description && (
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mb: 0.5 }}
-                  >
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
                     {selectedList.description}
                   </Typography>
                 )}
                 <Typography variant="caption" color="text.secondary">
-                  Created:{' '}
-                  {new Date(selectedList.createdAt).toLocaleDateString()}
+                  Created: {new Date(selectedList.createdAt).toLocaleDateString()}
                 </Typography>
               </Box>
 
@@ -844,39 +780,24 @@ export default function Top10Page() {
                             bgcolor: 'action.disabled',
                             borderRadius: 1,
                             mr: 1,
-                            backgroundImage: item.posterUrl
-                              ? `url(${item.posterUrl})`
-                              : 'none',
+                            backgroundImage: item.posterUrl ? `url(${item.posterUrl})` : 'none',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center'
                           }}
                         />
                         <Box sx={{ flex: 1 }}>
-                          <Typography
-                            variant="body2"
-                            sx={{ fontSize: '0.875rem' }}
-                          >
+                          <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
                             {item.title}
                           </Typography>
                           {item.contentType && (
-                            <Typography
-                              variant="caption"
-                              color="text.secondary"
-                              sx={{ fontSize: '0.7rem' }}
-                            >
-                              {item.contentType === 'movie'
-                                ? 'Movie'
-                                : 'TV Show'}
+                            <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
+                              {item.contentType === 'movie' ? 'Movie' : 'TV Show'}
                             </Typography>
                           )}
                         </Box>
                       </>
                     ) : (
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ flex: 1, fontSize: '0.8rem' }}
-                      >
+                      <Typography variant="body2" color="text.secondary" sx={{ flex: 1, fontSize: '0.8rem' }}>
                         Empty slot
                       </Typography>
                     )}
@@ -886,11 +807,7 @@ export default function Top10Page() {
 
               {/* Footer */}
               <Box sx={{ textAlign: 'center', mt: 2 }}>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{ fontSize: '0.7rem' }}
-                >
+                <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
                   Made with Group 5&apos;s Movie & TV Show App
                 </Typography>
               </Box>
@@ -898,46 +815,26 @@ export default function Top10Page() {
           )}
         </DialogContent>
         <DialogActions sx={{ px: 2, pb: 1.5, pt: 1 }}>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ flex: 1, fontSize: '0.85rem' }}
-          >
+          <Typography variant="body2" color="text.secondary" sx={{ flex: 1, fontSize: '0.85rem' }}>
             Take a screenshot to share your list!
           </Typography>
-          <Button
-            onClick={handleCloseShareDialog}
-            variant="contained"
-            size="medium"
-          >
+          <Button onClick={handleCloseShareDialog} variant="contained" size="medium">
             Close
           </Button>
         </DialogActions>
       </Dialog>
 
       {/* Delete Confirmation Dialog */}
-      <Dialog
-        open={deleteConfirmOpen}
-        onClose={handleCloseDeleteConfirm}
-        maxWidth="xs"
-        fullWidth
-      >
+      <Dialog open={deleteConfirmOpen} onClose={handleCloseDeleteConfirm} maxWidth="xs" fullWidth>
         <DialogTitle>Delete List?</DialogTitle>
         <DialogContent>
-          <Typography>
-            Are you sure you want to delete &quot;{listToDelete?.title}&quot;?
-            This action cannot be undone.
-          </Typography>
+          <Typography>Are you sure you want to delete &quot;{listToDelete?.title}&quot;? This action cannot be undone.</Typography>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
           <Button onClick={handleCloseDeleteConfirm} variant="outlined">
             Cancel
           </Button>
-          <Button
-            onClick={handleConfirmDelete}
-            variant="contained"
-            color="error"
-          >
+          <Button onClick={handleConfirmDelete} variant="contained" color="error">
             Delete
           </Button>
         </DialogActions>

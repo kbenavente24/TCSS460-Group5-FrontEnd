@@ -29,15 +29,9 @@ export async function GET(request: NextRequest) {
     console.error('❌ Error proxying TV show statuses request:', error);
 
     if (axios.isAxiosError(error)) {
-      return NextResponse.json(
-        { error: error.message, details: error.response?.data },
-        { status: error.response?.status || 500 }
-      );
+      return NextResponse.json({ error: error.message, details: error.response?.data }, { status: error.response?.status || 500 });
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

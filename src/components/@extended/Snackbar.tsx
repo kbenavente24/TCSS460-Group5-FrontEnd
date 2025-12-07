@@ -76,13 +76,7 @@ export default function Snackbar() {
               <Button color="primary" size="small" onClick={handleClose}>
                 UNDO
               </Button>
-              <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-                sx={{ mt: 0.25 }}
-              >
+              <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose} sx={{ mt: 0.25 }}>
                 <CloseOutlined />
               </IconButton>
             </>
@@ -110,11 +104,7 @@ export default function Snackbar() {
               <>
                 {snackbar.actionButton !== false && (
                   <>
-                    <Button
-                      color={snackbar.alert.color}
-                      size="small"
-                      onClick={handleClose}
-                    >
+                    <Button color={snackbar.alert.color} size="small" onClick={handleClose}>
                       UNDO
                     </Button>
                     <IconButton

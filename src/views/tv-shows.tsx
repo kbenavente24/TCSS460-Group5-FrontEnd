@@ -71,8 +71,7 @@ const MOCK_TV_SHOWS = [
     overview:
       'Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.',
     networks: 'HBO',
-    production_companies:
-      'HBO Entertainment, Bighead Littlehead, 360 Television',
+    production_companies: 'HBO Entertainment, Bighead Littlehead, 360 Television',
     vote_average: 8.5,
     poster_url: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
     backdrop_url: '/2OMB0ynKlyIenMJWI2Dy9IWT4cM.jpg'
@@ -167,8 +166,7 @@ const MOCK_TV_SHOWS = [
     overview:
       'Follow the lives of the Roy family as they contemplate their future once their aging father begins to step back from the media and entertainment conglomerate they control.',
     networks: 'HBO',
-    production_companies:
-      'Gary Sanchez Productions, Hyperobject Industries, Project Zeus',
+    production_companies: 'Gary Sanchez Productions, Hyperobject Industries, Project Zeus',
     vote_average: 8.7,
     poster_url: '/d7iVuo8Z7v6Eb7LkCk7OoiwMxrk.jpg',
     backdrop_url: '/7vKp7j2sgyjEhCxHWdAFb9pCQDI.jpg'
@@ -184,8 +182,7 @@ const MOCK_TV_SHOWS = [
     number_of_seasons: 3,
     number_of_episodes: 30,
     episode_run_time: 30,
-    overview:
-      "A young chef from the fine dining world returns to Chicago to run his family's Italian beef sandwich shop.",
+    overview: "A young chef from the fine dining world returns to Chicago to run his family's Italian beef sandwich shop.",
     networks: 'FX',
     production_companies: 'FX Productions',
     vote_average: 8.6,
@@ -206,8 +203,7 @@ const MOCK_TV_SHOWS = [
     overview:
       'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
     networks: 'HBO',
-    production_companies:
-      'HBO Entertainment, Sony Pictures Television, Naughty Dog',
+    production_companies: 'HBO Entertainment, Sony Pictures Television, Naughty Dog',
     vote_average: 8.8,
     poster_url: '/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',
     backdrop_url: '/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg'
@@ -226,8 +222,7 @@ const MOCK_TV_SHOWS = [
     overview:
       "Ted Lasso, an American football coach, moves to England when he's hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
     networks: 'Apple TV+',
-    production_companies:
-      'Doozer Productions, Universal Television, Warner Bros. Television',
+    production_companies: 'Doozer Productions, Universal Television, Warner Bros. Television',
     vote_average: 8.7,
     poster_url: '/4kBHvhe4uY6sO0qZ1uw2K8mKmrg.jpg',
     backdrop_url: '/yY76zq9X2lnn6N5H3PzHPqnyZsO.jpg'
@@ -398,10 +393,7 @@ export default function TVShowsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText, page, viewMode]);
 
-  const handleViewChange = (
-    _event: React.MouseEvent<HTMLElement>,
-    newView: 'single' | 'multi' | null
-  ) => {
+  const handleViewChange = (_event: React.MouseEvent<HTMLElement>, newView: 'single' | 'multi' | null) => {
     if (newView !== null) {
       setViewMode(newView);
       setPage(1);
@@ -422,10 +414,7 @@ export default function TVShowsPage() {
 
   // DESIGN-ONLY: Delete functionality - no backend API calls
   // This only opens/closes the modal for UI/UX demonstration
-  const handleDeleteClick = (
-    e: React.MouseEvent,
-    show: (typeof MOCK_TV_SHOWS)[0]
-  ) => {
+  const handleDeleteClick = (e: React.MouseEvent, show: (typeof MOCK_TV_SHOWS)[0]) => {
     e.stopPropagation(); // Prevent card click
     setShowToDelete(show);
     setDeleteModalOpen(true);
@@ -437,8 +426,7 @@ export default function TVShowsPage() {
     setShowToDelete(null);
   };
 
-  const displayedShows =
-    viewMode === 'multi' ? tvShows : selectedShow ? [selectedShow] : [];
+  const displayedShows = viewMode === 'multi' ? tvShows : selectedShow ? [selectedShow] : [];
 
   // Show loading state
   if (loading) {
@@ -479,19 +467,9 @@ export default function TVShowsPage() {
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Search Bar and View Toggle */}
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mb: 2 }}
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
         <Stack direction="row" spacing={2} alignItems="center">
-          <ToggleButtonGroup
-            value={viewMode}
-            exclusive
-            onChange={handleViewChange}
-            size="small"
-          >
+          <ToggleButtonGroup value={viewMode} exclusive onChange={handleViewChange} size="small">
             <ToggleButton value="multi" aria-label="multi view">
               <AppstoreOutlined style={{ marginRight: 8 }} />
               Multi View
@@ -595,11 +573,7 @@ export default function TVShowsPage() {
             }}
           >
             {/* Left Arrow */}
-            <IconButton
-              onClick={handlePreviousShow}
-              sx={{ flexShrink: 0, height: 'fit-content' }}
-              size="large"
-            >
+            <IconButton onClick={handlePreviousShow} sx={{ flexShrink: 0, height: 'fit-content' }} size="large">
               <LeftOutlined style={{ fontSize: '2rem' }} />
             </IconButton>
 
@@ -639,73 +613,33 @@ export default function TVShowsPage() {
                         variant="outlined"
                         color="error"
                         startIcon={<DeleteOutlined />}
-                        onClick={() =>
-                          handleDeleteClick(
-                            { stopPropagation: () => {} } as React.MouseEvent,
-                            selectedShow
-                          )
-                        }
+                        onClick={() => handleDeleteClick({ stopPropagation: () => {} } as React.MouseEvent, selectedShow)}
                         sx={{ ml: 2 }}
                       >
                         Delete
                       </Button>
                     </Box>
                     {selectedShow.original_name !== selectedShow.name && (
-                      <Typography
-                        variant="h5"
-                        color="text.secondary"
-                        gutterBottom
-                      >
+                      <Typography variant="h5" color="text.secondary" gutterBottom>
                         Original Name: {selectedShow.original_name}
                       </Typography>
                     )}
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      sx={{ mt: 1 }}
-                      flexWrap="wrap"
-                      useFlexGap
-                    >
-                      <Chip
-                        label={`⭐ ${selectedShow.vote_average}/10`}
-                        color="primary"
-                        size="small"
-                      />
+                    <Stack direction="row" spacing={1} sx={{ mt: 1 }} flexWrap="wrap" useFlexGap>
+                      <Chip label={`⭐ ${selectedShow.vote_average}/10`} color="primary" size="small" />
                       {selectedShow.episode_run_time > 0 && (
-                        <Chip
-                          label={`${selectedShow.episode_run_time} min/ep`}
-                          variant="outlined"
-                          size="small"
-                        />
+                        <Chip label={`${selectedShow.episode_run_time} min/ep`} variant="outlined" size="small" />
                       )}
-                      <Chip
-                        label={`${selectedShow.number_of_seasons} Seasons`}
-                        variant="outlined"
-                        size="small"
-                      />
-                      <Chip
-                        label={`${selectedShow.number_of_episodes} Episodes`}
-                        variant="outlined"
-                        size="small"
-                      />
+                      <Chip label={`${selectedShow.number_of_seasons} Seasons`} variant="outlined" size="small" />
+                      <Chip label={`${selectedShow.number_of_episodes} Episodes`} variant="outlined" size="small" />
                     </Stack>
                   </Box>
 
                   {/* Genres */}
                   <Box>
-                    <Typography
-                      variant="subtitle2"
-                      color="text.secondary"
-                      gutterBottom
-                    >
+                    <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                       Genres
                     </Typography>
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      flexWrap="wrap"
-                      useFlexGap
-                    >
+                    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
                       {selectedShow.genres.split(', ').map((genre) => (
                         <Chip key={genre} label={genre} size="small" />
                       ))}
@@ -728,40 +662,27 @@ export default function TVShowsPage() {
                       <Typography variant="subtitle2" color="text.secondary">
                         Creators
                       </Typography>
-                      <Typography variant="body1">
-                        {selectedShow.creators}
-                      </Typography>
+                      <Typography variant="body1">{selectedShow.creators}</Typography>
                     </Box>
                   )}
 
                   {/* Networks and Production - Only show if available */}
-                  {(selectedShow.networks !== 'N/A' ||
-                    selectedShow.production_companies !== 'N/A') && (
+                  {(selectedShow.networks !== 'N/A' || selectedShow.production_companies !== 'N/A') && (
                     <Grid container spacing={2}>
                       {selectedShow.networks !== 'N/A' && (
                         <Grid item xs={12} sm={6}>
-                          <Typography
-                            variant="subtitle2"
-                            color="text.secondary"
-                          >
+                          <Typography variant="subtitle2" color="text.secondary">
                             Network
                           </Typography>
-                          <Typography variant="body1">
-                            {selectedShow.networks}
-                          </Typography>
+                          <Typography variant="body1">{selectedShow.networks}</Typography>
                         </Grid>
                       )}
                       {selectedShow.production_companies !== 'N/A' && (
                         <Grid item xs={12} sm={6}>
-                          <Typography
-                            variant="subtitle2"
-                            color="text.secondary"
-                          >
+                          <Typography variant="subtitle2" color="text.secondary">
                             Production Companies
                           </Typography>
-                          <Typography variant="body1">
-                            {selectedShow.production_companies}
-                          </Typography>
+                          <Typography variant="body1">{selectedShow.production_companies}</Typography>
                         </Grid>
                       )}
                     </Grid>
@@ -773,17 +694,13 @@ export default function TVShowsPage() {
                       <Typography variant="subtitle2" color="text.secondary">
                         First Air Date
                       </Typography>
-                      <Typography variant="body1">
-                        {formatDate(selectedShow.first_air_date)}
-                      </Typography>
+                      <Typography variant="body1">{formatDate(selectedShow.first_air_date)}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Typography variant="subtitle2" color="text.secondary">
                         Last Air Date
                       </Typography>
-                      <Typography variant="body1">
-                        {formatDate(selectedShow.last_air_date)}
-                      </Typography>
+                      <Typography variant="body1">{formatDate(selectedShow.last_air_date)}</Typography>
                     </Grid>
                   </Grid>
                 </Stack>
@@ -791,11 +708,7 @@ export default function TVShowsPage() {
             </Grid>
 
             {/* Right Arrow */}
-            <IconButton
-              onClick={handleNextShow}
-              sx={{ flexShrink: 0, height: 'fit-content' }}
-              size="large"
-            >
+            <IconButton onClick={handleNextShow} sx={{ flexShrink: 0, height: 'fit-content' }} size="large">
               <RightOutlined style={{ fontSize: '2rem' }} />
             </IconButton>
           </Box>
@@ -857,34 +770,12 @@ export default function TVShowsPage() {
                       <Typography variant="h5" gutterBottom>
                         {show.name}
                       </Typography>
-                      <Stack
-                        direction="row"
-                        spacing={1}
-                        sx={{ mb: 1 }}
-                        flexWrap="wrap"
-                        useFlexGap
-                      >
-                        <Chip
-                          label={`⭐ ${show.vote_average}`}
-                          size="small"
-                          color="primary"
-                        />
-                        <Chip
-                          label={`${show.number_of_seasons} Seasons`}
-                          size="small"
-                          variant="outlined"
-                        />
-                        <Chip
-                          label={`${show.number_of_episodes} Eps`}
-                          size="small"
-                          variant="outlined"
-                        />
+                      <Stack direction="row" spacing={1} sx={{ mb: 1 }} flexWrap="wrap" useFlexGap>
+                        <Chip label={`⭐ ${show.vote_average}`} size="small" color="primary" />
+                        <Chip label={`${show.number_of_seasons} Seasons`} size="small" variant="outlined" />
+                        <Chip label={`${show.number_of_episodes} Eps`} size="small" variant="outlined" />
                       </Stack>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ mb: 1 }}
-                      >
+                      <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                         {show.genres}
                       </Typography>
                       <Typography
@@ -908,12 +799,7 @@ export default function TVShowsPage() {
 
             {/* Pagination */}
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-              <Pagination
-                count={totalPages}
-                page={page}
-                onChange={(_e, value) => setPage(value)}
-                color="primary"
-              />
+              <Pagination count={totalPages} page={page} onChange={(_e, value) => setPage(value)} color="primary" />
             </Box>
           </Box>
         )}

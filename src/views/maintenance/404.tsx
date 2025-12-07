@@ -58,19 +58,10 @@ export default function Error404() {
       <Grid item xs={12}>
         <Stack spacing={2} justifyContent="center" alignItems="center">
           <Typography variant="h1">Page Not Found</Typography>
-          <Typography
-            color="text.secondary"
-            align="center"
-            sx={{ width: { xs: '73%', sm: '61%' } }}
-          >
-            The page you are looking was moved, removed, renamed, or might never
-            exist!
+          <Typography color="text.secondary" align="center" sx={{ width: { xs: '73%', sm: '61%' } }}>
+            The page you are looking was moved, removed, renamed, or might never exist!
           </Typography>
-          <Button
-            component={NextLink}
-            href={APP_DEFAULT_PATH}
-            variant="contained"
-          >
+          <Button component={NextLink} href={APP_DEFAULT_PATH} variant="contained">
             Back To Home
           </Button>
         </Stack>

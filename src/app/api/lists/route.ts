@@ -55,10 +55,7 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error fetching lists:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch lists' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch lists' }, { status: 500 });
   }
 }
 
@@ -78,10 +75,7 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!title || !type) {
-      return NextResponse.json(
-        { error: 'Title and type are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Title and type are required' }, { status: 400 });
     }
 
     // Validate type
@@ -102,12 +96,7 @@ export async function POST(request: NextRequest) {
         updated_at as "updatedAt"
     `;
 
-    const result = await pool.query(insertQuery, [
-      userId,
-      title,
-      type,
-      description || null
-    ]);
+    const result = await pool.query(insertQuery, [userId, title, type, description || null]);
 
     const newList = result.rows[0];
 
@@ -123,9 +112,6 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('Error creating list:', error);
-    return NextResponse.json(
-      { error: 'Failed to create list' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create list' }, { status: 500 });
   }
 }

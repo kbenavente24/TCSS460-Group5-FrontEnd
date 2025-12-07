@@ -1,9 +1,6 @@
 // material-ui
 import Typography from '@mui/material/Typography';
-import CircularProgress, {
-  CircularProgressProps,
-  circularProgressClasses
-} from '@mui/material/CircularProgress';
+import CircularProgress, { CircularProgressProps, circularProgressClasses } from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 interface Props extends CircularProgressProps {
@@ -13,16 +10,7 @@ interface Props extends CircularProgressProps {
 
 // ==============================|| PROGRESS - CIRCULAR PATH ||============================== //
 
-export default function CircularWithPath({
-  value,
-  size,
-  variant,
-  thickness,
-  showLabel,
-  pathColor,
-  sx,
-  ...others
-}: Props) {
+export default function CircularWithPath({ value, size, variant, thickness, showLabel, pathColor, sx, ...others }: Props) {
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress
@@ -42,15 +30,7 @@ export default function CircularWithPath({
         value={100}
       />
       {showLabel && (
-        <Stack
-          top={0}
-          left={0}
-          bottom={0}
-          right={0}
-          position="absolute"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Stack top={0} left={0} bottom={0} right={0} position="absolute" alignItems="center" justifyContent="center">
           <Typography variant="caption" color="text.secondary">
             {value ? `${Math.round(value)}%` : '0%'}
           </Typography>

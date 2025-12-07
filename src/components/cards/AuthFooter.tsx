@@ -19,25 +19,11 @@ export default function AuthFooter() {
           For educational use only
         </Typography>
 
-        <Stack
-          direction={{ xs: 'column', sm: 'row' }}
-          spacing={{ xs: 1, sm: 3 }}
-          textAlign={{ xs: 'center', sm: 'inherit' }}
-        >
-          <Link
-            href="https://www.tacoma.uw.edu/"
-            target="_blank"
-            variant="caption"
-            color="text.secondary"
-          >
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 3 }} textAlign={{ xs: 'center', sm: 'inherit' }}>
+          <Link href="https://www.tacoma.uw.edu/" target="_blank" variant="caption" color="text.secondary">
             University of Washington Tacoma
           </Link>
-          <Link
-            href="https://www.tacoma.uw.edu/set"
-            target="_blank"
-            variant="caption"
-            color="text.secondary"
-          >
+          <Link href="https://www.tacoma.uw.edu/set" target="_blank" variant="caption" color="text.secondary">
             School of Engineering and Technology
           </Link>
           <Link

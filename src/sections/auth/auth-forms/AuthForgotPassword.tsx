@@ -46,29 +46,17 @@ export default function AuthForgotPassword() {
         submit: null
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email('Must be a valid email')
-          .max(255)
-          .required('Email is required')
+        email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
       })}
       onSubmit={async (_values, { setErrors, setSubmitting }) => {
         // This endpoint no longer exists in the new API
         setErrors({
-          submit:
-            'Password reset via email is no longer supported. Please contact support or change your password while logged in.'
+          submit: 'Password reset via email is no longer supported. Please contact support or change your password while logged in.'
         });
         setSubmitting(false);
       }}
     >
-      {({
-        errors,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        touched,
-        values
-      }) => (
+      {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -99,21 +87,11 @@ export default function AuthForgotPassword() {
               </Grid>
             )}
             <Grid item xs={12} sx={{ mb: -2 }}>
-              <Typography variant="caption">
-                Do not forgot to check SPAM box.
-              </Typography>
+              <Typography variant="caption">Do not forgot to check SPAM box.</Typography>
             </Grid>
             <Grid item xs={12}>
               <AnimateButton>
-                <Button
-                  disableElevation
-                  disabled={isSubmitting}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
+                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                   Send Password Reset Email
                 </Button>
               </AnimateButton>

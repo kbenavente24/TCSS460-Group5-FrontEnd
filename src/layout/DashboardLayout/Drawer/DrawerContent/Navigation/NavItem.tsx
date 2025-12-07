@@ -21,12 +21,7 @@ import IconButton from 'components/@extended/IconButton';
 
 import { MenuOrientation, ThemeMode, NavActionType } from 'config';
 import useConfig from 'hooks/useConfig';
-import {
-  handlerHorizontalActiveItem,
-  handlerActiveItem,
-  handlerDrawerOpen,
-  useGetMenuMaster
-} from 'api/menu';
+import { handlerHorizontalActiveItem, handlerActiveItem, handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 
 // types
 import { LinkTarget, NavItemType } from 'types/menu';
@@ -59,8 +54,7 @@ export default function NavItem({ item, level, isParents = false }: Props) {
     <Icon
       style={{
         fontSize: drawerOpen ? '1rem' : '1.25rem',
-        ...(menuOrientation === MenuOrientation.HORIZONTAL &&
-          isParents && { fontSize: 20, stroke: '1.5' })
+        ...(menuOrientation === MenuOrientation.HORIZONTAL && isParents && { fontSize: 20, stroke: '1.5' })
       }}
     />
   ) : (
@@ -78,8 +72,7 @@ export default function NavItem({ item, level, isParents = false }: Props) {
   }, [pathname]);
 
   const textColor = mode === ThemeMode.DARK ? 'grey.400' : 'text.primary';
-  const iconSelectedColor =
-    mode === ThemeMode.DARK && drawerOpen ? 'text.primary' : 'primary.main';
+  const iconSelectedColor = mode === ThemeMode.DARK && drawerOpen ? 'text.primary' : 'primary.main';
 
   return (
     <>
@@ -387,10 +380,7 @@ export default function NavItem({ item, level, isParents = false }: Props) {
           )}
           <ListItemText
             primary={
-              <Typography
-                variant="h6"
-                color={isSelected ? 'primary.main' : 'secondary.dark'}
-              >
+              <Typography variant="h6" color={isSelected ? 'primary.main' : 'secondary.dark'}>
                 {item.title}
               </Typography>
             }

@@ -2,26 +2,14 @@ import { useRouter } from 'next/navigation';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
-import {
-  IconButton,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText
-} from '@mui/material';
+import { IconButton, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
 
 // project import
 import { IMessage } from 'types/message';
 import PriorityAvatar from 'components/Priority';
 import { useMessage } from 'contexts/MessageContext';
 
-export function MessageListItem({
-  message,
-  onDelete
-}: {
-  message: IMessage;
-  onDelete: (name: string) => void;
-}) {
+export function MessageListItem({ message, onDelete }: { message: IMessage; onDelete: (name: string) => void }) {
   const router = useRouter();
   const { onChangeMessage } = useMessage();
 
@@ -45,11 +33,7 @@ export function MessageListItem({
   return (
     <ListItem
       secondaryAction={
-        <IconButton
-          edge="end"
-          aria-label="delete"
-          onClick={() => onDelete(message.name)}
-        >
+        <IconButton edge="end" aria-label="delete" onClick={() => onDelete(message.name)}>
           <DeleteIcon />
         </IconButton>
       }

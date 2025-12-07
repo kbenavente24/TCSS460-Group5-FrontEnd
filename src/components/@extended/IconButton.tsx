@@ -11,11 +11,7 @@ import getColors from 'utils/getColors';
 import getShadow from 'utils/getShadow';
 
 // types
-import {
-  ButtonVariantProps,
-  ExtendedStyleProps,
-  IconButtonShapeProps
-} from 'types/extended';
+import { ButtonVariantProps, ExtendedStyleProps, IconButtonShapeProps } from 'types/extended';
 
 // ==============================|| ICON BUTTON - COLOR STYLE ||============================== //
 
@@ -110,8 +106,7 @@ interface StyleProps extends IconButtonStyleProps {
 }
 
 const IconButtonStyle = styled(MuiIconButton, {
-  shouldForwardProp: (prop) =>
-    prop !== 'variant' && prop !== 'shape' && prop !== 'color'
+  shouldForwardProp: (prop) => prop !== 'variant' && prop !== 'shape' && prop !== 'color'
 })(({ theme, variant = 'text', color = 'primary' }: StyleProps) => ({
   position: 'relative',
   '::after': {
@@ -193,28 +188,11 @@ export interface Props extends IconButtonProps {
   children: ReactNode;
 }
 
-function IconButton(
-  {
-    variant = 'text',
-    shape = 'square',
-    children,
-    color = 'primary',
-    ...others
-  }: Props,
-  ref: Ref<HTMLButtonElement>
-) {
+function IconButton({ variant = 'text', shape = 'square', children, color = 'primary', ...others }: Props, ref: Ref<HTMLButtonElement>) {
   const theme = useTheme();
 
   return (
-    <IconButtonStyle
-      ref={ref}
-      disableRipple
-      variant={variant}
-      shape={shape}
-      theme={theme}
-      color={color}
-      {...others}
-    >
+    <IconButtonStyle ref={ref} disableRipple variant={variant} shape={shape} theme={theme} color={color} {...others}>
       {children}
     </IconButtonStyle>
   );

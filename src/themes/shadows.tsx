@@ -12,10 +12,7 @@ import { CustomShadowProps } from 'types/theme';
 export default function CustomShadows(theme: Theme): CustomShadowProps {
   return {
     // z1: `0px 2px 8px rgba(0, 0, 0, 0.15)`,
-    button:
-      theme.palette.mode === ThemeMode.DARK
-        ? `0 2px 0 rgb(0 0 0 / 5%)`
-        : `0 2px #0000000b`,
+    button: theme.palette.mode === ThemeMode.DARK ? `0 2px 0 rgb(0 0 0 / 5%)` : `0 2px #0000000b`,
     text: `0 -1px 0 rgb(0 0 0 / 12%)`,
     z1:
       theme.palette.mode === ThemeMode.DARK

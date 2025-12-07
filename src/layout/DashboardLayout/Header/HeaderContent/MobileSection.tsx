@@ -47,10 +47,8 @@ export default function MobileSection() {
     prevOpen.current = open;
   }, [open]);
 
-  const iconBackColorOpen =
-    theme.palette.mode === ThemeMode.DARK ? 'grey.200' : 'grey.300';
-  const iconBackColor =
-    theme.palette.mode === ThemeMode.DARK ? 'background.default' : 'grey.100';
+  const iconBackColorOpen = theme.palette.mode === ThemeMode.DARK ? 'grey.200' : 'grey.300';
+  const iconBackColor = theme.palette.mode === ThemeMode.DARK ? 'background.default' : 'grey.100';
 
   return (
     <>

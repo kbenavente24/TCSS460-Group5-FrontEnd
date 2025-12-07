@@ -8,10 +8,7 @@ import { useServerInsertedHTML } from 'next/navigation';
 // material-ui
 import createCache from '@emotion/cache';
 import { CacheProvider as DefaultCacheProvider } from '@emotion/react';
-import type {
-  EmotionCache,
-  Options as OptionsOfCreateCache
-} from '@emotion/cache';
+import type { EmotionCache, Options as OptionsOfCreateCache } from '@emotion/cache';
 
 export type NextAppDirEmotionCacheProviderProps = {
   /** This is the options passed to createCache() from 'import createCache from "@emotion/cache"' */
@@ -79,18 +76,9 @@ export function NextAppDirEmotionCacheProvider({
     return (
       <>
         {globals.map(({ name, style }) => (
-          <style
-            key={name}
-            data-emotion={`${cache.key}-global ${name}`}
-            dangerouslySetInnerHTML={{ __html: style }}
-          />
+          <style key={name} data-emotion={`${cache.key}-global ${name}`} dangerouslySetInnerHTML={{ __html: style }} />
         ))}
-        {styles && (
-          <style
-            data-emotion={dataEmotionAttribute}
-            dangerouslySetInnerHTML={{ __html: styles }}
-          />
-        )}
+        {styles && <style data-emotion={dataEmotionAttribute} dangerouslySetInnerHTML={{ __html: styles }} />}
       </>
     );
   });

@@ -87,16 +87,11 @@ export default function AddMovieView() {
   const [genres, setGenres] = useState<string[]>(['']);
   const [directors, setDirectors] = useState<string[]>(['']);
   const [producers, setProducers] = useState<string[]>(['']);
-  const [studios, setStudios] = useState<Studio[]>([
-    { studio_name: '', logo_url: '', country: '' }
-  ]);
-  const [cast, setCast] = useState<CastMember[]>([
-    { actor_name: '', character_name: '', actor_order: 1, profile_url: '' }
-  ]);
+  const [studios, setStudios] = useState<Studio[]>([{ studio_name: '', logo_url: '', country: '' }]);
+  const [cast, setCast] = useState<CastMember[]>([{ actor_name: '', character_name: '', actor_order: 1, profile_url: '' }]);
 
   const handleAddGenre = () => setGenres([...genres, '']);
-  const handleRemoveGenre = (index: number) =>
-    setGenres(genres.filter((_, i) => i !== index));
+  const handleRemoveGenre = (index: number) => setGenres(genres.filter((_, i) => i !== index));
   const handleGenreChange = (index: number, value: string) => {
     const newGenres = [...genres];
     newGenres[index] = value;
@@ -104,8 +99,7 @@ export default function AddMovieView() {
   };
 
   const handleAddDirector = () => setDirectors([...directors, '']);
-  const handleRemoveDirector = (index: number) =>
-    setDirectors(directors.filter((_, i) => i !== index));
+  const handleRemoveDirector = (index: number) => setDirectors(directors.filter((_, i) => i !== index));
   const handleDirectorChange = (index: number, value: string) => {
     const newDirectors = [...directors];
     newDirectors[index] = value;
@@ -113,23 +107,16 @@ export default function AddMovieView() {
   };
 
   const handleAddProducer = () => setProducers([...producers, '']);
-  const handleRemoveProducer = (index: number) =>
-    setProducers(producers.filter((_, i) => i !== index));
+  const handleRemoveProducer = (index: number) => setProducers(producers.filter((_, i) => i !== index));
   const handleProducerChange = (index: number, value: string) => {
     const newProducers = [...producers];
     newProducers[index] = value;
     setProducers(newProducers);
   };
 
-  const handleAddStudio = () =>
-    setStudios([...studios, { studio_name: '', logo_url: '', country: '' }]);
-  const handleRemoveStudio = (index: number) =>
-    setStudios(studios.filter((_, i) => i !== index));
-  const handleStudioChange = (
-    index: number,
-    field: keyof Studio,
-    value: string
-  ) => {
+  const handleAddStudio = () => setStudios([...studios, { studio_name: '', logo_url: '', country: '' }]);
+  const handleRemoveStudio = (index: number) => setStudios(studios.filter((_, i) => i !== index));
+  const handleStudioChange = (index: number, field: keyof Studio, value: string) => {
     const newStudios = [...studios];
     newStudios[index][field] = value;
     setStudios(newStudios);
@@ -145,13 +132,8 @@ export default function AddMovieView() {
         profile_url: ''
       }
     ]);
-  const handleRemoveCast = (index: number) =>
-    setCast(cast.filter((_, i) => i !== index));
-  const handleCastChange = (
-    index: number,
-    field: keyof CastMember,
-    value: string | number
-  ) => {
+  const handleRemoveCast = (index: number) => setCast(cast.filter((_, i) => i !== index));
+  const handleCastChange = (index: number, field: keyof CastMember, value: string | number) => {
     const newCast = [...cast];
     newCast[index] = { ...newCast[index], [field]: value };
     setCast(newCast);
@@ -183,17 +165,14 @@ export default function AddMovieView() {
         cast: cast.filter((c) => c.actor_name.trim())
       };
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movies`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-API-Key': process.env.NEXT_PUBLIC_MOVIE_API_KEY || ''
-          },
-          body: JSON.stringify(movieData)
-        }
-      );
+      const response = await fetch(`${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movies`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': process.env.NEXT_PUBLIC_MOVIE_API_KEY || ''
+        },
+        body: JSON.stringify(movieData)
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -217,12 +196,7 @@ export default function AddMovieView() {
     <Box sx={{ p: 3 }}>
       <MainCard>
         {/* Header */}
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{ mb: 3 }}
-        >
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
           <Stack direction="row" alignItems="center" spacing={2}>
             <IconButton onClick={() => router.push('/movies')} size="large">
               <ArrowLeftOutlined style={{ fontSize: '1.5rem' }} />
@@ -296,13 +270,7 @@ export default function AddMovieView() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <TextField
-                      label="MPA Rating"
-                      value={mpaRating}
-                      onChange={(e) => setMpaRating(e.target.value)}
-                      fullWidth
-                      required
-                    />
+                    <TextField label="MPA Rating" value={mpaRating} onChange={(e) => setMpaRating(e.target.value)} fullWidth required />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -392,18 +360,9 @@ export default function AddMovieView() {
             {/* Genres */}
             <Card variant="outlined">
               <CardContent>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  sx={{ mb: 2 }}
-                >
+                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                   <Typography variant="h4">Genres</Typography>
-                  <Button
-                    startIcon={<PlusOutlined />}
-                    onClick={handleAddGenre}
-                    size="small"
-                  >
+                  <Button startIcon={<PlusOutlined />} onClick={handleAddGenre} size="small">
                     Add Genre
                   </Button>
                 </Stack>
@@ -412,13 +371,7 @@ export default function AddMovieView() {
                     <Stack direction="row" spacing={2} key={index}>
                       <FormControl fullWidth>
                         <InputLabel>Genre {index + 1}</InputLabel>
-                        <Select
-                          value={genre}
-                          label={`Genre ${index + 1}`}
-                          onChange={(e) =>
-                            handleGenreChange(index, e.target.value)
-                          }
-                        >
+                        <Select value={genre} label={`Genre ${index + 1}`} onChange={(e) => handleGenreChange(index, e.target.value)}>
                           <MenuItem value="">
                             <em>Select a genre</em>
                           </MenuItem>
@@ -430,10 +383,7 @@ export default function AddMovieView() {
                         </Select>
                       </FormControl>
                       {genres.length > 1 && (
-                        <IconButton
-                          onClick={() => handleRemoveGenre(index)}
-                          color="error"
-                        >
+                        <IconButton onClick={() => handleRemoveGenre(index)} color="error">
                           <DeleteOutlined />
                         </IconButton>
                       )}
@@ -446,18 +396,9 @@ export default function AddMovieView() {
             {/* Directors */}
             <Card variant="outlined">
               <CardContent>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  sx={{ mb: 2 }}
-                >
+                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                   <Typography variant="h4">Directors</Typography>
-                  <Button
-                    startIcon={<PlusOutlined />}
-                    onClick={handleAddDirector}
-                    size="small"
-                  >
+                  <Button startIcon={<PlusOutlined />} onClick={handleAddDirector} size="small">
                     Add Director
                   </Button>
                 </Stack>
@@ -467,16 +408,11 @@ export default function AddMovieView() {
                       <TextField
                         label={`Director ${index + 1}`}
                         value={director}
-                        onChange={(e) =>
-                          handleDirectorChange(index, e.target.value)
-                        }
+                        onChange={(e) => handleDirectorChange(index, e.target.value)}
                         fullWidth
                       />
                       {directors.length > 1 && (
-                        <IconButton
-                          onClick={() => handleRemoveDirector(index)}
-                          color="error"
-                        >
+                        <IconButton onClick={() => handleRemoveDirector(index)} color="error">
                           <DeleteOutlined />
                         </IconButton>
                       )}
@@ -489,18 +425,9 @@ export default function AddMovieView() {
             {/* Producers */}
             <Card variant="outlined">
               <CardContent>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  sx={{ mb: 2 }}
-                >
+                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                   <Typography variant="h4">Producers</Typography>
-                  <Button
-                    startIcon={<PlusOutlined />}
-                    onClick={handleAddProducer}
-                    size="small"
-                  >
+                  <Button startIcon={<PlusOutlined />} onClick={handleAddProducer} size="small">
                     Add Producer
                   </Button>
                 </Stack>
@@ -510,16 +437,11 @@ export default function AddMovieView() {
                       <TextField
                         label={`Producer ${index + 1}`}
                         value={producer}
-                        onChange={(e) =>
-                          handleProducerChange(index, e.target.value)
-                        }
+                        onChange={(e) => handleProducerChange(index, e.target.value)}
                         fullWidth
                       />
                       {producers.length > 1 && (
-                        <IconButton
-                          onClick={() => handleRemoveProducer(index)}
-                          color="error"
-                        >
+                        <IconButton onClick={() => handleRemoveProducer(index)} color="error">
                           <DeleteOutlined />
                         </IconButton>
                       )}
@@ -532,40 +454,19 @@ export default function AddMovieView() {
             {/* Studios */}
             <Card variant="outlined">
               <CardContent>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  sx={{ mb: 2 }}
-                >
+                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                   <Typography variant="h4">Studios</Typography>
-                  <Button
-                    startIcon={<PlusOutlined />}
-                    onClick={handleAddStudio}
-                    size="small"
-                  >
+                  <Button startIcon={<PlusOutlined />} onClick={handleAddStudio} size="small">
                     Add Studio
                   </Button>
                 </Stack>
                 <Stack spacing={3}>
                   {studios.map((studio, index) => (
-                    <Box
-                      key={index}
-                      sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}
-                    >
-                      <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        sx={{ mb: 2 }}
-                      >
+                    <Box key={index} sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
+                      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                         <Typography variant="h6">Studio {index + 1}</Typography>
                         {studios.length > 1 && (
-                          <IconButton
-                            onClick={() => handleRemoveStudio(index)}
-                            color="error"
-                            size="small"
-                          >
+                          <IconButton onClick={() => handleRemoveStudio(index)} color="error" size="small">
                             <DeleteOutlined />
                           </IconButton>
                         )}
@@ -575,13 +476,7 @@ export default function AddMovieView() {
                           <TextField
                             label="Studio Name"
                             value={studio.studio_name}
-                            onChange={(e) =>
-                              handleStudioChange(
-                                index,
-                                'studio_name',
-                                e.target.value
-                              )
-                            }
+                            onChange={(e) => handleStudioChange(index, 'studio_name', e.target.value)}
                             fullWidth
                           />
                         </Grid>
@@ -589,13 +484,7 @@ export default function AddMovieView() {
                           <TextField
                             label="Logo URL"
                             value={studio.logo_url}
-                            onChange={(e) =>
-                              handleStudioChange(
-                                index,
-                                'logo_url',
-                                e.target.value
-                              )
-                            }
+                            onChange={(e) => handleStudioChange(index, 'logo_url', e.target.value)}
                             fullWidth
                           />
                         </Grid>
@@ -603,13 +492,7 @@ export default function AddMovieView() {
                           <TextField
                             label="Country"
                             value={studio.country}
-                            onChange={(e) =>
-                              handleStudioChange(
-                                index,
-                                'country',
-                                e.target.value
-                              )
-                            }
+                            onChange={(e) => handleStudioChange(index, 'country', e.target.value)}
                             fullWidth
                           />
                         </Grid>
@@ -623,42 +506,19 @@ export default function AddMovieView() {
             {/* Cast */}
             <Card variant="outlined">
               <CardContent>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  sx={{ mb: 2 }}
-                >
+                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                   <Typography variant="h4">Cast</Typography>
-                  <Button
-                    startIcon={<PlusOutlined />}
-                    onClick={handleAddCast}
-                    size="small"
-                  >
+                  <Button startIcon={<PlusOutlined />} onClick={handleAddCast} size="small">
                     Add Cast Member
                   </Button>
                 </Stack>
                 <Stack spacing={3}>
                   {cast.map((member, index) => (
-                    <Box
-                      key={index}
-                      sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}
-                    >
-                      <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        sx={{ mb: 2 }}
-                      >
-                        <Typography variant="h6">
-                          Cast Member {index + 1}
-                        </Typography>
+                    <Box key={index} sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
+                      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                        <Typography variant="h6">Cast Member {index + 1}</Typography>
                         {cast.length > 1 && (
-                          <IconButton
-                            onClick={() => handleRemoveCast(index)}
-                            color="error"
-                            size="small"
-                          >
+                          <IconButton onClick={() => handleRemoveCast(index)} color="error" size="small">
                             <DeleteOutlined />
                           </IconButton>
                         )}
@@ -668,13 +528,7 @@ export default function AddMovieView() {
                           <TextField
                             label="Actor Name"
                             value={member.actor_name}
-                            onChange={(e) =>
-                              handleCastChange(
-                                index,
-                                'actor_name',
-                                e.target.value
-                              )
-                            }
+                            onChange={(e) => handleCastChange(index, 'actor_name', e.target.value)}
                             fullWidth
                           />
                         </Grid>
@@ -682,13 +536,7 @@ export default function AddMovieView() {
                           <TextField
                             label="Character Name"
                             value={member.character_name}
-                            onChange={(e) =>
-                              handleCastChange(
-                                index,
-                                'character_name',
-                                e.target.value
-                              )
-                            }
+                            onChange={(e) => handleCastChange(index, 'character_name', e.target.value)}
                             fullWidth
                           />
                         </Grid>
@@ -697,13 +545,7 @@ export default function AddMovieView() {
                             label="Order"
                             type="number"
                             value={member.actor_order}
-                            onChange={(e) =>
-                              handleCastChange(
-                                index,
-                                'actor_order',
-                                parseInt(e.target.value)
-                              )
-                            }
+                            onChange={(e) => handleCastChange(index, 'actor_order', parseInt(e.target.value))}
                             fullWidth
                           />
                         </Grid>
@@ -711,13 +553,7 @@ export default function AddMovieView() {
                           <TextField
                             label="Profile URL"
                             value={member.profile_url}
-                            onChange={(e) =>
-                              handleCastChange(
-                                index,
-                                'profile_url',
-                                e.target.value
-                              )
-                            }
+                            onChange={(e) => handleCastChange(index, 'profile_url', e.target.value)}
                             fullWidth
                           />
                         </Grid>
@@ -730,21 +566,10 @@ export default function AddMovieView() {
 
             {/* Submit Buttons */}
             <Stack direction="row" spacing={2} justifyContent="flex-end">
-              <Button
-                variant="outlined"
-                onClick={() => router.push('/movies')}
-                size="large"
-                disabled={loading}
-              >
+              <Button variant="outlined" onClick={() => router.push('/movies')} size="large" disabled={loading}>
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                startIcon={<SaveOutlined />}
-                size="large"
-                disabled={loading}
-              >
+              <Button type="submit" variant="contained" startIcon={<SaveOutlined />} size="large" disabled={loading}>
                 {loading ? 'Creating Movie...' : 'Create Movie'}
               </Button>
             </Stack>

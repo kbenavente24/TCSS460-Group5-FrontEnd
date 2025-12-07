@@ -24,13 +24,7 @@ interface DeleteConfirmationModalProps {
   itemType: 'movie' | 'tv-show';
 }
 
-export default function DeleteConfirmationModal({
-  open,
-  onClose,
-  title,
-  itemName,
-  itemType
-}: DeleteConfirmationModalProps) {
+export default function DeleteConfirmationModal({ open, onClose, title, itemName, itemType }: DeleteConfirmationModalProps) {
   // DESIGN-ONLY: Prevent any delete action
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -49,13 +43,9 @@ export default function DeleteConfirmationModal({
       <DialogContent>
         <DialogContentText>
           <Typography variant="body1" sx={{ mb: 2 }}>
-            Are you sure you want to delete this{' '}
-            {itemType === 'movie' ? 'movie' : 'TV show'}?
+            Are you sure you want to delete this {itemType === 'movie' ? 'movie' : 'TV show'}?
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: 600, color: 'text.primary' }}
-          >
+          <Typography variant="h6" sx={{ fontWeight: 600, color: 'text.primary' }}>
             {itemName}
           </Typography>
           <Typography variant="body2" color="error" sx={{ mt: 2 }}>

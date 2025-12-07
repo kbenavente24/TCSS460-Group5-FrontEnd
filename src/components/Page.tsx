@@ -14,10 +14,7 @@ interface Props extends BoxProps {
   title: string;
 }
 
-function Page(
-  { children, title = '', meta, ...other }: Props,
-  ref: Ref<HTMLDivElement>
-) {
+function Page({ children, title = '', meta, ...other }: Props, ref: Ref<HTMLDivElement>) {
   return (
     <>
       <Head>

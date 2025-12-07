@@ -6,9 +6,7 @@ import { FontFamily } from 'types/config';
 
 // ==============================|| DEFAULT THEME - TYPOGRAPHY ||============================== //
 
-export default function Typography(
-  fontFamily: FontFamily
-): TypographyVariantsOptions {
+export default function Typography(fontFamily: FontFamily): TypographyVariantsOptions {
   return {
     htmlFontSize: 16,
     fontFamily: 'inherit',

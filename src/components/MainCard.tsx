@@ -61,8 +61,7 @@ function MainCard(
   ref: Ref<HTMLDivElement>
 ) {
   const theme = useTheme();
-  boxShadow =
-    theme.palette.mode === ThemeMode.DARK ? boxShadow || true : boxShadow;
+  boxShadow = theme.palette.mode === ThemeMode.DARK ? boxShadow || true : boxShadow;
 
   return (
     <Card
@@ -70,10 +69,7 @@ function MainCard(
         position: modal ? 'absolute' : 'relative',
         borderRadius: 1,
         borderColor: 'grey.A800',
-        boxShadow:
-          boxShadow && (!border || theme.palette.mode === ThemeMode.DARK)
-            ? shadow || theme.customShadows.z1
-            : 'none',
+        boxShadow: boxShadow && (!border || theme.palette.mode === ThemeMode.DARK) ? shadow || theme.customShadows.z1 : 'none',
         border: border ? '1px solid' : 'none',
         ':hover': {
           boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'none'
@@ -110,13 +106,7 @@ function MainCard(
           }}
         />
       )}
-      {darkTitle && title && (
-        <CardHeader
-          sx={headerSX}
-          title={<Typography variant="h4">{title}</Typography>}
-          action={secondary}
-        />
-      )}
+      {darkTitle && title && <CardHeader sx={headerSX} title={<Typography variant="h4">{title}</Typography>} action={secondary} />}
       {/* content & header divider */}
       {title && divider && <Divider />}
       {/* card content */}

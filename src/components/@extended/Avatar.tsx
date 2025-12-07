@@ -10,12 +10,7 @@ import MuiAvatar, { AvatarProps } from '@mui/material/Avatar';
 import getColors from 'utils/getColors';
 
 // types
-import {
-  AvatarTypeProps,
-  ColorProps,
-  ExtendedStyleProps,
-  SizeProps
-} from 'types/extended';
+import { AvatarTypeProps, ColorProps, ExtendedStyleProps, SizeProps } from 'types/extended';
 
 // ==============================|| AVATAR - COLOR STYLE ||============================== //
 
@@ -109,8 +104,7 @@ interface AvatarStyledProps {
 }
 
 const AvatarStyle = styled(MuiAvatar, {
-  shouldForwardProp: (prop) =>
-    prop !== 'color' && prop !== 'type' && prop !== 'size'
+  shouldForwardProp: (prop) => prop !== 'color' && prop !== 'type' && prop !== 'size'
 })<AvatarStyledProps>(({ theme, size, color, type }) => ({
   ...getSizeStyle(size),
   ...getColorStyle({ theme, color, type }),
@@ -135,13 +129,7 @@ export interface Props extends AvatarProps {
   size?: SizeProps;
 }
 
-export default function Avatar({
-  children,
-  color = 'primary',
-  type,
-  size = 'md',
-  ...others
-}: Props) {
+export default function Avatar({ children, color = 'primary', type, size = 'md', ...others }: Props) {
   return (
     <AvatarStyle color={color} type={type} size={size} {...others}>
       {children}

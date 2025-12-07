@@ -57,8 +57,7 @@ const MOCK_TV_SHOWS = [
     overview:
       'Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.',
     networks: 'HBO',
-    production_companies:
-      'HBO Entertainment, Bighead Littlehead, 360 Television',
+    production_companies: 'HBO Entertainment, Bighead Littlehead, 360 Television',
     vote_average: 8.5,
     poster_url: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
     backdrop_url: '/2OMB0ynKlyIenMJWI2Dy9IWT4cM.jpg'
@@ -153,8 +152,7 @@ const MOCK_TV_SHOWS = [
     overview:
       'Follow the lives of the Roy family as they contemplate their future once their aging father begins to step back from the media and entertainment conglomerate they control.',
     networks: 'HBO',
-    production_companies:
-      'Gary Sanchez Productions, Hyperobject Industries, Project Zeus',
+    production_companies: 'Gary Sanchez Productions, Hyperobject Industries, Project Zeus',
     vote_average: 8.7,
     poster_url: '/d7iVuo8Z7v6Eb7LkCk7OoiwMxrk.jpg',
     backdrop_url: '/7vKp7j2sgyjEhCxHWdAFb9pCQDI.jpg'
@@ -170,8 +168,7 @@ const MOCK_TV_SHOWS = [
     number_of_seasons: 3,
     number_of_episodes: 30,
     episode_run_time: 30,
-    overview:
-      "A young chef from the fine dining world returns to Chicago to run his family's Italian beef sandwich shop.",
+    overview: "A young chef from the fine dining world returns to Chicago to run his family's Italian beef sandwich shop.",
     networks: 'FX',
     production_companies: 'FX Productions',
     vote_average: 8.6,
@@ -192,8 +189,7 @@ const MOCK_TV_SHOWS = [
     overview:
       'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
     networks: 'HBO',
-    production_companies:
-      'HBO Entertainment, Sony Pictures Television, Naughty Dog',
+    production_companies: 'HBO Entertainment, Sony Pictures Television, Naughty Dog',
     vote_average: 8.8,
     poster_url: '/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',
     backdrop_url: '/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg'
@@ -212,8 +208,7 @@ const MOCK_TV_SHOWS = [
     overview:
       "Ted Lasso, an American football coach, moves to England when he's hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
     networks: 'Apple TV+',
-    production_companies:
-      'Doozer Productions, Universal Television, Warner Bros. Television',
+    production_companies: 'Doozer Productions, Universal Television, Warner Bros. Television',
     vote_average: 8.7,
     poster_url: '/4kBHvhe4uY6sO0qZ1uw2K8mKmrg.jpg',
     backdrop_url: '/yY76zq9X2lnn6N5H3PzHPqnyZsO.jpg'
@@ -342,11 +337,7 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
       >
         <MainCard sx={{ p: 4, textAlign: 'center' }}>
           <Typography variant="h4">{error || 'TV Show not found'}</Typography>
-          <Button
-            variant="contained"
-            sx={{ mt: 2 }}
-            onClick={() => router.push('/tv-shows')}
-          >
+          <Button variant="contained" sx={{ mt: 2 }} onClick={() => router.push('/tv-shows')}>
             Back to TV Shows
           </Button>
         </MainCard>
@@ -357,12 +348,7 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Back Button */}
-      <Button
-        startIcon={<ArrowLeftOutlined />}
-        onClick={() => router.push('/tv-shows')}
-        sx={{ mb: 2 }}
-        variant="outlined"
-      >
+      <Button startIcon={<ArrowLeftOutlined />} onClick={() => router.push('/tv-shows')} sx={{ mb: 2 }} variant="outlined">
         Back to TV Shows
       </Button>
 
@@ -414,54 +400,19 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
                     Original Name: {tvShow.original_name}
                   </Typography>
                 )}
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{ mt: 2 }}
-                  flexWrap="wrap"
-                  useFlexGap
-                >
-                  <Chip
-                    label={`⭐ ${tvShow.vote_average}/10`}
-                    color="primary"
-                  />
-                  <Chip
-                    label={`${tvShow.number_of_seasons} Seasons`}
-                    variant="outlined"
-                  />
-                  <Chip
-                    label={`${tvShow.number_of_episodes} Episodes`}
-                    variant="outlined"
-                  />
-                  {tvShow.status && (
-                    <Chip
-                      label={tvShow.status}
-                      color="secondary"
-                      variant="outlined"
-                    />
-                  )}
-                  {tvShow.popularity && (
-                    <Chip
-                      label={`Popularity: ${Number(tvShow.popularity).toFixed(0)}`}
-                      variant="outlined"
-                    />
-                  )}
-                  {tvShow.vote_count && (
-                    <Chip
-                      label={`${tvShow.vote_count.toLocaleString()} votes`}
-                      variant="outlined"
-                    />
-                  )}
+                <Stack direction="row" spacing={1} sx={{ mt: 2 }} flexWrap="wrap" useFlexGap>
+                  <Chip label={`⭐ ${tvShow.vote_average}/10`} color="primary" />
+                  <Chip label={`${tvShow.number_of_seasons} Seasons`} variant="outlined" />
+                  <Chip label={`${tvShow.number_of_episodes} Episodes`} variant="outlined" />
+                  {tvShow.status && <Chip label={tvShow.status} color="secondary" variant="outlined" />}
+                  {tvShow.popularity && <Chip label={`Popularity: ${Number(tvShow.popularity).toFixed(0)}`} variant="outlined" />}
+                  {tvShow.vote_count && <Chip label={`${tvShow.vote_count.toLocaleString()} votes`} variant="outlined" />}
                 </Stack>
               </Box>
 
               {/* Genres */}
               <Box>
-                <Typography
-                  variant="subtitle2"
-                  color="text.secondary"
-                  gutterBottom
-                >
+                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                   Genres
                 </Typography>
                 <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -484,11 +435,7 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
               {/* Creators - Hide if N/A */}
               {tvShow.creators !== 'N/A' && (
                 <Box>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Creators
                   </Typography>
                   <Typography variant="body1">{tvShow.creators}</Typography>
@@ -498,56 +445,32 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
               {/* Air Dates */}
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     First Air Date
                   </Typography>
-                  <Typography variant="body1">
-                    {formatDate(tvShow.first_air_date)}
-                  </Typography>
+                  <Typography variant="body1">{formatDate(tvShow.first_air_date)}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Last Air Date
                   </Typography>
-                  <Typography variant="body1">
-                    {formatDate(tvShow.last_air_date)}
-                  </Typography>
+                  <Typography variant="body1">{formatDate(tvShow.last_air_date)}</Typography>
                 </Grid>
               </Grid>
 
               {/* Seasons and Episodes */}
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Number of Seasons
                   </Typography>
-                  <Typography variant="h6">
-                    {tvShow.number_of_seasons}
-                  </Typography>
+                  <Typography variant="h6">{tvShow.number_of_seasons}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Total Episodes
                   </Typography>
-                  <Typography variant="h6">
-                    {tvShow.number_of_episodes}
-                  </Typography>
+                  <Typography variant="h6">{tvShow.number_of_episodes}</Typography>
                 </Grid>
               </Grid>
             </Stack>

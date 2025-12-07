@@ -1,13 +1,7 @@
 import { ReactNode, useMemo } from 'react';
 
 // material-ui
-import {
-  createTheme,
-  ThemeOptions,
-  ThemeProvider,
-  Theme,
-  TypographyVariantsOptions
-} from '@mui/material/styles';
+import { createTheme, ThemeOptions, ThemeProvider, Theme, TypographyVariantsOptions } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 // project import
@@ -28,25 +22,13 @@ type ThemeCustomizationProps = {
 
 // ==============================|| DEFAULT THEME - MAIN ||============================== //
 
-export default function ThemeCustomization({
-  children
-}: ThemeCustomizationProps) {
+export default function ThemeCustomization({ children }: ThemeCustomizationProps) {
   const { themeDirection, mode, presetColor, fontFamily } = useConfig();
 
-  const theme: Theme = useMemo<Theme>(
-    () => Palette(mode, presetColor),
-    [mode, presetColor]
-  );
+  const theme: Theme = useMemo<Theme>(() => Palette(mode, presetColor), [mode, presetColor]);
 
-  const themeTypography: TypographyVariantsOptions =
-    useMemo<TypographyVariantsOptions>(
-      () => Typography(fontFamily),
-      [fontFamily]
-    );
-  const themeCustomShadows: CustomShadowProps = useMemo<CustomShadowProps>(
-    () => CustomShadows(theme),
-    [theme]
-  );
+  const themeTypography: TypographyVariantsOptions = useMemo<TypographyVariantsOptions>(() => Typography(fontFamily), [fontFamily]);
+  const themeCustomShadows: CustomShadowProps = useMemo<CustomShadowProps>(() => CustomShadows(theme), [theme]);
 
   const themeOptions: ThemeOptions = useMemo(
     () => ({

@@ -82,17 +82,10 @@ export default function ChangePassword() {
         newPassword: Yup.string()
           .min(8, 'Password must be at least 8 characters')
           .required('New password is required')
-          .notOneOf(
-            [Yup.ref('oldPassword')],
-            'New password must be different from current password'
-          ),
+          .notOneOf([Yup.ref('oldPassword')], 'New password must be different from current password'),
         confirmPassword: Yup.string()
           .required('Confirm Password is required')
-          .test(
-            'confirmPassword',
-            'Both passwords must match!',
-            (confirmPassword, yup) => yup.parent.newPassword === confirmPassword
-          )
+          .test('confirmPassword', 'Both passwords must match!', (confirmPassword, yup) => yup.parent.newPassword === confirmPassword)
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
@@ -118,9 +111,7 @@ export default function ChangePassword() {
               router.push('/home');
             }, 1500);
           } else {
-            throw new Error(
-              response?.data?.message || 'Failed to change password'
-            );
+            throw new Error(response?.data?.message || 'Failed to change password');
           }
         } catch (err: any) {
           console.error(err);
@@ -128,31 +119,19 @@ export default function ChangePassword() {
             setStatus({ success: false });
             setErrors({
               submit:
-                err.response?.data?.message ||
-                err.message ||
-                'Failed to change password. Please check your current password and try again.'
+                err.response?.data?.message || err.message || 'Failed to change password. Please check your current password and try again.'
             });
             setSubmitting(false);
           }
         }
       }}
     >
-      {({
-        errors,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        touched,
-        values
-      }) => (
+      {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Stack spacing={1}>
-                <InputLabel htmlFor="old-password-change">
-                  Current Password
-                </InputLabel>
+                <InputLabel htmlFor="old-password-change">Current Password</InputLabel>
                 <OutlinedInput
                   fullWidth
                   error={Boolean(touched.oldPassword && errors.oldPassword)}
@@ -171,11 +150,7 @@ export default function ChangePassword() {
                         edge="end"
                         color="secondary"
                       >
-                        {showOldPassword ? (
-                          <EyeOutlined />
-                        ) : (
-                          <EyeInvisibleOutlined />
-                        )}
+                        {showOldPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -190,9 +165,7 @@ export default function ChangePassword() {
             </Grid>
             <Grid item xs={12}>
               <Stack spacing={1}>
-                <InputLabel htmlFor="new-password-change">
-                  New Password
-                </InputLabel>
+                <InputLabel htmlFor="new-password-change">New Password</InputLabel>
                 <OutlinedInput
                   fullWidth
                   error={Boolean(touched.newPassword && errors.newPassword)}
@@ -214,11 +187,7 @@ export default function ChangePassword() {
                         edge="end"
                         color="secondary"
                       >
-                        {showNewPassword ? (
-                          <EyeOutlined />
-                        ) : (
-                          <EyeInvisibleOutlined />
-                        )}
+                        {showNewPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -252,14 +221,10 @@ export default function ChangePassword() {
             </Grid>
             <Grid item xs={12}>
               <Stack spacing={1}>
-                <InputLabel htmlFor="confirm-password-change">
-                  Confirm New Password
-                </InputLabel>
+                <InputLabel htmlFor="confirm-password-change">Confirm New Password</InputLabel>
                 <OutlinedInput
                   fullWidth
-                  error={Boolean(
-                    touched.confirmPassword && errors.confirmPassword
-                  )}
+                  error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                   id="confirm-password-change"
                   type="password"
                   value={values.confirmPassword}
@@ -283,15 +248,7 @@ export default function ChangePassword() {
             )}
             <Grid item xs={12}>
               <AnimateButton>
-                <Button
-                  disableElevation
-                  disabled={isSubmitting}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
+                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                   Change Password
                 </Button>
               </AnimateButton>

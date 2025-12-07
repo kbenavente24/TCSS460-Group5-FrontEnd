@@ -19,16 +19,7 @@ interface Props {
   [others: string]: any;
 }
 
-function transitions(
-  {
-    children,
-    position = 'top-left',
-    type = 'grow',
-    direction = 'up',
-    ...others
-  }: Props,
-  ref: Ref<ExoticComponent>
-) {
+function transitions({ children, position = 'top-left', type = 'grow', direction = 'up', ...others }: Props, ref: Ref<ExoticComponent>) {
   let positionSX = {
     transformOrigin: '0 0 0'
   };

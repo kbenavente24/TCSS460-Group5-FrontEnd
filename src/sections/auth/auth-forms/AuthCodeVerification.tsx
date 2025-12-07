@@ -26,9 +26,7 @@ export default function AuthCodeVerification() {
     <Formik
       initialValues={{ otp: '' }}
       validationSchema={Yup.object({
-        otp: Yup.string()
-          .length(4, 'OTP must be exactly 4 digits')
-          .required('OTP is required')
+        otp: Yup.string().length(4, 'OTP must be exactly 4 digits').required('OTP is required')
       })}
       onSubmit={(values, { resetForm }) => {
         resetForm();
@@ -69,10 +67,7 @@ export default function AuthCodeVerification() {
                     border: '1px solid',
                     outline: 'none',
                     borderRadius: 4,
-                    borderColor:
-                      touched.otp && errors.otp
-                        ? theme.palette.error.main
-                        : theme.palette.divider
+                    borderColor: touched.otp && errors.otp ? theme.palette.error.main : theme.palette.divider
                   }}
                 />
                 {touched.otp && errors.otp && (
@@ -84,27 +79,14 @@ export default function AuthCodeVerification() {
             </Grid>
             <Grid item xs={12}>
               <AnimateButton>
-                <Button
-                  disableElevation
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                >
+                <Button disableElevation fullWidth size="large" type="submit" variant="contained">
                   Continue
                 </Button>
               </AnimateButton>
             </Grid>
             <Grid item xs={12}>
-              <Stack
-                direction="row"
-                gap={2.5}
-                justifyContent="space-between"
-                alignItems="baseline"
-              >
-                <Typography>
-                  Did not receive the email? Check your spam filter, or
-                </Typography>
+              <Stack direction="row" gap={2.5} justifyContent="space-between" alignItems="baseline">
+                <Typography>Did not receive the email? Check your spam filter, or</Typography>
                 <Typography
                   variant="body1"
                   sx={{

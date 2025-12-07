@@ -95,12 +95,8 @@ const transformTVShowData = (apiShow: TVShowApiResponse): TVShow => {
     number_of_episodes: apiShow.episodes,
     episode_run_time: 0, // Not available in API response
     overview: apiShow.overview,
-    networks: Array.isArray(apiShow.networks)
-      ? apiShow.networks.join(', ')
-      : 'N/A',
-    production_companies: Array.isArray(apiShow.studios)
-      ? apiShow.studios.join(', ')
-      : 'N/A',
+    networks: Array.isArray(apiShow.networks) ? apiShow.networks.join(', ') : 'N/A',
+    production_companies: Array.isArray(apiShow.studios) ? apiShow.studios.join(', ') : 'N/A',
     vote_average:
       typeof apiShow.tmdb_rating === 'string'
         ? parseFloat(apiShow.tmdb_rating)
@@ -171,11 +167,7 @@ export const tvShowApi = {
         limit: responseData?.limit || filters?.limit || 20,
         total: responseData?.total || tvShows.length,
         totalPages:
-          responseData?.totalPages ||
-          Math.ceil(
-            (responseData?.total || tvShows.length) /
-              (responseData?.limit || filters?.limit || 20)
-          )
+          responseData?.totalPages || Math.ceil((responseData?.total || tvShows.length) / (responseData?.limit || filters?.limit || 20))
       }
     };
   },
@@ -200,11 +192,7 @@ export const tvShowApi = {
   },
 
   // Search TV shows by name
-  searchTVShows: async (
-    name: string,
-    page = 1,
-    limit = 20
-  ): Promise<TVShowsResponse> => {
+  searchTVShows: async (name: string, page = 1, limit = 20): Promise<TVShowsResponse> => {
     return tvShowApi.getTVShows({ name, page, limit });
   },
 

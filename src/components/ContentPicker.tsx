@@ -46,16 +46,8 @@ interface ContentPickerProps {
   currentRank: number;
 }
 
-export default function ContentPicker({
-  open,
-  onClose,
-  onSelect,
-  listType,
-  currentRank
-}: ContentPickerProps) {
-  const [contentType, setContentType] = useState<'movie' | 'tv-show'>(
-    listType === 'tv-shows' ? 'tv-show' : 'movie'
-  );
+export default function ContentPicker({ open, onClose, onSelect, listType, currentRank }: ContentPickerProps) {
+  const [contentType, setContentType] = useState<'movie' | 'tv-show'>(listType === 'tv-shows' ? 'tv-show' : 'movie');
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState<Movie[]>([]);
   const [tvShows, setTVShows] = useState<TVShow[]>([]);
@@ -113,10 +105,7 @@ export default function ContentPicker({
     return () => clearTimeout(timeoutId);
   }, [searchQuery, contentType]);
 
-  const handleContentTypeChange = (
-    _event: React.MouseEvent<HTMLElement>,
-    newType: 'movie' | 'tv-show' | null
-  ) => {
+  const handleContentTypeChange = (_event: React.MouseEvent<HTMLElement>, newType: 'movie' | 'tv-show' | null) => {
     if (newType !== null) {
       setContentType(newType);
       setSearchQuery('');
@@ -149,13 +138,7 @@ export default function ContentPicker({
   const displayedTVShows = contentType === 'tv-show' ? tvShows : [];
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="md"
-      fullWidth
-      PaperProps={{ sx: { borderRadius: 2, minHeight: '600px' } }}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth PaperProps={{ sx: { borderRadius: 2, minHeight: '600px' } }}>
       <DialogTitle>
         <Box
           sx={{
@@ -165,11 +148,7 @@ export default function ContentPicker({
           }}
         >
           <Typography variant="h3">Add to Rank #{currentRank}</Typography>
-          <Button
-            onClick={onClose}
-            sx={{ minWidth: 'auto', p: 1 }}
-            color="inherit"
-          >
+          <Button onClick={onClose} sx={{ minWidth: 'auto', p: 1 }} color="inherit">
             <CloseOutlined />
           </Button>
         </Box>
@@ -180,12 +159,7 @@ export default function ContentPicker({
           {/* Content Type Toggle (only show if list type is mixed) */}
           {listType === 'mixed' && (
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <ToggleButtonGroup
-                value={contentType}
-                exclusive
-                onChange={handleContentTypeChange}
-                size="small"
-              >
+              <ToggleButtonGroup value={contentType} exclusive onChange={handleContentTypeChange} size="small">
                 <ToggleButton value="movie">Movies</ToggleButton>
                 <ToggleButton value="tv-show">TV Shows</ToggleButton>
               </ToggleButtonGroup>
@@ -243,12 +217,10 @@ export default function ContentPicker({
                 }}
               >
                 <Typography variant="body1" color="text.secondary">
-                  Start typing to search for{' '}
-                  {contentType === 'movie' ? 'movies' : 'TV shows'}
+                  Start typing to search for {contentType === 'movie' ? 'movies' : 'TV shows'}
                 </Typography>
               </Box>
-            ) : displayedMovies.length === 0 &&
-              displayedTVShows.length === 0 ? (
+            ) : displayedMovies.length === 0 && displayedTVShows.length === 0 ? (
               <Box
                 sx={{
                   display: 'flex',

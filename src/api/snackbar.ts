@@ -44,17 +44,7 @@ export function useGetSnackbar() {
 export function openSnackbar(snackbar: SnackbarProps) {
   // to update local state based on key
 
-  const {
-    action,
-    open,
-    message,
-    anchorOrigin,
-    variant,
-    alert,
-    transition,
-    close,
-    actionButton
-  } = snackbar;
+  const { action, open, message, anchorOrigin, variant, alert, transition, close, actionButton } = snackbar;
 
   mutate(
     endpoints.key,

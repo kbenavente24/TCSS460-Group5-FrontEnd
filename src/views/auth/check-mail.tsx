@@ -71,8 +71,7 @@ export default function CheckMail() {
           <Box sx={{ mb: { xs: -0.5, sm: 0.5 } }}>
             <Typography variant="h3">Reset Your Password</Typography>
             <Typography color="secondary" sx={{ mb: 0.5, mt: 1.25 }}>
-              We have sent a password reset code to your email. Enter the code
-              below along with your new password.
+              We have sent a password reset code to your email. Enter the code below along with your new password.
             </Typography>
           </Box>
         </Grid>
@@ -86,22 +85,12 @@ export default function CheckMail() {
             }}
             validationSchema={Yup.object().shape({
               token: Yup.string().required('Reset code is required'),
-              password: Yup.string()
-                .min(8, 'Password must be at least 8 characters')
-                .required('Password is required'),
+              password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
               confirmPassword: Yup.string()
                 .required('Confirm Password is required')
-                .test(
-                  'confirmPassword',
-                  'Both Password must be match!',
-                  (confirmPassword, yup) =>
-                    yup.parent.password === confirmPassword
-                )
+                .test('confirmPassword', 'Both Password must be match!', (confirmPassword, yup) => yup.parent.password === confirmPassword)
             })}
-            onSubmit={async (
-              values,
-              { setErrors, setStatus, setSubmitting }
-            ) => {
+            onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
               try {
                 const response = await authApi.resetPasswordWithToken({
                   token: values.token.trim(),
@@ -114,8 +103,7 @@ export default function CheckMail() {
 
                   openSnackbar({
                     open: true,
-                    message:
-                      'Password reset successful! You can now login with your new password.',
+                    message: 'Password reset successful! You can now login with your new password.',
                     variant: 'alert',
                     alert: {
                       color: 'success'
@@ -126,9 +114,7 @@ export default function CheckMail() {
                     router.push('/login');
                   }, 1500);
                 } else {
-                  throw new Error(
-                    response?.data?.message || 'Failed to reset password'
-                  );
+                  throw new Error(response?.data?.message || 'Failed to reset password');
                 }
               } catch (err: any) {
                 console.error(err);
@@ -136,24 +122,14 @@ export default function CheckMail() {
                   setStatus({ success: false });
                   setErrors({
                     submit:
-                      err.response?.data?.message ||
-                      err.message ||
-                      'Failed to reset password. Please check your reset code and try again.'
+                      err.response?.data?.message || err.message || 'Failed to reset password. Please check your reset code and try again.'
                   });
                   setSubmitting(false);
                 }
               }
             }}
           >
-            {({
-              errors,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-              isSubmitting,
-              touched,
-              values
-            }) => (
+            {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
               <form noValidate onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
@@ -179,9 +155,7 @@ export default function CheckMail() {
                   </Grid>
                   <Grid item xs={12}>
                     <Stack spacing={1}>
-                      <InputLabel htmlFor="password-reset">
-                        New Password
-                      </InputLabel>
+                      <InputLabel htmlFor="password-reset">New Password</InputLabel>
                       <OutlinedInput
                         fullWidth
                         error={Boolean(touched.password && errors.password)}
@@ -203,11 +177,7 @@ export default function CheckMail() {
                               edge="end"
                               color="secondary"
                             >
-                              {showPassword ? (
-                                <EyeOutlined />
-                              ) : (
-                                <EyeInvisibleOutlined />
-                              )}
+                              {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                             </IconButton>
                           </InputAdornment>
                         }
@@ -241,14 +211,10 @@ export default function CheckMail() {
                   </Grid>
                   <Grid item xs={12}>
                     <Stack spacing={1}>
-                      <InputLabel htmlFor="confirm-password-reset">
-                        Confirm Password
-                      </InputLabel>
+                      <InputLabel htmlFor="confirm-password-reset">Confirm Password</InputLabel>
                       <OutlinedInput
                         fullWidth
-                        error={Boolean(
-                          touched.confirmPassword && errors.confirmPassword
-                        )}
+                        error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                         id="confirm-password-reset"
                         type="password"
                         value={values.confirmPassword}
@@ -259,10 +225,7 @@ export default function CheckMail() {
                       />
                     </Stack>
                     {touched.confirmPassword && errors.confirmPassword && (
-                      <FormHelperText
-                        error
-                        id="helper-text-confirm-password-reset"
-                      >
+                      <FormHelperText error id="helper-text-confirm-password-reset">
                         {errors.confirmPassword}
                       </FormHelperText>
                     )}

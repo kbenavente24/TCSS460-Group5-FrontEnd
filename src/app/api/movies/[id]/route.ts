@@ -4,10 +4,7 @@ import axios from 'axios';
 const MOVIE_API_URL = process.env.NEXT_PUBLIC_MOVIE_API_URL;
 const MOVIE_API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const { id } = params;
 
@@ -25,15 +22,9 @@ export async function GET(
     console.error('❌ Error proxying movie by ID request:', error);
 
     if (axios.isAxiosError(error)) {
-      return NextResponse.json(
-        { error: error.message, details: error.response?.data },
-        { status: error.response?.status || 500 }
-      );
+      return NextResponse.json({ error: error.message, details: error.response?.data }, { status: error.response?.status || 500 });
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

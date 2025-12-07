@@ -94,9 +94,7 @@ export default function NavGroup({
 
   const downLG = useMediaQuery(theme.breakpoints.down('lg'));
 
-  const [anchorEl, setAnchorEl] = useState<
-    VirtualElement | (() => VirtualElement) | null | undefined
-  >(null);
+  const [anchorEl, setAnchorEl] = useState<VirtualElement | (() => VirtualElement) | null | undefined>(null);
   const [currentItem, setCurrentItem] = useState(item);
 
   const openMini = Boolean(anchorEl);
@@ -143,12 +141,7 @@ export default function NavGroup({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, currentItem]);
 
-  const handleClick = (
-    event:
-      | React.MouseEvent<HTMLAnchorElement>
-      | React.MouseEvent<HTMLDivElement, MouseEvent>
-      | undefined
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
     if (!openMini) {
       setAnchorEl(event?.currentTarget);
     }
@@ -164,10 +157,7 @@ export default function NavGroup({
       style={{
         fontSize: 20,
         stroke: '1.5',
-        color:
-          selectedID === currentItem.id
-            ? theme.palette.primary.main
-            : theme.palette.secondary.dark
+        color: selectedID === currentItem.id ? theme.palette.primary.main : theme.palette.secondary.dark
       }}
     />
   ) : null;
@@ -191,12 +181,7 @@ export default function NavGroup({
         return <NavItem key={menuItem.id} item={menuItem} level={1} />;
       default:
         return (
-          <Typography
-            key={menuItem.id}
-            variant="h6"
-            color="error"
-            align="center"
-          >
+          <Typography key={menuItem.id} variant="h6" color="error" align="center">
             Fix - Group Collapse or Items
           </Typography>
         );
@@ -234,12 +219,7 @@ export default function NavGroup({
             return <NavItem key={menu.id} item={menu} level={1} />;
           default:
             return (
-              <Typography
-                key={menu.id}
-                variant="h6"
-                color="error"
-                align="center"
-              >
+              <Typography key={menu.id} variant="h6" color="error" align="center">
                 Menu Items Error
               </Typography>
             );
@@ -324,29 +304,14 @@ export default function NavGroup({
           >
             {itemIcon && (
               <ListItemIcon sx={{ minWidth: 28 }}>
-                {currentItem.id === lastItemId ? (
-                  <GroupOutlined style={{ fontSize: 20, stroke: '1.5' }} />
-                ) : (
-                  itemIcon
-                )}
+                {currentItem.id === lastItemId ? <GroupOutlined style={{ fontSize: 20, stroke: '1.5' }} /> : itemIcon}
               </ListItemIcon>
             )}
             <ListItemText
               sx={{ mr: 1 }}
               primary={
-                <Typography
-                  variant="body1"
-                  color={
-                    selectedID === currentItem.id
-                      ? 'primary.main'
-                      : 'secondary.dark'
-                  }
-                >
-                  {currentItem.id === lastItemId ? (
-                    <FormattedMessage id="more-items" />
-                  ) : (
-                    currentItem.title
-                  )}
+                <Typography variant="body1" color={selectedID === currentItem.id ? 'primary.main' : 'secondary.dark'}>
+                  {currentItem.id === lastItemId ? <FormattedMessage id="more-items" /> : currentItem.title}
                 </Typography>
               }
             />
@@ -356,13 +321,7 @@ export default function NavGroup({
               <RightOutlined style={{ fontSize: 16, stroke: '1.5' }} />
             )}
             {anchorEl && (
-              <PopperStyled
-                id={popperId}
-                open={openMini}
-                anchorEl={anchorEl}
-                placement="bottom-start"
-                style={{ zIndex: 2001 }}
-              >
+              <PopperStyled id={popperId} open={openMini} anchorEl={anchorEl} placement="bottom-start" style={{ zIndex: 2001 }}>
                 {({ TransitionProps }) => (
                   <Transitions in={openMini} {...TransitionProps}>
                     <Paper

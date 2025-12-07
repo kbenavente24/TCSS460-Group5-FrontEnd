@@ -17,8 +17,7 @@ const openedMixin = (theme: Theme) =>
     }),
 
     overflowX: 'hidden',
-    boxShadow:
-      theme.palette.mode === ThemeMode.DARK ? theme.customShadows.z1 : 'none'
+    boxShadow: theme.palette.mode === ThemeMode.DARK ? theme.customShadows.z1 : 'none'
   }) as CSSObject;
 
 const closedMixin = (theme: Theme) =>

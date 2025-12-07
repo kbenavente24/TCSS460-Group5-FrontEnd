@@ -10,12 +10,7 @@ export default function ModeSwitch() {
   }
 
   // return <Switch color="default" checked={mode == ThemeMode.DARK} onChange={handleChange} />;
-  return (
-    <MaterialUISwitch
-      checked={mode == ThemeMode.DARK}
-      onChange={handleChange}
-    />
-  );
+  return <MaterialUISwitch checked={mode == ThemeMode.DARK} onChange={handleChange} />;
 }
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({

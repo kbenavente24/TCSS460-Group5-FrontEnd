@@ -78,10 +78,8 @@ export default function Breadcrumbs({
   const [item, setItem] = useState<NavItemType>();
 
   const iconSX = {
-    marginRight:
-      theme.direction === ThemeDirection.RTL ? 0 : theme.spacing(0.75),
-    marginLeft:
-      theme.direction === ThemeDirection.RTL ? theme.spacing(0.75) : 0,
+    marginRight: theme.direction === ThemeDirection.RTL ? 0 : theme.spacing(0.75),
+    marginLeft: theme.direction === ThemeDirection.RTL ? theme.spacing(0.75) : 0,
     width: '1rem',
     height: '1rem',
     color: theme.palette.secondary.main
@@ -126,11 +124,7 @@ export default function Breadcrumbs({
 
   // item separator
   const SeparatorIcon = separator!;
-  const separatorIcon = separator ? (
-    <SeparatorIcon style={{ fontSize: '0.75rem', marginTop: 2 }} />
-  ) : (
-    '/'
-  );
+  const separatorIcon = separator ? <SeparatorIcon style={{ fontSize: '0.75rem', marginTop: 2 }} /> : '/';
 
   let mainContent;
   let itemContent;
@@ -140,23 +134,14 @@ export default function Breadcrumbs({
   let ItemIcon;
 
   // collapse item
-  if (
-    !custom &&
-    main &&
-    main.type === 'collapse' &&
-    main.breadcrumbs === true
-  ) {
+  if (!custom && main && main.type === 'collapse' && main.breadcrumbs === true) {
     CollapseIcon = main.icon ? main.icon : ApartmentOutlined;
     mainContent = (
       <NextLink href={main.url as string}>
         <Typography
           variant={window.location.pathname === main.url ? 'subtitle1' : 'h6'}
           sx={{ textDecoration: 'none', cursor: 'pointer' }}
-          color={
-            window.location.pathname === main.url
-              ? 'text.primary'
-              : 'text.secondary'
-          }
+          color={window.location.pathname === main.url ? 'text.primary' : 'text.secondary'}
         >
           {icons && <CollapseIcon style={iconSX} />}
           {main.title}
@@ -167,11 +152,7 @@ export default function Breadcrumbs({
     breadcrumbContent = (
       <MainCard
         border={card}
-        sx={
-          card === false
-            ? { mb: 3, bgcolor: 'inherit', backgroundImage: 'none', ...sx }
-            : { mb: 3, ...sx }
-        }
+        sx={card === false ? { mb: 3, bgcolor: 'inherit', backgroundImage: 'none', ...sx } : { mb: 3, ...sx }}
         {...others}
         content={card}
         shadow="none"
@@ -184,21 +165,11 @@ export default function Breadcrumbs({
           spacing={1}
         >
           <Grid item>
-            <MuiBreadcrumbs
-              aria-label="breadcrumb"
-              maxItems={maxItems || 8}
-              separator={separatorIcon}
-            >
+            <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
               <NextLink href="/">
-                <Typography
-                  color="text.secondary"
-                  variant="h6"
-                  sx={{ textDecoration: 'none', cursor: 'pointer' }}
-                >
+                <Typography color="text.secondary" variant="h6" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
                   {icons && <HomeOutlined style={iconSX} />}
-                  {icon && !icons && (
-                    <HomeFilled style={{ ...iconSX, marginRight: 0 }} />
-                  )}
+                  {icon && !icons && <HomeFilled style={{ ...iconSX, marginRight: 0 }} />}
                   {(!icon || icons) && 'Home'}
                 </Typography>
               </NextLink>
@@ -227,11 +198,7 @@ export default function Breadcrumbs({
     );
   }
   // items
-  if (
-    (item && item.type === 'item') ||
-    (item?.type === 'group' && item?.url) ||
-    custom
-  ) {
+  if ((item && item.type === 'item') || (item?.type === 'group' && item?.url) || custom) {
     itemTitle = item?.title;
     ItemIcon = item?.icon ? item.icon : ApartmentOutlined;
     itemContent = (
@@ -241,21 +208,11 @@ export default function Breadcrumbs({
       </Typography>
     );
     let tempContent = (
-      <MuiBreadcrumbs
-        aria-label="breadcrumb"
-        maxItems={maxItems || 8}
-        separator={separatorIcon}
-      >
+      <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
         <NextLink href="/">
-          <Typography
-            color="text.secondary"
-            variant="h6"
-            sx={{ textDecoration: 'none', cursor: 'pointer' }}
-          >
+          <Typography color="text.secondary" variant="h6" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
             {icons && <HomeOutlined style={iconSX} />}
-            {icon && !icons && (
-              <HomeFilled style={{ ...iconSX, marginRight: 0 }} />
-            )}
+            {icon && !icons && <HomeFilled style={{ ...iconSX, marginRight: 0 }} />}
             {(!icon || icons) && 'Home'}
           </Typography>
         </NextLink>
@@ -266,11 +223,7 @@ export default function Breadcrumbs({
 
     if (custom && links && links?.length > 0) {
       tempContent = (
-        <MuiBreadcrumbs
-          aria-label="breadcrumb"
-          maxItems={maxItems || 8}
-          separator={separatorIcon}
-        >
+        <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
           {links?.map((link: BreadcrumbLinkProps, index: number) => {
             CollapseIcon = link.icon ? link.icon : ApartmentOutlined;
             const key = index.toString();
@@ -306,11 +259,7 @@ export default function Breadcrumbs({
       breadcrumbContent = (
         <MainCard
           border={card}
-          sx={
-            card === false
-              ? { mb: 3, bgcolor: 'inherit', backgroundImage: 'none', ...sx }
-              : { mb: 3, ...sx }
-          }
+          sx={card === false ? { mb: 3, bgcolor: 'inherit', backgroundImage: 'none', ...sx } : { mb: 3, ...sx }}
           {...others}
           content={card}
           shadow="none"
@@ -324,9 +273,7 @@ export default function Breadcrumbs({
           >
             {title && !titleBottom && (
               <Grid item>
-                <Typography variant="h2">
-                  {custom ? heading : item?.title}
-                </Typography>
+                <Typography variant="h2">{custom ? heading : item?.title}</Typography>
               </Grid>
             )}
             <Grid item>{tempContent}</Grid>
@@ -343,9 +290,7 @@ export default function Breadcrumbs({
                       }
                 ]}
               >
-                <Typography variant="h2">
-                  {custom ? heading : item?.title}
-                </Typography>
+                <Typography variant="h2">{custom ? heading : item?.title}</Typography>
               </Grid>
             )}
           </Grid>

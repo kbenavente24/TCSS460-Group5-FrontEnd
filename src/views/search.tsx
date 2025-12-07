@@ -104,10 +104,7 @@ export default function SearchPage() {
       const fetchOptions = async () => {
         setLoadingOptions(true);
         try {
-          const [genres, statuses] = await Promise.all([
-            tvShowApi.getGenres(),
-            tvShowApi.getStatuses()
-          ]);
+          const [genres, statuses] = await Promise.all([tvShowApi.getGenres(), tvShowApi.getStatuses()]);
           setTvGenres(genres);
           setTvStatuses(statuses);
         } catch (err) {
@@ -217,10 +214,7 @@ export default function SearchPage() {
   };
 
   // Handle tab change
-  const handleTabChange = (
-    _event: React.SyntheticEvent,
-    newValue: SearchTab
-  ) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: SearchTab) => {
     setActiveTab(newValue);
     handleClearFilters();
   };
@@ -256,11 +250,7 @@ export default function SearchPage() {
 
       {/* Tabs */}
       <MainCard sx={{ mb: 3 }}>
-        <Tabs
-          value={activeTab}
-          onChange={handleTabChange}
-          sx={{ borderBottom: 1, borderColor: 'divider' }}
-        >
+        <Tabs value={activeTab} onChange={handleTabChange} sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tab
             value="movies"
             label="Movies"
@@ -280,21 +270,9 @@ export default function SearchPage() {
 
       {/* Search Controls */}
       <MainCard sx={{ mb: 3, p: 3 }}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ mb: 2 }}
-        >
-          <Typography variant="h5">
-            {activeTab === 'movies' ? 'Movie' : 'TV Show'} Search Filters
-          </Typography>
-          <Button
-            variant="outlined"
-            startIcon={<ClearOutlined />}
-            onClick={handleClearFilters}
-            size="small"
-          >
+        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+          <Typography variant="h5">{activeTab === 'movies' ? 'Movie' : 'TV Show'} Search Filters</Typography>
+          <Button variant="outlined" startIcon={<ClearOutlined />} onClick={handleClearFilters} size="small">
             Clear All
           </Button>
         </Stack>
@@ -304,9 +282,7 @@ export default function SearchPage() {
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               fullWidth
-              label={
-                activeTab === 'movies' ? 'Search by Title' : 'Search by Name'
-              }
+              label={activeTab === 'movies' ? 'Search by Title' : 'Search by Name'}
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               slotProps={{
@@ -326,11 +302,7 @@ export default function SearchPage() {
             {activeTab === 'movies' ? (
               <FormControl fullWidth>
                 <InputLabel>Genre</InputLabel>
-                <Select
-                  value={genre}
-                  label="Genre"
-                  onChange={(e) => setGenre(e.target.value)}
-                >
+                <Select value={genre} label="Genre" onChange={(e) => setGenre(e.target.value)}>
                   <MenuItem value="">All Genres</MenuItem>
                   {MOVIE_GENRES.map((g) => (
                     <MenuItem key={g} value={g}>
@@ -342,11 +314,7 @@ export default function SearchPage() {
             ) : (
               <FormControl fullWidth disabled={loadingOptions}>
                 <InputLabel>Genre</InputLabel>
-                <Select
-                  value={genre}
-                  label="Genre"
-                  onChange={(e) => setGenre(e.target.value)}
-                >
+                <Select value={genre} label="Genre" onChange={(e) => setGenre(e.target.value)}>
                   <MenuItem value="">All Genres</MenuItem>
                   {tvGenres.map((g) => (
                     <MenuItem key={g} value={g}>
@@ -372,25 +340,13 @@ export default function SearchPage() {
             </Grid>
           ) : (
             <Grid item xs={12} sm={6} md={2}>
-              <TextField
-                fullWidth
-                label="Network"
-                value={network}
-                onChange={(e) => setNetwork(e.target.value)}
-                placeholder="e.g., HBO"
-              />
+              <TextField fullWidth label="Network" value={network} onChange={(e) => setNetwork(e.target.value)} placeholder="e.g., HBO" />
             </Grid>
           )}
 
           {/* Search Button */}
           <Grid item xs={12} sm={6} md={2}>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={handleSearch}
-              disabled={loading}
-              sx={{ height: '56px' }}
-            >
+            <Button fullWidth variant="contained" onClick={handleSearch} disabled={loading} sx={{ height: '56px' }}>
               Search
             </Button>
           </Grid>
@@ -418,13 +374,7 @@ export default function SearchPage() {
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <TextField
-                fullWidth
-                label="Studio"
-                value={studio}
-                onChange={(e) => setStudio(e.target.value)}
-                placeholder="Studio name"
-              />
+              <TextField fullWidth label="Studio" value={studio} onChange={(e) => setStudio(e.target.value)} placeholder="Studio name" />
             </Grid>
           </Grid>
         )}
@@ -433,13 +383,7 @@ export default function SearchPage() {
         {activeTab === 'tv-shows' && (
           <Grid container spacing={2} sx={{ mt: 1 }}>
             <Grid item xs={12} sm={6} md={4}>
-              <TextField
-                fullWidth
-                label="Actor"
-                value={tvActor}
-                onChange={(e) => setTvActor(e.target.value)}
-                placeholder="Actor name"
-              />
+              <TextField fullWidth label="Actor" value={tvActor} onChange={(e) => setTvActor(e.target.value)} placeholder="Actor name" />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <TextField
@@ -453,11 +397,7 @@ export default function SearchPage() {
             <Grid item xs={12} sm={6} md={4}>
               <FormControl fullWidth disabled={loadingOptions}>
                 <InputLabel>Status</InputLabel>
-                <Select
-                  value={status}
-                  label="Status"
-                  onChange={(e) => setStatus(e.target.value)}
-                >
+                <Select value={status} label="Status" onChange={(e) => setStatus(e.target.value)}>
                   <MenuItem value="">All Statuses</MenuItem>
                   {tvStatuses.map((s) => (
                     <MenuItem key={s} value={s}>
@@ -503,12 +443,7 @@ export default function SearchPage() {
             </Typography>
             <Grid container spacing={3}>
               {results
-                .filter(
-                  (item) =>
-                    item &&
-                    typeof item === 'object' &&
-                    ('movie_id' in item || 'tv_show_id' in item)
-                )
+                .filter((item) => item && typeof item === 'object' && ('movie_id' in item || 'tv_show_id' in item))
                 .map((item) => {
                   if (!item || typeof item !== 'object') {
                     return null;
@@ -522,14 +457,11 @@ export default function SearchPage() {
                     return null;
                   }
 
-                  const posterUrl =
-                    movie?.poster_url || tvShow?.poster_url || '';
+                  const posterUrl = movie?.poster_url || tvShow?.poster_url || '';
                   const title = movie?.title || tvShow?.name || 'Unknown';
-                  const releaseDate =
-                    movie?.release_date || tvShow?.first_air_date || '';
+                  const releaseDate = movie?.release_date || tvShow?.first_air_date || '';
                   const genres = movie?.genres || tvShow?.genres || '';
-                  const rating =
-                    movie?.tmdb_rating || tvShow?.vote_average || null;
+                  const rating = movie?.tmdb_rating || tvShow?.vote_average || null;
                   const itemId = movie?.movie_id || tvShow?.tv_show_id || 0;
 
                   return (
@@ -569,62 +501,25 @@ export default function SearchPage() {
                             flexDirection: 'column'
                           }}
                         >
-                          <Typography
-                            variant="h6"
-                            gutterBottom
-                            sx={{ fontWeight: 600 }}
-                          >
+                          <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
                             {title}
                           </Typography>
-                          <Stack
-                            direction="row"
-                            spacing={1}
-                            sx={{ mb: 1 }}
-                            flexWrap="wrap"
-                            useFlexGap
-                          >
-                            {rating && (
-                              <Chip
-                                label={`⭐ ${rating}/10`}
-                                size="small"
-                                color="primary"
-                              />
-                            )}
-                            <Chip
-                              label={formatDate(releaseDate)}
-                              size="small"
-                              variant="outlined"
-                            />
-                            <Chip
-                              label={isMovie ? 'Movie' : 'TV Show'}
-                              size="small"
-                              color="secondary"
-                            />
+                          <Stack direction="row" spacing={1} sx={{ mb: 1 }} flexWrap="wrap" useFlexGap>
+                            {rating && <Chip label={`⭐ ${rating}/10`} size="small" color="primary" />}
+                            <Chip label={formatDate(releaseDate)} size="small" variant="outlined" />
+                            <Chip label={isMovie ? 'Movie' : 'TV Show'} size="small" color="secondary" />
                           </Stack>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{ mb: 1 }}
-                          >
+                          <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                             {genres}
                           </Typography>
                           {movie ? (
-                            <Typography
-                              variant="body2"
-                              color="text.secondary"
-                              sx={{ fontSize: '0.75rem' }}
-                            >
+                            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
                               {movie.runtime_minutes} min
                             </Typography>
                           ) : tvShow ? (
-                            <Typography
-                              variant="body2"
-                              color="text.secondary"
-                              sx={{ fontSize: '0.75rem' }}
-                            >
+                            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
                               {tvShow.number_of_seasons} Season
-                              {tvShow.number_of_seasons !== 1 ? 's' : ''} •{' '}
-                              {tvShow.number_of_episodes} Episode
+                              {tvShow.number_of_seasons !== 1 ? 's' : ''} • {tvShow.number_of_episodes} Episode
                               {tvShow.number_of_episodes !== 1 ? 's' : ''}
                             </Typography>
                           ) : null}
@@ -638,9 +533,7 @@ export default function SearchPage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <Box
-                sx={{ display: 'flex', justifyContent: 'center', mt: 3, pb: 2 }}
-              >
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, pb: 2 }}>
                 <Pagination
                   count={totalPages}
                   page={page}

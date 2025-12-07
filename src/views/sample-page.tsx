@@ -33,21 +33,11 @@ export default function SamplePage() {
           Welcome to Group 5&apos;s Movie and TV Show Application!
         </Typography>
 
-        <Typography
-          variant="h4"
-          color="text.secondary"
-          gutterBottom
-          sx={{ mb: 4 }}
-        >
-          Developed by: Kobe Benavente, Balkirat Singh, Pham Nguyen, and MD Khan
-          (Shanto)
+        <Typography variant="h4" color="text.secondary" gutterBottom sx={{ mb: 4 }}>
+          Developed by: Kobe Benavente, Balkirat Singh, Pham Nguyen, and MD Khan (Shanto)
         </Typography>
 
-        <Typography
-          variant="h3"
-          gutterBottom
-          sx={{ mt: 4, mb: 2, textAlign: 'left' }}
-        >
+        <Typography variant="h3" gutterBottom sx={{ mt: 4, mb: 2, textAlign: 'left' }}>
           Features:
         </Typography>
 

@@ -111,11 +111,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
       >
         <MainCard sx={{ p: 4, textAlign: 'center' }}>
           <Typography variant="h4">Movie not found</Typography>
-          <Button
-            variant="contained"
-            sx={{ mt: 2 }}
-            onClick={() => router.push('/movies')}
-          >
+          <Button variant="contained" sx={{ mt: 2 }} onClick={() => router.push('/movies')}>
             Back to Movies
           </Button>
         </MainCard>
@@ -126,12 +122,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Back Button */}
-      <Button
-        startIcon={<ArrowLeftOutlined />}
-        onClick={() => router.push('/movies')}
-        sx={{ mb: 2 }}
-        variant="outlined"
-      >
+      <Button startIcon={<ArrowLeftOutlined />} onClick={() => router.push('/movies')} sx={{ mb: 2 }} variant="outlined">
         Back to Movies
       </Button>
 
@@ -183,35 +174,17 @@ export default function MovieDetailPage({ id }: { id?: string }) {
                     Original Title: {movie.original_title}
                   </Typography>
                 )}
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{ mt: 1 }}
-                  flexWrap="wrap"
-                  useFlexGap
-                >
+                <Stack direction="row" spacing={1} sx={{ mt: 1 }} flexWrap="wrap" useFlexGap>
                   <Chip label={movie.mpa_rating} color="primary" size="small" />
-                  <Chip
-                    label={`${movie.runtime_minutes} min`}
-                    variant="outlined"
-                    size="small"
-                  />
-                  <Chip
-                    label={formatDate(movie.release_date)}
-                    variant="outlined"
-                    size="small"
-                  />
+                  <Chip label={`${movie.runtime_minutes} min`} variant="outlined" size="small" />
+                  <Chip label={formatDate(movie.release_date)} variant="outlined" size="small" />
                 </Stack>
               </Box>
 
               {/* Genres - Only show if available */}
               {movie.genres && (
                 <Box>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Genres
                   </Typography>
                   <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -237,11 +210,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
               {/* Director - Only show if available */}
               {movie.directors && (
                 <Box>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Director
                   </Typography>
                   <Typography variant="body1">{movie.directors}</Typography>
@@ -251,43 +220,25 @@ export default function MovieDetailPage({ id }: { id?: string }) {
               {/* Budget and Revenue */}
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Budget
                   </Typography>
-                  <Typography variant="h6">
-                    {formatCurrency(movie.budget)}
-                  </Typography>
+                  <Typography variant="h6">{formatCurrency(movie.budget)}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     Revenue
                   </Typography>
-                  <Typography variant="h6">
-                    {formatCurrency(movie.revenue)}
-                  </Typography>
+                  <Typography variant="h6">{formatCurrency(movie.revenue)}</Typography>
                 </Grid>
               </Grid>
 
               {/* Release Date */}
               <Box>
-                <Typography
-                  variant="subtitle2"
-                  color="text.secondary"
-                  gutterBottom
-                >
+                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                   Release Date
                 </Typography>
-                <Typography variant="body1">
-                  {formatDate(movie.release_date)}
-                </Typography>
+                <Typography variant="body1">{formatDate(movie.release_date)}</Typography>
               </Box>
             </Stack>
           </Grid>

@@ -26,10 +26,7 @@ const SimpleBarStyle = styled(SimpleBar)(({ theme }) => ({
   maxHeight: '100%',
   '& .simplebar-scrollbar': {
     '&:before': {
-      background: alpha(
-        theme.palette.grey[theme.palette.mode === ThemeMode.DARK ? 200 : 500],
-        0.48
-      )
+      background: alpha(theme.palette.grey[theme.palette.mode === ThemeMode.DARK ? 200 : 500], 0.48)
     },
     '&.simplebar-visible:before': {
       opacity: 1
@@ -48,11 +45,7 @@ const SimpleBarStyle = styled(SimpleBar)(({ theme }) => ({
 
 // ==============================|| SIMPLE SCROLL BAR ||============================== //
 
-export default function SimpleBarScroll({
-  children,
-  sx,
-  ...other
-}: MUIStyledCommonProps<Theme> & Props) {
+export default function SimpleBarScroll({ children, sx, ...other }: MUIStyledCommonProps<Theme> & Props) {
   return (
     <>
       <RootStyle>

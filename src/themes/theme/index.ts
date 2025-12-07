@@ -12,10 +12,6 @@ import { PresetColor } from 'types/config';
 
 // ==============================|| PRESET THEME - THEME SELECTOR ||============================== //
 
-export default function Theme(
-  colors: PalettesProps,
-  presetColor: PresetColor,
-  mode: ThemeMode
-): PaletteThemeProps {
+export default function Theme(colors: PalettesProps, presetColor: PresetColor, mode: ThemeMode): PaletteThemeProps {
   return Default(colors);
 }

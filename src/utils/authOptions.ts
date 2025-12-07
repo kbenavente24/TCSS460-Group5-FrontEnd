@@ -45,9 +45,7 @@ export const authOptions: NextAuthOptions = {
           // Handle new API response format
           const responseData = response?.data;
           if (!responseData?.success || !responseData?.data) {
-            throw new Error(
-              responseData?.message || 'Invalid login response from server'
-            );
+            throw new Error(responseData?.message || 'Invalid login response from server');
           }
 
           const { accessToken, user } = responseData.data;
@@ -59,8 +57,7 @@ export const authOptions: NextAuthOptions = {
           return { ...user, id: String(user.id), accessToken };
         } catch (err: any) {
           console.error('Login error:', err);
-          const errorMessage =
-            err?.response?.data?.message || err?.message || 'Login failed';
+          const errorMessage = err?.response?.data?.message || err?.message || 'Login failed';
           throw new Error(errorMessage);
         }
       }
@@ -107,10 +104,7 @@ export const authOptions: NextAuthOptions = {
           const responseData = response?.data;
           if (!responseData?.success || !responseData?.data) {
             console.error('Full registration response:', response.data);
-            throw new Error(
-              responseData?.message ||
-                'Invalid registration response from server'
-            );
+            throw new Error(responseData?.message || 'Invalid registration response from server');
           }
 
           const { accessToken, user } = responseData.data;
@@ -122,10 +116,7 @@ export const authOptions: NextAuthOptions = {
           return { ...user, id: String(user.id), accessToken };
         } catch (err: any) {
           console.error('Registration error:', err);
-          const errorMessage =
-            err?.response?.data?.message ||
-            err?.message ||
-            'Registration failed';
+          const errorMessage = err?.response?.data?.message || err?.message || 'Registration failed';
           throw new Error(errorMessage);
         }
       }

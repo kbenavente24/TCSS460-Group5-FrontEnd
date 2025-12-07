@@ -8,22 +8,9 @@ import { LoadingButtonProps } from '@mui/lab/LoadingButton';
 
 // ==============================|| EXTENDED COMPONENT - TYPES ||============================== //
 
-export type ButtonVariantProps =
-  | 'contained'
-  | 'light'
-  | 'outlined'
-  | 'dashed'
-  | 'text'
-  | 'shadow';
+export type ButtonVariantProps = 'contained' | 'light' | 'outlined' | 'dashed' | 'text' | 'shadow';
 export type IconButtonShapeProps = 'rounded' | 'square';
-type TooltipColor =
-  | 'primary'
-  | 'secondary'
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'default';
+type TooltipColor = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error' | 'default';
 export type ColorProps =
   | ChipProps['color']
   | ButtonProps['color']

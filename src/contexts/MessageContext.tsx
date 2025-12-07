@@ -35,13 +35,7 @@ export const MessageProvider = ({ children }: MessageProviderProps) => {
     setMessage(EMPTY_MSG);
   }
 
-  return (
-    <MessageContext.Provider
-      value={{ ...message, onChangeMessage, clearContext }}
-    >
-      {children}
-    </MessageContext.Provider>
-  );
+  return <MessageContext.Provider value={{ ...message, onChangeMessage, clearContext }}>{children}</MessageContext.Provider>;
 };
 
 // Custom hook to use the context

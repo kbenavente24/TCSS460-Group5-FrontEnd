@@ -5,10 +5,7 @@ import { authOptions } from 'utils/authOptions';
 import pool from 'lib/db';
 
 // POST /api/lists/:id/items - Add or update an item in a list
-export async function POST(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -33,18 +30,12 @@ export async function POST(
 
     // Validate rank is between 1-10
     if (rank < 1 || rank > 10) {
-      return NextResponse.json(
-        { error: 'Rank must be between 1 and 10' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Rank must be between 1 and 10' }, { status: 400 });
     }
 
     // Validate content type
     if (!['movie', 'tv-show'].includes(contentType)) {
-      return NextResponse.json(
-        { error: 'Content type must be "movie" or "tv-show"' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Content type must be "movie" or "tv-show"' }, { status: 400 });
     }
 
     // Verify list ownership
@@ -63,16 +54,10 @@ export async function POST(
 
     // Validate content type matches list type
     if (list.list_type === 'movies' && contentType !== 'movie') {
-      return NextResponse.json(
-        { error: 'This list only accepts movies' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'This list only accepts movies' }, { status: 400 });
     }
     if (list.list_type === 'tv-shows' && contentType !== 'tv-show') {
-      return NextResponse.json(
-        { error: 'This list only accepts TV shows' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'This list only accepts TV shows' }, { status: 400 });
     }
 
     // Check if an item already exists at this rank
@@ -81,10 +66,7 @@ export async function POST(
       FROM list_items
       WHERE list_id = $1 AND rank = $2
     `;
-    const existingItemResult = await pool.query(existingItemQuery, [
-      listId,
-      rank
-    ]);
+    const existingItemResult = await pool.query(existingItemQuery, [listId, rank]);
 
     if (existingItemResult.rows.length > 0) {
       // Update existing item
@@ -101,14 +83,7 @@ export async function POST(
           poster_url as "posterUrl",
           added_at as "addedAt"
       `;
-      const updateResult = await pool.query(updateQuery, [
-        contentId,
-        contentType,
-        title,
-        posterUrl || null,
-        listId,
-        rank
-      ]);
+      const updateResult = await pool.query(updateQuery, [contentId, contentType, title, posterUrl || null, listId, rank]);
 
       return NextResponse.json({
         success: true,
@@ -129,14 +104,7 @@ export async function POST(
           poster_url as "posterUrl",
           added_at as "addedAt"
       `;
-      const insertResult = await pool.query(insertQuery, [
-        listId,
-        rank,
-        contentId,
-        contentType,
-        title,
-        posterUrl || null
-      ]);
+      const insertResult = await pool.query(insertQuery, [listId, rank, contentId, contentType, title, posterUrl || null]);
 
       return NextResponse.json(
         {
@@ -149,18 +117,12 @@ export async function POST(
     }
   } catch (error) {
     console.error('Error adding/updating list item:', error);
-    return NextResponse.json(
-      { error: 'Failed to add/update item' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to add/update item' }, { status: 500 });
   }
 }
 
 // DELETE /api/lists/:id/items?rank=X - Remove an item from a specific rank
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -174,18 +136,12 @@ export async function DELETE(
     const rank = searchParams.get('rank');
 
     if (!rank) {
-      return NextResponse.json(
-        { error: 'Rank parameter is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Rank parameter is required' }, { status: 400 });
     }
 
     const rankNum = parseInt(rank);
     if (isNaN(rankNum) || rankNum < 1 || rankNum > 10) {
-      return NextResponse.json(
-        { error: 'Rank must be a number between 1 and 10' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Rank must be a number between 1 and 10' }, { status: 400 });
     }
 
     // Verify list ownership
@@ -209,10 +165,7 @@ export async function DELETE(
     const deleteResult = await pool.query(deleteQuery, [listId, rankNum]);
 
     if (deleteResult.rows.length === 0) {
-      return NextResponse.json(
-        { error: 'No item found at this rank' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'No item found at this rank' }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -221,9 +174,6 @@ export async function DELETE(
     });
   } catch (error) {
     console.error('Error deleting list item:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete item' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to delete item' }, { status: 500 });
   }
 }

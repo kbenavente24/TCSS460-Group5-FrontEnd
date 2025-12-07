@@ -22,15 +22,11 @@ export const endpoints = {
 };
 
 export function useGetMenu() {
-  const { data, isLoading, error, isValidating } = useSWR(
-    endpoints.key + endpoints.dashboard,
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false
-    }
-  );
+  const { data, isLoading, error, isValidating } = useSWR(endpoints.key + endpoints.dashboard, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false
+  });
 
   const memoizedValue = useMemo(
     () => ({
@@ -47,15 +43,11 @@ export function useGetMenu() {
 }
 
 export function useGetMenuMaster() {
-  const { data, isLoading } = useSWR(
-    endpoints.key + endpoints.master,
-    () => initialState,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false
-    }
-  );
+  const { data, isLoading } = useSWR(endpoints.key + endpoints.master, () => initialState, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false
+  });
 
   const memoizedValue = useMemo(
     () => ({
@@ -92,9 +84,7 @@ export function handlerDrawerOpen(isDashboardDrawerOpened: boolean) {
   );
 }
 
-export function handlerHorizontalActiveItem(
-  openedHorizontalItem: string | null
-) {
+export function handlerHorizontalActiveItem(openedHorizontalItem: string | null) {
   // to update local state based on key
 
   mutate(

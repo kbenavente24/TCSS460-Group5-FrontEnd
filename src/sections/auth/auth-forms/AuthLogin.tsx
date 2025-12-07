@@ -63,17 +63,10 @@ export default function AuthLogin({ providers, csrfToken }: any) {
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string()
-            .email('Must be a valid email')
-            .max(255)
-            .required('Email is required'),
+          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string()
             .required('Password is required')
-            .test(
-              'no-leading-trailing-whitespace',
-              'Password cannot start or end with spaces',
-              (value) => value === value.trim()
-            )
+            .test('no-leading-trailing-whitespace', 'Password cannot start or end with spaces', (value) => value === value.trim())
             .min(6, 'Password must be at least 6 characters')
         })}
         onSubmit={(values, { setErrors, setSubmitting }) => {
@@ -100,15 +93,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
           );
         }}
       >
-        {({
-          errors,
-          handleBlur,
-          handleChange,
-          handleSubmit,
-          isSubmitting,
-          touched,
-          values
-        }) => (
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <Grid container spacing={3}>
@@ -128,10 +113,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
                   />
                 </Stack>
                 {touched.email && errors.email && (
-                  <FormHelperText
-                    error
-                    id="standard-weight-helper-text-email-login"
-                  >
+                  <FormHelperText error id="standard-weight-helper-text-email-login">
                     {errors.email}
                   </FormHelperText>
                 )}
@@ -162,31 +144,20 @@ export default function AuthLogin({ providers, csrfToken }: any) {
                           edge="end"
                           color="secondary"
                         >
-                          {showPassword ? (
-                            <EyeOutlined />
-                          ) : (
-                            <EyeInvisibleOutlined />
-                          )}
+                          {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </IconButton>
                       </InputAdornment>
                     }
                     placeholder="Enter password"
                   />
                   {capsWarning && (
-                    <Typography
-                      variant="caption"
-                      sx={{ color: 'warning.main' }}
-                      id="warning-helper-text-password-login"
-                    >
+                    <Typography variant="caption" sx={{ color: 'warning.main' }} id="warning-helper-text-password-login">
                       Caps lock on!
                     </Typography>
                   )}
                 </Stack>
                 {touched.password && errors.password && (
-                  <FormHelperText
-                    error
-                    id="standard-weight-helper-text-password-login"
-                  >
+                  <FormHelperText error id="standard-weight-helper-text-password-login">
                     {errors.password}
                   </FormHelperText>
                 )}
@@ -203,9 +174,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
                       size="small"
                     />
                   }
-                  label={
-                    <Typography variant="h6">Keep me signed in</Typography>
-                  }
+                  label={<Typography variant="h6">Keep me signed in</Typography>}
                 />
               </Grid>
               {errors.submit && (
@@ -215,15 +184,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
               )}
               <Grid item xs={12}>
                 <AnimateButton>
-                  <Button
-                    disableElevation
-                    disabled={isSubmitting}
-                    fullWidth
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                  >
+                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                     Login
                   </Button>
                 </AnimateButton>

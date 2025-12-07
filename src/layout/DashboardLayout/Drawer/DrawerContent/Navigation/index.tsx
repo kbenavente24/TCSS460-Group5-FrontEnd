@@ -41,8 +41,7 @@ export default function Navigation() {
     // eslint-disable-next-line
   }, [menuItem]);
 
-  const isHorizontal =
-    menuOrientation === MenuOrientation.HORIZONTAL && !downLG;
+  const isHorizontal = menuOrientation === MenuOrientation.HORIZONTAL && !downLG;
 
   const lastItem = isHorizontal ? HORIZONTAL_MAX_ITEM : null;
   let lastItemIndex = menuItems.items.length - 1;
@@ -55,53 +54,49 @@ export default function Navigation() {
   if (lastItem && lastItem < menuItems.items.length) {
     lastItemId = menuItems.items[lastItem - 1].id!;
     lastItemIndex = lastItem - 1;
-    remItems = menuItems.items
-      .slice(lastItem - 1, menuItems.items.length)
-      .map((item) => ({
-        title: item.title,
-        elements: item.children,
-        icon: item.icon,
-        ...(item.url && {
-          url: item.url
-        })
-      }));
+    remItems = menuItems.items.slice(lastItem - 1, menuItems.items.length).map((item) => ({
+      title: item.title,
+      elements: item.children,
+      icon: item.icon,
+      ...(item.url && {
+        url: item.url
+      })
+    }));
   }
 
-  const navGroups = menuItems.items
-    .slice(0, lastItemIndex + 1)
-    .map((item, index) => {
-      switch (item.type) {
-        case 'group':
-          if (item.url && item.id !== lastItemId) {
-            return (
-              <List key={item.id} {...(isHorizontal && { sx: { mt: 0.5 } })}>
-                {!isHorizontal && index !== 0 && <Divider sx={{ my: 0.5 }} />}
-                <NavItem item={item} level={1} isParents />
-              </List>
-            );
-          }
+  const navGroups = menuItems.items.slice(0, lastItemIndex + 1).map((item, index) => {
+    switch (item.type) {
+      case 'group':
+        if (item.url && item.id !== lastItemId) {
+          return (
+            <List key={item.id} {...(isHorizontal && { sx: { mt: 0.5 } })}>
+              {!isHorizontal && index !== 0 && <Divider sx={{ my: 0.5 }} />}
+              <NavItem item={item} level={1} isParents />
+            </List>
+          );
+        }
 
-          return (
-            <NavGroup
-              key={item.id}
-              setSelectedItems={setSelectedItems}
-              setSelectedLevel={setSelectedLevel}
-              selectedLevel={selectedLevel}
-              selectedItems={selectedItems}
-              lastItem={lastItem!}
-              remItems={remItems}
-              lastItemId={lastItemId}
-              item={item}
-            />
-          );
-        default:
-          return (
-            <Typography key={item.id} variant="h6" color="error" align="center">
-              Fix - Navigation Group
-            </Typography>
-          );
-      }
-    });
+        return (
+          <NavGroup
+            key={item.id}
+            setSelectedItems={setSelectedItems}
+            setSelectedLevel={setSelectedLevel}
+            selectedLevel={selectedLevel}
+            selectedItems={selectedItems}
+            lastItem={lastItem!}
+            remItems={remItems}
+            lastItemId={lastItemId}
+            item={item}
+          />
+        );
+      default:
+        return (
+          <Typography key={item.id} variant="h6" color="error" align="center">
+            Fix - Navigation Group
+          </Typography>
+        );
+    }
+  });
 
   return (
     <Box

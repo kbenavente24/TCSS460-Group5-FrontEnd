@@ -34,16 +34,12 @@ export default function MessagesList() {
     messagesApi
       .delete(name)
       .then((response) => {
-        response.status == 200 &&
-          setMessages(messages.filter((msg) => msg.name !== name));
+        response.status == 200 && setMessages(messages.filter((msg) => msg.name !== name));
       })
       .catch((error) => console.error(error));
   };
 
-  const handlePriorityClick = (
-    event: React.MouseEvent<HTMLElement>,
-    newPriority: number
-  ) => setPriority(newPriority ?? 0);
+  const handlePriorityClick = (event: React.MouseEvent<HTMLElement>, newPriority: number) => setPriority(newPriority ?? 0);
 
   const messagesAsComponents = messages
     .filter((msg) => priority == 0 || priority == msg.priority)
@@ -82,14 +78,9 @@ export default function MessagesList() {
         <Typography component="h1" variant="h5">
           Read Messages
         </Typography>
-        <PrioritySelector
-          initialValue={priority}
-          onClick={handlePriorityClick}
-        />
+        <PrioritySelector initialValue={priority} onClick={handlePriorityClick} />
         <Box sx={{ mt: 1 }}>
-          <List>
-            {messagesAsComponents.length ? messagesAsComponents : <NoMessage />}
-          </List>
+          <List>{messagesAsComponents.length ? messagesAsComponents : <NoMessage />}</List>
         </Box>
       </Box>
     </Container>

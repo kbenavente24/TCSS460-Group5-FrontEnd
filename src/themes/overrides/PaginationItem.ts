@@ -78,10 +78,8 @@ export default function PaginationItem(theme: Theme) {
             backgroundColor: 'transparent',
             fontSize: '1rem',
             fontWeight: 500,
-            '&.MuiPaginationItem-text.MuiPaginationItem-colorPrimary':
-              getColorStyle({ variant: 'text', color: 'primary', theme }),
-            '&.MuiPaginationItem-text.MuiPaginationItem-colorSecondary':
-              getColorStyle({ variant: 'text', color: 'secondary', theme }),
+            '&.MuiPaginationItem-text.MuiPaginationItem-colorPrimary': getColorStyle({ variant: 'text', color: 'primary', theme }),
+            '&.MuiPaginationItem-text.MuiPaginationItem-colorSecondary': getColorStyle({ variant: 'text', color: 'secondary', theme }),
             '&.MuiPaginationItem-textError': getColorStyle({
               variant: 'text',
               color: 'error',
@@ -181,14 +179,12 @@ export default function PaginationItem(theme: Theme) {
           borderColor: theme.palette.divider,
           '&.Mui-selected': {
             backgroundColor: 'transparent',
-            '&.MuiPaginationItem-outlined.MuiPaginationItem-colorPrimary':
-              getColorStyle({ variant: 'outlined', color: 'primary', theme }),
-            '&.MuiPaginationItem-outlined.MuiPaginationItem-colorSecondary':
-              getColorStyle({
-                variant: 'outlined',
-                color: 'secondary',
-                theme
-              }),
+            '&.MuiPaginationItem-outlined.MuiPaginationItem-colorPrimary': getColorStyle({ variant: 'outlined', color: 'primary', theme }),
+            '&.MuiPaginationItem-outlined.MuiPaginationItem-colorSecondary': getColorStyle({
+              variant: 'outlined',
+              color: 'secondary',
+              theme
+            }),
             '&.MuiPaginationItem-outlinedError': getColorStyle({
               variant: 'outlined',
               color: 'error',

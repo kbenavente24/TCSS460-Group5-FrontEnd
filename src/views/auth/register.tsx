@@ -24,19 +24,9 @@ export default function Register() {
     <AuthWrapper>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="baseline"
-            sx={{ mb: { xs: -0.5, sm: 0.5 } }}
-          >
+          <Stack direction="row" justifyContent="space-between" alignItems="baseline" sx={{ mb: { xs: -0.5, sm: 0.5 } }}>
             <Typography variant="h3">Sign up</Typography>
-            <Link
-              component={NextLink}
-              href="/login"
-              variant="body1"
-              color="primary"
-            >
+            <Link component={NextLink} href="/login" variant="body1" color="primary">
               Already have an account?
             </Link>
           </Stack>

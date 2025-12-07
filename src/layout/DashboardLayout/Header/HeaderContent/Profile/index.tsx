@@ -119,25 +119,14 @@ export default function Profile() {
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard elevation={0} border={false} content={false}>
                   <CardContent sx={{ px: 2.5, pt: 3 }}>
-                    <Grid
-                      container
-                      justifyContent="space-between"
-                      alignItems="center"
-                    >
+                    <Grid container justifyContent="space-between" alignItems="center">
                       <Grid item>
                         {user && (
-                          <Stack
-                            direction="row"
-                            spacing={1.25}
-                            alignItems="center"
-                          >
+                          <Stack direction="row" spacing={1.25} alignItems="center">
                             <Avatar alt={user.name} src={user.avatar} />
                             <Stack>
                               <Typography variant="h6">{user.name}</Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
+                              <Typography variant="body2" color="text.secondary">
                                 {user.email}
                               </Typography>
                             </Stack>
@@ -147,10 +136,7 @@ export default function Profile() {
                     </Grid>
                   </CardContent>
                   <Box sx={{ borderTop: 1, borderColor: 'divider' }}>
-                    <List
-                      component="nav"
-                      sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}
-                    >
+                    <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
                       <ListItemButton>
                         <ListItemIcon>
                           <BulbOutlined />
