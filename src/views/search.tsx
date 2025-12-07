@@ -461,7 +461,7 @@ export default function SearchPage() {
                   const title = movie?.title || tvShow?.name || 'Unknown';
                   const releaseDate = movie?.release_date || tvShow?.first_air_date || '';
                   const genres = movie?.genres || tvShow?.genres || '';
-                  const rating = movie?.tmdb_rating || tvShow?.vote_average || null;
+                  const rating = tvShow?.vote_average || null;
                   const itemId = movie?.movie_id || tvShow?.tv_show_id || 0;
 
                   return (
