@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from 'react';
 
 // material-ui
-import { Theme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
+import { Theme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
 
 // project import
-import NavItem from "./NavItem";
-import NavGroup from "./NavGroup";
-import menuItem from "menu-items";
+import NavItem from './NavItem';
+import NavGroup from './NavGroup';
+import menuItem from 'menu-items';
 
-import { HORIZONTAL_MAX_ITEM, MenuOrientation } from "config";
-import useConfig from "hooks/useConfig";
-import { useGetMenuMaster } from "api/menu";
+import { HORIZONTAL_MAX_ITEM, MenuOrientation } from 'config';
+import useConfig from 'hooks/useConfig';
+import { useGetMenuMaster } from 'api/menu';
 
 // types
-import { NavItemType } from "types/menu";
+import { NavItemType } from 'types/menu';
 
 // ==============================|| DRAWER CONTENT - NAVIGATION ||============================== //
 
@@ -28,9 +28,9 @@ export default function Navigation() {
   const { menuOrientation } = useConfig();
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
-  const downLG = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
+  const downLG = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
 
-  const [selectedItems, setSelectedItems] = useState<string | undefined>("");
+  const [selectedItems, setSelectedItems] = useState<string | undefined>('');
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const [menuItems, setMenuItems] = useState<{ items: NavItemType[] }>({
     items: [],
@@ -71,7 +71,7 @@ export default function Navigation() {
     .slice(0, lastItemIndex + 1)
     .map((item, index) => {
       switch (item.type) {
-        case "group":
+        case 'group':
           if (item.url && item.id !== lastItemId) {
             return (
               <List key={item.id} {...(isHorizontal && { sx: { mt: 0.5 } })}>
@@ -107,7 +107,7 @@ export default function Navigation() {
     <Box
       sx={[
         {
-          display: isHorizontal ? { xs: "block", lg: "flex" } : "block",
+          display: isHorizontal ? { xs: 'block', lg: 'flex' } : 'block',
         },
         drawerOpen
           ? {
@@ -117,7 +117,7 @@ export default function Navigation() {
               pt: 0,
             },
         !isHorizontal && {
-          "& > ul:first-of-type": { mt: 0 },
+          '& > ul:first-of-type': { mt: 0 },
         },
       ]}
     >

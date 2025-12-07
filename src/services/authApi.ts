@@ -1,8 +1,8 @@
-import { credentialsService } from "utils/axios";
+import { credentialsService } from 'utils/axios';
 
 export const authApi = {
   login: (credentials: { email: string; password: string }) =>
-    credentialsService.post("/auth/login", credentials),
+    credentialsService.post('/auth/login', credentials),
 
   register: (data: {
     email: string;
@@ -11,8 +11,8 @@ export const authApi = {
     lastname: string;
     username: string;
     phone: string;
-  }) => credentialsService.post("/auth/register", data),
+  }) => credentialsService.post('/auth/register', data),
 
   changePassword: (data: { oldPassword: string; newPassword: string }) =>
-    credentialsService.post("/auth/user/password/change", data),
+    credentialsService.post('/auth/user/password/change', data),
 };

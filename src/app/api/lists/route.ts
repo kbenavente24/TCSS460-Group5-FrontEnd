@@ -1,8 +1,8 @@
 // src/app/api/lists/route.ts
-import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "utils/authOptions";
-import pool from "lib/db";
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from 'utils/authOptions';
+import pool from 'lib/db';
 
 // GET /api/lists - Fetch all lists for the logged-in user
 export async function GET(request: NextRequest) {
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const userId = session.id;
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
           ...list,
           itemCount: parseInt(countResult.rows[0].count),
         };
-      }),
+      })
     );
 
     return NextResponse.json({
@@ -54,10 +54,10 @@ export async function GET(request: NextRequest) {
       data: listsWithCounts,
     });
   } catch (error) {
-    console.error("Error fetching lists:", error);
+    console.error('Error fetching lists:', error);
     return NextResponse.json(
-      { error: "Failed to fetch lists" },
-      { status: 500 },
+      { error: 'Failed to fetch lists' },
+      { status: 500 }
     );
   }
 }
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const userId = session.id;
@@ -79,14 +79,14 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     if (!title || !type) {
       return NextResponse.json(
-        { error: "Title and type are required" },
-        { status: 400 },
+        { error: 'Title and type are required' },
+        { status: 400 }
       );
     }
 
     // Validate type
-    if (!["movies", "tv-shows", "mixed"].includes(type)) {
-      return NextResponse.json({ error: "Invalid list type" }, { status: 400 });
+    if (!['movies', 'tv-shows', 'mixed'].includes(type)) {
+      return NextResponse.json({ error: 'Invalid list type' }, { status: 400 });
     }
 
     // Insert the new list
@@ -119,13 +119,13 @@ export async function POST(request: NextRequest) {
           itemCount: 0,
         },
       },
-      { status: 201 },
+      { status: 201 }
     );
   } catch (error) {
-    console.error("Error creating list:", error);
+    console.error('Error creating list:', error);
     return NextResponse.json(
-      { error: "Failed to create list" },
-      { status: 500 },
+      { error: 'Failed to create list' },
+      { status: 500 }
     );
   }
 }

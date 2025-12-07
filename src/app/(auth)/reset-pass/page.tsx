@@ -1,4 +1,4 @@
-import ResetPassword from "views/auth/reset-password";
+import ResetPassword from 'views/auth/reset-password';
 
 // ==============================|| PAGE ||============================== //
 

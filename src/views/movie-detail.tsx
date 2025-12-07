@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 // next
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 // material-ui
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 // icons
-import ArrowLeftOutlined from "@ant-design/icons/ArrowLeftOutlined";
+import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
 
 // project imports
-import MainCard from "components/MainCard";
-import { movieApi, type Movie } from "services/movieApi";
+import MainCard from 'components/MainCard';
+import { movieApi, type Movie } from 'services/movieApi';
 
 // ==============================|| MOVIE DETAIL PAGE ||============================== //
 
@@ -51,8 +51,8 @@ export default function MovieDetailPage({ id }: { id?: string }) {
         const movieData = await movieApi.getMovieById(parsedId);
         setMovie(movieData);
       } catch (err) {
-        console.error("Error fetching movie:", err);
-        setError("Failed to load movie");
+        console.error('Error fetching movie:', err);
+        setError('Failed to load movie');
         setMovie(null);
       } finally {
         setLoading(false);
@@ -64,19 +64,19 @@ export default function MovieDetailPage({ id }: { id?: string }) {
 
   const formatCurrency = (amount: string) => {
     const num = parseInt(amount);
-    if (num === 0) return "N/A";
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
+    if (num === 0) return 'N/A';
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
       minimumFractionDigits: 0,
     }).format(num);
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
   };
 
@@ -84,14 +84,14 @@ export default function MovieDetailPage({ id }: { id?: string }) {
     return (
       <Box
         sx={{
-          height: "calc(100vh - 80px)",
+          height: 'calc(100vh - 80px)',
           p: 3,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <MainCard sx={{ p: 4, textAlign: "center" }}>
+        <MainCard sx={{ p: 4, textAlign: 'center' }}>
           <Typography variant="h4">Loading movie...</Typography>
         </MainCard>
       </Box>
@@ -102,19 +102,19 @@ export default function MovieDetailPage({ id }: { id?: string }) {
     return (
       <Box
         sx={{
-          height: "calc(100vh - 80px)",
+          height: 'calc(100vh - 80px)',
           p: 3,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <MainCard sx={{ p: 4, textAlign: "center" }}>
+        <MainCard sx={{ p: 4, textAlign: 'center' }}>
           <Typography variant="h4">Movie not found</Typography>
           <Button
             variant="contained"
             sx={{ mt: 2 }}
-            onClick={() => router.push("/movies")}
+            onClick={() => router.push('/movies')}
           >
             Back to Movies
           </Button>
@@ -124,11 +124,11 @@ export default function MovieDetailPage({ id }: { id?: string }) {
   }
 
   return (
-    <Box sx={{ height: "calc(100vh - 80px)", p: 3 }}>
+    <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
       {/* Back Button */}
       <Button
         startIcon={<ArrowLeftOutlined />}
-        onClick={() => router.push("/movies")}
+        onClick={() => router.push('/movies')}
         sx={{ mb: 2 }}
         variant="outlined"
       >
@@ -138,21 +138,21 @@ export default function MovieDetailPage({ id }: { id?: string }) {
       {/* Movie Detail Card */}
       <MainCard
         sx={{
-          width: "100%",
-          height: "calc(100% - 80px)",
-          overflow: "auto",
-          overflowY: "scroll",
-          "&::-webkit-scrollbar": {
-            width: "12px",
+          width: '100%',
+          height: 'calc(100% - 80px)',
+          overflow: 'auto',
+          overflowY: 'scroll',
+          '&::-webkit-scrollbar': {
+            width: '12px',
           },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: "background.paper",
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: 'background.paper',
           },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#424242",
-            borderRadius: "6px",
-            "&:hover": {
-              backgroundColor: "#303030",
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#424242',
+            borderRadius: '6px',
+            '&:hover': {
+              backgroundColor: '#303030',
             },
           },
         }}
@@ -215,7 +215,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
                     Genres
                   </Typography>
                   <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                    {movie.genres.split(", ").map((genre) => (
+                    {movie.genres.split(', ').map((genre) => (
                       <Chip key={genre} label={genre} size="small" />
                     ))}
                   </Stack>

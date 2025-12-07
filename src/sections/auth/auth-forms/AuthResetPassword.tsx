@@ -1,42 +1,42 @@
-"use client";
+'use client';
 
-import { useEffect, useState, SyntheticEvent } from "react";
+import { useEffect, useState, SyntheticEvent } from 'react';
 
 // next
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 // material-ui
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid from "@mui/material/Grid";
-import InputAdornment from "@mui/material/InputAdornment";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import Grid from '@mui/material/Grid';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 // third party
-import * as Yup from "yup";
-import { Formik } from "formik";
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 
 // project import
-import IconButton from "components/@extended/IconButton";
-import AnimateButton from "components/@extended/AnimateButton";
-import { authApi } from "services/authApi";
+import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
+import { authApi } from 'services/authApi';
 
-import { openSnackbar } from "api/snackbar";
-import useScriptRef from "hooks/useScriptRef";
-import { strengthColor, strengthIndicator } from "utils/password-strength";
+import { openSnackbar } from 'api/snackbar';
+import useScriptRef from 'hooks/useScriptRef';
+import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 // types
-import { SnackbarProps } from "types/snackbar";
-import { StringColorProps } from "types/password";
+import { SnackbarProps } from 'types/snackbar';
+import { StringColorProps } from 'types/password';
 
 // assets
-import EyeOutlined from "@ant-design/icons/EyeOutlined";
-import EyeInvisibleOutlined from "@ant-design/icons/EyeInvisibleOutlined";
+import EyeOutlined from '@ant-design/icons/EyeOutlined';
+import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 
 // ============================|| STATIC - RESET PASSWORD ||============================ //
 
@@ -60,28 +60,28 @@ export default function AuthResetPassword() {
   };
 
   useEffect(() => {
-    changePassword("");
+    changePassword('');
   }, []);
 
   return (
     <Formik
       initialValues={{
-        token: "",
-        password: "",
-        confirmPassword: "",
+        token: '',
+        password: '',
+        confirmPassword: '',
         submit: null,
       }}
       validationSchema={Yup.object().shape({
-        token: Yup.string().required("Reset token is required"),
+        token: Yup.string().required('Reset token is required'),
         password: Yup.string()
-          .min(8, "Password must be at least 8 characters")
-          .required("Password is required"),
+          .min(8, 'Password must be at least 8 characters')
+          .required('Password is required'),
         confirmPassword: Yup.string()
-          .required("Confirm Password is required")
+          .required('Confirm Password is required')
           .test(
-            "confirmPassword",
-            "Both Password must be match!",
-            (confirmPassword, yup) => yup.parent.password === confirmPassword,
+            'confirmPassword',
+            'Both Password must be match!',
+            (confirmPassword, yup) => yup.parent.password === confirmPassword
           ),
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -98,19 +98,19 @@ export default function AuthResetPassword() {
             openSnackbar({
               open: true,
               message:
-                "Password reset successful! You can now login with your new password.",
-              variant: "alert",
+                'Password reset successful! You can now login with your new password.',
+              variant: 'alert',
               alert: {
-                color: "success",
+                color: 'success',
               },
             } as SnackbarProps);
 
             setTimeout(() => {
-              router.push("/login");
+              router.push('/login');
             }, 1500);
           } else {
             throw new Error(
-              response?.data?.message || "Failed to reset password",
+              response?.data?.message || 'Failed to reset password'
             );
           }
         } catch (err: any) {
@@ -121,7 +121,7 @@ export default function AuthResetPassword() {
               submit:
                 err.response?.data?.message ||
                 err.message ||
-                "Failed to reset password. Please check your token and try again.",
+                'Failed to reset password. Please check your token and try again.',
             });
             setSubmitting(false);
           }
@@ -167,7 +167,7 @@ export default function AuthResetPassword() {
                   fullWidth
                   error={Boolean(touched.password && errors.password)}
                   id="password-reset"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   value={values.password}
                   name="password"
                   onBlur={handleBlur}
@@ -208,7 +208,7 @@ export default function AuthResetPassword() {
                         bgcolor: level?.color,
                         width: 85,
                         height: 8,
-                        borderRadius: "7px",
+                        borderRadius: '7px',
                       }}
                     />
                   </Grid>
@@ -228,7 +228,7 @@ export default function AuthResetPassword() {
                 <OutlinedInput
                   fullWidth
                   error={Boolean(
-                    touched.confirmPassword && errors.confirmPassword,
+                    touched.confirmPassword && errors.confirmPassword
                   )}
                   id="confirm-password-reset"
                   type="password"

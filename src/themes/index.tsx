@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo } from 'react';
 
 // material-ui
 import {
@@ -7,19 +7,19 @@ import {
   ThemeProvider,
   Theme,
   TypographyVariantsOptions,
-} from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+} from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 // project import
-import useConfig from "hooks/useConfig";
-import Palette from "./palette";
-import Typography from "./typography";
-import CustomShadows from "./shadows";
-import componentsOverride from "./overrides";
-import { NextAppDirEmotionCacheProvider } from "./emotionCache";
+import useConfig from 'hooks/useConfig';
+import Palette from './palette';
+import Typography from './typography';
+import CustomShadows from './shadows';
+import componentsOverride from './overrides';
+import { NextAppDirEmotionCacheProvider } from './emotionCache';
 
 // types
-import { CustomShadowProps } from "types/theme";
+import { CustomShadowProps } from 'types/theme';
 
 // types
 type ThemeCustomizationProps = {
@@ -35,17 +35,17 @@ export default function ThemeCustomization({
 
   const theme: Theme = useMemo<Theme>(
     () => Palette(mode, presetColor),
-    [mode, presetColor],
+    [mode, presetColor]
   );
 
   const themeTypography: TypographyVariantsOptions =
     useMemo<TypographyVariantsOptions>(
       () => Typography(fontFamily),
-      [fontFamily],
+      [fontFamily]
     );
   const themeCustomShadows: CustomShadowProps = useMemo<CustomShadowProps>(
     () => CustomShadows(theme),
-    [theme],
+    [theme]
   );
 
   const themeOptions: ThemeOptions = useMemo(
@@ -71,14 +71,14 @@ export default function ThemeCustomization({
       customShadows: themeCustomShadows,
       typography: themeTypography,
     }),
-    [themeDirection, theme, themeTypography, themeCustomShadows],
+    [themeDirection, theme, themeTypography, themeCustomShadows]
   );
 
   const themes: Theme = createTheme(themeOptions);
   themes.components = componentsOverride(themes);
 
   return (
-    <NextAppDirEmotionCacheProvider options={{ key: "mui" }}>
+    <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
       <ThemeProvider theme={themes}>
         <CssBaseline enableColorScheme />
         {children}

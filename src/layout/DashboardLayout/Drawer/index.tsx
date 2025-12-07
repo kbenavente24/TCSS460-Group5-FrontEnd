@@ -1,18 +1,18 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 // material-ui
-import { Theme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
+import { Theme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
 
 // project import
-import DrawerHeader from "./DrawerHeader";
-import DrawerContent from "./DrawerContent";
-import MiniDrawerStyled from "./MiniDrawerStyled";
+import DrawerHeader from './DrawerHeader';
+import DrawerContent from './DrawerContent';
+import MiniDrawerStyled from './MiniDrawerStyled';
 
-import { DRAWER_WIDTH } from "config";
-import { handlerDrawerOpen, useGetMenuMaster } from "api/menu";
+import { DRAWER_WIDTH } from 'config';
+import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 
 // ==============================|| MAIN LAYOUT - DRAWER ||============================== //
 
@@ -23,7 +23,7 @@ interface Props {
 export default function MainDrawer({ window }: Props) {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
-  const downLG = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
+  const downLG = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
 
   // responsive drawer container
   const container =
@@ -33,7 +33,7 @@ export default function MainDrawer({ window }: Props) {
   const drawerContent = useMemo(() => <DrawerContent />, []);
   const drawerHeader = useMemo(
     () => <DrawerHeader open={drawerOpen} />,
-    [drawerOpen],
+    [drawerOpen]
   );
 
   return (
@@ -57,26 +57,26 @@ export default function MainDrawer({ window }: Props) {
           sx={[
             {
               display: {
-                lg: "none",
+                lg: 'none',
               },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
                 width: DRAWER_WIDTH,
-                borderRight: "1px solid",
-                borderRightColor: "divider",
-                backgroundImage: "none",
-                boxShadow: "inherit",
+                borderRight: '1px solid',
+                borderRightColor: 'divider',
+                backgroundImage: 'none',
+                boxShadow: 'inherit',
               },
             },
             drawerOpen
               ? {
                   display: {
-                    xs: "block",
+                    xs: 'block',
                   },
                 }
               : {
                   display: {
-                    xs: "none",
+                    xs: 'none',
                   },
                 },
           ]}

@@ -1,18 +1,18 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from 'react';
 
 // third-party
-import { IntlProvider, MessageFormatElement } from "react-intl";
+import { IntlProvider, MessageFormatElement } from 'react-intl';
 
 // project import
-import useConfig from "hooks/useConfig";
-import { I18n } from "types/config";
+import useConfig from 'hooks/useConfig';
+import { I18n } from 'types/config';
 
 // load locales files
 const loadLocaleData = (locale: I18n) => {
   switch (locale) {
-    case "en":
+    case 'en':
     default:
-      return import("utils/locales/en.json");
+      return import('utils/locales/en.json');
   }
 };
 
@@ -38,7 +38,7 @@ export default function Locales({ children }: Props) {
           | undefined;
       }) => {
         setMessages(d.default);
-      },
+      }
     );
   }, [i18n]);
 

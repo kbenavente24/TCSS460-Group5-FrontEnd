@@ -1,32 +1,32 @@
-import { useMemo } from "react";
-import useSWR, { mutate } from "swr";
+import { useMemo } from 'react';
+import useSWR, { mutate } from 'swr';
 
 // types
-import { SnackbarProps } from "types/snackbar";
+import { SnackbarProps } from 'types/snackbar';
 
 export const endpoints = {
-  key: "snackbar",
+  key: 'snackbar',
 };
 
 const initialState: SnackbarProps = {
   action: false,
   open: false,
-  message: "Note archived",
+  message: 'Note archived',
   anchorOrigin: {
-    vertical: "bottom",
-    horizontal: "right",
+    vertical: 'bottom',
+    horizontal: 'right',
   },
-  variant: "default",
+  variant: 'default',
   alert: {
-    color: "primary",
-    variant: "filled",
+    color: 'primary',
+    variant: 'filled',
   },
-  transition: "Fade",
+  transition: 'Fade',
   close: false,
   actionButton: false,
   maxStack: 3,
   dense: false,
-  iconVariant: "usedefault",
+  iconVariant: 'usedefault',
 };
 
 export function useGetSnackbar() {
@@ -75,7 +75,7 @@ export function openSnackbar(snackbar: SnackbarProps) {
         actionButton: actionButton || initialState.actionButton,
       };
     },
-    false,
+    false
   );
 }
 
@@ -86,6 +86,6 @@ export function closeSnackbar() {
     (currentSnackbar: any) => {
       return { ...currentSnackbar, open: false };
     },
-    false,
+    false
   );
 }

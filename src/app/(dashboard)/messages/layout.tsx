@@ -1,5 +1,5 @@
 // PROJECT IMPORTS
-import { MessageProvider } from "contexts/MessageContext";
+import { MessageProvider } from 'contexts/MessageContext';
 
 // ==============================|| DASHBOARD LAYOUT ||============================== //
 

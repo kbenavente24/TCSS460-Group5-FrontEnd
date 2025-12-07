@@ -5,16 +5,16 @@ export default function TableRow() {
     MuiTableRow: {
       styleOverrides: {
         root: {
-          "&:last-of-type": {
-            "& .MuiTableCell-root": {
-              borderBottom: "none",
+          '&:last-of-type': {
+            '& .MuiTableCell-root': {
+              borderBottom: 'none',
             },
           },
-          "& .MuiTableCell-root": {
-            "&:last-of-type": {
+          '& .MuiTableCell-root': {
+            '&:last-of-type': {
               paddingRight: 24,
             },
-            "&:first-of-type": {
+            '&:first-of-type': {
               paddingLeft: 24,
             },
           },

@@ -1,5 +1,5 @@
 // src/lib/db.ts
-import { Pool } from "pg";
+import { Pool } from 'pg';
 
 // Create a connection pool for PostgreSQL
 const pool = new Pool({
@@ -10,12 +10,12 @@ const pool = new Pool({
 });
 
 // Test the connection
-pool.on("connect", () => {
-  console.log("Connected to PostgreSQL database");
+pool.on('connect', () => {
+  console.log('Connected to PostgreSQL database');
 });
 
-pool.on("error", (err: Error) => {
-  console.error("Unexpected error on idle client", err);
+pool.on('error', (err: Error) => {
+  console.error('Unexpected error on idle client', err);
   process.exit(-1);
 });
 

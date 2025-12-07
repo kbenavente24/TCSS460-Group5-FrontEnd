@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 // next
-import Image from "next/image";
+import Image from 'next/image';
 
-const logo = "assets/images/logo.svg";
+const logo = 'assets/images/logo.svg';
 
 // ==============================|| LOGO SVG ||============================== //
 

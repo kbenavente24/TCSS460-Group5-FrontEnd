@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { createContext, ReactElement } from "react";
+import { createContext, ReactElement } from 'react';
 
 // project import
 import defaultConfig, {
   MenuOrientation,
   ThemeDirection,
   ThemeMode,
-} from "config";
-import useLocalStorage from "hooks/useLocalStorage";
+} from 'config';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 // types
 import {
@@ -16,7 +16,7 @@ import {
   FontFamily,
   I18n,
   PresetColor,
-} from "types/config";
+} from 'types/config';
 
 // initial state
 const initialState: CustomizationProps = {
@@ -42,8 +42,8 @@ type ConfigProviderProps = {
 
 function ConfigProvider({ children }: ConfigProviderProps) {
   const [config, setConfig] = useLocalStorage(
-    "mantis-react-next-ts-config",
-    initialState,
+    'mantis-react-next-ts-config',
+    initialState
   );
 
   const onChangeContainer = (container: boolean) => {
@@ -90,7 +90,7 @@ function ConfigProvider({ children }: ConfigProviderProps) {
 
   const onChangeThemeLayout = (
     direction: ThemeDirection,
-    miniDrawer: boolean,
+    miniDrawer: boolean
   ) => {
     setConfig({
       ...config,

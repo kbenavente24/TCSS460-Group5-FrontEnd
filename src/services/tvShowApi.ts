@@ -1,15 +1,15 @@
 // src/services/tvShowApi.ts
-import axios from "axios";
+import axios from 'axios';
 
 // Use local Next.js API routes to avoid CORS issues
-const API_BASE_URL = "/api/tv-shows";
+const API_BASE_URL = '/api/tv-shows';
 
 // Create axios instance with default config
 // No API key needed here since the Next.js API route handles it
 const tvShowApiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    accept: "application/json",
+    accept: 'application/json',
   },
 });
 
@@ -87,8 +87,8 @@ const transformTVShowData = (apiShow: TVShowApiResponse): TVShow => {
     tv_show_id: apiShow.id,
     name: apiShow.name,
     original_name: apiShow.original_name,
-    creators: "N/A", // Not available in API response
-    genres: Array.isArray(apiShow.genres) ? apiShow.genres.join(", ") : "",
+    creators: 'N/A', // Not available in API response
+    genres: Array.isArray(apiShow.genres) ? apiShow.genres.join(', ') : '',
     first_air_date: apiShow.first_air_date,
     last_air_date: apiShow.last_air_date,
     number_of_seasons: apiShow.seasons,
@@ -96,35 +96,35 @@ const transformTVShowData = (apiShow: TVShowApiResponse): TVShow => {
     episode_run_time: 0, // Not available in API response
     overview: apiShow.overview,
     networks: Array.isArray(apiShow.networks)
-      ? apiShow.networks.join(", ")
-      : "N/A",
+      ? apiShow.networks.join(', ')
+      : 'N/A',
     production_companies: Array.isArray(apiShow.studios)
-      ? apiShow.studios.join(", ")
-      : "N/A",
+      ? apiShow.studios.join(', ')
+      : 'N/A',
     vote_average:
-      typeof apiShow.tmdb_rating === "string"
+      typeof apiShow.tmdb_rating === 'string'
         ? parseFloat(apiShow.tmdb_rating)
-        : typeof apiShow.tmdb_rating === "number"
+        : typeof apiShow.tmdb_rating === 'number'
           ? apiShow.tmdb_rating
           : 0,
     vote_count: apiShow.vote_count,
     popularity:
-      typeof apiShow.popularity === "string"
+      typeof apiShow.popularity === 'string'
         ? parseFloat(apiShow.popularity)
-        : typeof apiShow.popularity === "number"
+        : typeof apiShow.popularity === 'number'
           ? apiShow.popularity
           : 0,
     status: apiShow.status,
     poster_url: apiShow.poster_url,
-    backdrop_url: apiShow.backdrop_url ?? "",
+    backdrop_url: apiShow.backdrop_url ?? '',
   };
 };
 
 export const tvShowApi = {
   // Get all TV shows with optional filters
   getTVShows: async (filters?: TVShowFilters): Promise<TVShowsResponse> => {
-    console.log("Fetching TV shows with filters:", filters);
-    console.log("API Base URL:", API_BASE_URL);
+    console.log('Fetching TV shows with filters:', filters);
+    console.log('API Base URL:', API_BASE_URL);
 
     // Map our filter parameters to the API's expected parameters
     const apiParams: Record<string, any> = {
@@ -144,11 +144,11 @@ export const tvShowApi = {
     if (filters?.actor) apiParams.actor = filters.actor;
     if (filters?.status) apiParams.status = filters.status;
 
-    const response = await tvShowApiClient.get("", {
+    const response = await tvShowApiClient.get('', {
       params: apiParams,
     });
 
-    console.log("API Response:", response.data);
+    console.log('API Response:', response.data);
 
     const responseData = response.data;
     let tvShows: TVShow[] = [];
@@ -174,7 +174,7 @@ export const tvShowApi = {
           responseData?.totalPages ||
           Math.ceil(
             (responseData?.total || tvShows.length) /
-              (responseData?.limit || filters?.limit || 20),
+              (responseData?.limit || filters?.limit || 20)
           ),
       },
     };
@@ -203,7 +203,7 @@ export const tvShowApi = {
   searchTVShows: async (
     name: string,
     page = 1,
-    limit = 20,
+    limit = 20
   ): Promise<TVShowsResponse> => {
     return tvShowApi.getTVShows({ name, page, limit });
   },
@@ -211,7 +211,7 @@ export const tvShowApi = {
   // Get all genres
   getGenres: async (): Promise<string[]> => {
     try {
-      const response = await tvShowApiClient.get("/genres", {
+      const response = await tvShowApiClient.get('/genres', {
         params: { limit: 100 },
       });
 
@@ -220,7 +220,7 @@ export const tvShowApi = {
       }
       return [];
     } catch (error) {
-      console.error("Error fetching genres:", error);
+      console.error('Error fetching genres:', error);
       return [];
     }
   },
@@ -228,7 +228,7 @@ export const tvShowApi = {
   // Get all statuses
   getStatuses: async (): Promise<string[]> => {
     try {
-      const response = await tvShowApiClient.get("/statuses", {
+      const response = await tvShowApiClient.get('/statuses', {
         params: { limit: 50 },
       });
 
@@ -237,7 +237,7 @@ export const tvShowApi = {
       }
       return [];
     } catch (error) {
-      console.error("Error fetching statuses:", error);
+      console.error('Error fetching statuses:', error);
       return [];
     }
   },

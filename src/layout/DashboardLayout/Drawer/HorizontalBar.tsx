@@ -1,15 +1,15 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement } from 'react';
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import AppBar from "@mui/material/AppBar";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
+import { useTheme } from '@mui/material/styles';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 
 // project imports
-import Navigation from "./DrawerContent/Navigation";
-import useConfig from "hooks/useConfig";
+import Navigation from './DrawerContent/Navigation';
+import useConfig from 'hooks/useConfig';
 
 // ==============================|| HORIZONTAL MENU LIST ||============================== //
 
@@ -46,19 +46,19 @@ export default function CustomAppBar() {
       <AppBar
         sx={{
           top: 60,
-          bgcolor: "background.paper",
-          width: "100%",
+          bgcolor: 'background.paper',
+          width: '100%',
           height: 62,
-          justifyContent: "center",
-          borderTop: "1px solid",
-          borderTopColor: "divider",
-          borderBottom: "1px solid",
-          borderBottomColor: "divider",
+          justifyContent: 'center',
+          borderTop: '1px solid',
+          borderTopColor: 'divider',
+          borderBottom: '1px solid',
+          borderBottomColor: 'divider',
           zIndex: 1098,
-          color: "grey.500",
+          color: 'grey.500',
         }}
       >
-        <Container maxWidth={container ? "xl" : false}>
+        <Container maxWidth={container ? 'xl' : false}>
           <Stack direction="row" alignItems="center">
             <Navigation />
           </Stack>

@@ -1,42 +1,42 @@
-"use client";
+'use client';
 
-import { useEffect, useState, SyntheticEvent } from "react";
+import { useEffect, useState, SyntheticEvent } from 'react';
 
 // next
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 // material-ui
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid from "@mui/material/Grid";
-import InputAdornment from "@mui/material/InputAdornment";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import Grid from '@mui/material/Grid';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 // third party
-import * as Yup from "yup";
-import { Formik } from "formik";
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 
 // project import
-import IconButton from "components/@extended/IconButton";
-import AnimateButton from "components/@extended/AnimateButton";
-import { authApi } from "services/authApi";
+import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
+import { authApi } from 'services/authApi';
 
-import { openSnackbar } from "api/snackbar";
-import useScriptRef from "hooks/useScriptRef";
-import { strengthColor, strengthIndicator } from "utils/password-strength";
+import { openSnackbar } from 'api/snackbar';
+import useScriptRef from 'hooks/useScriptRef';
+import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 // types
-import { SnackbarProps } from "types/snackbar";
-import { StringColorProps } from "types/password";
+import { SnackbarProps } from 'types/snackbar';
+import { StringColorProps } from 'types/password';
 
 // assets
-import EyeOutlined from "@ant-design/icons/EyeOutlined";
-import EyeInvisibleOutlined from "@ant-design/icons/EyeInvisibleOutlined";
+import EyeOutlined from '@ant-design/icons/EyeOutlined';
+import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 
 // ============================|| CHANGE PASSWORD ||============================ //
 
@@ -66,33 +66,32 @@ export default function ChangePassword() {
   };
 
   useEffect(() => {
-    changePassword("");
+    changePassword('');
   }, []);
 
   return (
     <Formik
       initialValues={{
-        oldPassword: "",
-        newPassword: "",
-        confirmPassword: "",
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: '',
         submit: null,
       }}
       validationSchema={Yup.object().shape({
-        oldPassword: Yup.string().required("Current password is required"),
+        oldPassword: Yup.string().required('Current password is required'),
         newPassword: Yup.string()
-          .min(8, "Password must be at least 8 characters")
-          .required("New password is required")
+          .min(8, 'Password must be at least 8 characters')
+          .required('New password is required')
           .notOneOf(
-            [Yup.ref("oldPassword")],
-            "New password must be different from current password",
+            [Yup.ref('oldPassword')],
+            'New password must be different from current password'
           ),
         confirmPassword: Yup.string()
-          .required("Confirm Password is required")
+          .required('Confirm Password is required')
           .test(
-            "confirmPassword",
-            "Both passwords must match!",
-            (confirmPassword, yup) =>
-              yup.parent.newPassword === confirmPassword,
+            'confirmPassword',
+            'Both passwords must match!',
+            (confirmPassword, yup) => yup.parent.newPassword === confirmPassword
           ),
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -108,19 +107,19 @@ export default function ChangePassword() {
 
             openSnackbar({
               open: true,
-              message: "Password changed successfully!",
-              variant: "alert",
+              message: 'Password changed successfully!',
+              variant: 'alert',
               alert: {
-                color: "success",
+                color: 'success',
               },
             } as SnackbarProps);
 
             setTimeout(() => {
-              router.push("/home");
+              router.push('/home');
             }, 1500);
           } else {
             throw new Error(
-              response?.data?.message || "Failed to change password",
+              response?.data?.message || 'Failed to change password'
             );
           }
         } catch (err: any) {
@@ -131,7 +130,7 @@ export default function ChangePassword() {
               submit:
                 err.response?.data?.message ||
                 err.message ||
-                "Failed to change password. Please check your current password and try again.",
+                'Failed to change password. Please check your current password and try again.',
             });
             setSubmitting(false);
           }
@@ -158,7 +157,7 @@ export default function ChangePassword() {
                   fullWidth
                   error={Boolean(touched.oldPassword && errors.oldPassword)}
                   id="old-password-change"
-                  type={showOldPassword ? "text" : "password"}
+                  type={showOldPassword ? 'text' : 'password'}
                   value={values.oldPassword}
                   name="oldPassword"
                   onBlur={handleBlur}
@@ -198,7 +197,7 @@ export default function ChangePassword() {
                   fullWidth
                   error={Boolean(touched.newPassword && errors.newPassword)}
                   id="new-password-change"
-                  type={showNewPassword ? "text" : "password"}
+                  type={showNewPassword ? 'text' : 'password'}
                   value={values.newPassword}
                   name="newPassword"
                   onBlur={handleBlur}
@@ -239,7 +238,7 @@ export default function ChangePassword() {
                         bgcolor: level?.color,
                         width: 85,
                         height: 8,
-                        borderRadius: "7px",
+                        borderRadius: '7px',
                       }}
                     />
                   </Grid>
@@ -259,7 +258,7 @@ export default function ChangePassword() {
                 <OutlinedInput
                   fullWidth
                   error={Boolean(
-                    touched.confirmPassword && errors.confirmPassword,
+                    touched.confirmPassword && errors.confirmPassword
                   )}
                   id="confirm-password-change"
                   type="password"

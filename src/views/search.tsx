@@ -1,88 +1,88 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 // next
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 // material-ui
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import Button from "@mui/material/Button";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import CircularProgress from "@mui/material/CircularProgress";
-import Pagination from "@mui/material/Pagination";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import Button from '@mui/material/Button';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import CircularProgress from '@mui/material/CircularProgress';
+import Pagination from '@mui/material/Pagination';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 // icons
-import SearchOutlined from "@ant-design/icons/SearchOutlined";
+import SearchOutlined from '@ant-design/icons/SearchOutlined';
 // import IdcardOutlined from '@ant-design/icons/IdcardOutlined';
-import ClearOutlined from "@ant-design/icons/ClearOutlined";
-import VideoCameraOutlined from "@ant-design/icons/VideoCameraOutlined";
-import PlayCircleOutlined from "@ant-design/icons/PlayCircleOutlined";
+import ClearOutlined from '@ant-design/icons/ClearOutlined';
+import VideoCameraOutlined from '@ant-design/icons/VideoCameraOutlined';
+import PlayCircleOutlined from '@ant-design/icons/PlayCircleOutlined';
 
 // project imports
-import MainCard from "components/MainCard";
-import { movieApi, type Movie } from "services/movieApi";
-import { tvShowApi, type TVShow } from "services/tvShowApi";
+import MainCard from 'components/MainCard';
+import { movieApi, type Movie } from 'services/movieApi';
+import { tvShowApi, type TVShow } from 'services/tvShowApi';
 
-type SearchTab = "movies" | "tv-shows";
+type SearchTab = 'movies' | 'tv-shows';
 type ResultItem = Movie | TVShow;
 
 // TMDB Movie Genres (standard movie database genres)
 const MOVIE_GENRES = [
-  "Action",
-  "Adventure",
-  "Animation",
-  "Comedy",
-  "Crime",
-  "Documentary",
-  "Drama",
-  "Family",
-  "Fantasy",
-  "History",
-  "Horror",
-  "Music",
-  "Mystery",
-  "Romance",
-  "Science Fiction",
-  "Thriller",
-  "War",
-  "Western",
+  'Action',
+  'Adventure',
+  'Animation',
+  'Comedy',
+  'Crime',
+  'Documentary',
+  'Drama',
+  'Family',
+  'Fantasy',
+  'History',
+  'Horror',
+  'Music',
+  'Mystery',
+  'Romance',
+  'Science Fiction',
+  'Thriller',
+  'War',
+  'Western',
 ];
 
 // ==============================|| ADVANCED SEARCH PAGE ||============================== //
 
 export default function SearchPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<SearchTab>("movies");
+  const [activeTab, setActiveTab] = useState<SearchTab>('movies');
 
   // Common search fields
-  const [searchText, setSearchText] = useState("");
-  const [genre, setGenre] = useState("");
-  const [year, setYear] = useState("");
+  const [searchText, setSearchText] = useState('');
+  const [genre, setGenre] = useState('');
+  const [year, setYear] = useState('');
 
   // Movie-specific fields
-  const [director, setDirector] = useState("");
-  const [movieActor, setMovieActor] = useState("");
-  const [studio, setStudio] = useState("");
+  const [director, setDirector] = useState('');
+  const [movieActor, setMovieActor] = useState('');
+  const [studio, setStudio] = useState('');
 
   // TV Show-specific fields
-  const [tvActor, setTvActor] = useState("");
-  const [network, setNetwork] = useState("");
-  const [tvStudio, setTvStudio] = useState("");
-  const [status, setStatus] = useState("");
+  const [tvActor, setTvActor] = useState('');
+  const [network, setNetwork] = useState('');
+  const [tvStudio, setTvStudio] = useState('');
+  const [status, setStatus] = useState('');
 
   // TV Show dropdown options
   const [tvGenres, setTvGenres] = useState<string[]>([]);
@@ -100,7 +100,7 @@ export default function SearchPage() {
 
   // Fetch TV show genres and statuses when TV Shows tab is selected
   useEffect(() => {
-    if (activeTab === "tv-shows" && tvGenres.length === 0) {
+    if (activeTab === 'tv-shows' && tvGenres.length === 0) {
       const fetchOptions = async () => {
         setLoadingOptions(true);
         try {
@@ -111,7 +111,7 @@ export default function SearchPage() {
           setTvGenres(genres);
           setTvStatuses(statuses);
         } catch (err) {
-          console.error("Error fetching TV show options:", err);
+          console.error('Error fetching TV show options:', err);
         } finally {
           setLoadingOptions(false);
         }
@@ -146,8 +146,8 @@ export default function SearchPage() {
       setTotalPages(response.pagination?.totalPages || 1);
       setTotalResults(response.pagination?.total || 0);
     } catch (err: any) {
-      console.error("Search error:", err);
-      setError(err?.message || "Failed to perform search. Please try again.");
+      console.error('Search error:', err);
+      setError(err?.message || 'Failed to perform search. Please try again.');
       setResults([]);
     } finally {
       setLoading(false);
@@ -181,8 +181,8 @@ export default function SearchPage() {
       setTotalPages(response.pagination?.totalPages || 1);
       setTotalResults(response.pagination?.total || 0);
     } catch (err: any) {
-      console.error("Search error:", err);
-      setError(err?.message || "Failed to perform search. Please try again.");
+      console.error('Search error:', err);
+      setError(err?.message || 'Failed to perform search. Please try again.');
       setResults([]);
     } finally {
       setLoading(false);
@@ -192,7 +192,7 @@ export default function SearchPage() {
   // Handle search button click
   const handleSearch = () => {
     setPage(1);
-    if (activeTab === "movies") {
+    if (activeTab === 'movies') {
       searchMovies({ page: 1 });
     } else {
       searchTVShows({ page: 1 });
@@ -201,16 +201,16 @@ export default function SearchPage() {
 
   // Clear all filters
   const handleClearFilters = () => {
-    setSearchText("");
-    setGenre("");
-    setYear("");
-    setDirector("");
-    setMovieActor("");
-    setStudio("");
-    setTvActor("");
-    setNetwork("");
-    setTvStudio("");
-    setStatus("");
+    setSearchText('');
+    setGenre('');
+    setYear('');
+    setDirector('');
+    setMovieActor('');
+    setStudio('');
+    setTvActor('');
+    setNetwork('');
+    setTvStudio('');
+    setStatus('');
     setPage(1);
     setResults([]);
     setError(null);
@@ -219,7 +219,7 @@ export default function SearchPage() {
   // Handle tab change
   const handleTabChange = (
     _event: React.SyntheticEvent,
-    newValue: SearchTab,
+    newValue: SearchTab
   ) => {
     setActiveTab(newValue);
     handleClearFilters();
@@ -227,29 +227,29 @@ export default function SearchPage() {
 
   // Handle result click
   const handleResultClick = (item: ResultItem) => {
-    if (!item || typeof item !== "object") {
+    if (!item || typeof item !== 'object') {
       return;
     }
 
-    if ("movie_id" in item) {
+    if ('movie_id' in item) {
       const movie = item as Movie;
       router.push(`/movies/${movie.movie_id}`);
-    } else if ("tv_show_id" in item) {
+    } else if ('tv_show_id' in item) {
       const tvShow = item as TVShow;
       router.push(`/tv-shows/${tvShow.tv_show_id}`);
     }
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
   };
 
   return (
-    <Box sx={{ minHeight: "calc(100vh - 80px)", p: 3 }}>
+    <Box sx={{ minHeight: 'calc(100vh - 80px)', p: 3 }}>
       <Typography variant="h2" gutterBottom sx={{ mb: 3 }}>
         Advanced Search
       </Typography>
@@ -259,21 +259,21 @@ export default function SearchPage() {
         <Tabs
           value={activeTab}
           onChange={handleTabChange}
-          sx={{ borderBottom: 1, borderColor: "divider" }}
+          sx={{ borderBottom: 1, borderColor: 'divider' }}
         >
           <Tab
             value="movies"
             label="Movies"
             icon={<VideoCameraOutlined />}
             iconPosition="start"
-            sx={{ textTransform: "none", fontSize: "1rem", fontWeight: 500 }}
+            sx={{ textTransform: 'none', fontSize: '1rem', fontWeight: 500 }}
           />
           <Tab
             value="tv-shows"
             label="TV Shows"
             icon={<PlayCircleOutlined />}
             iconPosition="start"
-            sx={{ textTransform: "none", fontSize: "1rem", fontWeight: 500 }}
+            sx={{ textTransform: 'none', fontSize: '1rem', fontWeight: 500 }}
           />
         </Tabs>
       </MainCard>
@@ -287,7 +287,7 @@ export default function SearchPage() {
           sx={{ mb: 2 }}
         >
           <Typography variant="h5">
-            {activeTab === "movies" ? "Movie" : "TV Show"} Search Filters
+            {activeTab === 'movies' ? 'Movie' : 'TV Show'} Search Filters
           </Typography>
           <Button
             variant="outlined"
@@ -305,7 +305,7 @@ export default function SearchPage() {
             <TextField
               fullWidth
               label={
-                activeTab === "movies" ? "Search by Title" : "Search by Name"
+                activeTab === 'movies' ? 'Search by Title' : 'Search by Name'
               }
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
@@ -323,7 +323,7 @@ export default function SearchPage() {
 
           {/* Genre Filter */}
           <Grid item xs={12} sm={6} md={3}>
-            {activeTab === "movies" ? (
+            {activeTab === 'movies' ? (
               <FormControl fullWidth>
                 <InputLabel>Genre</InputLabel>
                 <Select
@@ -359,7 +359,7 @@ export default function SearchPage() {
           </Grid>
 
           {/* Year Filter (Movies) / Network Filter (TV Shows) */}
-          {activeTab === "movies" ? (
+          {activeTab === 'movies' ? (
             <Grid item xs={12} sm={6} md={2}>
               <TextField
                 fullWidth
@@ -389,7 +389,7 @@ export default function SearchPage() {
               variant="contained"
               onClick={handleSearch}
               disabled={loading}
-              sx={{ height: "56px" }}
+              sx={{ height: '56px' }}
             >
               Search
             </Button>
@@ -397,7 +397,7 @@ export default function SearchPage() {
         </Grid>
 
         {/* Movie-specific Filters */}
-        {activeTab === "movies" && (
+        {activeTab === 'movies' && (
           <Grid container spacing={2} sx={{ mt: 1 }}>
             <Grid item xs={12} sm={6} md={4}>
               <TextField
@@ -430,7 +430,7 @@ export default function SearchPage() {
         )}
 
         {/* TV Show-specific Filters */}
-        {activeTab === "tv-shows" && (
+        {activeTab === 'tv-shows' && (
           <Grid container spacing={2} sx={{ mt: 1 }}>
             <Grid item xs={12} sm={6} md={4}>
               <TextField
@@ -476,22 +476,22 @@ export default function SearchPage() {
         {loading ? (
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minHeight: "400px",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '400px',
             }}
           >
             <CircularProgress />
           </Box>
         ) : error ? (
-          <Box sx={{ p: 3, textAlign: "center" }}>
+          <Box sx={{ p: 3, textAlign: 'center' }}>
             <Typography variant="h6" color="error">
               {error}
             </Typography>
           </Box>
         ) : results.length === 0 ? (
-          <Box sx={{ p: 3, textAlign: "center" }}>
+          <Box sx={{ p: 3, textAlign: 'center' }}>
             <Typography variant="h6" color="text.secondary">
               No results found. Try adjusting your search criteria.
             </Typography>
@@ -499,22 +499,22 @@ export default function SearchPage() {
         ) : (
           <>
             <Typography variant="h6" sx={{ mb: 2, p: 2 }}>
-              Found {totalResults} result{totalResults !== 1 ? "s" : ""}
+              Found {totalResults} result{totalResults !== 1 ? 's' : ''}
             </Typography>
             <Grid container spacing={3}>
               {results
                 .filter(
                   (item) =>
                     item &&
-                    typeof item === "object" &&
-                    ("movie_id" in item || "tv_show_id" in item),
+                    typeof item === 'object' &&
+                    ('movie_id' in item || 'tv_show_id' in item)
                 )
                 .map((item) => {
-                  if (!item || typeof item !== "object") {
+                  if (!item || typeof item !== 'object') {
                     return null;
                   }
 
-                  const isMovie = "movie_id" in item;
+                  const isMovie = 'movie_id' in item;
                   const movie = isMovie ? (item as Movie) : null;
                   const tvShow = !isMovie ? (item as TVShow) : null;
 
@@ -523,11 +523,11 @@ export default function SearchPage() {
                   }
 
                   const posterUrl =
-                    movie?.poster_url || tvShow?.poster_url || "";
-                  const title = movie?.title || tvShow?.name || "Unknown";
+                    movie?.poster_url || tvShow?.poster_url || '';
+                  const title = movie?.title || tvShow?.name || 'Unknown';
                   const releaseDate =
-                    movie?.release_date || tvShow?.first_air_date || "";
-                  const genres = movie?.genres || tvShow?.genres || "";
+                    movie?.release_date || tvShow?.first_air_date || '';
+                  const genres = movie?.genres || tvShow?.genres || '';
                   const rating =
                     movie?.tmdb_rating || tvShow?.vote_average || null;
                   const itemId = movie?.movie_id || tvShow?.tv_show_id || 0;
@@ -536,13 +536,13 @@ export default function SearchPage() {
                     <Grid item xs={12} sm={6} md={4} lg={3} key={itemId}>
                       <Card
                         sx={{
-                          height: "100%",
-                          display: "flex",
-                          flexDirection: "column",
-                          cursor: "pointer",
-                          transition: "transform 0.2s, box-shadow 0.2s",
-                          "&:hover": {
-                            transform: "scale(1.02)",
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          cursor: 'pointer',
+                          transition: 'transform 0.2s, box-shadow 0.2s',
+                          '&:hover': {
+                            transform: 'scale(1.02)',
                             boxShadow: 4,
                           },
                         }}
@@ -559,14 +559,14 @@ export default function SearchPage() {
                           height="400"
                           image={`https://image.tmdb.org/t/p/w500${posterUrl}`}
                           alt={title}
-                          sx={{ objectFit: "cover" }}
+                          sx={{ objectFit: 'cover' }}
                         />
                         <Box
                           sx={{
                             p: 2,
                             flex: 1,
-                            display: "flex",
-                            flexDirection: "column",
+                            display: 'flex',
+                            flexDirection: 'column',
                           }}
                         >
                           <Typography
@@ -596,7 +596,7 @@ export default function SearchPage() {
                               variant="outlined"
                             />
                             <Chip
-                              label={isMovie ? "Movie" : "TV Show"}
+                              label={isMovie ? 'Movie' : 'TV Show'}
                               size="small"
                               color="secondary"
                             />
@@ -612,7 +612,7 @@ export default function SearchPage() {
                             <Typography
                               variant="body2"
                               color="text.secondary"
-                              sx={{ fontSize: "0.75rem" }}
+                              sx={{ fontSize: '0.75rem' }}
                             >
                               {movie.runtime_minutes} min
                             </Typography>
@@ -620,12 +620,12 @@ export default function SearchPage() {
                             <Typography
                               variant="body2"
                               color="text.secondary"
-                              sx={{ fontSize: "0.75rem" }}
+                              sx={{ fontSize: '0.75rem' }}
                             >
                               {tvShow.number_of_seasons} Season
-                              {tvShow.number_of_seasons !== 1 ? "s" : ""} •{" "}
+                              {tvShow.number_of_seasons !== 1 ? 's' : ''} •{' '}
                               {tvShow.number_of_episodes} Episode
-                              {tvShow.number_of_episodes !== 1 ? "s" : ""}
+                              {tvShow.number_of_episodes !== 1 ? 's' : ''}
                             </Typography>
                           ) : null}
                         </Box>
@@ -639,14 +639,14 @@ export default function SearchPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <Box
-                sx={{ display: "flex", justifyContent: "center", mt: 3, pb: 2 }}
+                sx={{ display: 'flex', justifyContent: 'center', mt: 3, pb: 2 }}
               >
                 <Pagination
                   count={totalPages}
                   page={page}
                   onChange={(_e, value) => {
                     setPage(value);
-                    if (activeTab === "movies") {
+                    if (activeTab === 'movies') {
                       searchMovies({ page: value });
                     } else {
                       searchTVShows({ page: value });

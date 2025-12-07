@@ -1,37 +1,37 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
 // next
-import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import CardContent from "@mui/material/CardContent";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import ButtonBase from '@mui/material/ButtonBase';
+import CardContent from '@mui/material/CardContent';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 // project import
-import Avatar from "components/@extended/Avatar";
-import MainCard from "components/MainCard";
-import Transitions from "components/@extended/Transitions";
+import Avatar from 'components/@extended/Avatar';
+import MainCard from 'components/MainCard';
+import Transitions from 'components/@extended/Transitions';
 
-import useUser from "hooks/useUser";
-import ModeSwitch from "components/ModeSwitch";
+import useUser from 'hooks/useUser';
+import ModeSwitch from 'components/ModeSwitch';
 
 // assets
-import LogoutOutlined from "@ant-design/icons/LogoutOutlined";
-import KeyOutlined from "@ant-design/icons/KeyOutlined";
-import BulbOutlined from "@ant-design/icons/BulbOutlined";
+import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
+import KeyOutlined from '@ant-design/icons/KeyOutlined';
+import BulbOutlined from '@ant-design/icons/BulbOutlined';
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
@@ -42,12 +42,12 @@ export default function Profile() {
 
   const handleLogout = () => {
     signOut({ redirect: false });
-    router.push("/login");
+    router.push('/login');
   };
 
   const handleResetPassword = () => {
     setOpen(false);
-    router.push("/reset-password");
+    router.push('/reset-password');
   };
 
   const anchorRef = useRef<any>(null);
@@ -68,21 +68,21 @@ export default function Profile() {
       <ButtonBase
         sx={(theme) => ({
           p: 0.25,
-          borderRadius: "50%",
-          "&:hover": {
-            bgcolor: "secondary.lighter",
-            ...theme.applyStyles("dark", {
-              bgcolor: "secondary.light",
+          borderRadius: '50%',
+          '&:hover': {
+            bgcolor: 'secondary.lighter',
+            ...theme.applyStyles('dark', {
+              bgcolor: 'secondary.light',
             }),
           },
-          "&:focus-visible": {
+          '&:focus-visible': {
             outline: `2px solid ${theme.palette.secondary.dark}`,
             outlineOffset: 2,
           },
         })}
         aria-label="open profile"
         ref={anchorRef}
-        aria-controls={open ? "profile-grow" : undefined}
+        aria-controls={open ? 'profile-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
       >
@@ -98,7 +98,7 @@ export default function Profile() {
         popperOptions={{
           modifiers: [
             {
-              name: "offset",
+              name: 'offset',
               options: {
                 offset: [0, 9],
               },
@@ -146,17 +146,17 @@ export default function Profile() {
                       </Grid>
                     </Grid>
                   </CardContent>
-                  <Box sx={{ borderTop: 1, borderColor: "divider" }}>
+                  <Box sx={{ borderTop: 1, borderColor: 'divider' }}>
                     <List
                       component="nav"
-                      sx={{ p: 0, "& .MuiListItemIcon-root": { minWidth: 32 } }}
+                      sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}
                     >
                       <ListItemButton>
                         <ListItemIcon>
                           <BulbOutlined />
                         </ListItemIcon>
                         <ListItemText primary="Theme" />
-                        <Box sx={{ ml: "auto" }}>
+                        <Box sx={{ ml: 'auto' }}>
                           <ModeSwitch />
                         </Box>
                       </ListItemButton>

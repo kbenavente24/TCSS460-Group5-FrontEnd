@@ -8,9 +8,9 @@ export default function ButtonBase() {
       },
       styleOverrides: {
         root: {
-          "&.MuiButtonBase-root:disabled": {
-            cursor: "not-allowed",
-            pointerEvents: "auto",
+          '&.MuiButtonBase-root:disabled': {
+            cursor: 'not-allowed',
+            pointerEvents: 'auto',
           },
         },
       },

@@ -1,34 +1,34 @@
 //material-ui
-import { styled } from "@mui/material/styles";
+import { styled } from '@mui/material/styles';
 
 // third-party
-import { SnackbarProvider } from "notistack";
+import { SnackbarProvider } from 'notistack';
 
 // project import
-import Loader from "components/Loader";
-import { useGetSnackbar } from "api/snackbar";
+import Loader from 'components/Loader';
+import { useGetSnackbar } from 'api/snackbar';
 
 // assets
-import CheckCircleOutlined from "@ant-design/icons/CheckCircleOutlined";
-import CloseCircleOutlined from "@ant-design/icons/CloseCircleOutlined";
-import InfoCircleOutlined from "@ant-design/icons/InfoCircleOutlined";
-import WarningOutlined from "@ant-design/icons/WarningOutlined";
+import CheckCircleOutlined from '@ant-design/icons/CheckCircleOutlined';
+import CloseCircleOutlined from '@ant-design/icons/CloseCircleOutlined';
+import InfoCircleOutlined from '@ant-design/icons/InfoCircleOutlined';
+import WarningOutlined from '@ant-design/icons/WarningOutlined';
 
 // custom styles
 const StyledSnackbarProvider = styled(SnackbarProvider)(({ theme }) => ({
-  "&.notistack-MuiContent-default": {
+  '&.notistack-MuiContent-default': {
     background: theme.palette.primary.main,
   },
-  "&.notistack-MuiContent-error": {
+  '&.notistack-MuiContent-error': {
     background: theme.palette.error.main,
   },
-  "&.notistack-MuiContent-success": {
+  '&.notistack-MuiContent-success': {
     background: theme.palette.success.main,
   },
-  "&.notistack-MuiContent-info": {
+  '&.notistack-MuiContent-info': {
     background: theme.palette.info.main,
   },
-  "&.notistack-MuiContent-warning": {
+  '&.notistack-MuiContent-warning': {
     background: theme.palette.warning.main,
   },
 }));
@@ -37,7 +37,7 @@ const StyledSnackbarProvider = styled(SnackbarProvider)(({ theme }) => ({
 
 export default function Notistack({ children }: any) {
   const { snackbar } = useGetSnackbar();
-  const iconSX = { marginRight: 8, fontSize: "1.15rem" };
+  const iconSX = { marginRight: 8, fontSize: '1.15rem' };
 
   if (snackbar === undefined) return <Loader />;
 
@@ -46,7 +46,7 @@ export default function Notistack({ children }: any) {
       maxSnack={snackbar.maxStack}
       dense={snackbar.dense}
       iconVariant={
-        snackbar.iconVariant === "useemojis"
+        snackbar.iconVariant === 'useemojis'
           ? {
               success: <CheckCircleOutlined style={iconSX} />,
               error: <CloseCircleOutlined style={iconSX} />,
@@ -55,7 +55,7 @@ export default function Notistack({ children }: any) {
             }
           : undefined
       }
-      hideIconVariant={snackbar.iconVariant === "hide" ? true : false}
+      hideIconVariant={snackbar.iconVariant === 'hide' ? true : false}
     >
       {children}
     </StyledSnackbarProvider>

@@ -1,37 +1,37 @@
-"use client";
+'use client';
 
-import React, { useState, FocusEvent, SyntheticEvent } from "react";
+import React, { useState, FocusEvent, SyntheticEvent } from 'react';
 
 // next
-import { signIn } from "next-auth/react";
+import { signIn } from 'next-auth/react';
 
 // material-ui
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid from "@mui/material/Grid";
-import InputAdornment from "@mui/material/InputAdornment";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Grid from '@mui/material/Grid';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 // third party
-import * as Yup from "yup";
-import { preload } from "swr";
-import { Formik } from "formik";
+import * as Yup from 'yup';
+import { preload } from 'swr';
+import { Formik } from 'formik';
 
 // project import
-import IconButton from "components/@extended/IconButton";
-import AnimateButton from "components/@extended/AnimateButton";
+import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
 
-import { APP_DEFAULT_PATH } from "config";
-import { fetcher } from "utils/axios";
+import { APP_DEFAULT_PATH } from 'config';
+import { fetcher } from 'utils/axios';
 
 // assets
-import EyeOutlined from "@ant-design/icons/EyeOutlined";
-import EyeInvisibleOutlined from "@ant-design/icons/EyeInvisibleOutlined";
+import EyeOutlined from '@ant-design/icons/EyeOutlined';
+import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 
 export default function AuthLogin({ providers, csrfToken }: any) {
   const [checked, setChecked] = useState(false);
@@ -47,7 +47,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
   };
 
   const onKeyDown = (keyEvent: any) => {
-    if (keyEvent.getModifierState("CapsLock")) {
+    if (keyEvent.getModifierState('CapsLock')) {
       setCapsWarning(true);
     } else {
       setCapsWarning(false);
@@ -58,27 +58,27 @@ export default function AuthLogin({ providers, csrfToken }: any) {
     <>
       <Formik
         initialValues={{
-          email: "", // TODO for dev work, you can hardcode a known user and password here
-          password: "",
+          email: '', // TODO for dev work, you can hardcode a known user and password here
+          password: '',
           submit: null,
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
-            .email("Must be a valid email")
+            .email('Must be a valid email')
             .max(255)
-            .required("Email is required"),
+            .required('Email is required'),
           password: Yup.string()
-            .required("Password is required")
+            .required('Password is required')
             .test(
-              "no-leading-trailing-whitespace",
-              "Password cannot start or end with spaces",
-              (value) => value === value.trim(),
+              'no-leading-trailing-whitespace',
+              'Password cannot start or end with spaces',
+              (value) => value === value.trim()
             )
-            .min(6, "Password must be at least 6 characters"),
+            .min(6, 'Password must be at least 6 characters'),
         })}
         onSubmit={(values, { setErrors, setSubmitting }) => {
           const trimmedEmail = values.email.trim();
-          signIn("login", {
+          signIn('login', {
             redirect: false,
             email: trimmedEmail,
             password: values.password,
@@ -89,14 +89,14 @@ export default function AuthLogin({ providers, csrfToken }: any) {
                 setErrors({ submit: res.error });
                 setSubmitting(false);
               } else {
-                preload("api/menu/dashboard", fetcher);
+                preload('api/menu/dashboard', fetcher);
                 setSubmitting(false);
               }
             },
             (res) => {
               setErrors({ submit: res.error });
               setSubmitting(false);
-            },
+            }
           );
         }}
       >
@@ -141,10 +141,10 @@ export default function AuthLogin({ providers, csrfToken }: any) {
                   <InputLabel htmlFor="password-login">Password</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    color={capsWarning ? "warning" : "primary"}
+                    color={capsWarning ? 'warning' : 'primary'}
                     error={Boolean(touched.password && errors.password)}
                     id="-password-login"
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     value={values.password}
                     name="password"
                     onBlur={(event: FocusEvent<any, Element>) => {
@@ -175,7 +175,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
                   {capsWarning && (
                     <Typography
                       variant="caption"
-                      sx={{ color: "warning.main" }}
+                      sx={{ color: 'warning.main' }}
                       id="warning-helper-text-password-login"
                     >
                       Caps lock on!

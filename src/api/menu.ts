@@ -1,24 +1,24 @@
-import useSWR, { mutate } from "swr";
-import { useMemo } from "react";
+import useSWR, { mutate } from 'swr';
+import { useMemo } from 'react';
 
 // Project-imports
-import { fetcher } from "utils/axios";
+import { fetcher } from 'utils/axios';
 
 // types
-import { MenuProps, NavItemType } from "types/menu";
+import { MenuProps, NavItemType } from 'types/menu';
 
 const initialState: MenuProps = {
-  openedItem: "dashboard",
-  openedComponent: "buttons",
+  openedItem: 'dashboard',
+  openedComponent: 'buttons',
   openedHorizontalItem: null,
   isDashboardDrawerOpened: false,
   isComponentDrawerOpened: true,
 };
 
 export const endpoints = {
-  key: "api/menu",
-  master: "master",
-  dashboard: "/dashboard", // server URL
+  key: 'api/menu',
+  master: 'master',
+  dashboard: '/dashboard', // server URL
 };
 
 export function useGetMenu() {
@@ -29,7 +29,7 @@ export function useGetMenu() {
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    },
+    }
   );
 
   const memoizedValue = useMemo(
@@ -40,7 +40,7 @@ export function useGetMenu() {
       menuValidating: isValidating,
       menuEmpty: !isLoading && !data?.length,
     }),
-    [data, error, isLoading, isValidating],
+    [data, error, isLoading, isValidating]
   );
 
   return memoizedValue;
@@ -54,7 +54,7 @@ export function useGetMenuMaster() {
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    },
+    }
   );
 
   const memoizedValue = useMemo(
@@ -62,7 +62,7 @@ export function useGetMenuMaster() {
       menuMaster: data as MenuProps,
       menuMasterLoading: isLoading,
     }),
-    [data, isLoading],
+    [data, isLoading]
   );
 
   return memoizedValue;
@@ -76,7 +76,7 @@ export function handlerActiveComponent(openedComponent: string) {
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, openedComponent };
     },
-    false,
+    false
   );
 }
 
@@ -88,12 +88,12 @@ export function handlerDrawerOpen(isDashboardDrawerOpened: boolean) {
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, isDashboardDrawerOpened };
     },
-    false,
+    false
   );
 }
 
 export function handlerHorizontalActiveItem(
-  openedHorizontalItem: string | null,
+  openedHorizontalItem: string | null
 ) {
   // to update local state based on key
 
@@ -102,7 +102,7 @@ export function handlerHorizontalActiveItem(
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, openedHorizontalItem };
     },
-    false,
+    false
   );
 }
 
@@ -114,6 +114,6 @@ export function handlerActiveItem(openedItem: string) {
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, openedItem };
     },
-    false,
+    false
   );
 }
