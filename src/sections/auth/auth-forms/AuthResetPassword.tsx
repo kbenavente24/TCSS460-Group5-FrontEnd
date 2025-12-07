@@ -1,9 +1,14 @@
 'use client';
 
-import { useEffect, useState, SyntheticEvent } from 'react';
+// ============================|| DEPRECATED - NOT FUNCTIONAL ||============================ //
+// NOTE: This component is NO LONGER FUNCTIONAL with the new credential API.
+// The new API (https://credential-api-giuj.onrender.com/) does not support
+// password reset via email/token. Password changes can only be done while logged in
+// using the /auth/user/password/change endpoint.
+// This file is kept for reference but should not be used.
+// ======================================================================================== //
 
-// next
-import { useRouter } from 'next/navigation';
+import { useEffect, useState, SyntheticEvent } from 'react';
 
 // material-ui
 import Box from '@mui/material/Box';
@@ -24,25 +29,18 @@ import { Formik } from 'formik';
 // project import
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
-import { authApi } from 'services/authApi';
-
-import { openSnackbar } from 'api/snackbar';
-import useScriptRef from 'hooks/useScriptRef';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 // types
-import { SnackbarProps } from 'types/snackbar';
 import { StringColorProps } from 'types/password';
 
 // assets
 import EyeOutlined from '@ant-design/icons/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 
-// ============================|| STATIC - RESET PASSWORD ||============================ //
+// ============================|| STATIC - RESET PASSWORD - NOT FUNCTIONAL ||============================ //
 
 export default function AuthResetPassword() {
-  const scriptedRef = useScriptRef();
-  const router = useRouter();
 
   const [level, setLevel] = useState<StringColorProps>();
   const [showPassword, setShowPassword] = useState(false);
@@ -78,42 +76,12 @@ export default function AuthResetPassword() {
           .required('Confirm Password is required')
           .test('confirmPassword', 'Both Password must be match!', (confirmPassword, yup) => yup.parent.password === confirmPassword)
       })}
-      onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-        try {
-          const response = await authApi.resetPasswordWithToken({
-            token: values.token.trim(),
-            password: values.password
-          });
-
-          if (response?.data?.success) {
-            setStatus({ success: true });
-            setSubmitting(false);
-
-            openSnackbar({
-              open: true,
-              message: 'Password reset successful! You can now login with your new password.',
-              variant: 'alert',
-              alert: {
-                color: 'success'
-              }
-            } as SnackbarProps);
-
-            setTimeout(() => {
-              router.push('/login');
-            }, 1500);
-          } else {
-            throw new Error(response?.data?.message || 'Failed to reset password');
-          }
-        } catch (err: any) {
-          console.error(err);
-          if (scriptedRef.current) {
-            setStatus({ success: false });
-            setErrors({
-              submit: err.response?.data?.message || err.message || 'Failed to reset password. Please check your token and try again.'
-            });
-            setSubmitting(false);
-          }
-        }
+      onSubmit={async (_values, { setErrors, setSubmitting }) => {
+        // This endpoint no longer exists in the new API
+        setErrors({
+          submit: 'Password reset via email/token is no longer supported. Please contact support or change your password while logged in.'
+        });
+        setSubmitting(false);
       }}
     >
       {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
