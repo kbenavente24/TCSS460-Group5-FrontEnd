@@ -8,9 +8,6 @@
 // This file is kept for reference but should not be used.
 // ======================================================================================== //
 
-// next
-import { useRouter } from 'next/navigation';
-
 // material-ui
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -25,19 +22,11 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project import
-import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'components/@extended/AnimateButton';
-
-import { openSnackbar } from 'api/snackbar';
-
-// types
-import { SnackbarProps } from 'types/snackbar';
 
 // ============================|| FORGOT PASSWORD - NOT FUNCTIONAL ||============================ //
 
 export default function AuthForgotPassword() {
-  const scriptedRef = useScriptRef();
-  const router = useRouter();
 
   return (
     <Formik
