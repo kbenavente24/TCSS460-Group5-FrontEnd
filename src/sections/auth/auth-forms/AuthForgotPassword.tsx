@@ -1,5 +1,13 @@
 'use client';
 
+// ============================|| DEPRECATED - NOT FUNCTIONAL ||============================ //
+// NOTE: This component is NO LONGER FUNCTIONAL with the new credential API.
+// The new API (https://credential-api-giuj.onrender.com/) does not support
+// password reset via email. Password changes can only be done while logged in
+// using the /auth/user/password/change endpoint.
+// This file is kept for reference but should not be used.
+// ======================================================================================== //
+
 // next
 import { useRouter } from 'next/navigation';
 
@@ -19,14 +27,13 @@ import { Formik } from 'formik';
 // project import
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'components/@extended/AnimateButton';
-import { authApi } from 'services/authApi';
 
 import { openSnackbar } from 'api/snackbar';
 
 // types
 import { SnackbarProps } from 'types/snackbar';
 
-// ============================|| FIREBASE - FORGOT PASSWORD ||============================ //
+// ============================|| FORGOT PASSWORD - NOT FUNCTIONAL ||============================ //
 
 export default function AuthForgotPassword() {
   const scriptedRef = useScriptRef();
@@ -41,37 +48,10 @@ export default function AuthForgotPassword() {
       validationSchema={Yup.object().shape({
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
       })}
-      onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-        try {
-          const trimmedEmail = values.email.trim();
-          const response = await authApi.requestPasswordReset({ email: trimmedEmail });
-
-          if (response?.data?.success) {
-            setStatus({ success: true });
-            setSubmitting(false);
-
-            openSnackbar({
-              open: true,
-              message: 'If an account exists with this email, you will receive a password reset link',
-              variant: 'alert',
-              alert: {
-                color: 'success'
-              }
-            } as SnackbarProps);
-
-            setTimeout(() => {
-              router.push('/check-mail');
-            }, 1500);
-          } else {
-            throw new Error(response?.data?.message || 'Failed to send reset email');
-          }
-        } catch (err: any) {
-          if (scriptedRef.current) {
-            setStatus({ success: false });
-            setErrors({ submit: err.response?.data?.message || err.message || 'Failed to send reset email' });
-            setSubmitting(false);
-          }
-        }
+      onSubmit={async (_values, { setErrors, setSubmitting }) => {
+        // This endpoint no longer exists in the new API
+        setErrors({ submit: 'Password reset via email is no longer supported. Please contact support or change your password while logged in.' });
+        setSubmitting(false);
       }}
     >
       {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (

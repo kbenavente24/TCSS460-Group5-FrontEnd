@@ -3,7 +3,6 @@
 import React, { useState, FocusEvent, SyntheticEvent } from 'react';
 
 // next
-import NextLink from 'next/link';
 import { signIn } from 'next-auth/react';
 
 // material-ui
@@ -12,7 +11,6 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -166,23 +164,18 @@ export default function AuthLogin({ providers, csrfToken }: any) {
               </Grid>
 
               <Grid item xs={12} sx={{ mt: -1 }}>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={checked}
-                        onChange={(event) => setChecked(event.target.checked)}
-                        name="checked"
-                        color="primary"
-                        size="small"
-                      />
-                    }
-                    label={<Typography variant="h6">Keep me signed in</Typography>}
-                  />
-                  <Link component={NextLink} href={'/forget-pass'} variant="h6" color="text.primary">
-                    Forgot Password?
-                  </Link>
-                </Stack>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={checked}
+                      onChange={(event) => setChecked(event.target.checked)}
+                      name="checked"
+                      color="primary"
+                      size="small"
+                    />
+                  }
+                  label={<Typography variant="h6">Keep me signed in</Typography>}
+                />
               </Grid>
               {errors.submit && (
                 <Grid item xs={12}>

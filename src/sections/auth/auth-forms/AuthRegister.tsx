@@ -31,7 +31,6 @@ import { Formik } from 'formik';
 // project import
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
-import { authApi } from 'services/authApi';
 
 import { APP_DEFAULT_PATH } from 'config';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
@@ -105,22 +104,13 @@ export default function AuthRegister({ providers, csrfToken }: any) {
             email: trimmedEmail,
             password: values.password,
             callbackUrl: APP_DEFAULT_PATH
-          }).then(async (res: any) => {
+          }).then((res: any) => {
             if (res?.error) {
               setErrors({ submit: res.error });
               setSubmitting(false);
             } else if (res?.ok) {
-              // Registration successful, send verification email
-              try {
-                await authApi.sendEmailVerification();
-                console.log('✅ Verification email sent successfully');
-                // Show welcome dialog
-                setShowWelcomeDialog(true);
-              } catch (error) {
-                console.error('Failed to send verification email:', error);
-                // Show welcome dialog anyway
-                setShowWelcomeDialog(true);
-              }
+              // Registration successful - show welcome dialog
+              setShowWelcomeDialog(true);
             }
           });
         }}
@@ -323,11 +313,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
         <DialogTitle id="welcome-dialog-title">Welcome to Our App!</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Thank you for registering! We&apos;ve sent a verification email to your inbox. Please check your email and click the
-            verification link to activate your account.
-            <br />
-            <br />
-            <strong>Note:</strong> The verification link will expire in 48 hours.
+            Thank you for registering! Your account has been created successfully. You can now log in and start using the application.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

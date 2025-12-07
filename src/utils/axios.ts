@@ -10,14 +10,14 @@ const getCredentialsApiUrl = () => {
     if (process.env.NODE_ENV === 'development') {
       console.warn(
         '⚠️ CREDENTIALS_API_URL environment variable is not set. ' +
-          'Using default Heroku API. Please add CREDENTIALS_API_URL to your .env.local file if you want to use a different API.'
+          'Using default Render API. Please add CREDENTIALS_API_URL to your .env.local file if you want to use a different API.'
       );
-      return 'https://credentials-api-f267039abb9d.herokuapp.com'; // Default API
+      return 'https://credential-api-giuj.onrender.com'; // Default API
     }
     throw new Error(
       'CREDENTIALS_API_URL environment variable is not set. ' +
         'Please add CREDENTIALS_API_URL to your .env and/or next.config.js file(s). ' +
-        'Example: CREDENTIALS_API_URL=https://credentials-api-f267039abb9d.herokuapp.com'
+        'Example: CREDENTIALS_API_URL=https://credential-api-giuj.onrender.com'
     );
   }
   return url;
