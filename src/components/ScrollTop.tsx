@@ -1,5 +1,5 @@
-import { ReactElement, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { ReactElement, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // ==============================|| NAVIGATION - SCROLL TO TOP ||============================== //
 
@@ -14,7 +14,7 @@ export default function ScrollTop({
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }, [pathname]);
 

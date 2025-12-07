@@ -1,18 +1,18 @@
 // material-ui
-import { Theme } from '@mui/material/styles';
+import { Theme } from "@mui/material/styles";
 
 // ==============================|| OVERRIDES - TABLE CELL ||============================== //
 
 export default function TableCell(theme: Theme) {
   const commonCell = {
-    '&:not(:last-of-type)': {
-      position: 'relative',
-      '&:after': {
-        position: 'absolute',
+    "&:not(:last-of-type)": {
+      position: "relative",
+      "&:after": {
+        position: "absolute",
         content: '""',
         backgroundColor: theme.palette.divider,
         width: 1,
-        height: 'calc(100% - 30px)',
+        height: "calc(100% - 30px)",
         right: 0,
         top: 16,
       },
@@ -23,26 +23,26 @@ export default function TableCell(theme: Theme) {
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontSize: '0.875rem',
+          fontSize: "0.875rem",
           padding: 12,
           borderColor: theme.palette.divider,
-          '&.cell-right': {
-            justifyContent: 'flex-end',
-            textAlign: 'right',
-            '& > *': {
-              justifyContent: 'flex-end',
-              margin: '0 0 0 auto',
+          "&.cell-right": {
+            justifyContent: "flex-end",
+            textAlign: "right",
+            "& > *": {
+              justifyContent: "flex-end",
+              margin: "0 0 0 auto",
             },
-            '& .MuiOutlinedInput-input': {
-              textAlign: 'right',
+            "& .MuiOutlinedInput-input": {
+              textAlign: "right",
             },
           },
-          '&.cell-center': {
-            justifyContent: 'center',
-            textAlign: 'center',
-            '& > *': {
-              justifyContent: 'center',
-              margin: '0 auto',
+          "&.cell-center": {
+            justifyContent: "center",
+            textAlign: "center",
+            "& > *": {
+              justifyContent: "center",
+              margin: "0 auto",
             },
           },
         },
@@ -50,14 +50,14 @@ export default function TableCell(theme: Theme) {
           padding: 8,
         },
         head: {
-          fontSize: '0.75rem',
+          fontSize: "0.75rem",
           fontWeight: 700,
-          textTransform: 'uppercase',
+          textTransform: "uppercase",
           ...commonCell,
         },
         footer: {
-          fontSize: '0.75rem',
-          textTransform: 'uppercase',
+          fontSize: "0.75rem",
+          textTransform: "uppercase",
           ...commonCell,
         },
       },

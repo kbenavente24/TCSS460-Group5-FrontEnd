@@ -1,11 +1,11 @@
 // material-ui
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 // project import
-import AuthWrapper from 'sections/auth/AuthWrapper';
-import AuthChangePassword from 'sections/auth/auth-forms/AuthChangePassword';
+import AuthWrapper from "sections/auth/AuthWrapper";
+import AuthChangePassword from "sections/auth/auth-forms/AuthChangePassword";
 
 // ================================|| CHANGE PASSWORD ||================================ //
 

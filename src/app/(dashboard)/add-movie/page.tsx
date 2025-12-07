@@ -1,4 +1,4 @@
-import AddMovieView from 'views/add-movie';
+import AddMovieView from "views/add-movie";
 
 export default function AddMoviePage() {
   return <AddMovieView />;

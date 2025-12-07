@@ -1,13 +1,13 @@
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 // project import
-import DrawerHeaderStyled from './DrawerHeaderStyled';
-import Logo from 'components/logo';
+import DrawerHeaderStyled from "./DrawerHeaderStyled";
+import Logo from "components/logo";
 
-import { MenuOrientation } from 'config';
-import useConfig from 'hooks/useConfig';
+import { MenuOrientation } from "config";
+import useConfig from "hooks/useConfig";
 
 // ==============================|| DRAWER HEADER ||============================== //
 
@@ -17,7 +17,7 @@ interface Props {
 
 export default function DrawerHeader({ open }: Props) {
   const theme = useTheme();
-  const downLG = useMediaQuery(theme.breakpoints.down('lg'));
+  const downLG = useMediaQuery(theme.breakpoints.down("lg"));
 
   const { menuOrientation } = useConfig();
   const isHorizontal =
@@ -28,21 +28,21 @@ export default function DrawerHeader({ open }: Props) {
       open={open}
       sx={[
         {
-          width: isHorizontal ? { xs: '100%', lg: '424px' } : 'initial',
-          paddingTop: isHorizontal ? { xs: '10px', lg: '0' } : '8px',
-          paddingBottom: isHorizontal ? { xs: '18px', lg: '0' } : '8px',
+          width: isHorizontal ? { xs: "100%", lg: "424px" } : "initial",
+          paddingTop: isHorizontal ? { xs: "10px", lg: "0" } : "8px",
+          paddingBottom: isHorizontal ? { xs: "18px", lg: "0" } : "8px",
           paddingLeft: isHorizontal
-            ? { xs: '24px', lg: '0' }
+            ? { xs: "24px", lg: "0" }
             : open
-              ? '24px'
+              ? "24px"
               : 0,
         },
         isHorizontal
           ? {
-              minHeight: 'unset',
+              minHeight: "unset",
             }
           : {
-              minHeight: '60px',
+              minHeight: "60px",
             },
       ]}
     >
@@ -54,7 +54,7 @@ export default function DrawerHeader({ open }: Props) {
           },
           open
             ? {
-                width: 'auto',
+                width: "auto",
               }
             : {
                 width: 35,

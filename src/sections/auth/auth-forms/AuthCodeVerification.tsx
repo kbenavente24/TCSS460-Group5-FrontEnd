@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import FormHelperText from '@mui/material/FormHelperText';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { useTheme } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import FormHelperText from "@mui/material/FormHelperText";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 // third-party
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import OtpInput from 'react-otp-input';
+import * as Yup from "yup";
+import { Formik } from "formik";
+import OtpInput from "react-otp-input";
 
 // project import
-import AnimateButton from 'components/@extended/AnimateButton';
+import AnimateButton from "components/@extended/AnimateButton";
 
 // ============================|| STATIC - CODE VERIFICATION ||============================ //
 
@@ -24,11 +24,11 @@ export default function AuthCodeVerification() {
 
   return (
     <Formik
-      initialValues={{ otp: '' }}
+      initialValues={{ otp: "" }}
       validationSchema={Yup.object({
         otp: Yup.string()
-          .length(4, 'OTP must be exactly 4 digits')
-          .required('OTP is required'),
+          .length(4, "OTP must be exactly 4 digits")
+          .required("OTP is required"),
       })}
       onSubmit={(values, { resetForm }) => {
         resetForm();
@@ -44,8 +44,8 @@ export default function AuthCodeVerification() {
             <Grid item xs={12}>
               <Box
                 sx={(theme) => ({
-                  '& input:focus-visible': {
-                    outline: 'none !important',
+                  "& input:focus-visible": {
+                    outline: "none !important",
                     borderColor: `${theme.palette.primary.main} !important`,
                     boxShadow: `${theme.customShadows.primary} !important`,
                   },
@@ -53,21 +53,21 @@ export default function AuthCodeVerification() {
               >
                 <OtpInput
                   value={values.otp}
-                  onChange={(otp) => setFieldValue('otp', otp)}
+                  onChange={(otp) => setFieldValue("otp", otp)}
                   inputType="tel"
                   shouldAutoFocus
                   renderInput={(props) => <input {...props} />}
                   numInputs={4}
                   containerStyle={{
-                    justifyContent: 'space-between',
+                    justifyContent: "space-between",
                     margin: -8,
                   }}
                   inputStyle={{
-                    width: '100%',
-                    margin: '8px',
-                    padding: '10px',
-                    border: '1px solid',
-                    outline: 'none',
+                    width: "100%",
+                    margin: "8px",
+                    padding: "10px",
+                    border: "1px solid",
+                    outline: "none",
                     borderRadius: 4,
                     borderColor:
                       touched.otp && errors.otp
@@ -110,8 +110,8 @@ export default function AuthCodeVerification() {
                   sx={{
                     minWidth: 85,
                     ml: 2,
-                    textDecoration: 'none',
-                    cursor: 'pointer',
+                    textDecoration: "none",
+                    cursor: "pointer",
                   }}
                   color="primary"
                 >

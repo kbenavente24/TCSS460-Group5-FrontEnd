@@ -1,4 +1,4 @@
-import SearchPage from 'views/search';
+import SearchPage from "views/search";
 
 // ==============================|| SEARCH PAGE ||============================== //
 

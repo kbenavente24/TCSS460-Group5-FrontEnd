@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { Provider, ReactNode, useState } from 'react';
+import { Provider, ReactNode, useState } from "react";
 
 // next
-import { useServerInsertedHTML } from 'next/navigation';
+import { useServerInsertedHTML } from "next/navigation";
 
 // material-ui
-import createCache from '@emotion/cache';
-import { CacheProvider as DefaultCacheProvider } from '@emotion/react';
+import createCache from "@emotion/cache";
+import { CacheProvider as DefaultCacheProvider } from "@emotion/react";
 import type {
   EmotionCache,
   Options as OptionsOfCreateCache,
-} from '@emotion/cache';
+} from "@emotion/cache";
 
 export type NextAppDirEmotionCacheProviderProps = {
   /** This is the options passed to createCache() from 'import createCache from "@emotion/cache"' */
-  options: Omit<OptionsOfCreateCache, 'insertionPoint'>;
+  options: Omit<OptionsOfCreateCache, "insertionPoint">;
   /** By default <CacheProvider /> from 'import { CacheProvider } from "@emotion/react"' */
   CacheProvider?: Provider<EmotionCache | null>;
   children: ReactNode;
@@ -55,7 +55,7 @@ export function NextAppDirEmotionCacheProvider({
     if (names.length === 0) {
       return null;
     }
-    let styles = '';
+    let styles = "";
     let dataEmotionAttribute = cache.key;
 
     const globals: {
@@ -64,9 +64,9 @@ export function NextAppDirEmotionCacheProvider({
     }[] = [];
 
     names.forEach(({ name, isGlobal }) => {
-      const style = cache.inserted[name] || '';
+      const style = cache.inserted[name] || "";
 
-      if (typeof style !== 'boolean') {
+      if (typeof style !== "boolean") {
         if (isGlobal) {
           globals.push({ name, style });
         } else {

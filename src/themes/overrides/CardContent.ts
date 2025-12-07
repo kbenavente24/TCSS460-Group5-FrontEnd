@@ -6,7 +6,7 @@ export default function CardContent() {
       styleOverrides: {
         root: {
           padding: 20,
-          '&:last-child': {
+          "&:last-child": {
             paddingBottom: 20,
           },
         },

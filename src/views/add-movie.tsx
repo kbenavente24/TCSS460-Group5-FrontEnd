@@ -1,54 +1,54 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // material-ui
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 // icons
-import PlusOutlined from '@ant-design/icons/PlusOutlined';
-import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
-import SaveOutlined from '@ant-design/icons/SaveOutlined';
-import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
+import DeleteOutlined from "@ant-design/icons/DeleteOutlined";
+import SaveOutlined from "@ant-design/icons/SaveOutlined";
+import ArrowLeftOutlined from "@ant-design/icons/ArrowLeftOutlined";
 
 // project imports
-import MainCard from 'components/MainCard';
+import MainCard from "components/MainCard";
 
 // TMDB Movie Genres (standard movie database genres)
 const MOVIE_GENRES = [
-  'Action',
-  'Adventure',
-  'Animation',
-  'Comedy',
-  'Crime',
-  'Documentary',
-  'Drama',
-  'Family',
-  'Fantasy',
-  'History',
-  'Horror',
-  'Music',
-  'Mystery',
-  'Romance',
-  'Science Fiction',
-  'Thriller',
-  'War',
-  'Western',
+  "Action",
+  "Adventure",
+  "Animation",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Family",
+  "Fantasy",
+  "History",
+  "Horror",
+  "Music",
+  "Mystery",
+  "Romance",
+  "Science Fiction",
+  "Thriller",
+  "War",
+  "Western",
 ];
 
 interface Studio {
@@ -71,30 +71,30 @@ export default function AddMovieView() {
   const [success, setSuccess] = useState(false);
 
   // Form state
-  const [title, setTitle] = useState('');
-  const [originalTitle, setOriginalTitle] = useState('');
-  const [releaseDate, setReleaseDate] = useState('');
-  const [runtimeMinutes, setRuntimeMinutes] = useState('');
-  const [overview, setOverview] = useState('');
-  const [budget, setBudget] = useState('');
-  const [revenue, setRevenue] = useState('');
-  const [mpaRating, setMpaRating] = useState('');
-  const [collectionName, setCollectionName] = useState('');
-  const [posterUrl, setPosterUrl] = useState('');
-  const [backdropUrl, setBackdropUrl] = useState('');
+  const [title, setTitle] = useState("");
+  const [originalTitle, setOriginalTitle] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
+  const [runtimeMinutes, setRuntimeMinutes] = useState("");
+  const [overview, setOverview] = useState("");
+  const [budget, setBudget] = useState("");
+  const [revenue, setRevenue] = useState("");
+  const [mpaRating, setMpaRating] = useState("");
+  const [collectionName, setCollectionName] = useState("");
+  const [posterUrl, setPosterUrl] = useState("");
+  const [backdropUrl, setBackdropUrl] = useState("");
 
   // Array fields
-  const [genres, setGenres] = useState<string[]>(['']);
-  const [directors, setDirectors] = useState<string[]>(['']);
-  const [producers, setProducers] = useState<string[]>(['']);
+  const [genres, setGenres] = useState<string[]>([""]);
+  const [directors, setDirectors] = useState<string[]>([""]);
+  const [producers, setProducers] = useState<string[]>([""]);
   const [studios, setStudios] = useState<Studio[]>([
-    { studio_name: '', logo_url: '', country: '' },
+    { studio_name: "", logo_url: "", country: "" },
   ]);
   const [cast, setCast] = useState<CastMember[]>([
-    { actor_name: '', character_name: '', actor_order: 1, profile_url: '' },
+    { actor_name: "", character_name: "", actor_order: 1, profile_url: "" },
   ]);
 
-  const handleAddGenre = () => setGenres([...genres, '']);
+  const handleAddGenre = () => setGenres([...genres, ""]);
   const handleRemoveGenre = (index: number) =>
     setGenres(genres.filter((_, i) => i !== index));
   const handleGenreChange = (index: number, value: string) => {
@@ -103,7 +103,7 @@ export default function AddMovieView() {
     setGenres(newGenres);
   };
 
-  const handleAddDirector = () => setDirectors([...directors, '']);
+  const handleAddDirector = () => setDirectors([...directors, ""]);
   const handleRemoveDirector = (index: number) =>
     setDirectors(directors.filter((_, i) => i !== index));
   const handleDirectorChange = (index: number, value: string) => {
@@ -112,7 +112,7 @@ export default function AddMovieView() {
     setDirectors(newDirectors);
   };
 
-  const handleAddProducer = () => setProducers([...producers, '']);
+  const handleAddProducer = () => setProducers([...producers, ""]);
   const handleRemoveProducer = (index: number) =>
     setProducers(producers.filter((_, i) => i !== index));
   const handleProducerChange = (index: number, value: string) => {
@@ -122,7 +122,7 @@ export default function AddMovieView() {
   };
 
   const handleAddStudio = () =>
-    setStudios([...studios, { studio_name: '', logo_url: '', country: '' }]);
+    setStudios([...studios, { studio_name: "", logo_url: "", country: "" }]);
   const handleRemoveStudio = (index: number) =>
     setStudios(studios.filter((_, i) => i !== index));
   const handleStudioChange = (
@@ -139,10 +139,10 @@ export default function AddMovieView() {
     setCast([
       ...cast,
       {
-        actor_name: '',
-        character_name: '',
+        actor_name: "",
+        character_name: "",
         actor_order: cast.length + 1,
-        profile_url: '',
+        profile_url: "",
       },
     ]);
   const handleRemoveCast = (index: number) =>
@@ -186,10 +186,10 @@ export default function AddMovieView() {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movies`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            'X-API-Key': process.env.NEXT_PUBLIC_MOVIE_API_KEY || '',
+            "Content-Type": "application/json",
+            "X-API-Key": process.env.NEXT_PUBLIC_MOVIE_API_KEY || "",
           },
           body: JSON.stringify(movieData),
         },
@@ -197,17 +197,17 @@ export default function AddMovieView() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create movie');
+        throw new Error(errorData.message || "Failed to create movie");
       }
 
       setSuccess(true);
       // Reset form after 2 seconds
       setTimeout(() => {
-        router.push('/movies');
+        router.push("/movies");
       }, 2000);
     } catch (err: any) {
-      console.error('Error creating movie:', err);
-      setError(err.message || 'Failed to create movie. Please try again.');
+      console.error("Error creating movie:", err);
+      setError(err.message || "Failed to create movie. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -224,8 +224,8 @@ export default function AddMovieView() {
           sx={{ mb: 3 }}
         >
           <Stack direction="row" alignItems="center" spacing={2}>
-            <IconButton onClick={() => router.push('/movies')} size="large">
-              <ArrowLeftOutlined style={{ fontSize: '1.5rem' }} />
+            <IconButton onClick={() => router.push("/movies")} size="large">
+              <ArrowLeftOutlined style={{ fontSize: "1.5rem" }} />
             </IconButton>
             <Typography variant="h2">Add New Movie</Typography>
           </Stack>
@@ -551,7 +551,7 @@ export default function AddMovieView() {
                   {studios.map((studio, index) => (
                     <Box
                       key={index}
-                      sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}
+                      sx={{ p: 2, bgcolor: "action.hover", borderRadius: 1 }}
                     >
                       <Stack
                         direction="row"
@@ -578,7 +578,7 @@ export default function AddMovieView() {
                             onChange={(e) =>
                               handleStudioChange(
                                 index,
-                                'studio_name',
+                                "studio_name",
                                 e.target.value,
                               )
                             }
@@ -592,7 +592,7 @@ export default function AddMovieView() {
                             onChange={(e) =>
                               handleStudioChange(
                                 index,
-                                'logo_url',
+                                "logo_url",
                                 e.target.value,
                               )
                             }
@@ -606,7 +606,7 @@ export default function AddMovieView() {
                             onChange={(e) =>
                               handleStudioChange(
                                 index,
-                                'country',
+                                "country",
                                 e.target.value,
                               )
                             }
@@ -642,7 +642,7 @@ export default function AddMovieView() {
                   {cast.map((member, index) => (
                     <Box
                       key={index}
-                      sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}
+                      sx={{ p: 2, bgcolor: "action.hover", borderRadius: 1 }}
                     >
                       <Stack
                         direction="row"
@@ -671,7 +671,7 @@ export default function AddMovieView() {
                             onChange={(e) =>
                               handleCastChange(
                                 index,
-                                'actor_name',
+                                "actor_name",
                                 e.target.value,
                               )
                             }
@@ -685,7 +685,7 @@ export default function AddMovieView() {
                             onChange={(e) =>
                               handleCastChange(
                                 index,
-                                'character_name',
+                                "character_name",
                                 e.target.value,
                               )
                             }
@@ -700,7 +700,7 @@ export default function AddMovieView() {
                             onChange={(e) =>
                               handleCastChange(
                                 index,
-                                'actor_order',
+                                "actor_order",
                                 parseInt(e.target.value),
                               )
                             }
@@ -714,7 +714,7 @@ export default function AddMovieView() {
                             onChange={(e) =>
                               handleCastChange(
                                 index,
-                                'profile_url',
+                                "profile_url",
                                 e.target.value,
                               )
                             }
@@ -732,7 +732,7 @@ export default function AddMovieView() {
             <Stack direction="row" spacing={2} justifyContent="flex-end">
               <Button
                 variant="outlined"
-                onClick={() => router.push('/movies')}
+                onClick={() => router.push("/movies")}
                 size="large"
                 disabled={loading}
               >
@@ -745,7 +745,7 @@ export default function AddMovieView() {
                 size="large"
                 disabled={loading}
               >
-                {loading ? 'Creating Movie...' : 'Create Movie'}
+                {loading ? "Creating Movie..." : "Create Movie"}
               </Button>
             </Stack>
           </Stack>

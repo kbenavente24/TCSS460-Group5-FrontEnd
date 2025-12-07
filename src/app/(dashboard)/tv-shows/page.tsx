@@ -1,4 +1,4 @@
-import TVShowsPage from 'views/tv-shows';
+import TVShowsPage from "views/tv-shows";
 
 // ==============================|| TV SHOWS PAGE ||============================== //
 

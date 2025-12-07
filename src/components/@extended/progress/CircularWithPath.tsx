@@ -1,11 +1,11 @@
 // material-ui
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 import CircularProgress, {
   CircularProgressProps,
   circularProgressClasses,
-} from '@mui/material/CircularProgress';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+} from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 interface Props extends CircularProgressProps {
   showLabel?: boolean;
   pathColor?: string;
@@ -24,7 +24,7 @@ export default function CircularWithPath({
   ...others
 }: Props) {
   return (
-    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
         variant="determinate"
         sx={[
@@ -33,7 +33,7 @@ export default function CircularWithPath({
                 color: pathColor,
               }
             : {
-                color: 'grey.200',
+                color: "grey.200",
               },
         ]}
         size={size}
@@ -52,7 +52,7 @@ export default function CircularWithPath({
           justifyContent="center"
         >
           <Typography variant="caption" color="text.secondary">
-            {value ? `${Math.round(value)}%` : '0%'}
+            {value ? `${Math.round(value)}%` : "0%"}
           </Typography>
         </Stack>
       )}
@@ -60,10 +60,10 @@ export default function CircularWithPath({
         variant={variant}
         sx={{
           ...sx,
-          position: 'absolute',
+          position: "absolute",
           left: 0,
           [`& .${circularProgressClasses.circle}`]: {
-            strokeLinecap: 'round',
+            strokeLinecap: "round",
           },
         }}
         size={size}

@@ -1,22 +1,22 @@
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent } from "react";
 
 // material-ui
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
-import Fade from '@mui/material/Fade';
-import Grow from '@mui/material/Grow';
-import Slide, { SlideProps } from '@mui/material/Slide';
-import MuiSnackbar from '@mui/material/Snackbar';
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import Grow from "@mui/material/Grow";
+import Slide, { SlideProps } from "@mui/material/Slide";
+import MuiSnackbar from "@mui/material/Snackbar";
 
 // project import
-import IconButton from './IconButton';
-import { closeSnackbar, useGetSnackbar } from 'api/snackbar';
+import IconButton from "./IconButton";
+import { closeSnackbar, useGetSnackbar } from "api/snackbar";
 
 // assets
-import CloseOutlined from '@ant-design/icons/CloseOutlined';
+import CloseOutlined from "@ant-design/icons/CloseOutlined";
 
 // types
-import { KeyedObject } from 'types/root';
+import { KeyedObject } from "types/root";
 
 // animation function
 function TransitionSlideLeft(props: SlideProps) {
@@ -55,7 +55,7 @@ export default function Snackbar() {
   const { snackbar } = useGetSnackbar();
 
   const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     closeSnackbar();
@@ -64,7 +64,7 @@ export default function Snackbar() {
   return (
     <>
       {/* default snackbar */}
-      {snackbar.variant === 'default' && (
+      {snackbar.variant === "default" && (
         <MuiSnackbar
           anchorOrigin={snackbar.anchorOrigin}
           open={snackbar.open}
@@ -93,7 +93,7 @@ export default function Snackbar() {
         />
       )}
       {/* alert snackbar */}
-      {snackbar.variant === 'alert' && (
+      {snackbar.variant === "alert" && (
         <MuiSnackbar
           anchorOrigin={snackbar.anchorOrigin}
           open={snackbar.open}
@@ -131,7 +131,7 @@ export default function Snackbar() {
                 )}
                 {snackbar.actionButton === false && snackbar.close && (
                   <IconButton
-                    sx={{ mt: 0.25, '&:hover': { bgcolor: 'transparent' } }}
+                    sx={{ mt: 0.25, "&:hover": { bgcolor: "transparent" } }}
                     size="small"
                     aria-label="close"
                     variant="contained"
@@ -144,8 +144,8 @@ export default function Snackbar() {
               </>
             }
             sx={[
-              snackbar.alert.variant === 'outlined' && {
-                bgcolor: 'grey.0',
+              snackbar.alert.variant === "outlined" && {
+                bgcolor: "grey.0",
               },
             ]}
           >

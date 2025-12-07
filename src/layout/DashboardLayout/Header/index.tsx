@@ -1,11 +1,11 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo } from "react";
 
 // material-ui
-import AppBar, { AppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+import AppBar, { AppBarProps } from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 
 // project import
-import HeaderContent from './HeaderContent';
+import HeaderContent from "./HeaderContent";
 
 // ==============================|| MAIN LAYOUT - HEADER ||============================== //
 
@@ -18,14 +18,14 @@ export default function Header() {
 
   // app-bar params
   const appBar: AppBarProps = {
-    position: 'fixed',
+    position: "fixed",
     elevation: 0,
     sx: {
-      backgroundColor: '#424242',
-      borderBottom: '1px solid',
-      borderBottomColor: '#333',
+      backgroundColor: "#424242",
+      borderBottom: "1px solid",
+      borderBottomColor: "#333",
       zIndex: 1200,
-      width: '100%',
+      width: "100%",
     },
   };
 

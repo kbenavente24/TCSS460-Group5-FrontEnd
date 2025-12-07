@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo } from "react";
 
 // material-ui
 import {
@@ -7,19 +7,19 @@ import {
   ThemeProvider,
   Theme,
   TypographyVariantsOptions,
-} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+} from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 // project import
-import useConfig from 'hooks/useConfig';
-import Palette from './palette';
-import Typography from './typography';
-import CustomShadows from './shadows';
-import componentsOverride from './overrides';
-import { NextAppDirEmotionCacheProvider } from './emotionCache';
+import useConfig from "hooks/useConfig";
+import Palette from "./palette";
+import Typography from "./typography";
+import CustomShadows from "./shadows";
+import componentsOverride from "./overrides";
+import { NextAppDirEmotionCacheProvider } from "./emotionCache";
 
 // types
-import { CustomShadowProps } from 'types/theme';
+import { CustomShadowProps } from "types/theme";
 
 // types
 type ThemeCustomizationProps = {
@@ -78,7 +78,7 @@ export default function ThemeCustomization({
   themes.components = componentsOverride(themes);
 
   return (
-    <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
+    <NextAppDirEmotionCacheProvider options={{ key: "mui" }}>
       <ThemeProvider theme={themes}>
         <CssBaseline enableColorScheme />
         {children}

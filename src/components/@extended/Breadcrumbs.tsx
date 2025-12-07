@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import { CSSProperties, ReactElement, useEffect, useState } from 'react';
+import { CSSProperties, ReactElement, useEffect, useState } from "react";
 
 // next
-import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
+import { useTheme } from "@mui/material/styles";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
 
 // project import
-import MainCard from 'components/MainCard';
-import { ThemeDirection } from 'config';
-import navigation from 'menu-items';
+import MainCard from "components/MainCard";
+import { ThemeDirection } from "config";
+import navigation from "menu-items";
 
 // assets
-import ApartmentOutlined from '@ant-design/icons/ApartmentOutlined';
-import HomeOutlined from '@ant-design/icons/HomeOutlined';
-import HomeFilled from '@ant-design/icons/HomeFilled';
+import ApartmentOutlined from "@ant-design/icons/ApartmentOutlined";
+import HomeOutlined from "@ant-design/icons/HomeOutlined";
+import HomeFilled from "@ant-design/icons/HomeFilled";
 
 // types
-import { OverrideIcon } from 'types/root';
-import { NavItemType } from 'types/menu';
+import { OverrideIcon } from "types/root";
+import { NavItemType } from "types/menu";
 
 interface BreadcrumbLinkProps {
   title: string;
@@ -82,8 +82,8 @@ export default function Breadcrumbs({
       theme.direction === ThemeDirection.RTL ? 0 : theme.spacing(0.75),
     marginLeft:
       theme.direction === ThemeDirection.RTL ? theme.spacing(0.75) : 0,
-    width: '1rem',
-    height: '1rem',
+    width: "1rem",
+    height: "1rem",
     color: theme.palette.secondary.main,
   };
 
@@ -91,7 +91,7 @@ export default function Breadcrumbs({
 
   useEffect(() => {
     navigation?.items?.map((menu: NavItemType) => {
-      if (menu.type && menu.type === 'group') {
+      if (menu.type && menu.type === "group") {
         if (menu?.url && menu.url === customLocation) {
           setMain(menu);
           setItem(menu);
@@ -107,13 +107,13 @@ export default function Breadcrumbs({
   const getCollapse = (menu: NavItemType) => {
     if (!custom && menu.children) {
       menu.children.filter((collapse: NavItemType) => {
-        if (collapse.type && collapse.type === 'collapse') {
+        if (collapse.type && collapse.type === "collapse") {
           getCollapse(collapse as { children: NavItemType[]; type?: string });
           if (collapse.url === customLocation) {
             setMain(collapse);
             setItem(collapse);
           }
-        } else if (collapse.type && collapse.type === 'item') {
+        } else if (collapse.type && collapse.type === "item") {
           if (customLocation === collapse.url) {
             setMain(menu);
             setItem(collapse);
@@ -127,15 +127,15 @@ export default function Breadcrumbs({
   // item separator
   const SeparatorIcon = separator!;
   const separatorIcon = separator ? (
-    <SeparatorIcon style={{ fontSize: '0.75rem', marginTop: 2 }} />
+    <SeparatorIcon style={{ fontSize: "0.75rem", marginTop: 2 }} />
   ) : (
-    '/'
+    "/"
   );
 
   let mainContent;
   let itemContent;
   let breadcrumbContent: ReactElement = <Typography />;
-  let itemTitle: NavItemType['title'] = '';
+  let itemTitle: NavItemType["title"] = "";
   let CollapseIcon;
   let ItemIcon;
 
@@ -143,19 +143,19 @@ export default function Breadcrumbs({
   if (
     !custom &&
     main &&
-    main.type === 'collapse' &&
+    main.type === "collapse" &&
     main.breadcrumbs === true
   ) {
     CollapseIcon = main.icon ? main.icon : ApartmentOutlined;
     mainContent = (
       <NextLink href={main.url as string}>
         <Typography
-          variant={window.location.pathname === main.url ? 'subtitle1' : 'h6'}
-          sx={{ textDecoration: 'none', cursor: 'pointer' }}
+          variant={window.location.pathname === main.url ? "subtitle1" : "h6"}
+          sx={{ textDecoration: "none", cursor: "pointer" }}
           color={
             window.location.pathname === main.url
-              ? 'text.primary'
-              : 'text.secondary'
+              ? "text.primary"
+              : "text.secondary"
           }
         >
           {icons && <CollapseIcon style={iconSX} />}
@@ -169,7 +169,7 @@ export default function Breadcrumbs({
         border={card}
         sx={
           card === false
-            ? { mb: 3, bgcolor: 'inherit', backgroundImage: 'none', ...sx }
+            ? { mb: 3, bgcolor: "inherit", backgroundImage: "none", ...sx }
             : { mb: 3, ...sx }
         }
         {...others}
@@ -178,9 +178,9 @@ export default function Breadcrumbs({
       >
         <Grid
           container
-          direction={rightAlign ? 'row' : 'column'}
-          justifyContent={rightAlign ? 'space-between' : 'flex-start'}
-          alignItems={rightAlign ? 'center' : 'flex-start'}
+          direction={rightAlign ? "row" : "column"}
+          justifyContent={rightAlign ? "space-between" : "flex-start"}
+          alignItems={rightAlign ? "center" : "flex-start"}
           spacing={1}
         >
           <Grid item>
@@ -193,13 +193,13 @@ export default function Breadcrumbs({
                 <Typography
                   color="text.secondary"
                   variant="h6"
-                  sx={{ textDecoration: 'none', cursor: 'pointer' }}
+                  sx={{ textDecoration: "none", cursor: "pointer" }}
                 >
                   {icons && <HomeOutlined style={iconSX} />}
                   {icon && !icons && (
                     <HomeFilled style={{ ...iconSX, marginRight: 0 }} />
                   )}
-                  {(!icon || icons) && 'Home'}
+                  {(!icon || icons) && "Home"}
                 </Typography>
               </NextLink>
               {mainContent}
@@ -228,8 +228,8 @@ export default function Breadcrumbs({
   }
   // items
   if (
-    (item && item.type === 'item') ||
-    (item?.type === 'group' && item?.url) ||
+    (item && item.type === "item") ||
+    (item?.type === "group" && item?.url) ||
     custom
   ) {
     itemTitle = item?.title;
@@ -250,13 +250,13 @@ export default function Breadcrumbs({
           <Typography
             color="text.secondary"
             variant="h6"
-            sx={{ textDecoration: 'none', cursor: 'pointer' }}
+            sx={{ textDecoration: "none", cursor: "pointer" }}
           >
             {icons && <HomeOutlined style={iconSX} />}
             {icon && !icons && (
               <HomeFilled style={{ ...iconSX, marginRight: 0 }} />
             )}
-            {(!icon || icons) && 'Home'}
+            {(!icon || icons) && "Home"}
           </Typography>
         </NextLink>
         {mainContent}
@@ -277,12 +277,12 @@ export default function Breadcrumbs({
             let breadcrumbLink = (
               <Typography
                 key={index}
-                variant={!link.to ? 'subtitle1' : 'h6'}
+                variant={!link.to ? "subtitle1" : "h6"}
                 sx={{
-                  textDecoration: 'none',
-                  ...(link.to && { cursor: 'pointer' }),
+                  textDecoration: "none",
+                  ...(link.to && { cursor: "pointer" }),
                 }}
-                color={!link.to ? 'text.primary' : 'text.secondary'}
+                color={!link.to ? "text.primary" : "text.secondary"}
               >
                 {link.icon && <CollapseIcon style={iconSX} />}
                 {link.title}
@@ -308,7 +308,7 @@ export default function Breadcrumbs({
           border={card}
           sx={
             card === false
-              ? { mb: 3, bgcolor: 'inherit', backgroundImage: 'none', ...sx }
+              ? { mb: 3, bgcolor: "inherit", backgroundImage: "none", ...sx }
               : { mb: 3, ...sx }
           }
           {...others}
@@ -317,9 +317,9 @@ export default function Breadcrumbs({
         >
           <Grid
             container
-            direction={rightAlign ? 'row' : 'column'}
-            justifyContent={rightAlign ? 'space-between' : 'flex-start'}
-            alignItems={rightAlign ? 'center' : 'flex-start'}
+            direction={rightAlign ? "row" : "column"}
+            justifyContent={rightAlign ? "space-between" : "flex-start"}
+            alignItems={rightAlign ? "center" : "flex-start"}
             spacing={1}
           >
             {title && !titleBottom && (

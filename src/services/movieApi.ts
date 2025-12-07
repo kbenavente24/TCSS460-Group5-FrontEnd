@@ -1,15 +1,15 @@
 // src/services/movieApi.ts
-import axios from 'axios';
+import axios from "axios";
 
 // Use local Next.js API routes to avoid CORS issues
-const API_BASE_URL = '/api/movies';
+const API_BASE_URL = "/api/movies";
 
 // Create axios instance with default config
 // No API key needed here since the Next.js API route handles it
 const movieApiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    accept: 'application/json',
+    accept: "application/json",
   },
 });
 
@@ -62,14 +62,14 @@ export const movieApi = {
   // Get all movies with optional filters
   getMovies: async (filters?: MovieFilters): Promise<MoviesResponse> => {
     try {
-      console.log('Fetching movies with filters:', filters);
-      console.log('API Base URL:', API_BASE_URL);
+      console.log("Fetching movies with filters:", filters);
+      console.log("API Base URL:", API_BASE_URL);
 
-      const response = await movieApiClient.get('', {
+      const response = await movieApiClient.get("", {
         params: filters,
       });
 
-      console.log('API Response:', response.data);
+      console.log("API Response:", response.data);
 
       // The API returns { data: [...], meta: {...} } but we expect pagination
       // Transform the response to match our interface
@@ -83,7 +83,7 @@ export const movieApi = {
         movies = responseData.data;
       } else if (
         responseData?.data &&
-        typeof responseData.data === 'object' &&
+        typeof responseData.data === "object" &&
         !Array.isArray(responseData.data)
       ) {
         // Single movie object wrapped in data
@@ -109,7 +109,7 @@ export const movieApi = {
             },
       };
     } catch (error) {
-      console.error('Error fetching movies:', error);
+      console.error("Error fetching movies:", error);
       // Return empty result instead of throwing
       return {
         data: [],

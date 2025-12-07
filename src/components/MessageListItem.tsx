@@ -1,19 +1,19 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
+import DeleteIcon from "@mui/icons-material/Delete";
+import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled";
 import {
   IconButton,
   ListItem,
   ListItemAvatar,
   ListItemButton,
   ListItemText,
-} from '@mui/material';
+} from "@mui/material";
 
 // project import
-import { IMessage } from 'types/message';
-import PriorityAvatar from 'components/Priority';
-import { useMessage } from 'contexts/MessageContext';
+import { IMessage } from "types/message";
+import PriorityAvatar from "components/Priority";
+import { useMessage } from "contexts/MessageContext";
 
 export function MessageListItem({
   message,
@@ -39,7 +39,7 @@ export function MessageListItem({
 
   function onItemClick(msg: IMessage) {
     onChangeMessage(msg);
-    router.push('/messages/msgContext/');
+    router.push("/messages/msgContext/");
   }
 
   return (
@@ -63,7 +63,7 @@ export function MessageListItem({
           primary={message.message}
           secondary={message.name}
           slotProps={{
-            secondary: { color: 'gray' },
+            secondary: { color: "gray" },
           }}
         />
       </ListItemButton>

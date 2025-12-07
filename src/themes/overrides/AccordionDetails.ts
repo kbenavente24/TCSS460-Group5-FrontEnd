@@ -1,5 +1,5 @@
 // material-ui
-import { Theme } from '@mui/material/styles';
+import { Theme } from "@mui/material/styles";
 
 // ==============================|| OVERRIDES - ALERT TITLE ||============================== //
 
@@ -9,7 +9,7 @@ export default function AccordionDetails(theme: Theme) {
       styleOverrides: {
         root: {
           padding: theme.spacing(2),
-          borderTop: '1px solid',
+          borderTop: "1px solid",
           borderTopColor: theme.palette.secondary.light,
         },
       },

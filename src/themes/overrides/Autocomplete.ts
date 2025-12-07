@@ -5,17 +5,17 @@ export default function Autocomplete() {
     MuiAutocomplete: {
       styleOverrides: {
         root: {
-          '& .MuiOutlinedInput-root': {
-            padding: '3px 9px',
+          "& .MuiOutlinedInput-root": {
+            padding: "3px 9px",
           },
         },
         popupIndicator: {
-          width: 'auto',
-          height: 'auto',
+          width: "auto",
+          height: "auto",
         },
         clearIndicator: {
-          width: 'auto',
-          height: 'auto',
+          width: "auto",
+          height: "auto",
         },
       },
     },

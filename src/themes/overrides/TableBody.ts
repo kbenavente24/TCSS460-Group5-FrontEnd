@@ -1,11 +1,11 @@
 // material-ui
-import { Theme } from '@mui/material/styles';
+import { Theme } from "@mui/material/styles";
 
 // ==============================|| OVERRIDES - TABLE ROW ||============================== //
 
 export default function TableBody(theme: Theme) {
   const hoverStyle = {
-    '&:hover': {
+    "&:hover": {
       backgroundColor: theme.palette.secondary.lighter,
     },
   };
@@ -14,13 +14,13 @@ export default function TableBody(theme: Theme) {
     MuiTableBody: {
       styleOverrides: {
         root: {
-          '&.striped .MuiTableRow-root': {
-            '&:nth-of-type(even)': {
+          "&.striped .MuiTableRow-root": {
+            "&:nth-of-type(even)": {
               backgroundColor: theme.palette.grey[50],
             },
             ...hoverStyle,
           },
-          '& .MuiTableRow-root': {
+          "& .MuiTableRow-root": {
             ...hoverStyle,
           },
         },

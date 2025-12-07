@@ -1,4 +1,4 @@
-import Top10Page from 'views/top10';
+import Top10Page from "views/top10";
 
 // ==============================|| TOP 10S PAGE ||============================== //
 

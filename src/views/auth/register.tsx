@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
 // next
-import NextLink from 'next/link';
-import { getProviders, getCsrfToken } from 'next-auth/react';
+import NextLink from "next/link";
+import { getProviders, getCsrfToken } from "next-auth/react";
 
 // material-ui
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 // project import
-import AuthWrapper from 'sections/auth/AuthWrapper';
-import AuthRegister from 'sections/auth/auth-forms/AuthRegister';
+import AuthWrapper from "sections/auth/AuthWrapper";
+import AuthRegister from "sections/auth/auth-forms/AuthRegister";
 
 // ================================|| REGISTER ||================================ //
 

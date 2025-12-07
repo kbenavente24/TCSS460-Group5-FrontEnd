@@ -1,10 +1,10 @@
-import { forwardRef, ReactNode, Ref } from 'react';
+import { forwardRef, ReactNode, Ref } from "react";
 
 // next
-import Head from 'next/head';
+import Head from "next/head";
 
 // material-ui
-import Box, { BoxProps } from '@mui/material/Box';
+import Box, { BoxProps } from "@mui/material/Box";
 
 // ==============================|| Page - SET TITLE & META TAGS ||============================== //
 
@@ -15,7 +15,7 @@ interface Props extends BoxProps {
 }
 
 function Page(
-  { children, title = '', meta, ...other }: Props,
+  { children, title = "", meta, ...other }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
   return (

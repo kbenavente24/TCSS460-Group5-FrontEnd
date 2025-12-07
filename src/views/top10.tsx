@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 // material-ui
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
 
 // icons
-import PlusOutlined from '@ant-design/icons/PlusOutlined';
-import CloseOutlined from '@ant-design/icons/CloseOutlined';
-import LeftOutlined from '@ant-design/icons/LeftOutlined';
-import ShareAltOutlined from '@ant-design/icons/ShareAltOutlined';
-import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
+import CloseOutlined from "@ant-design/icons/CloseOutlined";
+import LeftOutlined from "@ant-design/icons/LeftOutlined";
+import ShareAltOutlined from "@ant-design/icons/ShareAltOutlined";
+import DeleteOutlined from "@ant-design/icons/DeleteOutlined";
 
 // project imports
-import MainCard from 'components/MainCard';
-import ContentPicker, { type SelectedContent } from 'components/ContentPicker';
+import MainCard from "components/MainCard";
+import ContentPicker, { type SelectedContent } from "components/ContentPicker";
 
 // ==============================|| TOP 10S PAGE ||============================== //
 
@@ -36,7 +36,7 @@ interface ListItem {
   movieId?: number;
   title?: string;
   posterUrl?: string;
-  contentType?: 'movie' | 'tv-show';
+  contentType?: "movie" | "tv-show";
 }
 
 interface Top10List {
@@ -54,10 +54,10 @@ export default function Top10Page() {
   const [selectedList, setSelectedList] = useState<Top10List | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [openShareDialog, setOpenShareDialog] = useState(false);
-  const [listName, setListName] = useState('');
-  const [listDescription, setListDescription] = useState('');
+  const [listName, setListName] = useState("");
+  const [listDescription, setListDescription] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [listToDelete, setListToDelete] = useState<Top10List | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -66,26 +66,26 @@ export default function Top10Page() {
   // Fetch lists from the API
   useEffect(() => {
     async function fetchLists() {
-      if (status === 'loading') return;
+      if (status === "loading") return;
 
-      if (status === 'unauthenticated') {
+      if (status === "unauthenticated") {
         setLoading(false);
         return;
       }
 
       try {
         setLoading(true);
-        const response = await fetch('/api/lists');
+        const response = await fetch("/api/lists");
 
         if (!response.ok) {
-          throw new Error('Failed to fetch lists');
+          throw new Error("Failed to fetch lists");
         }
 
         const result = await response.json();
         setLists(result.data || []);
       } catch (err: any) {
-        console.error('Error fetching lists:', err);
-        setError(err.message || 'Failed to load lists');
+        console.error("Error fetching lists:", err);
+        setError(err.message || "Failed to load lists");
       } finally {
         setLoading(false);
       }
@@ -100,26 +100,26 @@ export default function Top10Page() {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
-    setListName('');
-    setListDescription('');
+    setListName("");
+    setListDescription("");
   };
 
   const handleCreateList = async () => {
     try {
-      const response = await fetch('/api/lists', {
-        method: 'POST',
+      const response = await fetch("/api/lists", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           title: listName,
-          type: 'mixed',
+          type: "mixed",
           description: listDescription,
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create list');
+        throw new Error("Failed to create list");
       }
 
       const result = await response.json();
@@ -138,8 +138,8 @@ export default function Top10Page() {
       // Immediately open the newly created list
       setSelectedList(newList);
     } catch (err: any) {
-      console.error('Error creating list:', err);
-      setError(err.message || 'Failed to create list');
+      console.error("Error creating list:", err);
+      setError(err.message || "Failed to create list");
     }
   };
 
@@ -149,27 +149,27 @@ export default function Top10Page() {
       const response = await fetch(`/api/lists/${list.id}`);
 
       if (!response.ok) {
-        throw new Error('Failed to fetch list details');
+        throw new Error("Failed to fetch list details");
       }
 
       const result = await response.json();
       setSelectedList(result.data);
     } catch (err: any) {
-      console.error('Error fetching list details:', err);
-      setError(err.message || 'Failed to load list details');
+      console.error("Error fetching list details:", err);
+      setError(err.message || "Failed to load list details");
     }
   };
 
   const handleBackToDashboard = async () => {
     // Refresh the lists to update item counts
     try {
-      const response = await fetch('/api/lists');
+      const response = await fetch("/api/lists");
       if (response.ok) {
         const result = await response.json();
         setLists(result.data || []);
       }
     } catch (err) {
-      console.error('Error refreshing lists:', err);
+      console.error("Error refreshing lists:", err);
     }
     setSelectedList(null);
   };
@@ -200,11 +200,11 @@ export default function Top10Page() {
 
     try {
       const response = await fetch(`/api/lists/${listToDelete.id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete list');
+        throw new Error("Failed to delete list");
       }
 
       // Remove from local state
@@ -217,8 +217,8 @@ export default function Top10Page() {
 
       handleCloseDeleteConfirm();
     } catch (err: any) {
-      console.error('Error deleting list:', err);
-      setError(err.message || 'Failed to delete list');
+      console.error("Error deleting list:", err);
+      setError(err.message || "Failed to delete list");
       handleCloseDeleteConfirm();
     }
   };
@@ -238,9 +238,9 @@ export default function Top10Page() {
 
     try {
       const response = await fetch(`/api/lists/${selectedList.id}/items`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           rank: selectedRank,
@@ -252,7 +252,7 @@ export default function Top10Page() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to add item');
+        throw new Error("Failed to add item");
       }
 
       // Refresh the list to get updated items
@@ -262,8 +262,8 @@ export default function Top10Page() {
         setSelectedList(result.data);
       }
     } catch (err: any) {
-      console.error('Error adding item:', err);
-      setError(err.message || 'Failed to add item');
+      console.error("Error adding item:", err);
+      setError(err.message || "Failed to add item");
     }
   };
 
@@ -274,12 +274,12 @@ export default function Top10Page() {
       const response = await fetch(
         `/api/lists/${selectedList.id}/items?rank=${rank}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
         },
       );
 
       if (!response.ok) {
-        throw new Error('Failed to remove item');
+        throw new Error("Failed to remove item");
       }
 
       // Update the list locally
@@ -292,8 +292,8 @@ export default function Top10Page() {
         items: updatedItems,
       });
     } catch (err: any) {
-      console.error('Error removing item:', err);
-      setError(err.message || 'Failed to remove item');
+      console.error("Error removing item:", err);
+      setError(err.message || "Failed to remove item");
     }
   };
 
@@ -302,11 +302,11 @@ export default function Top10Page() {
     return (
       <Box
         sx={{
-          height: 'calc(100vh - 80px)',
+          height: "calc(100vh - 80px)",
           p: 3,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Typography variant="h5">Loading...</Typography>
@@ -319,11 +319,11 @@ export default function Top10Page() {
     return (
       <Box
         sx={{
-          height: 'calc(100vh - 80px)',
+          height: "calc(100vh - 80px)",
           p: 3,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Typography variant="h5" color="error">
@@ -334,15 +334,15 @@ export default function Top10Page() {
   }
 
   // Check if user is authenticated
-  if (status === 'unauthenticated') {
+  if (status === "unauthenticated") {
     return (
       <Box
         sx={{
-          height: 'calc(100vh - 80px)',
+          height: "calc(100vh - 80px)",
           p: 3,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Typography variant="h5">
@@ -353,14 +353,14 @@ export default function Top10Page() {
   }
 
   return (
-    <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
+    <Box sx={{ height: "calc(100vh - 80px)", p: 3 }}>
       <MainCard
         sx={{
-          width: '100%',
-          height: '100%',
-          overflow: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
+          width: "100%",
+          height: "100%",
+          overflow: "auto",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         {selectedList ? (
@@ -414,12 +414,12 @@ export default function Top10Page() {
               )}
               <Stack direction="row" spacing={2}>
                 <Typography variant="body2" color="text.secondary">
-                  Type:{' '}
+                  Type:{" "}
                   {selectedList.type.charAt(0).toUpperCase() +
                     selectedList.type.slice(1)}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Created:{' '}
+                  Created:{" "}
                   {new Date(selectedList.createdAt).toLocaleDateString()}
                 </Typography>
               </Stack>
@@ -433,12 +433,12 @@ export default function Top10Page() {
                 <Card
                   key={item.rank}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     p: 2,
-                    transition: 'box-shadow 0.2s',
-                    cursor: item.movieId ? 'default' : 'pointer',
-                    '&:hover': {
+                    transition: "box-shadow 0.2s",
+                    cursor: item.movieId ? "default" : "pointer",
+                    "&:hover": {
                       boxShadow: 4,
                     },
                   }}
@@ -449,11 +449,11 @@ export default function Top10Page() {
                     sx={{
                       minWidth: 60,
                       height: 60,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      bgcolor: 'primary.main',
-                      color: 'primary.contrastText',
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      bgcolor: "primary.main",
+                      color: "primary.contrastText",
                       borderRadius: 2,
                       mr: 3,
                     }}
@@ -468,21 +468,21 @@ export default function Top10Page() {
                         sx={{
                           width: 80,
                           height: 120,
-                          bgcolor: 'action.hover',
+                          bgcolor: "action.hover",
                           borderRadius: 1,
                           mr: 2,
                           backgroundImage: item.posterUrl
                             ? `url(${item.posterUrl})`
-                            : 'none',
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
+                            : "none",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
                         }}
                       />
                       <Box sx={{ flex: 1 }}>
                         <Typography variant="h5">{item.title}</Typography>
                         {item.contentType && (
                           <Typography variant="caption" color="text.secondary">
-                            {item.contentType === 'movie' ? 'Movie' : 'TV Show'}
+                            {item.contentType === "movie" ? "Movie" : "TV Show"}
                           </Typography>
                         )}
                       </Box>
@@ -514,12 +514,12 @@ export default function Top10Page() {
                     <Box
                       sx={{
                         flex: 1,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                         height: 120,
-                        border: '2px dashed',
-                        borderColor: 'divider',
+                        border: "2px dashed",
+                        borderColor: "divider",
                         borderRadius: 1,
                       }}
                     >
@@ -564,25 +564,25 @@ export default function Top10Page() {
             </Box>
 
             {/* Lists Section */}
-            <Box sx={{ flex: 1, overflow: 'auto' }}>
+            <Box sx={{ flex: 1, overflow: "auto" }}>
               {lists.length > 0 ? (
                 <Stack
                   direction="row"
                   spacing={3}
                   sx={{
-                    overflowX: 'auto',
+                    overflowX: "auto",
                     pb: 2,
-                    '&::-webkit-scrollbar': {
-                      height: '12px',
+                    "&::-webkit-scrollbar": {
+                      height: "12px",
                     },
-                    '&::-webkit-scrollbar-track': {
-                      backgroundColor: 'background.paper',
+                    "&::-webkit-scrollbar-track": {
+                      backgroundColor: "background.paper",
                     },
-                    '&::-webkit-scrollbar-thumb': {
-                      backgroundColor: '#424242',
-                      borderRadius: '6px',
-                      '&:hover': {
-                        backgroundColor: '#303030',
+                    "&::-webkit-scrollbar-thumb": {
+                      backgroundColor: "#424242",
+                      borderRadius: "6px",
+                      "&:hover": {
+                        backgroundColor: "#303030",
                       },
                     },
                   }}
@@ -594,11 +594,11 @@ export default function Top10Page() {
                       sx={{
                         minWidth: 280,
                         maxWidth: 280,
-                        cursor: 'pointer',
-                        transition: 'transform 0.2s, box-shadow 0.2s',
-                        position: 'relative',
-                        '&:hover': {
-                          transform: 'translateY(-4px)',
+                        cursor: "pointer",
+                        transition: "transform 0.2s, box-shadow 0.2s",
+                        position: "relative",
+                        "&:hover": {
+                          transform: "translateY(-4px)",
                           boxShadow: 6,
                         },
                       }}
@@ -606,12 +606,12 @@ export default function Top10Page() {
                       <IconButton
                         onClick={(e) => handleDeleteClick(list, e)}
                         sx={{
-                          position: 'absolute',
+                          position: "absolute",
                           top: 8,
                           right: 8,
-                          color: 'error.main',
-                          '&:hover': {
-                            bgcolor: 'error.lighter',
+                          color: "error.main",
+                          "&:hover": {
+                            bgcolor: "error.lighter",
                           },
                         }}
                         size="small"
@@ -630,7 +630,7 @@ export default function Top10Page() {
                           {(list as any).itemCount || 0} / 10 items
                         </Typography>
                         <Typography variant="caption" color="text.secondary">
-                          Created:{' '}
+                          Created:{" "}
                           {new Date(list.createdAt).toLocaleDateString()}
                         </Typography>
                       </CardContent>
@@ -640,10 +640,10 @@ export default function Top10Page() {
               ) : (
                 <Box
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100%',
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
                   }}
                 >
                   <Typography variant="h5" color="text.secondary">
@@ -672,15 +672,15 @@ export default function Top10Page() {
         <DialogTitle>
           <Box
             sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <Typography variant="h3">Create New List</Typography>
             <Button
               onClick={handleCloseDialog}
-              sx={{ minWidth: 'auto', p: 1 }}
+              sx={{ minWidth: "auto", p: 1 }}
               color="inherit"
             >
               <CloseOutlined />
@@ -711,7 +711,7 @@ export default function Top10Page() {
             />
 
             {/* Max Items Info */}
-            <Box sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
+            <Box sx={{ p: 2, bgcolor: "action.hover", borderRadius: 1 }}>
               <Typography variant="body2" color="text.secondary">
                 You can add up to 10 items to your list. You&apos;ll be able to
                 rank and reorder them after creation.
@@ -750,15 +750,15 @@ export default function Top10Page() {
         <DialogTitle sx={{ pb: 1 }}>
           <Box
             sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <Typography variant="h3">Share Your List</Typography>
             <Button
               onClick={handleCloseShareDialog}
-              sx={{ minWidth: 'auto', p: 1 }}
+              sx={{ minWidth: "auto", p: 1 }}
               color="inherit"
             >
               <CloseOutlined />
@@ -769,15 +769,15 @@ export default function Top10Page() {
           {selectedList && (
             <Box
               sx={{
-                bgcolor: 'background.paper',
+                bgcolor: "background.paper",
                 p: 2.5,
                 borderRadius: 2,
-                border: '1px solid',
-                borderColor: 'divider',
+                border: "1px solid",
+                borderColor: "divider",
               }}
             >
               {/* List Header */}
-              <Box sx={{ textAlign: 'center', mb: 2 }}>
+              <Box sx={{ textAlign: "center", mb: 2 }}>
                 <Typography variant="h3" gutterBottom>
                   {selectedList.title}
                 </Typography>
@@ -791,7 +791,7 @@ export default function Top10Page() {
                   </Typography>
                 )}
                 <Typography variant="caption" color="text.secondary">
-                  Created:{' '}
+                  Created:{" "}
                   {new Date(selectedList.createdAt).toLocaleDateString()}
                 </Typography>
               </Box>
@@ -801,8 +801,8 @@ export default function Top10Page() {
               {/* Compact List - 2 columns */}
               <Box
                 sx={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
                   gap: 1.5,
                 }}
               >
@@ -810,10 +810,10 @@ export default function Top10Page() {
                   <Box
                     key={item.rank}
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
+                      display: "flex",
+                      alignItems: "center",
                       p: 1,
-                      bgcolor: 'action.hover',
+                      bgcolor: "action.hover",
                       borderRadius: 1,
                     }}
                   >
@@ -822,11 +822,11 @@ export default function Top10Page() {
                       sx={{
                         minWidth: 35,
                         height: 35,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        bgcolor: 'primary.main',
-                        color: 'primary.contrastText',
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        bgcolor: "primary.main",
+                        color: "primary.contrastText",
                         borderRadius: 1,
                         mr: 1.5,
                       }}
@@ -841,20 +841,20 @@ export default function Top10Page() {
                           sx={{
                             width: 40,
                             height: 60,
-                            bgcolor: 'action.disabled',
+                            bgcolor: "action.disabled",
                             borderRadius: 1,
                             mr: 1,
                             backgroundImage: item.posterUrl
                               ? `url(${item.posterUrl})`
-                              : 'none',
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
+                              : "none",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
                           }}
                         />
                         <Box sx={{ flex: 1 }}>
                           <Typography
                             variant="body2"
-                            sx={{ fontSize: '0.875rem' }}
+                            sx={{ fontSize: "0.875rem" }}
                           >
                             {item.title}
                           </Typography>
@@ -862,11 +862,11 @@ export default function Top10Page() {
                             <Typography
                               variant="caption"
                               color="text.secondary"
-                              sx={{ fontSize: '0.7rem' }}
+                              sx={{ fontSize: "0.7rem" }}
                             >
-                              {item.contentType === 'movie'
-                                ? 'Movie'
-                                : 'TV Show'}
+                              {item.contentType === "movie"
+                                ? "Movie"
+                                : "TV Show"}
                             </Typography>
                           )}
                         </Box>
@@ -875,7 +875,7 @@ export default function Top10Page() {
                       <Typography
                         variant="body2"
                         color="text.secondary"
-                        sx={{ flex: 1, fontSize: '0.8rem' }}
+                        sx={{ flex: 1, fontSize: "0.8rem" }}
                       >
                         Empty slot
                       </Typography>
@@ -885,11 +885,11 @@ export default function Top10Page() {
               </Box>
 
               {/* Footer */}
-              <Box sx={{ textAlign: 'center', mt: 2 }}>
+              <Box sx={{ textAlign: "center", mt: 2 }}>
                 <Typography
                   variant="caption"
                   color="text.secondary"
-                  sx={{ fontSize: '0.7rem' }}
+                  sx={{ fontSize: "0.7rem" }}
                 >
                   Made with Group 5&apos;s Movie & TV Show App
                 </Typography>
@@ -901,7 +901,7 @@ export default function Top10Page() {
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ flex: 1, fontSize: '0.85rem' }}
+            sx={{ flex: 1, fontSize: "0.85rem" }}
           >
             Take a screenshot to share your list!
           </Typography>
@@ -949,7 +949,7 @@ export default function Top10Page() {
           open={pickerOpen}
           onClose={handleCloseContentPicker}
           onSelect={handleSelectContent}
-          listType={selectedList.type as 'movies' | 'tv-shows' | 'mixed'}
+          listType={selectedList.type as "movies" | "tv-shows" | "mixed"}
           currentRank={selectedRank}
         />
       )}

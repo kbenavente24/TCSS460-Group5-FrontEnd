@@ -1,20 +1,20 @@
 // next
-import Image from 'next/image';
-import NextLink from 'next/link';
+import Image from "next/image";
+import NextLink from "next/link";
 
 // material-ui
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 // project import
-import { APP_DEFAULT_PATH } from 'config';
+import { APP_DEFAULT_PATH } from "config";
 
 // assets
-const error404 = '/assets/images/maintenance/Error404.png';
-const TwoCone = '/assets/images/maintenance/TwoCone.png';
+const error404 = "/assets/images/maintenance/Error404.png";
+const TwoCone = "/assets/images/maintenance/TwoCone.png";
 
 // ==============================|| PAGE ||============================== //
 
@@ -26,24 +26,24 @@ export default function Error404() {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ minHeight: '100vh', pt: 1.5, pb: 1, overflow: 'hidden' }}
+      sx={{ minHeight: "100vh", pt: 1.5, pb: 1, overflow: "hidden" }}
     >
       <Grid item xs={12}>
         <Stack direction="row">
           <Grid
             item
             sx={{
-              position: 'relative',
+              position: "relative",
               width: { xs: 250, sm: 590 },
               height: { xs: 130, sm: 300 },
             }}
           >
             <Image src={error404} alt="mantis" fill sizes="100vw" />
           </Grid>
-          <Grid item sx={{ position: 'relative' }}>
+          <Grid item sx={{ position: "relative" }}>
             <Box
               sx={{
-                position: 'absolute',
+                position: "absolute",
                 top: 60,
                 left: -40,
                 width: { xs: 130, sm: 390 },
@@ -61,7 +61,7 @@ export default function Error404() {
           <Typography
             color="text.secondary"
             align="center"
-            sx={{ width: { xs: '73%', sm: '61%' } }}
+            sx={{ width: { xs: "73%", sm: "61%" } }}
           >
             The page you are looking was moved, removed, renamed, or might never
             exist!

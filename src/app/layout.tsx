@@ -1,10 +1,10 @@
-import type { Metadata, Viewport } from 'next';
+import type { Metadata, Viewport } from "next";
 
-import './globals.css';
+import "./globals.css";
 
 // PROJECT IMPORTS
-import ProviderWrapper from './ProviderWrapper';
-import { publicSans } from 'config';
+import ProviderWrapper from "./ProviderWrapper";
+import { publicSans } from "config";
 
 export const metadata: Metadata = {
   title: "Group 5's Movie & TV Show App",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
 };

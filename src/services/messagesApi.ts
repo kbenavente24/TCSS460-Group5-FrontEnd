@@ -1,4 +1,4 @@
-import { messagesService } from 'utils/axios';
+import { messagesService } from "utils/axios";
 
 export const messagesApi = {
   getAllPaginated: (offset: number, limit: number) =>
@@ -7,7 +7,7 @@ export const messagesApi = {
     ),
 
   create: (data: { name: string; message: string; priority: number }) =>
-    messagesService.post('/protected/message', data),
+    messagesService.post("/protected/message", data),
 
   delete: (name: string) =>
     messagesService.delete(`/protected/message/${name}`),

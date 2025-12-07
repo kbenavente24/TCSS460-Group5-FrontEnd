@@ -1,24 +1,24 @@
-import useSWR, { mutate } from 'swr';
-import { useMemo } from 'react';
+import useSWR, { mutate } from "swr";
+import { useMemo } from "react";
 
 // Project-imports
-import { fetcher } from 'utils/axios';
+import { fetcher } from "utils/axios";
 
 // types
-import { MenuProps, NavItemType } from 'types/menu';
+import { MenuProps, NavItemType } from "types/menu";
 
 const initialState: MenuProps = {
-  openedItem: 'dashboard',
-  openedComponent: 'buttons',
+  openedItem: "dashboard",
+  openedComponent: "buttons",
   openedHorizontalItem: null,
   isDashboardDrawerOpened: false,
   isComponentDrawerOpened: true,
 };
 
 export const endpoints = {
-  key: 'api/menu',
-  master: 'master',
-  dashboard: '/dashboard', // server URL
+  key: "api/menu",
+  master: "master",
+  dashboard: "/dashboard", // server URL
 };
 
 export function useGetMenu() {

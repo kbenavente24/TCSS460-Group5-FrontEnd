@@ -5,7 +5,7 @@ export default function InputBase() {
     MuiInputBase: {
       styleOverrides: {
         sizeSmall: {
-          fontSize: '0.75rem',
+          fontSize: "0.75rem",
         },
       },
     },

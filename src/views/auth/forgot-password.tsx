@@ -1,15 +1,15 @@
 // next
-import NextLink from 'next/link';
+import NextLink from "next/link";
 
 // material-ui
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 // project import
-import AuthWrapper from 'sections/auth/AuthWrapper';
-import AuthForgotPassword from 'sections/auth/auth-forms/AuthForgotPassword';
+import AuthWrapper from "sections/auth/AuthWrapper";
+import AuthForgotPassword from "sections/auth/auth-forms/AuthForgotPassword";
 
 // ================================|| FORGOT PASSWORD ||================================ //
 
