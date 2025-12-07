@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 // next
 
 // material-ui
-import Button from '@mui/material/Button';
-import FormHelperText from '@mui/material/FormHelperText';
-import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Stack from '@mui/material/Stack';
+import Button from "@mui/material/Button";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Stack from "@mui/material/Stack";
 
 // third party
-import * as Yup from 'yup';
-import { Formik } from 'formik';
+import * as Yup from "yup";
+import { Formik } from "formik";
 
 // project import
-import AnimateButton from 'components/@extended/AnimateButton';
+import AnimateButton from "components/@extended/AnimateButton";
 
-import { messagesApi } from 'services/messagesApi';
+import { messagesApi } from "services/messagesApi";
 
 export default function SendMessage({
   priority,
   onSuccess,
-  onError
+  onError,
 }: {
   priority: number;
   onSuccess: () => void;
@@ -33,25 +33,28 @@ export default function SendMessage({
   return (
     <Formik
       initialValues={{
-        sender: '',
-        message: '',
-        submit: null
+        sender: "",
+        message: "",
+        submit: null,
       }}
       validationSchema={Yup.object().shape({
-        sender: Yup.string().max(255).required('Name is required'),
-        message: Yup.string().max(255).required('Message is required')
+        sender: Yup.string().max(255).required("Name is required"),
+        message: Yup.string().max(255).required("Message is required"),
       })}
-      onSubmit={(values, { setErrors, setSubmitting, setValues, resetForm }) => {
+      onSubmit={(
+        values,
+        { setErrors, setSubmitting, setValues, resetForm },
+      ) => {
         messagesApi
           .create({ name: values.sender, message: values.message, priority })
           .then((response) => {
             setSubmitting(false);
             resetForm({
               values: {
-                sender: '',
-                message: '',
-                submit: null
-              }
+                sender: "",
+                message: "",
+                submit: null,
+              },
             });
             onSuccess();
           })
@@ -63,7 +66,15 @@ export default function SendMessage({
           });
       }}
     >
-      {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+      {({
+        errors,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+        touched,
+        values,
+      }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -82,7 +93,10 @@ export default function SendMessage({
                 />
               </Stack>
               {touched.sender && errors.sender && (
-                <FormHelperText error id="standard-weight-helper-text-name-message-send">
+                <FormHelperText
+                  error
+                  id="standard-weight-helper-text-name-message-send"
+                >
                   {errors.sender}
                 </FormHelperText>
               )}
@@ -103,7 +117,10 @@ export default function SendMessage({
                 />
               </Stack>
               {touched.message && errors.message && (
-                <FormHelperText error id="standard-weight-helper-text-msg-message-send">
+                <FormHelperText
+                  error
+                  id="standard-weight-helper-text-msg-message-send"
+                >
                   {errors.message}
                 </FormHelperText>
               )}
@@ -116,7 +133,15 @@ export default function SendMessage({
             )}
             <Grid item xs={12}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                <Button
+                  disableElevation
+                  disabled={isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >
                   SEND!
                 </Button>
               </AnimateButton>

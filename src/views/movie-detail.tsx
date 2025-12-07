@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 // next
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 // material-ui
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 // icons
-import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
+import ArrowLeftOutlined from "@ant-design/icons/ArrowLeftOutlined";
 
 // project imports
-import MainCard from 'components/MainCard';
-import { movieApi, type Movie } from 'services/movieApi';
+import MainCard from "components/MainCard";
+import { movieApi, type Movie } from "services/movieApi";
 
 // ==============================|| MOVIE DETAIL PAGE ||============================== //
 
@@ -51,8 +51,8 @@ export default function MovieDetailPage({ id }: { id?: string }) {
         const movieData = await movieApi.getMovieById(parsedId);
         setMovie(movieData);
       } catch (err) {
-        console.error('Error fetching movie:', err);
-        setError('Failed to load movie');
+        console.error("Error fetching movie:", err);
+        setError("Failed to load movie");
         setMovie(null);
       } finally {
         setLoading(false);
@@ -64,18 +64,34 @@ export default function MovieDetailPage({ id }: { id?: string }) {
 
   const formatCurrency = (amount: string) => {
     const num = parseInt(amount);
-    if (num === 0) return 'N/A';
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(num);
+    if (num === 0) return "N/A";
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+    }).format(num);
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   };
 
   if (loading) {
     return (
-      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <MainCard sx={{ p: 4, textAlign: 'center' }}>
+      <Box
+        sx={{
+          height: "calc(100vh - 80px)",
+          p: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <MainCard sx={{ p: 4, textAlign: "center" }}>
           <Typography variant="h4">Loading movie...</Typography>
         </MainCard>
       </Box>
@@ -84,10 +100,22 @@ export default function MovieDetailPage({ id }: { id?: string }) {
 
   if (error || !movie) {
     return (
-      <Box sx={{ height: 'calc(100vh - 80px)', p: 3, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <MainCard sx={{ p: 4, textAlign: 'center' }}>
+      <Box
+        sx={{
+          height: "calc(100vh - 80px)",
+          p: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <MainCard sx={{ p: 4, textAlign: "center" }}>
           <Typography variant="h4">Movie not found</Typography>
-          <Button variant="contained" sx={{ mt: 2 }} onClick={() => router.push('/movies')}>
+          <Button
+            variant="contained"
+            sx={{ mt: 2 }}
+            onClick={() => router.push("/movies")}
+          >
             Back to Movies
           </Button>
         </MainCard>
@@ -96,32 +124,37 @@ export default function MovieDetailPage({ id }: { id?: string }) {
   }
 
   return (
-    <Box sx={{ height: 'calc(100vh - 80px)', p: 3 }}>
+    <Box sx={{ height: "calc(100vh - 80px)", p: 3 }}>
       {/* Back Button */}
-      <Button startIcon={<ArrowLeftOutlined />} onClick={() => router.push('/movies')} sx={{ mb: 2 }} variant="outlined">
+      <Button
+        startIcon={<ArrowLeftOutlined />}
+        onClick={() => router.push("/movies")}
+        sx={{ mb: 2 }}
+        variant="outlined"
+      >
         Back to Movies
       </Button>
 
       {/* Movie Detail Card */}
       <MainCard
         sx={{
-          width: '100%',
-          height: 'calc(100% - 80px)',
-          overflow: 'auto',
-          overflowY: 'scroll',
-          '&::-webkit-scrollbar': {
-            width: '12px'
+          width: "100%",
+          height: "calc(100% - 80px)",
+          overflow: "auto",
+          overflowY: "scroll",
+          "&::-webkit-scrollbar": {
+            width: "12px",
           },
-          '&::-webkit-scrollbar-track': {
-            backgroundColor: 'background.paper'
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: "background.paper",
           },
-          '&::-webkit-scrollbar-thumb': {
-            backgroundColor: '#424242',
-            borderRadius: '6px',
-            '&:hover': {
-              backgroundColor: '#303030'
-            }
-          }
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#424242",
+            borderRadius: "6px",
+            "&:hover": {
+              backgroundColor: "#303030",
+            },
+          },
         }}
       >
         <Grid container spacing={4}>
@@ -150,21 +183,39 @@ export default function MovieDetailPage({ id }: { id?: string }) {
                     Original Title: {movie.original_title}
                   </Typography>
                 )}
-                <Stack direction="row" spacing={1} sx={{ mt: 1 }} flexWrap="wrap" useFlexGap>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ mt: 1 }}
+                  flexWrap="wrap"
+                  useFlexGap
+                >
                   <Chip label={movie.mpa_rating} color="primary" size="small" />
-                  <Chip label={`${movie.runtime_minutes} min`} variant="outlined" size="small" />
-                  <Chip label={formatDate(movie.release_date)} variant="outlined" size="small" />
+                  <Chip
+                    label={`${movie.runtime_minutes} min`}
+                    variant="outlined"
+                    size="small"
+                  />
+                  <Chip
+                    label={formatDate(movie.release_date)}
+                    variant="outlined"
+                    size="small"
+                  />
                 </Stack>
               </Box>
 
               {/* Genres - Only show if available */}
               {movie.genres && (
                 <Box>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
                     Genres
                   </Typography>
                   <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                    {movie.genres.split(', ').map((genre) => (
+                    {movie.genres.split(", ").map((genre) => (
                       <Chip key={genre} label={genre} size="small" />
                     ))}
                   </Stack>
@@ -186,7 +237,11 @@ export default function MovieDetailPage({ id }: { id?: string }) {
               {/* Director - Only show if available */}
               {movie.directors && (
                 <Box>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
                     Director
                   </Typography>
                   <Typography variant="body1">{movie.directors}</Typography>
@@ -196,25 +251,43 @@ export default function MovieDetailPage({ id }: { id?: string }) {
               {/* Budget and Revenue */}
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
                     Budget
                   </Typography>
-                  <Typography variant="h6">{formatCurrency(movie.budget)}</Typography>
+                  <Typography variant="h6">
+                    {formatCurrency(movie.budget)}
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
                     Revenue
                   </Typography>
-                  <Typography variant="h6">{formatCurrency(movie.revenue)}</Typography>
+                  <Typography variant="h6">
+                    {formatCurrency(movie.revenue)}
+                  </Typography>
                 </Grid>
               </Grid>
 
               {/* Release Date */}
               <Box>
-                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                <Typography
+                  variant="subtitle2"
+                  color="text.secondary"
+                  gutterBottom
+                >
                   Release Date
                 </Typography>
-                <Typography variant="body1">{formatDate(movie.release_date)}</Typography>
+                <Typography variant="body1">
+                  {formatDate(movie.release_date)}
+                </Typography>
               </Box>
             </Stack>
           </Grid>
@@ -223,4 +296,3 @@ export default function MovieDetailPage({ id }: { id?: string }) {
     </Box>
   );
 }
-

@@ -1,4 +1,4 @@
-import MessagesList from 'views/messages/message-list';
+import MessagesList from "views/messages/message-list";
 
 // ==============================|| PAGE ||============================== //
 

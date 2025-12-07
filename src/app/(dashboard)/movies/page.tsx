@@ -1,4 +1,4 @@
-import MoviesPage from 'views/movies';
+import MoviesPage from "views/movies";
 
 // ==============================|| MOVIES PAGE ||============================== //
 

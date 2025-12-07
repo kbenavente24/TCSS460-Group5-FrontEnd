@@ -1,58 +1,58 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // material-ui
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 // icons
-import PlusOutlined from '@ant-design/icons/PlusOutlined';
-import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
-import SaveOutlined from '@ant-design/icons/SaveOutlined';
-import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
+import DeleteOutlined from "@ant-design/icons/DeleteOutlined";
+import SaveOutlined from "@ant-design/icons/SaveOutlined";
+import ArrowLeftOutlined from "@ant-design/icons/ArrowLeftOutlined";
 
 // project imports
-import MainCard from 'components/MainCard';
+import MainCard from "components/MainCard";
 
 // TV Show Genres (from TMDB API)
 const TV_SHOW_GENRES = [
-  'Action & Adventure',
-  'Animation',
-  'Comedy',
-  'Crime',
-  'Documentary',
-  'Drama',
-  'Family',
-  'History',
-  'Kids',
-  'Mystery',
-  'News',
-  'Reality',
-  'Romance',
-  'Sci-Fi & Fantasy',
-  'Soap',
-  'Talk',
-  'War & Politics',
-  'Western'
+  "Action & Adventure",
+  "Animation",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Family",
+  "History",
+  "Kids",
+  "Mystery",
+  "News",
+  "Reality",
+  "Romance",
+  "Sci-Fi & Fantasy",
+  "Soap",
+  "Talk",
+  "War & Politics",
+  "Western",
 ];
 
 // TV Show Status Options
-const TV_SHOW_STATUSES = ['Canceled', 'Ended', 'Pilot', 'Returning Series'];
+const TV_SHOW_STATUSES = ["Canceled", "Ended", "Pilot", "Returning Series"];
 
 export default function AddTVShowView() {
   const router = useRouter();
@@ -61,52 +61,59 @@ export default function AddTVShowView() {
   const [success, setSuccess] = useState(false);
 
   // Form state
-  const [name, setName] = useState('');
-  const [originalName, setOriginalName] = useState('');
-  const [firstAirDate, setFirstAirDate] = useState('');
-  const [lastAirDate, setLastAirDate] = useState('');
-  const [numberOfSeasons, setNumberOfSeasons] = useState('');
-  const [numberOfEpisodes, setNumberOfEpisodes] = useState('');
-  const [status, setStatus] = useState('');
-  const [overview, setOverview] = useState('');
-  const [popularity, setPopularity] = useState('');
-  const [tmdbRating, setTmdbRating] = useState('');
-  const [voteCount, setVoteCount] = useState('');
-  const [posterUrl, setPosterUrl] = useState('');
-  const [backdropUrl, setBackdropUrl] = useState('');
+  const [name, setName] = useState("");
+  const [originalName, setOriginalName] = useState("");
+  const [firstAirDate, setFirstAirDate] = useState("");
+  const [lastAirDate, setLastAirDate] = useState("");
+  const [numberOfSeasons, setNumberOfSeasons] = useState("");
+  const [numberOfEpisodes, setNumberOfEpisodes] = useState("");
+  const [status, setStatus] = useState("");
+  const [overview, setOverview] = useState("");
+  const [popularity, setPopularity] = useState("");
+  const [tmdbRating, setTmdbRating] = useState("");
+  const [voteCount, setVoteCount] = useState("");
+  const [posterUrl, setPosterUrl] = useState("");
+  const [backdropUrl, setBackdropUrl] = useState("");
 
   // Array fields
-  const [genres, setGenres] = useState<string[]>(['']);
-  const [creators, setCreators] = useState<string[]>(['']);
-  const [networks, setNetworks] = useState<string[]>(['']);
-  const [productionCompanies, setProductionCompanies] = useState<string[]>(['']);
+  const [genres, setGenres] = useState<string[]>([""]);
+  const [creators, setCreators] = useState<string[]>([""]);
+  const [networks, setNetworks] = useState<string[]>([""]);
+  const [productionCompanies, setProductionCompanies] = useState<string[]>([
+    "",
+  ]);
 
-  const handleAddGenre = () => setGenres([...genres, '']);
-  const handleRemoveGenre = (index: number) => setGenres(genres.filter((_, i) => i !== index));
+  const handleAddGenre = () => setGenres([...genres, ""]);
+  const handleRemoveGenre = (index: number) =>
+    setGenres(genres.filter((_, i) => i !== index));
   const handleGenreChange = (index: number, value: string) => {
     const newGenres = [...genres];
     newGenres[index] = value;
     setGenres(newGenres);
   };
 
-  const handleAddCreator = () => setCreators([...creators, '']);
-  const handleRemoveCreator = (index: number) => setCreators(creators.filter((_, i) => i !== index));
+  const handleAddCreator = () => setCreators([...creators, ""]);
+  const handleRemoveCreator = (index: number) =>
+    setCreators(creators.filter((_, i) => i !== index));
   const handleCreatorChange = (index: number, value: string) => {
     const newCreators = [...creators];
     newCreators[index] = value;
     setCreators(newCreators);
   };
 
-  const handleAddNetwork = () => setNetworks([...networks, '']);
-  const handleRemoveNetwork = (index: number) => setNetworks(networks.filter((_, i) => i !== index));
+  const handleAddNetwork = () => setNetworks([...networks, ""]);
+  const handleRemoveNetwork = (index: number) =>
+    setNetworks(networks.filter((_, i) => i !== index));
   const handleNetworkChange = (index: number, value: string) => {
     const newNetworks = [...networks];
     newNetworks[index] = value;
     setNetworks(newNetworks);
   };
 
-  const handleAddProductionCompany = () => setProductionCompanies([...productionCompanies, '']);
-  const handleRemoveProductionCompany = (index: number) => setProductionCompanies(productionCompanies.filter((_, i) => i !== index));
+  const handleAddProductionCompany = () =>
+    setProductionCompanies([...productionCompanies, ""]);
+  const handleRemoveProductionCompany = (index: number) =>
+    setProductionCompanies(productionCompanies.filter((_, i) => i !== index));
   const handleProductionCompanyChange = (index: number, value: string) => {
     const newCompanies = [...productionCompanies];
     newCompanies[index] = value;
@@ -125,13 +132,19 @@ export default function AddTVShowView() {
 
       // Validate that at least one genre is selected
       if (filteredGenres.length === 0) {
-        setError('Please select at least one genre before submitting.');
+        setError("Please select at least one genre before submitting.");
         setLoading(false);
         return;
       }
-      const filteredCreators = creators.filter((c) => c.trim()).map((c) => ({ creator_name: c }));
-      const filteredNetworks = networks.filter((n) => n.trim()).map((n) => ({ network_name: n }));
-      const filteredStudios = productionCompanies.filter((p) => p.trim()).map((p) => ({ studio_name: p }));
+      const filteredCreators = creators
+        .filter((c) => c.trim())
+        .map((c) => ({ creator_name: c }));
+      const filteredNetworks = networks
+        .filter((n) => n.trim())
+        .map((n) => ({ network_name: n }));
+      const filteredStudios = productionCompanies
+        .filter((p) => p.trim())
+        .map((p) => ({ studio_name: p }));
 
       const tvShowData: any = {
         name,
@@ -140,12 +153,12 @@ export default function AddTVShowView() {
         last_air_date: lastAirDate || firstAirDate, // API requires this field, use first_air_date as default
         seasons: parseInt(numberOfSeasons) || 1,
         episodes: parseInt(numberOfEpisodes) || 0,
-        status: status || 'Unknown',
+        status: status || "Unknown",
         overview,
         popularity: parseFloat(popularity) || 0,
         tmdb_rating: parseFloat(tmdbRating) || 0,
         vote_count: parseInt(voteCount) || 0,
-        genres: filteredGenres.length > 0 ? filteredGenres : ['Unknown'] // API requires genres array
+        genres: filteredGenres.length > 0 ? filteredGenres : ["Unknown"], // API requires genres array
       };
 
       // Add optional fields only if they have values
@@ -155,25 +168,27 @@ export default function AddTVShowView() {
       if (filteredNetworks.length > 0) tvShowData.networks = filteredNetworks;
       if (filteredStudios.length > 0) tvShowData.studios = filteredStudios;
 
-      console.log('Sending TV Show Data:', JSON.stringify(tvShowData, null, 2));
+      console.log("Sending TV Show Data:", JSON.stringify(tvShowData, null, 2));
 
       // Use local Next.js API route
-      const response = await fetch('/api/tv-shows', {
-        method: 'POST',
+      const response = await fetch("/api/tv-shows", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(tvShowData)
+        body: JSON.stringify(tvShowData),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('API Error Response:', errorData);
+        console.error("API Error Response:", errorData);
 
         // Extract detailed error message
-        let errorMessage = 'Failed to create TV show';
+        let errorMessage = "Failed to create TV show";
         if (errorData.details?.errors) {
-          errorMessage = errorData.details.errors.map((e: any) => `${e.path}: ${e.msg}`).join(', ');
+          errorMessage = errorData.details.errors
+            .map((e: any) => `${e.path}: ${e.msg}`)
+            .join(", ");
         } else if (errorData.error) {
           errorMessage = errorData.error;
         } else if (errorData.message) {
@@ -184,16 +199,16 @@ export default function AddTVShowView() {
       }
 
       const result = await response.json();
-      console.log('TV Show created successfully:', result);
+      console.log("TV Show created successfully:", result);
 
       setSuccess(true);
       setTimeout(() => {
-        router.push('/tv-shows');
+        router.push("/tv-shows");
       }, 2000);
     } catch (err: any) {
-      console.error('Error creating TV show:', err);
-      console.error('Error details:', err.message);
-      setError(err.message || 'Failed to create TV show. Please try again.');
+      console.error("Error creating TV show:", err);
+      console.error("Error details:", err.message);
+      setError(err.message || "Failed to create TV show. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -203,10 +218,15 @@ export default function AddTVShowView() {
     <Box sx={{ p: 3 }}>
       <MainCard>
         {/* Header */}
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ mb: 3 }}
+        >
           <Stack direction="row" alignItems="center" spacing={2}>
-            <IconButton onClick={() => router.push('/tv-shows')} size="large">
-              <ArrowLeftOutlined style={{ fontSize: '1.5rem' }} />
+            <IconButton onClick={() => router.push("/tv-shows")} size="large">
+              <ArrowLeftOutlined style={{ fontSize: "1.5rem" }} />
             </IconButton>
             <Typography variant="h2">Add New TV Show</Typography>
           </Stack>
@@ -280,7 +300,11 @@ export default function AddTVShowView() {
                   <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
                       <InputLabel>Status</InputLabel>
-                      <Select value={status} label="Status" onChange={(e) => setStatus(e.target.value)}>
+                      <Select
+                        value={status}
+                        label="Status"
+                        onChange={(e) => setStatus(e.target.value)}
+                      >
                         <MenuItem value="">
                           <em>Select a status</em>
                         </MenuItem>
@@ -395,11 +419,20 @@ export default function AddTVShowView() {
             {/* Genres */}
             <Card variant="outlined">
               <CardContent>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  sx={{ mb: 2 }}
+                >
                   <Typography variant="h4">
-                    Genres <span style={{ color: '#d32f2f' }}>*</span>
+                    Genres <span style={{ color: "#d32f2f" }}>*</span>
                   </Typography>
-                  <Button startIcon={<PlusOutlined />} onClick={handleAddGenre} size="small">
+                  <Button
+                    startIcon={<PlusOutlined />}
+                    onClick={handleAddGenre}
+                    size="small"
+                  >
                     Add Genre
                   </Button>
                 </Stack>
@@ -411,7 +444,9 @@ export default function AddTVShowView() {
                         <Select
                           value={genre}
                           label={`Genre ${index + 1}`}
-                          onChange={(e) => handleGenreChange(index, e.target.value)}
+                          onChange={(e) =>
+                            handleGenreChange(index, e.target.value)
+                          }
                         >
                           <MenuItem value="">
                             <em>Select a genre</em>
@@ -424,7 +459,10 @@ export default function AddTVShowView() {
                         </Select>
                       </FormControl>
                       {genres.length > 1 && (
-                        <IconButton onClick={() => handleRemoveGenre(index)} color="error">
+                        <IconButton
+                          onClick={() => handleRemoveGenre(index)}
+                          color="error"
+                        >
                           <DeleteOutlined />
                         </IconButton>
                       )}
@@ -437,9 +475,18 @@ export default function AddTVShowView() {
             {/* Creators */}
             <Card variant="outlined">
               <CardContent>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  sx={{ mb: 2 }}
+                >
                   <Typography variant="h4">Creators</Typography>
-                  <Button startIcon={<PlusOutlined />} onClick={handleAddCreator} size="small">
+                  <Button
+                    startIcon={<PlusOutlined />}
+                    onClick={handleAddCreator}
+                    size="small"
+                  >
                     Add Creator
                   </Button>
                 </Stack>
@@ -449,11 +496,16 @@ export default function AddTVShowView() {
                       <TextField
                         label={`Creator ${index + 1}`}
                         value={creator}
-                        onChange={(e) => handleCreatorChange(index, e.target.value)}
+                        onChange={(e) =>
+                          handleCreatorChange(index, e.target.value)
+                        }
                         fullWidth
                       />
                       {creators.length > 1 && (
-                        <IconButton onClick={() => handleRemoveCreator(index)} color="error">
+                        <IconButton
+                          onClick={() => handleRemoveCreator(index)}
+                          color="error"
+                        >
                           <DeleteOutlined />
                         </IconButton>
                       )}
@@ -466,9 +518,18 @@ export default function AddTVShowView() {
             {/* Networks */}
             <Card variant="outlined">
               <CardContent>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  sx={{ mb: 2 }}
+                >
                   <Typography variant="h4">Networks</Typography>
-                  <Button startIcon={<PlusOutlined />} onClick={handleAddNetwork} size="small">
+                  <Button
+                    startIcon={<PlusOutlined />}
+                    onClick={handleAddNetwork}
+                    size="small"
+                  >
                     Add Network
                   </Button>
                 </Stack>
@@ -478,11 +539,16 @@ export default function AddTVShowView() {
                       <TextField
                         label={`Network ${index + 1}`}
                         value={network}
-                        onChange={(e) => handleNetworkChange(index, e.target.value)}
+                        onChange={(e) =>
+                          handleNetworkChange(index, e.target.value)
+                        }
                         fullWidth
                       />
                       {networks.length > 1 && (
-                        <IconButton onClick={() => handleRemoveNetwork(index)} color="error">
+                        <IconButton
+                          onClick={() => handleRemoveNetwork(index)}
+                          color="error"
+                        >
                           <DeleteOutlined />
                         </IconButton>
                       )}
@@ -495,9 +561,18 @@ export default function AddTVShowView() {
             {/* Production Companies */}
             <Card variant="outlined">
               <CardContent>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  sx={{ mb: 2 }}
+                >
                   <Typography variant="h4">Production Companies</Typography>
-                  <Button startIcon={<PlusOutlined />} onClick={handleAddProductionCompany} size="small">
+                  <Button
+                    startIcon={<PlusOutlined />}
+                    onClick={handleAddProductionCompany}
+                    size="small"
+                  >
                     Add Company
                   </Button>
                 </Stack>
@@ -507,11 +582,16 @@ export default function AddTVShowView() {
                       <TextField
                         label={`Production Company ${index + 1}`}
                         value={company}
-                        onChange={(e) => handleProductionCompanyChange(index, e.target.value)}
+                        onChange={(e) =>
+                          handleProductionCompanyChange(index, e.target.value)
+                        }
                         fullWidth
                       />
                       {productionCompanies.length > 1 && (
-                        <IconButton onClick={() => handleRemoveProductionCompany(index)} color="error">
+                        <IconButton
+                          onClick={() => handleRemoveProductionCompany(index)}
+                          color="error"
+                        >
                           <DeleteOutlined />
                         </IconButton>
                       )}
@@ -523,11 +603,22 @@ export default function AddTVShowView() {
 
             {/* Submit Buttons */}
             <Stack direction="row" spacing={2} justifyContent="flex-end">
-              <Button variant="outlined" onClick={() => router.push('/tv-shows')} size="large" disabled={loading}>
+              <Button
+                variant="outlined"
+                onClick={() => router.push("/tv-shows")}
+                size="large"
+                disabled={loading}
+              >
                 Cancel
               </Button>
-              <Button type="submit" variant="contained" startIcon={<SaveOutlined />} size="large" disabled={loading}>
-                {loading ? 'Creating TV Show...' : 'Create TV Show'}
+              <Button
+                type="submit"
+                variant="contained"
+                startIcon={<SaveOutlined />}
+                size="large"
+                disabled={loading}
+              >
+                {loading ? "Creating TV Show..." : "Create TV Show"}
               </Button>
             </Stack>
           </Stack>
@@ -536,4 +627,3 @@ export default function AddTVShowView() {
     </Box>
   );
 }
-

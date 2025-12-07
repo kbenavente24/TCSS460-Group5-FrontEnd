@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useMessage } from 'contexts/MessageContext';
+import { useMessage } from "contexts/MessageContext";
 
 // ==============================|| PAGE ||============================== //
 

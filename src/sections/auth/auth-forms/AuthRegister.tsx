@@ -1,46 +1,46 @@
-'use client';
+"use client";
 
-import { useEffect, useState, SyntheticEvent } from 'react';
+import { useEffect, useState, SyntheticEvent } from "react";
 
 // next
-import NextLink from 'next/link';
-import { signIn } from 'next-auth/react';
+import NextLink from "next/link";
+import { signIn } from "next-auth/react";
 
 // material-ui
-import Button from '@mui/material/Button';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
+import Button from "@mui/material/Button";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
 
 // third party
-import * as Yup from 'yup';
-import { Formik } from 'formik';
+import * as Yup from "yup";
+import { Formik } from "formik";
 
 // project import
-import IconButton from 'components/@extended/IconButton';
-import AnimateButton from 'components/@extended/AnimateButton';
+import IconButton from "components/@extended/IconButton";
+import AnimateButton from "components/@extended/AnimateButton";
 
-import { APP_DEFAULT_PATH } from 'config';
-import { strengthColor, strengthIndicator } from 'utils/password-strength';
+import { APP_DEFAULT_PATH } from "config";
+import { strengthColor, strengthIndicator } from "utils/password-strength";
 
 // assets
-import EyeOutlined from '@ant-design/icons/EyeOutlined';
-import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
+import EyeOutlined from "@ant-design/icons/EyeOutlined";
+import EyeInvisibleOutlined from "@ant-design/icons/EyeInvisibleOutlined";
 
 // types
-import { StringColorProps } from 'types/password';
+import { StringColorProps } from "types/password";
 
 export default function AuthRegister({ providers, csrfToken }: any) {
   const [level, setLevel] = useState<StringColorProps>();
@@ -61,41 +61,47 @@ export default function AuthRegister({ providers, csrfToken }: any) {
   };
 
   useEffect(() => {
-    changePassword('');
+    changePassword("");
   }, []);
 
   return (
     <>
       <Formik
         initialValues={{
-          firstname: '',
-          lastname: '',
-          username: '',
-          phone: '',
-          email: '',
-          password: '',
-          submit: null
+          firstname: "",
+          lastname: "",
+          username: "",
+          phone: "",
+          email: "",
+          password: "",
+          submit: null,
         }}
         validationSchema={Yup.object().shape({
-          firstname: Yup.string().max(255).required('First Name is required'),
-          lastname: Yup.string().max(255).required('Last Name is required'),
+          firstname: Yup.string().max(255).required("First Name is required"),
+          lastname: Yup.string().max(255).required("Last Name is required"),
           username: Yup.string()
-            .min(3, 'Username must be at least 3 characters')
-            .max(50, 'Username must be less than 50 characters')
-            .matches(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, underscores, and hyphens')
-            .required('Username is required'),
+            .min(3, "Username must be at least 3 characters")
+            .max(50, "Username must be less than 50 characters")
+            .matches(
+              /^[a-zA-Z0-9_-]+$/,
+              "Username can only contain letters, numbers, underscores, and hyphens",
+            )
+            .required("Username is required"),
           phone: Yup.string()
-            .matches(/^\d{10,}$/, 'Phone number must be at least 10 digits')
-            .required('Phone number is required'),
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+            .matches(/^\d{10,}$/, "Phone number must be at least 10 digits")
+            .required("Phone number is required"),
+          email: Yup.string()
+            .email("Must be a valid email")
+            .max(255)
+            .required("Email is required"),
           password: Yup.string()
-            .required('Password is required')
-            .min(8, 'Password must be at least 8 characters')
-            .max(128, 'Password must be less than 128 characters')
+            .required("Password is required")
+            .min(8, "Password must be at least 8 characters")
+            .max(128, "Password must be less than 128 characters"),
         })}
         onSubmit={async (values, { setErrors, setSubmitting }) => {
           const trimmedEmail = values.email.trim();
-          signIn('register', {
+          signIn("register", {
             redirect: false,
             firstname: values.firstname,
             lastname: values.lastname,
@@ -103,7 +109,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
             phone: values.phone,
             email: trimmedEmail,
             password: values.password,
-            callbackUrl: APP_DEFAULT_PATH
+            callbackUrl: APP_DEFAULT_PATH,
           }).then((res: any) => {
             if (res?.error) {
               setErrors({ submit: res.error });
@@ -115,14 +121,24 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           });
         }}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+        {({
+          errors,
+          handleBlur,
+          handleChange,
+          handleSubmit,
+          isSubmitting,
+          touched,
+          values,
+        }) => (
           <form noValidate onSubmit={handleSubmit}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <Grid container spacing={3}>
               {/* First Name */}
               <Grid item xs={6}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
+                  <InputLabel htmlFor="firstname-signup">
+                    First Name*
+                  </InputLabel>
                   <OutlinedInput
                     fullWidth
                     id="firstname-signup"
@@ -135,7 +151,9 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                     error={Boolean(touched.firstname && errors.firstname)}
                   />
                 </Stack>
-                {touched.firstname && errors.firstname && <FormHelperText error>{errors.firstname}</FormHelperText>}
+                {touched.firstname && errors.firstname && (
+                  <FormHelperText error>{errors.firstname}</FormHelperText>
+                )}
               </Grid>
 
               {/* Last Name */}
@@ -154,7 +172,9 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                     error={Boolean(touched.lastname && errors.lastname)}
                   />
                 </Stack>
-                {touched.lastname && errors.lastname && <FormHelperText error>{errors.lastname}</FormHelperText>}
+                {touched.lastname && errors.lastname && (
+                  <FormHelperText error>{errors.lastname}</FormHelperText>
+                )}
               </Grid>
 
               {/* Username */}
@@ -173,7 +193,9 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                     error={Boolean(touched.username && errors.username)}
                   />
                 </Stack>
-                {touched.username && errors.username && <FormHelperText error>{errors.username}</FormHelperText>}
+                {touched.username && errors.username && (
+                  <FormHelperText error>{errors.username}</FormHelperText>
+                )}
               </Grid>
 
               {/* Phone */}
@@ -192,7 +214,9 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                     error={Boolean(touched.phone && errors.phone)}
                   />
                 </Stack>
-                {touched.phone && errors.phone && <FormHelperText error>{errors.phone}</FormHelperText>}
+                {touched.phone && errors.phone && (
+                  <FormHelperText error>{errors.phone}</FormHelperText>
+                )}
               </Grid>
 
               {/* Email */}
@@ -211,7 +235,9 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                     error={Boolean(touched.email && errors.email)}
                   />
                 </Stack>
-                {touched.email && errors.email && <FormHelperText error>{errors.email}</FormHelperText>}
+                {touched.email && errors.email && (
+                  <FormHelperText error>{errors.email}</FormHelperText>
+                )}
               </Grid>
 
               {/* Password */}
@@ -221,7 +247,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                   <OutlinedInput
                     fullWidth
                     id="password-signup"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={values.password}
                     onBlur={handleBlur}
@@ -240,13 +266,19 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                           edge="end"
                           color="secondary"
                         >
-                          {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                          {showPassword ? (
+                            <EyeOutlined />
+                          ) : (
+                            <EyeInvisibleOutlined />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     }
                   />
                 </Stack>
-                {touched.password && errors.password && <FormHelperText error>{errors.password}</FormHelperText>}
+                {touched.password && errors.password && (
+                  <FormHelperText error>{errors.password}</FormHelperText>
+                )}
                 <FormControl fullWidth sx={{ mt: 2 }}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
@@ -255,7 +287,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                           bgcolor: level?.color,
                           width: 85,
                           height: 8,
-                          borderRadius: '7px'
+                          borderRadius: "7px",
                         }}
                       />
                     </Grid>
@@ -292,7 +324,15 @@ export default function AuthRegister({ providers, csrfToken }: any) {
               {/* Submit Button */}
               <Grid item xs={12}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                  <Button
+                    disableElevation
+                    disabled={isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
                     Create Account
                   </Button>
                 </AnimateButton>
@@ -313,11 +353,17 @@ export default function AuthRegister({ providers, csrfToken }: any) {
         <DialogTitle id="welcome-dialog-title">Welcome to Our App!</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Thank you for registering! Your account has been created successfully. You can now log in and start using the application.
+            Thank you for registering! Your account has been created
+            successfully. You can now log in and start using the application.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setShowWelcomeDialog(false)} color="primary" variant="contained" autoFocus>
+          <Button
+            onClick={() => setShowWelcomeDialog(false)}
+            color="primary"
+            variant="contained"
+            autoFocus
+          >
             OK
           </Button>
         </DialogActions>

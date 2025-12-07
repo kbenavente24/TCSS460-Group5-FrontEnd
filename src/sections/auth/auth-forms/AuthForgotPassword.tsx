@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 // ============================|| DEPRECATED - NOT FUNCTIONAL ||============================ //
 // NOTE: This component is NO LONGER FUNCTIONAL with the new credential API.
@@ -9,29 +9,29 @@
 // ======================================================================================== //
 
 // next
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 // material-ui
-import Button from '@mui/material/Button';
-import FormHelperText from '@mui/material/FormHelperText';
-import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 // third party
-import * as Yup from 'yup';
-import { Formik } from 'formik';
+import * as Yup from "yup";
+import { Formik } from "formik";
 
 // project import
-import useScriptRef from 'hooks/useScriptRef';
-import AnimateButton from 'components/@extended/AnimateButton';
+import useScriptRef from "hooks/useScriptRef";
+import AnimateButton from "components/@extended/AnimateButton";
 
-import { openSnackbar } from 'api/snackbar';
+import { openSnackbar } from "api/snackbar";
 
 // types
-import { SnackbarProps } from 'types/snackbar';
+import { SnackbarProps } from "types/snackbar";
 
 // ============================|| FORGOT PASSWORD - NOT FUNCTIONAL ||============================ //
 
@@ -42,19 +42,33 @@ export default function AuthForgotPassword() {
   return (
     <Formik
       initialValues={{
-        email: '',
-        submit: null
+        email: "",
+        submit: null,
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
+        email: Yup.string()
+          .email("Must be a valid email")
+          .max(255)
+          .required("Email is required"),
       })}
       onSubmit={async (_values, { setErrors, setSubmitting }) => {
         // This endpoint no longer exists in the new API
-        setErrors({ submit: 'Password reset via email is no longer supported. Please contact support or change your password while logged in.' });
+        setErrors({
+          submit:
+            "Password reset via email is no longer supported. Please contact support or change your password while logged in.",
+        });
         setSubmitting(false);
       }}
     >
-      {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+      {({
+        errors,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+        touched,
+        values,
+      }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -85,11 +99,21 @@ export default function AuthForgotPassword() {
               </Grid>
             )}
             <Grid item xs={12} sx={{ mb: -2 }}>
-              <Typography variant="caption">Do not forgot to check SPAM box.</Typography>
+              <Typography variant="caption">
+                Do not forgot to check SPAM box.
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                <Button
+                  disableElevation
+                  disabled={isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >
                   Send Password Reset Email
                 </Button>
               </AnimateButton>

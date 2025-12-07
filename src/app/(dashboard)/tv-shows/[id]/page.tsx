@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useParams } from 'next/navigation';
-import { Suspense } from 'react';
-import TVShowDetailPage from 'views/tv-show-detail';
-import Loader from 'components/Loader';
+import { useParams } from "next/navigation";
+import { Suspense } from "react";
+import TVShowDetailPage from "views/tv-show-detail";
+import Loader from "components/Loader";
 
 // ==============================|| TV SHOW DETAIL PAGE ||============================== //
 

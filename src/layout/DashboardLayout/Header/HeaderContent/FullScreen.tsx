@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
 // material-ui
-import Tooltip from '@mui/material/Tooltip';
-import Box from '@mui/material/Box';
+import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
 
 // project import
-import IconButton from 'components/@extended/IconButton';
+import IconButton from "components/@extended/IconButton";
 
 // assets
-import FullscreenOutlined from '@ant-design/icons/FullscreenOutlined';
-import FullscreenExitOutlined from '@ant-design/icons/FullscreenExitOutlined';
+import FullscreenOutlined from "@ant-design/icons/FullscreenOutlined";
+import FullscreenExitOutlined from "@ant-design/icons/FullscreenExitOutlined";
 
 // ==============================|| HEADER CONTENT - FULLSCREEN ||============================== //
 
@@ -27,29 +27,29 @@ export default function FullScreen() {
     const handleFullscreenChange = () => {
       setOpen(!!document.fullscreenElement);
     };
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
     return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
   }, []);
 
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
-      <Tooltip title={open ? 'Exit Fullscreen' : 'Fullscreen'}>
+      <Tooltip title={open ? "Exit Fullscreen" : "Fullscreen"}>
         <IconButton
           color="secondary"
           variant="light"
           sx={[
             {
-              color: '#FFFFFF'
+              color: "#FFFFFF",
             },
             open
               ? {
-                  bgcolor: 'rgba(255, 255, 255, 0.1)'
+                  bgcolor: "rgba(255, 255, 255, 0.1)",
                 }
               : {
-                  bgcolor: 'transparent'
-                }
+                  bgcolor: "transparent",
+                },
           ]}
           aria-label="fullscreen toggler"
           onClick={handleToggle}

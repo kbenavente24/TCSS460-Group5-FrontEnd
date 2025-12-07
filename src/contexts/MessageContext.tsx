@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import useLocalStorage from 'hooks/useLocalStorage';
-import React, { createContext, ReactNode, useContext } from 'react';
-import { IMessage, MessageContextProps } from 'types/message';
+import useLocalStorage from "hooks/useLocalStorage";
+import React, { createContext, ReactNode, useContext } from "react";
+import { IMessage, MessageContextProps } from "types/message";
 
 const EMPTY_MSG = {
-  name: 'Empty',
+  name: "Empty",
   priority: 0,
-  message: 'Empty'
+  message: "Empty",
 };
 
 const initialState: MessageContextProps = {
   ...EMPTY_MSG,
   onChangeMessage: () => {},
-  clearContext: () => {}
+  clearContext: () => {},
 };
 
 // Create context
@@ -25,7 +25,7 @@ type MessageProviderProps = {
 
 // Create a provider component
 export const MessageProvider = ({ children }: MessageProviderProps) => {
-  const [message, setMessage] = useLocalStorage('tcss460-msg', EMPTY_MSG);
+  const [message, setMessage] = useLocalStorage("tcss460-msg", EMPTY_MSG);
 
   function onChangeMessage(message: IMessage) {
     setMessage(message);
@@ -35,7 +35,13 @@ export const MessageProvider = ({ children }: MessageProviderProps) => {
     setMessage(EMPTY_MSG);
   }
 
-  return <MessageContext.Provider value={{ ...message, onChangeMessage, clearContext }}>{children}</MessageContext.Provider>;
+  return (
+    <MessageContext.Provider
+      value={{ ...message, onChangeMessage, clearContext }}
+    >
+      {children}
+    </MessageContext.Provider>
+  );
 };
 
 // Custom hook to use the context

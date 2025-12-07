@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useParams } from 'next/navigation';
-import { Suspense } from 'react';
-import MovieDetailPage from 'views/movie-detail';
-import Loader from 'components/Loader';
+import { useParams } from "next/navigation";
+import { Suspense } from "react";
+import MovieDetailPage from "views/movie-detail";
+import Loader from "components/Loader";
 
 // ==============================|| MOVIE DETAIL PAGE ||============================== //
 
@@ -25,4 +25,3 @@ export default function MovieDetail() {
     </Suspense>
   );
 }
-

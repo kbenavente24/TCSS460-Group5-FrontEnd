@@ -1,39 +1,39 @@
-import { useMemo } from 'react';
-import useSWR, { mutate } from 'swr';
+import { useMemo } from "react";
+import useSWR, { mutate } from "swr";
 
 // types
-import { SnackbarProps } from 'types/snackbar';
+import { SnackbarProps } from "types/snackbar";
 
 export const endpoints = {
-  key: 'snackbar'
+  key: "snackbar",
 };
 
 const initialState: SnackbarProps = {
   action: false,
   open: false,
-  message: 'Note archived',
+  message: "Note archived",
   anchorOrigin: {
-    vertical: 'bottom',
-    horizontal: 'right'
+    vertical: "bottom",
+    horizontal: "right",
   },
-  variant: 'default',
+  variant: "default",
   alert: {
-    color: 'primary',
-    variant: 'filled'
+    color: "primary",
+    variant: "filled",
   },
-  transition: 'Fade',
+  transition: "Fade",
   close: false,
   actionButton: false,
   maxStack: 3,
   dense: false,
-  iconVariant: 'usedefault'
+  iconVariant: "usedefault",
 };
 
 export function useGetSnackbar() {
   const { data } = useSWR(endpoints.key, () => initialState, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
-    revalidateOnReconnect: false
+    revalidateOnReconnect: false,
   });
 
   const memoizedValue = useMemo(() => ({ snackbar: data! }), [data]);
@@ -44,7 +44,17 @@ export function useGetSnackbar() {
 export function openSnackbar(snackbar: SnackbarProps) {
   // to update local state based on key
 
-  const { action, open, message, anchorOrigin, variant, alert, transition, close, actionButton } = snackbar;
+  const {
+    action,
+    open,
+    message,
+    anchorOrigin,
+    variant,
+    alert,
+    transition,
+    close,
+    actionButton,
+  } = snackbar;
 
   mutate(
     endpoints.key,
@@ -58,14 +68,14 @@ export function openSnackbar(snackbar: SnackbarProps) {
         variant: variant || initialState.variant,
         alert: {
           color: alert?.color || initialState.alert.color,
-          variant: alert?.variant || initialState.alert.variant
+          variant: alert?.variant || initialState.alert.variant,
         },
         transition: transition || initialState.transition,
         close: close || initialState.close,
-        actionButton: actionButton || initialState.actionButton
+        actionButton: actionButton || initialState.actionButton,
       };
     },
-    false
+    false,
   );
 }
 
@@ -76,6 +86,6 @@ export function closeSnackbar() {
     (currentSnackbar: any) => {
       return { ...currentSnackbar, open: false };
     },
-    false
+    false,
   );
 }

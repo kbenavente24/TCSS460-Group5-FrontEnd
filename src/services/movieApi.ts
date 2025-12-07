@@ -1,16 +1,16 @@
 // src/services/movieApi.ts
-import axios from 'axios';
+import axios from "axios";
 
 // Use local Next.js API routes to avoid CORS issues
-const API_BASE_URL = '/api/movies';
+const API_BASE_URL = "/api/movies";
 
 // Create axios instance with default config
 // No API key needed here since the Next.js API route handles it
 const movieApiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    accept: 'application/json'
-  }
+    accept: "application/json",
+  },
 });
 
 export interface Movie {
@@ -62,14 +62,14 @@ export const movieApi = {
   // Get all movies with optional filters
   getMovies: async (filters?: MovieFilters): Promise<MoviesResponse> => {
     try {
-      console.log('Fetching movies with filters:', filters);
-      console.log('API Base URL:', API_BASE_URL);
+      console.log("Fetching movies with filters:", filters);
+      console.log("API Base URL:", API_BASE_URL);
 
-      const response = await movieApiClient.get('', {
-        params: filters
+      const response = await movieApiClient.get("", {
+        params: filters,
       });
 
-      console.log('API Response:', response.data);
+      console.log("API Response:", response.data);
 
       // The API returns { data: [...], meta: {...} } but we expect pagination
       // Transform the response to match our interface
@@ -81,7 +81,11 @@ export const movieApi = {
         movies = responseData;
       } else if (responseData?.data && Array.isArray(responseData.data)) {
         movies = responseData.data;
-      } else if (responseData?.data && typeof responseData.data === 'object' && !Array.isArray(responseData.data)) {
+      } else if (
+        responseData?.data &&
+        typeof responseData.data === "object" &&
+        !Array.isArray(responseData.data)
+      ) {
         // Single movie object wrapped in data
         movies = [responseData.data];
       } else {
@@ -95,17 +99,17 @@ export const movieApi = {
               page: responseData.meta.page || 1,
               limit: responseData.meta.limit || filters?.limit || 20,
               total: responseData.meta.total || movies.length,
-              totalPages: responseData.meta.pages || 1
+              totalPages: responseData.meta.pages || 1,
             }
           : {
               page: 1,
               limit: filters?.limit || 20,
               total: movies.length,
-              totalPages: 1
-            }
+              totalPages: 1,
+            },
       };
     } catch (error) {
-      console.error('Error fetching movies:', error);
+      console.error("Error fetching movies:", error);
       // Return empty result instead of throwing
       return {
         data: [],
@@ -113,8 +117,8 @@ export const movieApi = {
           page: 1,
           limit: filters?.limit || 20,
           total: 0,
-          totalPages: 0
-        }
+          totalPages: 0,
+        },
       };
     }
   },
@@ -126,9 +130,13 @@ export const movieApi = {
   },
 
   // Search movies by title
-  searchMovies: async (title: string, page = 1, limit = 20): Promise<MoviesResponse> => {
+  searchMovies: async (
+    title: string,
+    page = 1,
+    limit = 20,
+  ): Promise<MoviesResponse> => {
     return movieApi.getMovies({ title, page, limit });
-  }
+  },
 };
 
 export default movieApi;

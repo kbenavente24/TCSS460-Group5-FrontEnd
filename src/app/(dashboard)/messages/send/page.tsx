@@ -1,4 +1,4 @@
-import MessageSend from 'views/messages/message-send';
+import MessageSend from "views/messages/message-send";
 
 // ==============================|| PAGE ||============================== //
 

@@ -1,13 +1,17 @@
-'use client';
+"use client";
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from "next/navigation";
 
 // ==============================|| PAGE ||============================== //
 
-export default function MessagesPage({ params }: { params: Promise<{ slug: string }> }) {
+export default function MessagesPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const searchParams = useSearchParams();
 
-  const search = searchParams.get('msg');
+  const search = searchParams.get("msg");
 
   const message = search && JSON.parse(search);
 

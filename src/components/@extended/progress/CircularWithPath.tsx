@@ -1,8 +1,11 @@
 // material-ui
-import Typography from '@mui/material/Typography';
-import CircularProgress, { CircularProgressProps, circularProgressClasses } from '@mui/material/CircularProgress';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+import Typography from "@mui/material/Typography";
+import CircularProgress, {
+  CircularProgressProps,
+  circularProgressClasses,
+} from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 interface Props extends CircularProgressProps {
   showLabel?: boolean;
   pathColor?: string;
@@ -10,19 +13,28 @@ interface Props extends CircularProgressProps {
 
 // ==============================|| PROGRESS - CIRCULAR PATH ||============================== //
 
-export default function CircularWithPath({ value, size, variant, thickness, showLabel, pathColor, sx, ...others }: Props) {
+export default function CircularWithPath({
+  value,
+  size,
+  variant,
+  thickness,
+  showLabel,
+  pathColor,
+  sx,
+  ...others
+}: Props) {
   return (
-    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
         variant="determinate"
         sx={[
           pathColor
             ? {
-                color: pathColor
+                color: pathColor,
               }
             : {
-                color: 'grey.200'
-              }
+                color: "grey.200",
+              },
         ]}
         size={size}
         thickness={thickness}
@@ -30,9 +42,17 @@ export default function CircularWithPath({ value, size, variant, thickness, show
         value={100}
       />
       {showLabel && (
-        <Stack top={0} left={0} bottom={0} right={0} position="absolute" alignItems="center" justifyContent="center">
+        <Stack
+          top={0}
+          left={0}
+          bottom={0}
+          right={0}
+          position="absolute"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Typography variant="caption" color="text.secondary">
-            {value ? `${Math.round(value)}%` : '0%'}
+            {value ? `${Math.round(value)}%` : "0%"}
           </Typography>
         </Stack>
       )}
@@ -40,11 +60,11 @@ export default function CircularWithPath({ value, size, variant, thickness, show
         variant={variant}
         sx={{
           ...sx,
-          position: 'absolute',
+          position: "absolute",
           left: 0,
           [`& .${circularProgressClasses.circle}`]: {
-            strokeLinecap: 'round'
-          }
+            strokeLinecap: "round",
+          },
         }}
         size={size}
         thickness={thickness}

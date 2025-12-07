@@ -1,8 +1,8 @@
 // src/app/api/lists/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from 'utils/authOptions';
-import pool from 'lib/db';
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "utils/authOptions";
+import pool from "lib/db";
 
 // GET /api/lists - Fetch all lists for the logged-in user
 export async function GET(request: NextRequest) {
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const userId = session.id;
@@ -44,18 +44,21 @@ export async function GET(request: NextRequest) {
 
         return {
           ...list,
-          itemCount: parseInt(countResult.rows[0].count)
+          itemCount: parseInt(countResult.rows[0].count),
         };
-      })
+      }),
     );
 
     return NextResponse.json({
       success: true,
-      data: listsWithCounts
+      data: listsWithCounts,
     });
   } catch (error) {
-    console.error('Error fetching lists:', error);
-    return NextResponse.json({ error: 'Failed to fetch lists' }, { status: 500 });
+    console.error("Error fetching lists:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch lists" },
+      { status: 500 },
+    );
   }
 }
 
@@ -66,7 +69,7 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const userId = session.id;
@@ -75,12 +78,15 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!title || !type) {
-      return NextResponse.json({ error: 'Title and type are required' }, { status: 400 });
+      return NextResponse.json(
+        { error: "Title and type are required" },
+        { status: 400 },
+      );
     }
 
     // Validate type
-    if (!['movies', 'tv-shows', 'mixed'].includes(type)) {
-      return NextResponse.json({ error: 'Invalid list type' }, { status: 400 });
+    if (!["movies", "tv-shows", "mixed"].includes(type)) {
+      return NextResponse.json({ error: "Invalid list type" }, { status: 400 });
     }
 
     // Insert the new list
@@ -96,7 +102,12 @@ export async function POST(request: NextRequest) {
         updated_at as "updatedAt"
     `;
 
-    const result = await pool.query(insertQuery, [userId, title, type, description || null]);
+    const result = await pool.query(insertQuery, [
+      userId,
+      title,
+      type,
+      description || null,
+    ]);
 
     const newList = result.rows[0];
 
@@ -105,13 +116,16 @@ export async function POST(request: NextRequest) {
         success: true,
         data: {
           ...newList,
-          itemCount: 0
-        }
+          itemCount: 0,
+        },
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
-    console.error('Error creating list:', error);
-    return NextResponse.json({ error: 'Failed to create list' }, { status: 500 });
+    console.error("Error creating list:", error);
+    return NextResponse.json(
+      { error: "Failed to create list" },
+      { status: 500 },
+    );
   }
 }

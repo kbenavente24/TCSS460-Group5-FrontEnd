@@ -1,22 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import Toolbar from '@mui/material/Toolbar';
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import Toolbar from "@mui/material/Toolbar";
 
 // project import
-import Profile from './Profile';
-import IconButton from 'components/@extended/IconButton';
-import Transitions from 'components/@extended/Transitions';
-import { ThemeMode } from 'config';
+import Profile from "./Profile";
+import IconButton from "components/@extended/IconButton";
+import Transitions from "components/@extended/Transitions";
+import { ThemeMode } from "config";
 
 // assets
-import MoreOutlined from '@ant-design/icons/MoreOutlined';
+import MoreOutlined from "@ant-design/icons/MoreOutlined";
 
 // ==============================|| HEADER CONTENT - MOBILE ||============================== //
 
@@ -47,8 +47,10 @@ export default function MobileSection() {
     prevOpen.current = open;
   }, [open]);
 
-  const iconBackColorOpen = theme.palette.mode === ThemeMode.DARK ? 'grey.200' : 'grey.300';
-  const iconBackColor = theme.palette.mode === ThemeMode.DARK ? 'background.default' : 'grey.100';
+  const iconBackColorOpen =
+    theme.palette.mode === ThemeMode.DARK ? "grey.200" : "grey.300";
+  const iconBackColor =
+    theme.palette.mode === ThemeMode.DARK ? "background.default" : "grey.100";
 
   return (
     <>
@@ -56,19 +58,19 @@ export default function MobileSection() {
         <IconButton
           sx={[
             {
-              color: 'text.primary'
+              color: "text.primary",
             },
             open
               ? {
-                  bgcolor: iconBackColorOpen
+                  bgcolor: iconBackColorOpen,
                 }
               : {
-                  bgcolor: iconBackColor
-                }
+                  bgcolor: iconBackColor,
+                },
           ]}
           aria-label="open more menu"
           ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
+          aria-controls={open ? "menu-list-grow" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
           color="secondary"
@@ -84,16 +86,16 @@ export default function MobileSection() {
         role={undefined}
         transition
         disablePortal
-        sx={{ width: '100%' }}
+        sx={{ width: "100%" }}
         popperOptions={{
           modifiers: [
             {
-              name: 'offset',
+              name: "offset",
               options: {
-                offset: [0, 9]
-              }
-            }
-          ]
+                offset: [0, 9],
+              },
+            },
+          ],
         }}
       >
         {({ TransitionProps }) => (

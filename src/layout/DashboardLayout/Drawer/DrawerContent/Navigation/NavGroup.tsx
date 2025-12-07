@@ -1,40 +1,40 @@
-import { Fragment, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { Fragment, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 // material-ui
-import { useTheme, styled } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Box from '@mui/material/Box';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Divider from '@mui/material/Divider';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import Typography from '@mui/material/Typography';
+import { useTheme, styled } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from "@mui/material/Box";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import Typography from "@mui/material/Typography";
 
 // third-party
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 
 // project import
-import NavItem from './NavItem';
-import NavCollapse from './NavCollapse';
-import SimpleBar from 'components/third-party/SimpleBar';
-import Transitions from 'components/@extended/Transitions';
+import NavItem from "./NavItem";
+import NavCollapse from "./NavCollapse";
+import SimpleBar from "components/third-party/SimpleBar";
+import Transitions from "components/@extended/Transitions";
 
-import { MenuOrientation } from 'config';
-import useConfig from 'hooks/useConfig';
-import { handlerHorizontalActiveItem, useGetMenuMaster } from 'api/menu';
+import { MenuOrientation } from "config";
+import useConfig from "hooks/useConfig";
+import { handlerHorizontalActiveItem, useGetMenuMaster } from "api/menu";
 
 // assets
-import DownOutlined from '@ant-design/icons/DownOutlined';
-import GroupOutlined from '@ant-design/icons/GroupOutlined';
-import RightOutlined from '@ant-design/icons/RightOutlined';
+import DownOutlined from "@ant-design/icons/DownOutlined";
+import GroupOutlined from "@ant-design/icons/GroupOutlined";
+import RightOutlined from "@ant-design/icons/RightOutlined";
 
 // types
-import { NavItemType } from 'types/menu';
+import { NavItemType } from "types/menu";
 
 // ==============================|| NAVIGATION - LIST GROUP ||============================== //
 
@@ -55,23 +55,23 @@ type VirtualElement = {
 };
 
 const PopperStyled = styled(Popper)(({ theme }) => ({
-  overflow: 'visible',
+  overflow: "visible",
   zIndex: 1202,
   minWidth: 180,
-  '&:before': {
+  "&:before": {
     content: '""',
-    display: 'block',
-    position: 'absolute',
+    display: "block",
+    position: "absolute",
     top: 5,
     left: 32,
     width: 12,
     height: 12,
-    transform: 'translateY(-50%) rotate(45deg)',
+    transform: "translateY(-50%) rotate(45deg)",
     zIndex: 120,
-    borderWidth: '6px',
-    borderStyle: 'solid',
-    borderColor: `${theme.palette.background.paper}  transparent transparent ${theme.palette.background.paper}`
-  }
+    borderWidth: "6px",
+    borderStyle: "solid",
+    borderColor: `${theme.palette.background.paper}  transparent transparent ${theme.palette.background.paper}`,
+  },
 }));
 
 export default function NavGroup({
@@ -82,7 +82,7 @@ export default function NavGroup({
   setSelectedItems,
   selectedItems,
   setSelectedLevel,
-  selectedLevel
+  selectedLevel,
 }: Props) {
   const theme = useTheme();
   const pathname = usePathname();
@@ -92,9 +92,11 @@ export default function NavGroup({
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
   const selectedID = menuMaster.openedHorizontalItem;
 
-  const downLG = useMediaQuery(theme.breakpoints.down('lg'));
+  const downLG = useMediaQuery(theme.breakpoints.down("lg"));
 
-  const [anchorEl, setAnchorEl] = useState<VirtualElement | (() => VirtualElement) | null | undefined>(null);
+  const [anchorEl, setAnchorEl] = useState<
+    VirtualElement | (() => VirtualElement) | null | undefined
+  >(null);
   const [currentItem, setCurrentItem] = useState(item);
 
   const openMini = Boolean(anchorEl);
@@ -141,7 +143,12 @@ export default function NavGroup({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, currentItem]);
 
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
+  const handleClick = (
+    event:
+      | React.MouseEvent<HTMLAnchorElement>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>
+      | undefined,
+  ) => {
     if (!openMini) {
       setAnchorEl(event?.currentTarget);
     }
@@ -156,15 +163,18 @@ export default function NavGroup({
     <Icon
       style={{
         fontSize: 20,
-        stroke: '1.5',
-        color: selectedID === currentItem.id ? theme.palette.primary.main : theme.palette.secondary.dark
+        stroke: "1.5",
+        color:
+          selectedID === currentItem.id
+            ? theme.palette.primary.main
+            : theme.palette.secondary.dark,
       }}
     />
   ) : null;
 
   const navCollapse = item.children?.map((menuItem) => {
     switch (menuItem.type) {
-      case 'collapse':
+      case "collapse":
         return (
           <NavCollapse
             key={menuItem.id}
@@ -177,11 +187,16 @@ export default function NavGroup({
             parentId={currentItem.id!}
           />
         );
-      case 'item':
+      case "item":
         return <NavItem key={menuItem.id} item={menuItem} level={1} />;
       default:
         return (
-          <Typography key={menuItem.id} variant="h6" color="error" align="center">
+          <Typography
+            key={menuItem.id}
+            variant="h6"
+            color="error"
+            align="center"
+          >
             Fix - Group Collapse or Items
           </Typography>
         );
@@ -202,7 +217,7 @@ export default function NavGroup({
 
       {itemRem?.elements?.map((menu) => {
         switch (menu?.type) {
-          case 'collapse':
+          case "collapse":
             return (
               <NavCollapse
                 key={menu.id}
@@ -215,11 +230,16 @@ export default function NavGroup({
                 selectedItems={selectedItems}
               />
             );
-          case 'item':
+          case "item":
             return <NavItem key={menu.id} item={menu} level={1} />;
           default:
             return (
-              <Typography key={menu.id} variant="h6" color="error" align="center">
+              <Typography
+                key={menu.id}
+                variant="h6"
+                color="error"
+                align="center"
+              >
                 Menu Items Error
               </Typography>
             );
@@ -231,7 +251,7 @@ export default function NavGroup({
   // menu list collapse & items
   const items = currentItem.children?.map((menu) => {
     switch (menu?.type) {
-      case 'collapse':
+      case "collapse":
         return (
           <NavCollapse
             key={menu.id}
@@ -244,7 +264,7 @@ export default function NavGroup({
             selectedItems={selectedItems}
           />
         );
-      case 'item':
+      case "item":
         return <NavItem key={menu.id} item={menu} level={1} />;
       default:
         return (
@@ -289,7 +309,14 @@ export default function NavGroup({
         <List>
           <ListItemButton
             selected={selectedID === currentItem.id}
-            sx={{ p: 1, my: 0.5, mr: 1, display: 'flex', alignItems: 'center', '&.Mui-selected': { bgcolor: 'transparent' } }}
+            sx={{
+              p: 1,
+              my: 0.5,
+              mr: 1,
+              display: "flex",
+              alignItems: "center",
+              "&.Mui-selected": { bgcolor: "transparent" },
+            }}
             onMouseEnter={handleClick}
             onClick={handleClick}
             onMouseLeave={handleClose}
@@ -297,30 +324,65 @@ export default function NavGroup({
           >
             {itemIcon && (
               <ListItemIcon sx={{ minWidth: 28 }}>
-                {currentItem.id === lastItemId ? <GroupOutlined style={{ fontSize: 20, stroke: '1.5' }} /> : itemIcon}
+                {currentItem.id === lastItemId ? (
+                  <GroupOutlined style={{ fontSize: 20, stroke: "1.5" }} />
+                ) : (
+                  itemIcon
+                )}
               </ListItemIcon>
             )}
             <ListItemText
               sx={{ mr: 1 }}
               primary={
-                <Typography variant="body1" color={selectedID === currentItem.id ? 'primary.main' : 'secondary.dark'}>
-                  {currentItem.id === lastItemId ? <FormattedMessage id="more-items" /> : currentItem.title}
+                <Typography
+                  variant="body1"
+                  color={
+                    selectedID === currentItem.id
+                      ? "primary.main"
+                      : "secondary.dark"
+                  }
+                >
+                  {currentItem.id === lastItemId ? (
+                    <FormattedMessage id="more-items" />
+                  ) : (
+                    currentItem.title
+                  )}
                 </Typography>
               }
             />
             {openMini ? (
-              <DownOutlined style={{ fontSize: 16, stroke: '1.5' }} />
+              <DownOutlined style={{ fontSize: 16, stroke: "1.5" }} />
             ) : (
-              <RightOutlined style={{ fontSize: 16, stroke: '1.5' }} />
+              <RightOutlined style={{ fontSize: 16, stroke: "1.5" }} />
             )}
             {anchorEl && (
-              <PopperStyled id={popperId} open={openMini} anchorEl={anchorEl} placement="bottom-start" style={{ zIndex: 2001 }}>
+              <PopperStyled
+                id={popperId}
+                open={openMini}
+                anchorEl={anchorEl}
+                placement="bottom-start"
+                style={{ zIndex: 2001 }}
+              >
                 {({ TransitionProps }) => (
                   <Transitions in={openMini} {...TransitionProps}>
-                    <Paper sx={{ mt: 0.5, py: 1.25, boxShadow: theme.shadows[8], backgroundImage: 'none' }}>
+                    <Paper
+                      sx={{
+                        mt: 0.5,
+                        py: 1.25,
+                        boxShadow: theme.shadows[8],
+                        backgroundImage: "none",
+                      }}
+                    >
                       <ClickAwayListener onClickAway={handleClose}>
                         <>
-                          <SimpleBar sx={{ minWidth: 200, overflowX: 'hidden', overflowY: 'auto', maxHeight: 'calc(100vh - 170px)' }}>
+                          <SimpleBar
+                            sx={{
+                              minWidth: 200,
+                              overflowX: "hidden",
+                              overflowY: "auto",
+                              maxHeight: "calc(100vh - 170px)",
+                            }}
+                          >
                             {currentItem.id !== lastItemId ? items : moreItems}
                           </SimpleBar>
                         </>

@@ -1,32 +1,36 @@
-import useSWR, { mutate } from 'swr';
-import { useMemo } from 'react';
+import useSWR, { mutate } from "swr";
+import { useMemo } from "react";
 
 // Project-imports
-import { fetcher } from 'utils/axios';
+import { fetcher } from "utils/axios";
 
 // types
-import { MenuProps, NavItemType } from 'types/menu';
+import { MenuProps, NavItemType } from "types/menu";
 
 const initialState: MenuProps = {
-  openedItem: 'dashboard',
-  openedComponent: 'buttons',
+  openedItem: "dashboard",
+  openedComponent: "buttons",
   openedHorizontalItem: null,
   isDashboardDrawerOpened: false,
-  isComponentDrawerOpened: true
+  isComponentDrawerOpened: true,
 };
 
 export const endpoints = {
-  key: 'api/menu',
-  master: 'master',
-  dashboard: '/dashboard' // server URL
+  key: "api/menu",
+  master: "master",
+  dashboard: "/dashboard", // server URL
 };
 
 export function useGetMenu() {
-  const { data, isLoading, error, isValidating } = useSWR(endpoints.key + endpoints.dashboard, fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false
-  });
+  const { data, isLoading, error, isValidating } = useSWR(
+    endpoints.key + endpoints.dashboard,
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -34,27 +38,31 @@ export function useGetMenu() {
       menuLoading: isLoading,
       menuError: error,
       menuValidating: isValidating,
-      menuEmpty: !isLoading && !data?.length
+      menuEmpty: !isLoading && !data?.length,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating],
   );
 
   return memoizedValue;
 }
 
 export function useGetMenuMaster() {
-  const { data, isLoading } = useSWR(endpoints.key + endpoints.master, () => initialState, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false
-  });
+  const { data, isLoading } = useSWR(
+    endpoints.key + endpoints.master,
+    () => initialState,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
   const memoizedValue = useMemo(
     () => ({
       menuMaster: data as MenuProps,
-      menuMasterLoading: isLoading
+      menuMasterLoading: isLoading,
     }),
-    [data, isLoading]
+    [data, isLoading],
   );
 
   return memoizedValue;
@@ -68,7 +76,7 @@ export function handlerActiveComponent(openedComponent: string) {
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, openedComponent };
     },
-    false
+    false,
   );
 }
 
@@ -80,11 +88,13 @@ export function handlerDrawerOpen(isDashboardDrawerOpened: boolean) {
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, isDashboardDrawerOpened };
     },
-    false
+    false,
   );
 }
 
-export function handlerHorizontalActiveItem(openedHorizontalItem: string | null) {
+export function handlerHorizontalActiveItem(
+  openedHorizontalItem: string | null,
+) {
   // to update local state based on key
 
   mutate(
@@ -92,7 +102,7 @@ export function handlerHorizontalActiveItem(openedHorizontalItem: string | null)
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, openedHorizontalItem };
     },
-    false
+    false,
   );
 }
 
@@ -104,6 +114,6 @@ export function handlerActiveItem(openedItem: string) {
     (currentMenuMaster: any) => {
       return { ...currentMenuMaster, openedItem };
     },
-    false
+    false,
   );
 }

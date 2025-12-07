@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 // material-ui
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Toolbar from "@mui/material/Toolbar";
 
 // project import
-import Header from './Header';
-import Footer from './Footer';
+import Header from "./Header";
+import Footer from "./Footer";
 // import Breadcrumbs from 'components/@extended/Breadcrumbs';
 
-import useConfig from 'hooks/useConfig';
+import useConfig from "hooks/useConfig";
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -24,20 +24,23 @@ export default function DashboardLayout({ children }: Props) {
   const { container } = useConfig();
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       <Header />
-      <Box component="main" sx={{ width: '100%', flexGrow: 1, p: { xs: 2, sm: 3 } }}>
+      <Box
+        component="main"
+        sx={{ width: "100%", flexGrow: 1, p: { xs: 2, sm: 3 } }}
+      >
         <Toolbar />
         <Container
-          maxWidth={container ? 'xl' : false}
+          maxWidth={container ? "xl" : false}
           sx={[
             {
-              position: 'relative',
-              minHeight: 'calc(100vh - 110px)',
-              display: 'flex',
-              flexDirection: 'column'
+              position: "relative",
+              minHeight: "calc(100vh - 110px)",
+              display: "flex",
+              flexDirection: "column",
             },
-            container && { px: { xs: 0, sm: 2 } }
+            container && { px: { xs: 0, sm: 2 } },
           ]}
         >
           {/* <Breadcrumbs /> */}
