@@ -9,8 +9,8 @@ const API_BASE_URL = '/api/tv-shows';
 const tvShowApiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    accept: 'application/json',
-  },
+    accept: 'application/json'
+  }
 });
 
 // Raw API response interface
@@ -116,7 +116,7 @@ const transformTVShowData = (apiShow: TVShowApiResponse): TVShow => {
           : 0,
     status: apiShow.status,
     poster_url: apiShow.poster_url,
-    backdrop_url: apiShow.backdrop_url ?? '',
+    backdrop_url: apiShow.backdrop_url ?? ''
   };
 };
 
@@ -129,7 +129,7 @@ export const tvShowApi = {
     // Map our filter parameters to the API's expected parameters
     const apiParams: Record<string, any> = {
       page: filters?.page || 1,
-      limit: filters?.limit || 20,
+      limit: filters?.limit || 20
     };
 
     // Map 'name' to 'q' (search query)
@@ -145,7 +145,7 @@ export const tvShowApi = {
     if (filters?.status) apiParams.status = filters.status;
 
     const response = await tvShowApiClient.get('', {
-      params: apiParams,
+      params: apiParams
     });
 
     console.log('API Response:', response.data);
@@ -175,8 +175,8 @@ export const tvShowApi = {
           Math.ceil(
             (responseData?.total || tvShows.length) /
               (responseData?.limit || filters?.limit || 20)
-          ),
-      },
+          )
+      }
     };
   },
 
@@ -212,7 +212,7 @@ export const tvShowApi = {
   getGenres: async (): Promise<string[]> => {
     try {
       const response = await tvShowApiClient.get('/genres', {
-        params: { limit: 100 },
+        params: { limit: 100 }
       });
 
       if (response.data?.success && Array.isArray(response.data.data)) {
@@ -229,7 +229,7 @@ export const tvShowApi = {
   getStatuses: async (): Promise<string[]> => {
     try {
       const response = await tvShowApiClient.get('/statuses', {
-        params: { limit: 50 },
+        params: { limit: 50 }
       });
 
       if (response.data?.success && Array.isArray(response.data.data)) {
@@ -240,7 +240,7 @@ export const tvShowApi = {
       console.error('Error fetching statuses:', error);
       return [];
     }
-  },
+  }
 };
 
 export default tvShowApi;

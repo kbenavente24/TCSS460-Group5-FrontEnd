@@ -32,7 +32,7 @@ export default function useUser() {
       avatar: user?.image!,
       thumb,
       role: 'registered user',
-      emailVerified: (session as any)?.user?.emailVerified || false,
+      emailVerified: (session as any)?.user?.emailVerified || false
     };
 
     return newUser;

@@ -10,7 +10,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider as DefaultCacheProvider } from '@emotion/react';
 import type {
   EmotionCache,
-  Options as OptionsOfCreateCache,
+  Options as OptionsOfCreateCache
 } from '@emotion/cache';
 
 export type NextAppDirEmotionCacheProviderProps = {
@@ -25,7 +25,7 @@ export type NextAppDirEmotionCacheProviderProps = {
 export function NextAppDirEmotionCacheProvider({
   options,
   CacheProvider = DefaultCacheProvider,
-  children,
+  children
 }: NextAppDirEmotionCacheProviderProps) {
   const [{ cache, flush }] = useState(() => {
     const cache = createCache(options);
@@ -37,7 +37,7 @@ export function NextAppDirEmotionCacheProvider({
       if (cache.inserted[serialized.name] === undefined) {
         inserted.push({
           name: serialized.name,
-          isGlobal: !selector,
+          isGlobal: !selector
         });
       }
       return prevInsert(...args);

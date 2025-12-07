@@ -35,30 +35,30 @@ export default function DrawerHeader({ open }: Props) {
             ? { xs: '24px', lg: '0' }
             : open
               ? '24px'
-              : 0,
+              : 0
         },
         isHorizontal
           ? {
-              minHeight: 'unset',
+              minHeight: 'unset'
             }
           : {
-              minHeight: '60px',
-            },
+              minHeight: '60px'
+            }
       ]}
     >
       <Logo
         isIcon={!open}
         sx={[
           {
-            height: 35,
+            height: 35
           },
           open
             ? {
-                width: 'auto',
+                width: 'auto'
               }
             : {
-                width: 35,
-              },
+                width: 35
+              }
         ]}
       />
     </DrawerHeaderStyled>

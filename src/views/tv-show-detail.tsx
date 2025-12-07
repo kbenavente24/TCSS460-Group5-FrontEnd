@@ -41,7 +41,7 @@ const MOCK_TV_SHOWS = [
     production_companies: 'High Bridge Entertainment, Gran Via Productions',
     vote_average: 9.5,
     poster_url: '/ggFHVNu6YYI5L9pCfOacjizRGt.jpg',
-    backdrop_url: '/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg',
+    backdrop_url: '/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg'
   },
   {
     tv_show_id: 2,
@@ -61,7 +61,7 @@ const MOCK_TV_SHOWS = [
       'HBO Entertainment, Bighead Littlehead, 360 Television',
     vote_average: 8.5,
     poster_url: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
-    backdrop_url: '/2OMB0ynKlyIenMJWI2Dy9IWT4cM.jpg',
+    backdrop_url: '/2OMB0ynKlyIenMJWI2Dy9IWT4cM.jpg'
   },
   {
     tv_show_id: 3,
@@ -80,7 +80,7 @@ const MOCK_TV_SHOWS = [
     production_companies: '21 Laps Entertainment, Monkey Massacre',
     vote_average: 8.7,
     poster_url: '/49WJfeN0moxb9IPfGn8AIqMGskD.jpg',
-    backdrop_url: '/nTvM4mhqNlHIvUkI1gVnW6XP7GG.jpg',
+    backdrop_url: '/nTvM4mhqNlHIvUkI1gVnW6XP7GG.jpg'
   },
   {
     tv_show_id: 4,
@@ -99,7 +99,7 @@ const MOCK_TV_SHOWS = [
     production_companies: 'Reveille Productions, Deedle-Dee Productions',
     vote_average: 8.5,
     poster_url: '/qWnJzyZhyy74gjpSjIXWmuk0ifX.jpg',
-    backdrop_url: '/9a2z3QIubPGNgRzA7WO7fmK3S5x.jpg',
+    backdrop_url: '/9a2z3QIubPGNgRzA7WO7fmK3S5x.jpg'
   },
   {
     tv_show_id: 5,
@@ -118,7 +118,7 @@ const MOCK_TV_SHOWS = [
     production_companies: 'Left Bank Pictures, Sony Pictures Television',
     vote_average: 8.2,
     poster_url: '/1M876KPjulVwppEpldhdc8V4o68.jpg',
-    backdrop_url: '/fVpOOt95sfdb5jfe6Yb0tf50rkv.jpg',
+    backdrop_url: '/fVpOOt95sfdb5jfe6Yb0tf50rkv.jpg'
   },
   {
     tv_show_id: 6,
@@ -137,7 +137,7 @@ const MOCK_TV_SHOWS = [
     production_companies: 'Lucasfilm, Golem Creations, Fairview Entertainment',
     vote_average: 8.5,
     poster_url: '/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg',
-    backdrop_url: '/9ijMGlJKqcslswWUzTEwScM82EB.jpg',
+    backdrop_url: '/9ijMGlJKqcslswWUzTEwScM82EB.jpg'
   },
   {
     tv_show_id: 7,
@@ -157,7 +157,7 @@ const MOCK_TV_SHOWS = [
       'Gary Sanchez Productions, Hyperobject Industries, Project Zeus',
     vote_average: 8.7,
     poster_url: '/d7iVuo8Z7v6Eb7LkCk7OoiwMxrk.jpg',
-    backdrop_url: '/7vKp7j2sgyjEhCxHWdAFb9pCQDI.jpg',
+    backdrop_url: '/7vKp7j2sgyjEhCxHWdAFb9pCQDI.jpg'
   },
   {
     tv_show_id: 8,
@@ -176,7 +176,7 @@ const MOCK_TV_SHOWS = [
     production_companies: 'FX Productions',
     vote_average: 8.6,
     poster_url: '/9fzNf2Qkshv1i3j0zv3n9rs2Txv.jpg',
-    backdrop_url: '/rUb1wTffCXZGsWz5XYNWx9vBCvH.jpg',
+    backdrop_url: '/rUb1wTffCXZGsWz5XYNWx9vBCvH.jpg'
   },
   {
     tv_show_id: 9,
@@ -196,7 +196,7 @@ const MOCK_TV_SHOWS = [
       'HBO Entertainment, Sony Pictures Television, Naughty Dog',
     vote_average: 8.8,
     poster_url: '/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',
-    backdrop_url: '/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg',
+    backdrop_url: '/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg'
   },
   {
     tv_show_id: 10,
@@ -216,7 +216,7 @@ const MOCK_TV_SHOWS = [
       'Doozer Productions, Universal Television, Warner Bros. Television',
     vote_average: 8.7,
     poster_url: '/4kBHvhe4uY6sO0qZ1uw2K8mKmrg.jpg',
-    backdrop_url: '/yY76zq9X2lnn6N5H3PzHPqnyZsO.jpg',
+    backdrop_url: '/yY76zq9X2lnn6N5H3PzHPqnyZsO.jpg'
   },
   {
     tv_show_id: 11,
@@ -235,7 +235,7 @@ const MOCK_TV_SHOWS = [
     production_companies: 'HBO Entertainment, Bastard Sword, GRRM',
     vote_average: 8.5,
     poster_url: '/z2yahl2uefxDCl0nogcRBstwruJ.jpg',
-    backdrop_url: '/ztJfdBMQpC1cEkZRLExtYOLXsKK.jpg',
+    backdrop_url: '/ztJfdBMQpC1cEkZRLExtYOLXsKK.jpg'
   },
   {
     tv_show_id: 12,
@@ -254,8 +254,8 @@ const MOCK_TV_SHOWS = [
     production_companies: 'MGM Television, Tee and Charles Addams Foundation',
     vote_average: 8.1,
     poster_url: '/jeGtaMwGxPmQN5xM4ClnwPQcNQz.jpg',
-    backdrop_url: '/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg',
-  },
+    backdrop_url: '/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg'
+  }
 ];
 
 // ==============================|| TV SHOW DETAIL PAGE ||============================== //
@@ -307,7 +307,7 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
+      day: 'numeric'
     });
   };
 
@@ -320,7 +320,7 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
           p: 3,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}
       >
         <Typography variant="h4">Loading TV show details...</Typography>
@@ -337,7 +337,7 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
           p: 3,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <MainCard sx={{ p: 4, textAlign: 'center' }}>
@@ -374,18 +374,18 @@ export default function TVShowDetailPage({ id }: { id?: string }) {
           overflow: 'auto',
           overflowY: 'scroll',
           '&::-webkit-scrollbar': {
-            width: '12px',
+            width: '12px'
           },
           '&::-webkit-scrollbar-track': {
-            backgroundColor: 'background.paper',
+            backgroundColor: 'background.paper'
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#424242',
             borderRadius: '6px',
             '&:hover': {
-              backgroundColor: '#303030',
-            },
-          },
+              backgroundColor: '#303030'
+            }
+          }
         }}
       >
         <Grid container spacing={4}>

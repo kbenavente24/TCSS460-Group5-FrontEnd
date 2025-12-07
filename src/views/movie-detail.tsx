@@ -68,7 +68,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 0,
+      minimumFractionDigits: 0
     }).format(num);
   };
 
@@ -76,7 +76,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
+      day: 'numeric'
     });
   };
 
@@ -88,7 +88,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
           p: 3,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <MainCard sx={{ p: 4, textAlign: 'center' }}>
@@ -106,7 +106,7 @@ export default function MovieDetailPage({ id }: { id?: string }) {
           p: 3,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <MainCard sx={{ p: 4, textAlign: 'center' }}>
@@ -143,18 +143,18 @@ export default function MovieDetailPage({ id }: { id?: string }) {
           overflow: 'auto',
           overflowY: 'scroll',
           '&::-webkit-scrollbar': {
-            width: '12px',
+            width: '12px'
           },
           '&::-webkit-scrollbar-track': {
-            backgroundColor: 'background.paper',
+            backgroundColor: 'background.paper'
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#424242',
             borderRadius: '6px',
             '&:hover': {
-              backgroundColor: '#303030',
-            },
-          },
+              backgroundColor: '#303030'
+            }
+          }
         }}
       >
         <Grid container spacing={4}>

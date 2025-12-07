@@ -16,8 +16,8 @@ export async function GET(
     const response = await axios.get(`${TV_SHOW_API_URL}/shows/${id}`, {
       headers: {
         'X-API-Key': TV_SHOW_API_KEY,
-        accept: 'application/json',
-      },
+        accept: 'application/json'
+      }
     });
 
     return NextResponse.json(response.data);

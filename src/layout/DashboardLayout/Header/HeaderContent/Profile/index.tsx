@@ -72,13 +72,13 @@ export default function Profile() {
           '&:hover': {
             bgcolor: 'secondary.lighter',
             ...theme.applyStyles('dark', {
-              bgcolor: 'secondary.light',
-            }),
+              bgcolor: 'secondary.light'
+            })
           },
           '&:focus-visible': {
             outline: `2px solid ${theme.palette.secondary.dark}`,
-            outlineOffset: 2,
-          },
+            outlineOffset: 2
+          }
         })}
         aria-label="open profile"
         ref={anchorRef}
@@ -100,10 +100,10 @@ export default function Profile() {
             {
               name: 'offset',
               options: {
-                offset: [0, 9],
-              },
-            },
-          ],
+                offset: [0, 9]
+              }
+            }
+          ]
         }}
       >
         {({ TransitionProps }) => (
@@ -113,7 +113,7 @@ export default function Profile() {
                 boxShadow: theme.customShadows.z1,
                 width: 290,
                 minWidth: 240,
-                maxWidth: { xs: 250, md: 290 },
+                maxWidth: { xs: 250, md: 290 }
               }}
             >
               <ClickAwayListener onClickAway={handleClose}>

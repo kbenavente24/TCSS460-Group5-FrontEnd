@@ -8,10 +8,10 @@ export default function LoadingButton() {
           padding: '6px 16px',
           '&.MuiLoadingButton-loading': {
             opacity: 0.6,
-            textShadow: 'none',
-          },
-        },
-      },
-    },
+            textShadow: 'none'
+          }
+        }
+      }
+    }
   };
 }

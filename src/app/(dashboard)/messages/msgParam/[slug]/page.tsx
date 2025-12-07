@@ -1,7 +1,7 @@
 // ==============================|| PAGE ||============================== //
 
 export default async function MessagesPage({
-  params,
+  params
 }: {
   params: Promise<{ slug: string }>;
 }) {

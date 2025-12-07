@@ -19,7 +19,7 @@ const samplePage: NavItemType = {
   title: <FormattedMessage id="sample-page" />,
   type: 'group',
   url: '/sample-page',
-  icon: icons.ChromeOutlined,
+  icon: icons.ChromeOutlined
 };
 
 export default samplePage;

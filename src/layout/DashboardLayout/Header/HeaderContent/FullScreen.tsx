@@ -41,15 +41,15 @@ export default function FullScreen() {
           variant="light"
           sx={[
             {
-              color: '#FFFFFF',
+              color: '#FFFFFF'
             },
             open
               ? {
-                  bgcolor: 'rgba(255, 255, 255, 0.1)',
+                  bgcolor: 'rgba(255, 255, 255, 0.1)'
                 }
               : {
-                  bgcolor: 'transparent',
-                },
+                  bgcolor: 'transparent'
+                }
           ]}
           aria-label="fullscreen toggler"
           onClick={handleToggle}

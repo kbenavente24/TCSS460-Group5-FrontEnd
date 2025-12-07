@@ -33,7 +33,7 @@ export default function Navigation() {
   const [selectedItems, setSelectedItems] = useState<string | undefined>('');
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const [menuItems, setMenuItems] = useState<{ items: NavItemType[] }>({
-    items: [],
+    items: []
   });
 
   useLayoutEffect(() => {
@@ -62,8 +62,8 @@ export default function Navigation() {
         elements: item.children,
         icon: item.icon,
         ...(item.url && {
-          url: item.url,
-        }),
+          url: item.url
+        })
       }));
   }
 
@@ -107,18 +107,18 @@ export default function Navigation() {
     <Box
       sx={[
         {
-          display: isHorizontal ? { xs: 'block', lg: 'flex' } : 'block',
+          display: isHorizontal ? { xs: 'block', lg: 'flex' } : 'block'
         },
         drawerOpen
           ? {
-              pt: isHorizontal ? 0 : 2,
+              pt: isHorizontal ? 0 : 2
             }
           : {
-              pt: 0,
+              pt: 0
             },
         !isHorizontal && {
-          '& > ul:first-of-type': { mt: 0 },
-        },
+          '& > ul:first-of-type': { mt: 0 }
+        }
       ]}
     >
       {navGroups}

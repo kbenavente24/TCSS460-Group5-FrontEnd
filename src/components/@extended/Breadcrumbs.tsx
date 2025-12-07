@@ -84,7 +84,7 @@ export default function Breadcrumbs({
       theme.direction === ThemeDirection.RTL ? theme.spacing(0.75) : 0,
     width: '1rem',
     height: '1rem',
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.main
   };
 
   let customLocation = location;
@@ -211,11 +211,11 @@ export default function Breadcrumbs({
               sx={[
                 card === false
                   ? {
-                      mt: 0.25,
+                      mt: 0.25
                     }
                   : {
-                      mt: 1,
-                    },
+                      mt: 1
+                    }
               ]}
             >
               <Typography variant="h2">{main.title}</Typography>
@@ -280,7 +280,7 @@ export default function Breadcrumbs({
                 variant={!link.to ? 'subtitle1' : 'h6'}
                 sx={{
                   textDecoration: 'none',
-                  ...(link.to && { cursor: 'pointer' }),
+                  ...(link.to && { cursor: 'pointer' })
                 }}
                 color={!link.to ? 'text.primary' : 'text.secondary'}
               >
@@ -336,11 +336,11 @@ export default function Breadcrumbs({
                 sx={[
                   card === false
                     ? {
-                        mt: 0.25,
+                        mt: 0.25
                       }
                     : {
-                        mt: 1,
-                      },
+                        mt: 1
+                      }
                 ]}
               >
                 <Typography variant="h2">

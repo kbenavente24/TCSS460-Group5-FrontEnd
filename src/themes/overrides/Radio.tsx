@@ -17,15 +17,15 @@ function getColorStyle({ color, theme }: ExtendedStyleProps) {
 
   return {
     '& .dot': {
-      backgroundColor: main,
+      backgroundColor: main
     },
     '&:hover': {
-      backgroundColor: lighter,
+      backgroundColor: lighter
     },
     '&.Mui-focusVisible': {
       outline: `2px solid ${dark}`,
-      outlineOffset: -4,
-    },
+      outlineOffset: -4
+    }
   };
 }
 
@@ -62,9 +62,9 @@ function radioStyle(size?: CheckboxProps['size']) {
         width: sizes.dotSize,
         height: sizes.dotSize,
         top: sizes.position,
-        left: sizes.position,
-      },
-    },
+        left: sizes.position
+      }
+    }
   };
 }
 
@@ -85,7 +85,7 @@ export default function Radio(theme: Theme) {
               height: 16,
               border: '1px solid',
               borderColor: 'inherit',
-              borderRadius: '50%',
+              borderRadius: '50%'
             }}
           />
         ),
@@ -98,7 +98,7 @@ export default function Radio(theme: Theme) {
               border: '1px solid',
               borderColor: 'inherit',
               borderRadius: '50%',
-              position: 'relative',
+              position: 'relative'
             }}
           >
             <Box
@@ -110,32 +110,32 @@ export default function Radio(theme: Theme) {
                 borderRadius: '50%',
                 position: 'absolute',
                 top: 3,
-                left: 3,
+                left: 3
               }}
             />
           </Box>
-        ),
+        )
       },
       styleOverrides: {
         root: {
           color: palette.secondary[300],
           '&.size-small': {
-            ...radioStyle('small'),
+            ...radioStyle('small')
           },
           '&.size-medium': {
-            ...radioStyle('medium'),
+            ...radioStyle('medium')
           },
           '&.size-large': {
-            ...radioStyle('large'),
-          },
+            ...radioStyle('large')
+          }
         },
         colorPrimary: getColorStyle({ color: 'primary', theme }),
         colorSecondary: getColorStyle({ color: 'secondary', theme }),
         colorSuccess: getColorStyle({ color: 'success', theme }),
         colorWarning: getColorStyle({ color: 'warning', theme }),
         colorInfo: getColorStyle({ color: 'info', theme }),
-        colorError: getColorStyle({ color: 'error', theme }),
-      },
-    },
+        colorError: getColorStyle({ color: 'error', theme })
+      }
+    }
   };
 }

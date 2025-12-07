@@ -48,7 +48,7 @@ const TV_SHOW_GENRES = [
   'Soap',
   'Talk',
   'War & Politics',
-  'Western',
+  'Western'
 ];
 
 // TV Show Status Options
@@ -80,7 +80,7 @@ export default function AddTVShowView() {
   const [creators, setCreators] = useState<string[]>(['']);
   const [networks, setNetworks] = useState<string[]>(['']);
   const [productionCompanies, setProductionCompanies] = useState<string[]>([
-    '',
+    ''
   ]);
 
   const handleAddGenre = () => setGenres([...genres, '']);
@@ -158,7 +158,7 @@ export default function AddTVShowView() {
         popularity: parseFloat(popularity) || 0,
         tmdb_rating: parseFloat(tmdbRating) || 0,
         vote_count: parseInt(voteCount) || 0,
-        genres: filteredGenres.length > 0 ? filteredGenres : ['Unknown'], // API requires genres array
+        genres: filteredGenres.length > 0 ? filteredGenres : ['Unknown'] // API requires genres array
       };
 
       // Add optional fields only if they have values
@@ -174,9 +174,9 @@ export default function AddTVShowView() {
       const response = await fetch('/api/tv-shows', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(tvShowData),
+        body: JSON.stringify(tvShowData)
       });
 
       if (!response.ok) {

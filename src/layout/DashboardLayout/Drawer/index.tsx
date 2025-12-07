@@ -57,7 +57,7 @@ export default function MainDrawer({ window }: Props) {
           sx={[
             {
               display: {
-                lg: 'none',
+                lg: 'none'
               },
               '& .MuiDrawer-paper': {
                 boxSizing: 'border-box',
@@ -65,20 +65,20 @@ export default function MainDrawer({ window }: Props) {
                 borderRight: '1px solid',
                 borderRightColor: 'divider',
                 backgroundImage: 'none',
-                boxShadow: 'inherit',
-              },
+                boxShadow: 'inherit'
+              }
             },
             drawerOpen
               ? {
                   display: {
-                    xs: 'block',
-                  },
+                    xs: 'block'
+                  }
                 }
               : {
                   display: {
-                    xs: 'none',
-                  },
-                },
+                    xs: 'none'
+                  }
+                }
           ]}
         >
           {drawerHeader}

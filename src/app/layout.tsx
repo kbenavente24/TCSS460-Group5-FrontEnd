@@ -8,17 +8,17 @@ import { publicSans } from 'config';
 
 export const metadata: Metadata = {
   title: "Group 5's Movie & TV Show App",
-  description: "Group 5's Movie & TV Show Application",
+  description: "Group 5's Movie & TV Show Application"
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 1
 };
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {

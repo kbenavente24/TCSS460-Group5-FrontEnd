@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 // material-ui
 import LinearProgress, {
-  LinearProgressProps,
+  LinearProgressProps
 } from '@mui/material/LinearProgress';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';

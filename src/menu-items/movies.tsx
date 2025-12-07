@@ -10,7 +10,7 @@ import { NavItemType } from 'types/menu';
 const icons = {
   VideoCameraOutlined,
   PlusCircleOutlined,
-  UnorderedListOutlined,
+  UnorderedListOutlined
 };
 
 // ==============================|| MENU ITEMS - MOVIES ||============================== //
@@ -25,23 +25,23 @@ const movies: NavItemType = {
       title: 'Browse Movies',
       type: 'item',
       url: '/movies',
-      icon: icons.VideoCameraOutlined,
+      icon: icons.VideoCameraOutlined
     },
     {
       id: 'add-movie',
       title: 'Add Movie',
       type: 'item',
       url: '/add-movie',
-      icon: icons.PlusCircleOutlined,
+      icon: icons.PlusCircleOutlined
     },
     {
       id: 'top10',
       title: 'Top 10 Lists',
       type: 'item',
       url: '/top10',
-      icon: icons.UnorderedListOutlined,
-    },
-  ],
+      icon: icons.UnorderedListOutlined
+    }
+  ]
 };
 
 export default movies;

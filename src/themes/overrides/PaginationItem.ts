@@ -23,9 +23,9 @@ function getColorStyle({ variant, color, theme }: PaginationStyleProps) {
       outline: `2px solid ${dark}`,
       outlineOffset: 2,
       ...(variant === 'text' && {
-        backgroundColor: theme.palette.background.paper,
-      }),
-    },
+        backgroundColor: theme.palette.background.paper
+      })
+    }
   };
 
   switch (variant) {
@@ -35,18 +35,18 @@ function getColorStyle({ variant, color, theme }: PaginationStyleProps) {
         color: contrastText,
         backgroundColor: main,
         '&:hover': {
-          backgroundColor: light,
+          backgroundColor: light
         },
-        ...focusStyle,
+        ...focusStyle
       };
     case 'outlined':
       return {
         borderColor: main,
         '&:hover': {
           backgroundColor: lighter,
-          borderColor: light,
+          borderColor: light
         },
-        ...focusStyle,
+        ...focusStyle
       };
     case 'text':
     default:
@@ -54,9 +54,9 @@ function getColorStyle({ variant, color, theme }: PaginationStyleProps) {
         color: main,
         '&:hover': {
           backgroundColor: main,
-          color: lighter,
+          color: lighter
         },
-        ...focusStyle,
+        ...focusStyle
       };
   }
 }
@@ -70,8 +70,8 @@ export default function PaginationItem(theme: Theme) {
         root: {
           '&:focus-visible': {
             outline: `2px solid ${theme.palette.secondary.dark}`,
-            outlineOffset: 2,
-          },
+            outlineOffset: 2
+          }
         },
         text: {
           '&.Mui-selected': {
@@ -85,97 +85,97 @@ export default function PaginationItem(theme: Theme) {
             '&.MuiPaginationItem-textError': getColorStyle({
               variant: 'text',
               color: 'error',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-textSuccess': getColorStyle({
               variant: 'text',
               color: 'success',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-textInfo': getColorStyle({
               variant: 'text',
               color: 'info',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-textWarning': getColorStyle({
               variant: 'text',
               color: 'warning',
-              theme,
-            }),
-          },
+              theme
+            })
+          }
         },
         contained: {
           '&.Mui-selected': {
             '&.MuiPaginationItem-containedPrimary': getColorStyle({
               variant: 'contained',
               color: 'primary',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-containedSecondary': getColorStyle({
               variant: 'contained',
               color: 'secondary',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-containedError': getColorStyle({
               variant: 'contained',
               color: 'error',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-containedSuccess': getColorStyle({
               variant: 'contained',
               color: 'success',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-containedInfo': getColorStyle({
               variant: 'contained',
               color: 'info',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-containedWarning': getColorStyle({
               variant: 'contained',
               color: 'warning',
-              theme,
-            }),
-          },
+              theme
+            })
+          }
         },
         combined: {
           border: '1px solid',
           borderColor: theme.palette.divider,
           '&.MuiPaginationItem-ellipsis': {
-            border: 'none',
+            border: 'none'
           },
           '&.Mui-selected': {
             '&.MuiPaginationItem-combinedPrimary': getColorStyle({
               variant: 'combined',
               color: 'primary',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-combinedSecondary': getColorStyle({
               variant: 'combined',
               color: 'secondary',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-combinedError': getColorStyle({
               variant: 'combined',
               color: 'error',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-combinedSuccess': getColorStyle({
               variant: 'combined',
               color: 'success',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-combinedInfo': getColorStyle({
               variant: 'combined',
               color: 'info',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-combinedWarning': getColorStyle({
               variant: 'combined',
               color: 'warning',
-              theme,
-            }),
-          },
+              theme
+            })
+          }
         },
         outlined: {
           borderColor: theme.palette.divider,
@@ -187,31 +187,31 @@ export default function PaginationItem(theme: Theme) {
               getColorStyle({
                 variant: 'outlined',
                 color: 'secondary',
-                theme,
+                theme
               }),
             '&.MuiPaginationItem-outlinedError': getColorStyle({
               variant: 'outlined',
               color: 'error',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-outlinedSuccess': getColorStyle({
               variant: 'outlined',
               color: 'success',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-outlinedInfo': getColorStyle({
               variant: 'outlined',
               color: 'info',
-              theme,
+              theme
             }),
             '&.MuiPaginationItem-outlinedWarning': getColorStyle({
               variant: 'outlined',
               color: 'warning',
-              theme,
-            }),
-          },
-        },
-      },
-    },
+              theme
+            })
+          }
+        }
+      }
+    }
   };
 }

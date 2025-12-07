@@ -12,9 +12,9 @@ export default function TableHead(theme: Theme) {
           borderTop: '1px solid',
           borderTopColor: theme.palette.divider,
           borderBottom: '2px solid',
-          borderBottomColor: theme.palette.divider,
-        },
-      },
-    },
+          borderBottomColor: theme.palette.divider
+        }
+      }
+    }
   };
 }

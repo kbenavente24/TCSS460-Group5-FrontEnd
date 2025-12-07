@@ -12,13 +12,13 @@ const initialState: MenuProps = {
   openedComponent: 'buttons',
   openedHorizontalItem: null,
   isDashboardDrawerOpened: false,
-  isComponentDrawerOpened: true,
+  isComponentDrawerOpened: true
 };
 
 export const endpoints = {
   key: 'api/menu',
   master: 'master',
-  dashboard: '/dashboard', // server URL
+  dashboard: '/dashboard' // server URL
 };
 
 export function useGetMenu() {
@@ -28,7 +28,7 @@ export function useGetMenu() {
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,
-      revalidateOnReconnect: false,
+      revalidateOnReconnect: false
     }
   );
 
@@ -38,7 +38,7 @@ export function useGetMenu() {
       menuLoading: isLoading,
       menuError: error,
       menuValidating: isValidating,
-      menuEmpty: !isLoading && !data?.length,
+      menuEmpty: !isLoading && !data?.length
     }),
     [data, error, isLoading, isValidating]
   );
@@ -53,14 +53,14 @@ export function useGetMenuMaster() {
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,
-      revalidateOnReconnect: false,
+      revalidateOnReconnect: false
     }
   );
 
   const memoizedValue = useMemo(
     () => ({
       menuMaster: data as MenuProps,
-      menuMasterLoading: isLoading,
+      menuMasterLoading: isLoading
     }),
     [data, isLoading]
   );

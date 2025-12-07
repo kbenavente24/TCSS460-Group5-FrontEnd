@@ -51,7 +51,7 @@ export default function ContentPicker({
   onClose,
   onSelect,
   listType,
-  currentRank,
+  currentRank
 }: ContentPickerProps) {
   const [contentType, setContentType] = useState<'movie' | 'tv-show'>(
     listType === 'tv-shows' ? 'tv-show' : 'movie'
@@ -130,7 +130,7 @@ export default function ContentPicker({
       id: movie.movie_id,
       type: 'movie',
       title: movie.title,
-      posterUrl: `https://image.tmdb.org/t/p/w500${movie.poster_url}`,
+      posterUrl: `https://image.tmdb.org/t/p/w500${movie.poster_url}`
     });
     onClose();
   };
@@ -140,7 +140,7 @@ export default function ContentPicker({
       id: tvShow.tv_show_id,
       type: 'tv-show',
       title: tvShow.name,
-      posterUrl: `https://image.tmdb.org/t/p/w500${tvShow.poster_url}`,
+      posterUrl: `https://image.tmdb.org/t/p/w500${tvShow.poster_url}`
     });
     onClose();
   };
@@ -161,7 +161,7 @@ export default function ContentPicker({
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Typography variant="h3">Add to Rank #{currentRank}</Typography>
@@ -203,7 +203,7 @@ export default function ContentPicker({
                 <InputAdornment position="start">
                   <SearchOutlined style={{ fontSize: '1.2rem' }} />
                 </InputAdornment>
-              ),
+              )
             }}
           />
 
@@ -215,7 +215,7 @@ export default function ContentPicker({
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100%',
+                  height: '100%'
                 }}
               >
                 <CircularProgress />
@@ -226,7 +226,7 @@ export default function ContentPicker({
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100%',
+                  height: '100%'
                 }}
               >
                 <Typography variant="body1" color="error">
@@ -239,7 +239,7 @@ export default function ContentPicker({
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100%',
+                  height: '100%'
                 }}
               >
                 <Typography variant="body1" color="text.secondary">
@@ -254,7 +254,7 @@ export default function ContentPicker({
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100%',
+                  height: '100%'
                 }}
               >
                 <Typography variant="body1" color="text.secondary">
@@ -272,8 +272,8 @@ export default function ContentPicker({
                         transition: 'transform 0.2s, box-shadow 0.2s',
                         '&:hover': {
                           transform: 'scale(1.05)',
-                          boxShadow: 4,
-                        },
+                          boxShadow: 4
+                        }
                       }}
                       onClick={() => handleSelectMovie(movie)}
                     >
@@ -293,7 +293,7 @@ export default function ContentPicker({
                             display: '-webkit-box',
                             WebkitLineClamp: 2,
                             WebkitBoxOrient: 'vertical',
-                            fontSize: '0.75rem',
+                            fontSize: '0.75rem'
                           }}
                         >
                           {movie.title}
@@ -312,8 +312,8 @@ export default function ContentPicker({
                         transition: 'transform 0.2s, box-shadow 0.2s',
                         '&:hover': {
                           transform: 'scale(1.05)',
-                          boxShadow: 4,
-                        },
+                          boxShadow: 4
+                        }
                       }}
                       onClick={() => handleSelectTVShow(tvShow)}
                     >
@@ -333,7 +333,7 @@ export default function ContentPicker({
                             display: '-webkit-box',
                             WebkitLineClamp: 2,
                             WebkitBoxOrient: 'vertical',
-                            fontSize: '0.75rem',
+                            fontSize: '0.75rem'
                           }}
                         >
                           {tvShow.name}

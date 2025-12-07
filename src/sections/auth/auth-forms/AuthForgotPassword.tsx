@@ -43,19 +43,19 @@ export default function AuthForgotPassword() {
     <Formik
       initialValues={{
         email: '',
-        submit: null,
+        submit: null
       }}
       validationSchema={Yup.object().shape({
         email: Yup.string()
           .email('Must be a valid email')
           .max(255)
-          .required('Email is required'),
+          .required('Email is required')
       })}
       onSubmit={async (_values, { setErrors, setSubmitting }) => {
         // This endpoint no longer exists in the new API
         setErrors({
           submit:
-            'Password reset via email is no longer supported. Please contact support or change your password while logged in.',
+            'Password reset via email is no longer supported. Please contact support or change your password while logged in.'
         });
         setSubmitting(false);
       }}
@@ -67,7 +67,7 @@ export default function AuthForgotPassword() {
         handleSubmit,
         isSubmitting,
         touched,
-        values,
+        values
       }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>

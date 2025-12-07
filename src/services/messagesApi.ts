@@ -9,6 +9,5 @@ export const messagesApi = {
   create: (data: { name: string; message: string; priority: number }) =>
     messagesService.post('/protected/message', data),
 
-  delete: (name: string) =>
-    messagesService.delete(`/protected/message/${name}`),
+  delete: (name: string) => messagesService.delete(`/protected/message/${name}`)
 };

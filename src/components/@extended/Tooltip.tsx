@@ -2,7 +2,7 @@
 import { styled, useTheme, Theme } from '@mui/material/styles';
 import MuiTooltip, {
   TooltipProps,
-  tooltipClasses,
+  tooltipClasses
 } from '@mui/material/Tooltip';
 
 // project import
@@ -32,22 +32,22 @@ function getVariantStyle({ color, theme, labelColor }: TooltipStyleProps) {
     return {
       [`& .${tooltipClasses.tooltip}`]: {
         background: main,
-        color: labelColor ? labelColor : contrastText,
+        color: labelColor ? labelColor : contrastText
       },
       [`& .${tooltipClasses.arrow}`]: {
-        color: main,
-      },
+        color: main
+      }
     };
   } else {
     return {
       [`& .${tooltipClasses.tooltip}`]: {
         background: colorValue,
         color: labelColor ? labelColor : contrastText,
-        boxShadow: theme.shadows[1],
+        boxShadow: theme.shadows[1]
       },
       [`& .${tooltipClasses.arrow}`]: {
-        color: colorValue,
-      },
+        color: colorValue
+      }
     };
   }
 }
@@ -66,10 +66,10 @@ const TooltipStyle = styled(
     <MuiTooltip {...props} classes={{ popper: className }} />
   ),
   {
-    shouldForwardProp: (prop) => prop !== 'color' && prop !== 'labelColor',
+    shouldForwardProp: (prop) => prop !== 'color' && prop !== 'labelColor'
   }
 )(({ theme, color, labelColor }: StyleProps) => ({
-  ...(color && getVariantStyle({ color, theme, labelColor })),
+  ...(color && getVariantStyle({ color, theme, labelColor }))
 }));
 
 interface Props extends TooltipProps {

@@ -48,7 +48,7 @@ const MOVIE_GENRES = [
   'Science Fiction',
   'Thriller',
   'War',
-  'Western',
+  'Western'
 ];
 
 interface Studio {
@@ -88,10 +88,10 @@ export default function AddMovieView() {
   const [directors, setDirectors] = useState<string[]>(['']);
   const [producers, setProducers] = useState<string[]>(['']);
   const [studios, setStudios] = useState<Studio[]>([
-    { studio_name: '', logo_url: '', country: '' },
+    { studio_name: '', logo_url: '', country: '' }
   ]);
   const [cast, setCast] = useState<CastMember[]>([
-    { actor_name: '', character_name: '', actor_order: 1, profile_url: '' },
+    { actor_name: '', character_name: '', actor_order: 1, profile_url: '' }
   ]);
 
   const handleAddGenre = () => setGenres([...genres, '']);
@@ -142,8 +142,8 @@ export default function AddMovieView() {
         actor_name: '',
         character_name: '',
         actor_order: cast.length + 1,
-        profile_url: '',
-      },
+        profile_url: ''
+      }
     ]);
   const handleRemoveCast = (index: number) =>
     setCast(cast.filter((_, i) => i !== index));
@@ -180,7 +180,7 @@ export default function AddMovieView() {
         directors: directors.filter((d) => d.trim()),
         producers: producers.filter((p) => p.trim()),
         studios: studios.filter((s) => s.studio_name.trim()),
-        cast: cast.filter((c) => c.actor_name.trim()),
+        cast: cast.filter((c) => c.actor_name.trim())
       };
 
       const response = await fetch(
@@ -189,9 +189,9 @@ export default function AddMovieView() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-Key': process.env.NEXT_PUBLIC_MOVIE_API_KEY || '',
+            'X-API-Key': process.env.NEXT_PUBLIC_MOVIE_API_KEY || ''
           },
-          body: JSON.stringify(movieData),
+          body: JSON.stringify(movieData)
         }
       );
 

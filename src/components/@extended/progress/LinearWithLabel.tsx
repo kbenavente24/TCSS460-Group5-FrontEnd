@@ -1,6 +1,6 @@
 // material-ui
 import LinearProgress, {
-  LinearProgressProps,
+  LinearProgressProps
 } from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';

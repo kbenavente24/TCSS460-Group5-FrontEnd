@@ -38,9 +38,9 @@ export default function DashboardLayout({ children }: Props) {
               position: 'relative',
               minHeight: 'calc(100vh - 110px)',
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: 'column'
             },
-            container && { px: { xs: 0, sm: 2 } },
+            container && { px: { xs: 0, sm: 2 } }
           ]}
         >
           {/* <Breadcrumbs /> */}

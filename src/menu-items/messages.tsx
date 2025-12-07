@@ -30,18 +30,18 @@ const pages: NavItemType = {
           title: <FormattedMessage id="send-message" />,
           type: 'item',
           url: '/messages/send',
-          icon: icons.SendIcon,
+          icon: icons.SendIcon
         },
         {
           id: 'view-messages',
           title: <FormattedMessage id="view-messages" />,
           type: 'item',
           url: '/messages/list',
-          icon: icons.EmailIcon,
-        },
-      ],
-    },
-  ],
+          icon: icons.EmailIcon
+        }
+      ]
+    }
+  ]
 };
 
 export default pages;

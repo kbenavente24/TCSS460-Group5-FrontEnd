@@ -59,7 +59,7 @@ const MOVIE_GENRES = [
   'Science Fiction',
   'Thriller',
   'War',
-  'Western',
+  'Western'
 ];
 
 // ==============================|| ADVANCED SEARCH PAGE ||============================== //
@@ -106,7 +106,7 @@ export default function SearchPage() {
         try {
           const [genres, statuses] = await Promise.all([
             tvShowApi.getGenres(),
-            tvShowApi.getStatuses(),
+            tvShowApi.getStatuses()
           ]);
           setTvGenres(genres);
           setTvStatuses(statuses);
@@ -131,7 +131,7 @@ export default function SearchPage() {
       // Regular search with filters (no ID search for movies)
       const filters: any = {
         page: currentPage,
-        limit: resultsPerPage,
+        limit: resultsPerPage
       };
 
       if (searchText) filters.title = searchText;
@@ -165,7 +165,7 @@ export default function SearchPage() {
       // Regular search with filters (no ID search for TV shows)
       const filters: any = {
         page: currentPage,
-        limit: resultsPerPage,
+        limit: resultsPerPage
       };
 
       if (searchText) filters.name = searchText;
@@ -244,7 +244,7 @@ export default function SearchPage() {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
+      day: 'numeric'
     });
   };
 
@@ -315,8 +315,8 @@ export default function SearchPage() {
                     <InputAdornment position="start">
                       <SearchOutlined />
                     </InputAdornment>
-                  ),
-                },
+                  )
+                }
               }}
             />
           </Grid>
@@ -479,7 +479,7 @@ export default function SearchPage() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              minHeight: '400px',
+              minHeight: '400px'
             }}
           >
             <CircularProgress />
@@ -543,8 +543,8 @@ export default function SearchPage() {
                           transition: 'transform 0.2s, box-shadow 0.2s',
                           '&:hover': {
                             transform: 'scale(1.02)',
-                            boxShadow: 4,
-                          },
+                            boxShadow: 4
+                          }
                         }}
                         onClick={() => {
                           if (movie) {
@@ -566,7 +566,7 @@ export default function SearchPage() {
                             p: 2,
                             flex: 1,
                             display: 'flex',
-                            flexDirection: 'column',
+                            flexDirection: 'column'
                           }}
                         >
                           <Typography

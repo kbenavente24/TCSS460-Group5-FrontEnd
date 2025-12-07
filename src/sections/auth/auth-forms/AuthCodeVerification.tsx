@@ -28,7 +28,7 @@ export default function AuthCodeVerification() {
       validationSchema={Yup.object({
         otp: Yup.string()
           .length(4, 'OTP must be exactly 4 digits')
-          .required('OTP is required'),
+          .required('OTP is required')
       })}
       onSubmit={(values, { resetForm }) => {
         resetForm();
@@ -47,8 +47,8 @@ export default function AuthCodeVerification() {
                   '& input:focus-visible': {
                     outline: 'none !important',
                     borderColor: `${theme.palette.primary.main} !important`,
-                    boxShadow: `${theme.customShadows.primary} !important`,
-                  },
+                    boxShadow: `${theme.customShadows.primary} !important`
+                  }
                 })}
               >
                 <OtpInput
@@ -60,7 +60,7 @@ export default function AuthCodeVerification() {
                   numInputs={4}
                   containerStyle={{
                     justifyContent: 'space-between',
-                    margin: -8,
+                    margin: -8
                   }}
                   inputStyle={{
                     width: '100%',
@@ -72,7 +72,7 @@ export default function AuthCodeVerification() {
                     borderColor:
                       touched.otp && errors.otp
                         ? theme.palette.error.main
-                        : theme.palette.divider,
+                        : theme.palette.divider
                   }}
                 />
                 {touched.otp && errors.otp && (
@@ -111,7 +111,7 @@ export default function AuthCodeVerification() {
                     minWidth: 85,
                     ml: 2,
                     textDecoration: 'none',
-                    cursor: 'pointer',
+                    cursor: 'pointer'
                   }}
                   color="primary"
                 >

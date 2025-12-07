@@ -17,20 +17,20 @@ import WarningOutlined from '@ant-design/icons/WarningOutlined';
 // custom styles
 const StyledSnackbarProvider = styled(SnackbarProvider)(({ theme }) => ({
   '&.notistack-MuiContent-default': {
-    background: theme.palette.primary.main,
+    background: theme.palette.primary.main
   },
   '&.notistack-MuiContent-error': {
-    background: theme.palette.error.main,
+    background: theme.palette.error.main
   },
   '&.notistack-MuiContent-success': {
-    background: theme.palette.success.main,
+    background: theme.palette.success.main
   },
   '&.notistack-MuiContent-info': {
-    background: theme.palette.info.main,
+    background: theme.palette.info.main
   },
   '&.notistack-MuiContent-warning': {
-    background: theme.palette.warning.main,
-  },
+    background: theme.palette.warning.main
+  }
 }));
 
 // ===========================|| SNACKBAR - NOTISTACK ||=========================== //
@@ -51,7 +51,7 @@ export default function Notistack({ children }: any) {
               success: <CheckCircleOutlined style={iconSX} />,
               error: <CloseCircleOutlined style={iconSX} />,
               warning: <WarningOutlined style={iconSX} />,
-              info: <InfoCircleOutlined style={iconSX} />,
+              info: <InfoCircleOutlined style={iconSX} />
             }
           : undefined
       }

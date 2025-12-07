@@ -2,7 +2,7 @@
 import Typography from '@mui/material/Typography';
 import CircularProgress, {
   CircularProgressProps,
-  circularProgressClasses,
+  circularProgressClasses
 } from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -30,11 +30,11 @@ export default function CircularWithPath({
         sx={[
           pathColor
             ? {
-                color: pathColor,
+                color: pathColor
               }
             : {
-                color: 'grey.200',
-              },
+                color: 'grey.200'
+              }
         ]}
         size={size}
         thickness={thickness}
@@ -63,8 +63,8 @@ export default function CircularWithPath({
           position: 'absolute',
           left: 0,
           [`& .${circularProgressClasses.circle}`]: {
-            strokeLinecap: 'round',
-          },
+            strokeLinecap: 'round'
+          }
         }}
         size={size}
         thickness={thickness}

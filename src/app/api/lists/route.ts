@@ -44,14 +44,14 @@ export async function GET(request: NextRequest) {
 
         return {
           ...list,
-          itemCount: parseInt(countResult.rows[0].count),
+          itemCount: parseInt(countResult.rows[0].count)
         };
       })
     );
 
     return NextResponse.json({
       success: true,
-      data: listsWithCounts,
+      data: listsWithCounts
     });
   } catch (error) {
     console.error('Error fetching lists:', error);
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
       userId,
       title,
       type,
-      description || null,
+      description || null
     ]);
 
     const newList = result.rows[0];
@@ -116,8 +116,8 @@ export async function POST(request: NextRequest) {
         success: true,
         data: {
           ...newList,
-          itemCount: 0,
-        },
+          itemCount: 0
+        }
       },
       { status: 201 }
     );

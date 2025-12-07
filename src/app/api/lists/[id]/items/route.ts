@@ -25,7 +25,7 @@ export async function POST(
     if (!rank || !contentId || !contentType || !title) {
       return NextResponse.json(
         {
-          error: 'Missing required fields: rank, contentId, contentType, title',
+          error: 'Missing required fields: rank, contentId, contentType, title'
         },
         { status: 400 }
       );
@@ -83,7 +83,7 @@ export async function POST(
     `;
     const existingItemResult = await pool.query(existingItemQuery, [
       listId,
-      rank,
+      rank
     ]);
 
     if (existingItemResult.rows.length > 0) {
@@ -107,13 +107,13 @@ export async function POST(
         title,
         posterUrl || null,
         listId,
-        rank,
+        rank
       ]);
 
       return NextResponse.json({
         success: true,
         data: updateResult.rows[0],
-        message: 'Item updated successfully',
+        message: 'Item updated successfully'
       });
     } else {
       // Insert new item
@@ -135,14 +135,14 @@ export async function POST(
         contentId,
         contentType,
         title,
-        posterUrl || null,
+        posterUrl || null
       ]);
 
       return NextResponse.json(
         {
           success: true,
           data: insertResult.rows[0],
-          message: 'Item added successfully',
+          message: 'Item added successfully'
         },
         { status: 201 }
       );
@@ -217,7 +217,7 @@ export async function DELETE(
 
     return NextResponse.json({
       success: true,
-      message: 'Item removed successfully',
+      message: 'Item removed successfully'
     });
   } catch (error) {
     console.error('Error deleting list item:', error);

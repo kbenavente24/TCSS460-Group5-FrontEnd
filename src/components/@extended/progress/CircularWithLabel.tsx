@@ -1,7 +1,7 @@
 // material-ui
 import Box from '@mui/material/Box';
 import CircularProgress, {
-  CircularProgressProps,
+  CircularProgressProps
 } from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 
@@ -23,7 +23,7 @@ export default function CircularWithLabel({
           position: 'absolute',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}
       >
         <Typography

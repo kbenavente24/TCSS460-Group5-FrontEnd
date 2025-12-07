@@ -46,7 +46,7 @@ const animation: KeyedObject = {
   SlideRight: TransitionSlideRight,
   SlideDown: TransitionSlideDown,
   Grow: GrowTransition,
-  Fade,
+  Fade
 };
 
 // ==============================|| SNACKBAR ||============================== //
@@ -88,7 +88,7 @@ export default function Snackbar() {
             </>
           }
           slots={{
-            transition: animation[snackbar.transition],
+            transition: animation[snackbar.transition]
           }}
         />
       )}
@@ -100,7 +100,7 @@ export default function Snackbar() {
           autoHideDuration={1500}
           onClose={handleClose}
           slots={{
-            transition: animation[snackbar.transition],
+            transition: animation[snackbar.transition]
           }}
         >
           <Alert
@@ -145,8 +145,8 @@ export default function Snackbar() {
             }
             sx={[
               snackbar.alert.variant === 'outlined' && {
-                bgcolor: 'grey.0',
-              },
+                bgcolor: 'grey.0'
+              }
             ]}
           >
             {snackbar.message}

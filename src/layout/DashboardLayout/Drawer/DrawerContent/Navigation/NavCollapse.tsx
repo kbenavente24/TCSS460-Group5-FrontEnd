@@ -69,18 +69,18 @@ const PopperStyled = styled(Popper)(({ theme }) => ({
       borderLeft: '2px solid',
       borderLeftColor: theme.palette.divider,
       borderBottom: '2px solid',
-      borderBottomColor: theme.palette.divider,
-    },
+      borderBottomColor: theme.palette.divider
+    }
   },
   '&[data-popper-placement="right-end"]': {
     '.MuiPaper-root': {
-      marginBottom: -8,
+      marginBottom: -8
     },
     '&:before': {
       top: 'auto',
-      bottom: 5,
-    },
-  },
+      bottom: 5
+    }
+  }
 }));
 
 // ==============================|| NAVIGATION - LIST COLLAPSE ||============================== //
@@ -102,7 +102,7 @@ export default function NavCollapse({
   setSelectedItems,
   selectedItems,
   setSelectedLevel,
-  selectedLevel,
+  selectedLevel
 }: Props) {
   const theme = useTheme();
   const { menuMaster } = useGetMenuMaster();
@@ -197,7 +197,7 @@ export default function NavCollapse({
     selected,
     miniMenuOpened,
     drawerOpen,
-    selectedLevel,
+    selectedLevel
   ]);
 
   const pathname = usePathname();
@@ -310,7 +310,7 @@ export default function NavCollapse({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    width: '100%'
   };
   return (
     <>
@@ -321,73 +321,73 @@ export default function NavCollapse({
             selected={selected === menu.id}
             {...(!drawerOpen && {
               onMouseEnter: (e: ListItemClick) => handleClick(e, true),
-              onMouseLeave: handleClose,
+              onMouseLeave: handleClose
             })}
             onClick={(e: ListItemClick) => handleClick(e, true)}
             sx={[
               {
-                py: !drawerOpen && level === 1 ? 1.25 : 1,
+                py: !drawerOpen && level === 1 ? 1.25 : 1
               },
               drawerOpen
                 ? {
-                    pl: `${level * 28}px`,
+                    pl: `${level * 28}px`
                   }
                 : {
-                    pl: 1.5,
+                    pl: 1.5
                   },
               mode === ThemeMode.DARK
                 ? {
                     '&:hover': {
-                      bgcolor: 'divider',
-                    },
+                      bgcolor: 'divider'
+                    }
                   }
                 : {
                     '&:hover': {
-                      bgcolor: 'primary.lighter',
-                    },
+                      bgcolor: 'primary.lighter'
+                    }
                   },
               mode === ThemeMode.DARK
                 ? {
                     '&.Mui-selected': {
                       '&:hover': {
-                        bgcolor: 'divider',
-                      },
-                    },
+                        bgcolor: 'divider'
+                      }
+                    }
                   }
                 : {
                     '&.Mui-selected': {
                       '&:hover': {
-                        bgcolor: 'transparent',
-                      },
-                    },
+                        bgcolor: 'transparent'
+                      }
+                    }
                   },
               drawerOpen && {
                 '&.Mui-selected': {
                   bgcolor: 'transparent',
                   color: iconSelectedColor,
                   '&:hover': {
-                    color: iconSelectedColor,
-                  },
-                },
+                    color: iconSelectedColor
+                  }
+                }
               },
               !drawerOpen && {
                 '&:hover': {
-                  bgcolor: 'transparent',
+                  bgcolor: 'transparent'
                 },
                 '&.Mui-selected': {
                   '&:hover': {
-                    bgcolor: 'transparent',
+                    bgcolor: 'transparent'
                   },
-                  bgcolor: 'transparent',
-                },
-              },
+                  bgcolor: 'transparent'
+                }
+              }
             ]}
             {...((drawerOpen &&
               menu.isDropdown && {
                 'aria-controls': openCollapse ? `${menu.id}-menu` : undefined,
                 'aria-haspopup': true,
                 'aria-expanded': openCollapse ? 'true' : undefined,
-                onClick: handleClickCollapse,
+                onClick: handleClickCollapse
               }) as any)}
           >
             {menuIcon && (
@@ -395,25 +395,25 @@ export default function NavCollapse({
                 onClick={handlerIconLink}
                 sx={[
                   {
-                    minWidth: 28,
+                    minWidth: 28
                   },
                   selected === menu.id
                     ? {
-                        color: 'primary.main',
+                        color: 'primary.main'
                       }
                     : {
-                        color: textColor,
+                        color: textColor
                       },
                   mode === ThemeMode.DARK
                     ? {
                         '&:hover': {
-                          bgcolor: 'secondary.light',
-                        },
+                          bgcolor: 'secondary.light'
+                        }
                       }
                     : {
                         '&:hover': {
-                          bgcolor: 'secondary.lighter',
-                        },
+                          bgcolor: 'secondary.lighter'
+                        }
                       },
                   !drawerOpen && {
                     borderRadius: 1.5,
@@ -425,17 +425,17 @@ export default function NavCollapse({
                       ? {
                           bgcolor: 'primary.900',
                           '&:hover': {
-                            bgcolor: 'primary.darker',
-                          },
+                            bgcolor: 'primary.darker'
+                          }
                         }
                       : {
                           bgcolor: 'primary.lighter',
                           '&:hover': {
-                            bgcolor: 'primary.lighter',
-                          },
-                        }),
+                            bgcolor: 'primary.lighter'
+                          }
+                        })
                   },
-                  !drawerOpen && selected === menu.id && {},
+                  !drawerOpen && selected === menu.id && {}
                 ]}
               >
                 {menuIcon}
@@ -475,33 +475,33 @@ export default function NavCollapse({
                       width: 20,
                       height: 20,
                       mr: '-5px',
-                      color: 'secondary.dark',
+                      color: 'secondary.dark'
                     },
                     open
                       ? {
-                          borderColor: 'primary.light',
+                          borderColor: 'primary.light'
                         }
                       : {
-                          borderColor: 'secondary.light',
+                          borderColor: 'secondary.light'
                         },
                     open
                       ? {
                           '&:hover': {
-                            borderColor: 'primary.main',
-                          },
+                            borderColor: 'primary.main'
+                          }
                         }
                       : {
                           '&:hover': {
-                            borderColor: 'secondary.main',
-                          },
-                        },
+                            borderColor: 'secondary.main'
+                          }
+                        }
                   ]}
                 >
                   {miniMenuOpened || open ? (
                     <UpOutlined
                       style={{
                         fontSize: '0.625rem',
-                        color: theme.palette.primary.main,
+                        color: theme.palette.primary.main
                       }}
                     />
                   ) : (
@@ -515,7 +515,7 @@ export default function NavCollapse({
                       style={{
                         fontSize: '0.625rem',
                         marginLeft: 1,
-                        color: theme.palette.primary.main,
+                        color: theme.palette.primary.main
                       }}
                     />
                   ) : (
@@ -537,10 +537,10 @@ export default function NavCollapse({
                     {
                       name: 'offset',
                       options: {
-                        offset: [-12, 1],
-                      },
-                    },
-                  ],
+                        offset: [-12, 1]
+                      }
+                    }
+                  ]
                 }}
               >
                 {({ TransitionProps }) => (
@@ -552,7 +552,7 @@ export default function NavCollapse({
                         boxShadow: theme.customShadows.z1,
                         backgroundImage: 'none',
                         border: '1px solid',
-                        borderColor: 'divider',
+                        borderColor: 'divider'
                       }}
                     >
                       <ClickAwayListener onClickAway={handleClose}>
@@ -561,7 +561,7 @@ export default function NavCollapse({
                             sx={{
                               overflowX: 'hidden',
                               overflowY: 'auto',
-                              maxHeight: '50vh',
+                              maxHeight: '50vh'
                             }}
                           >
                             {navCollapse}
@@ -590,15 +590,15 @@ export default function NavCollapse({
               onClick={handleCloseCollapse}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'right',
+                horizontal: 'right'
               }}
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'right'
               }}
               sx={{
                 '& .MuiPaper-root': { boxShadow: theme.shadows[2] },
-                '& .MuiListItemButton-root': { pl: 2 },
+                '& .MuiListItemButton-root': { pl: 2 }
               }}
             >
               {navCollapse}
@@ -617,8 +617,8 @@ export default function NavCollapse({
           aria-describedby={popperId}
           sx={{
             '&.Mui-selected': {
-              bgcolor: 'transparent',
-            },
+              bgcolor: 'transparent'
+            }
           }}
         >
           <Box onClick={handlerIconLink} sx={FlexBox}>
@@ -627,7 +627,7 @@ export default function NavCollapse({
                 sx={{
                   my: 'auto',
                   minWidth: !menu.icon ? 18 : 28,
-                  color: 'secondary.dark',
+                  color: 'secondary.dark'
                 }}
               >
                 {menuIcon}
@@ -639,7 +639,7 @@ export default function NavCollapse({
                   my: 'auto',
                   minWidth: !menu.icon ? 18 : 28,
                   bgcolor: 'transparent',
-                  '&:hover': { bgcolor: 'transparent' },
+                  '&:hover': { bgcolor: 'transparent' }
                 }}
               >
                 <Dot size={4} color={isSelected ? 'primary' : 'secondary'} />
@@ -665,9 +665,9 @@ export default function NavCollapse({
                 {
                   name: 'offset',
                   options: {
-                    offset: [-10, 0],
-                  },
-                },
+                    offset: [-10, 0]
+                  }
+                }
               ]}
             >
               {({ TransitionProps }) => (
@@ -678,7 +678,7 @@ export default function NavCollapse({
                       mt: 1.5,
                       py: 0.5,
                       boxShadow: theme.shadows[8],
-                      backgroundImage: 'none',
+                      backgroundImage: 'none'
                     }}
                   >
                     <ClickAwayListener onClickAway={handleClose}>
@@ -687,7 +687,7 @@ export default function NavCollapse({
                           sx={{
                             overflowX: 'hidden',
                             overflowY: 'auto',
-                            maxHeight: '50vh',
+                            maxHeight: '50vh'
                           }}
                         >
                           {navCollapse}

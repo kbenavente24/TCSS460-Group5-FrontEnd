@@ -34,6 +34,6 @@ export default function CustomShadows(theme: Theme): CustomShadowProps {
     warningButton: `0 14px 12px ${alpha(theme.palette.warning.main, 0.2)}`,
     infoButton: `0 14px 12px ${alpha(theme.palette.info.main, 0.2)}`,
     successButton: `0 14px 12px ${alpha(theme.palette.success.main, 0.2)}`,
-    greyButton: `0 14px 12px ${alpha(theme.palette.grey[500], 0.2)}`,
+    greyButton: `0 14px 12px ${alpha(theme.palette.grey[500], 0.2)}`
   };
 }

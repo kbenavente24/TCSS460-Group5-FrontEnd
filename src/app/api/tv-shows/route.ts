@@ -20,8 +20,8 @@ export async function GET(request: NextRequest) {
       params,
       headers: {
         'X-API-Key': TV_SHOW_API_KEY,
-        accept: 'application/json',
-      },
+        accept: 'application/json'
+      }
     });
 
     return NextResponse.json(response.data);
@@ -39,8 +39,8 @@ export async function GET(request: NextRequest) {
             page: 1,
             limit: 20,
             total: 0,
-            pages: 0,
-          },
+            pages: 0
+          }
         });
       }
 
@@ -67,8 +67,8 @@ export async function POST(request: NextRequest) {
       headers: {
         'X-API-Key': TV_SHOW_API_KEY,
         'Content-Type': 'application/json',
-        accept: 'application/json',
-      },
+        accept: 'application/json'
+      }
     });
 
     return NextResponse.json(response.data, { status: 201 });

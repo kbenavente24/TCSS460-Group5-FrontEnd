@@ -74,7 +74,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           phone: '',
           email: '',
           password: '',
-          submit: null,
+          submit: null
         }}
         validationSchema={Yup.object().shape({
           firstname: Yup.string().max(255).required('First Name is required'),
@@ -97,7 +97,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           password: Yup.string()
             .required('Password is required')
             .min(8, 'Password must be at least 8 characters')
-            .max(128, 'Password must be less than 128 characters'),
+            .max(128, 'Password must be less than 128 characters')
         })}
         onSubmit={async (values, { setErrors, setSubmitting }) => {
           const trimmedEmail = values.email.trim();
@@ -109,7 +109,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
             phone: values.phone,
             email: trimmedEmail,
             password: values.password,
-            callbackUrl: APP_DEFAULT_PATH,
+            callbackUrl: APP_DEFAULT_PATH
           }).then((res: any) => {
             if (res?.error) {
               setErrors({ submit: res.error });
@@ -128,7 +128,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           handleSubmit,
           isSubmitting,
           touched,
-          values,
+          values
         }) => (
           <form noValidate onSubmit={handleSubmit}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
@@ -287,7 +287,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                           bgcolor: level?.color,
                           width: 85,
                           height: 8,
-                          borderRadius: '7px',
+                          borderRadius: '7px'
                         }}
                       />
                     </Grid>

@@ -70,8 +70,8 @@ const PopperStyled = styled(Popper)(({ theme }) => ({
     zIndex: 120,
     borderWidth: '6px',
     borderStyle: 'solid',
-    borderColor: `${theme.palette.background.paper}  transparent transparent ${theme.palette.background.paper}`,
-  },
+    borderColor: `${theme.palette.background.paper}  transparent transparent ${theme.palette.background.paper}`
+  }
 }));
 
 export default function NavGroup({
@@ -82,7 +82,7 @@ export default function NavGroup({
   setSelectedItems,
   selectedItems,
   setSelectedLevel,
-  selectedLevel,
+  selectedLevel
 }: Props) {
   const theme = useTheme();
   const pathname = usePathname();
@@ -167,7 +167,7 @@ export default function NavGroup({
         color:
           selectedID === currentItem.id
             ? theme.palette.primary.main
-            : theme.palette.secondary.dark,
+            : theme.palette.secondary.dark
       }}
     />
   ) : null;
@@ -315,7 +315,7 @@ export default function NavGroup({
               mr: 1,
               display: 'flex',
               alignItems: 'center',
-              '&.Mui-selected': { bgcolor: 'transparent' },
+              '&.Mui-selected': { bgcolor: 'transparent' }
             }}
             onMouseEnter={handleClick}
             onClick={handleClick}
@@ -370,7 +370,7 @@ export default function NavGroup({
                         mt: 0.5,
                         py: 1.25,
                         boxShadow: theme.shadows[8],
-                        backgroundImage: 'none',
+                        backgroundImage: 'none'
                       }}
                     >
                       <ClickAwayListener onClickAway={handleClose}>
@@ -380,7 +380,7 @@ export default function NavGroup({
                               minWidth: 200,
                               overflowX: 'hidden',
                               overflowY: 'auto',
-                              maxHeight: 'calc(100vh - 170px)',
+                              maxHeight: 'calc(100vh - 170px)'
                             }}
                           >
                             {currentItem.id !== lastItemId ? items : moreItems}

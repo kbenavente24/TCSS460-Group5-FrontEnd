@@ -58,15 +58,15 @@ export default function MobileSection() {
         <IconButton
           sx={[
             {
-              color: 'text.primary',
+              color: 'text.primary'
             },
             open
               ? {
-                  bgcolor: iconBackColorOpen,
+                  bgcolor: iconBackColorOpen
                 }
               : {
-                  bgcolor: iconBackColor,
-                },
+                  bgcolor: iconBackColor
+                }
           ]}
           aria-label="open more menu"
           ref={anchorRef}
@@ -92,10 +92,10 @@ export default function MobileSection() {
             {
               name: 'offset',
               options: {
-                offset: [0, 9],
-              },
-            },
-          ],
+                offset: [0, 9]
+              }
+            }
+          ]
         }}
       >
         {({ TransitionProps }) => (

@@ -16,8 +16,8 @@ export async function GET(
     const response = await axios.get(`${MOVIE_API_URL}/movies/${id}`, {
       headers: {
         'X-API-Key': MOVIE_API_KEY,
-        accept: 'application/json',
-      },
+        accept: 'application/json'
+      }
     });
 
     return NextResponse.json(response.data);

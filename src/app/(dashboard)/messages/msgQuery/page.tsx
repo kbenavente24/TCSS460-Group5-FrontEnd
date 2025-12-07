@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 // ==============================|| PAGE ||============================== //
 
 export default function MessagesPage({
-  params,
+  params
 }: {
   params: Promise<{ slug: string }>;
 }) {

@@ -35,7 +35,7 @@ export default function Error404() {
             sx={{
               position: 'relative',
               width: { xs: 250, sm: 590 },
-              height: { xs: 130, sm: 300 },
+              height: { xs: 130, sm: 300 }
             }}
           >
             <Image src={error404} alt="mantis" fill sizes="100vw" />
@@ -47,7 +47,7 @@ export default function Error404() {
                 top: 60,
                 left: -40,
                 width: { xs: 130, sm: 390 },
-                height: { xs: 115, sm: 330 },
+                height: { xs: 115, sm: 330 }
               }}
             >
               <Image src={TwoCone} alt="mantis" fill sizes="100vw" />

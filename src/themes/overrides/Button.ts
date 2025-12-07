@@ -23,24 +23,24 @@ function getColorStyle({ variant, color, theme }: ButtonStyleProps) {
 
   const commonShadow = {
     '&::after': {
-      boxShadow: `0 0 5px 5px ${alpha(main, 0.9)}`,
+      boxShadow: `0 0 5px 5px ${alpha(main, 0.9)}`
     },
     '&:active::after': {
-      boxShadow: `0 0 0 0 ${alpha(main, 0.9)}`,
+      boxShadow: `0 0 0 0 ${alpha(main, 0.9)}`
     },
     '&:focus-visible': {
       outline: `2px solid ${dark}`,
-      outlineOffset: 2,
-    },
+      outlineOffset: 2
+    }
   };
 
   switch (variant) {
     case 'contained':
       return {
         '&:hover': {
-          backgroundColor: dark,
+          backgroundColor: dark
         },
-        ...commonShadow,
+        ...commonShadow
       };
     case 'shadow':
       return {
@@ -49,9 +49,9 @@ function getColorStyle({ variant, color, theme }: ButtonStyleProps) {
         boxShadow: shadows,
         '&:hover': {
           boxShadow: 'none',
-          backgroundColor: dark,
+          backgroundColor: dark
         },
-        ...commonShadow,
+        ...commonShadow
       };
     case 'outlined':
       return {
@@ -59,9 +59,9 @@ function getColorStyle({ variant, color, theme }: ButtonStyleProps) {
         '&:hover': {
           color: dark,
           backgroundColor: 'transparent',
-          borderColor: dark,
+          borderColor: dark
         },
-        ...commonShadow,
+        ...commonShadow
       };
     case 'dashed':
       return {
@@ -70,9 +70,9 @@ function getColorStyle({ variant, color, theme }: ButtonStyleProps) {
         backgroundColor: lighter,
         '&:hover': {
           color: dark,
-          borderColor: dark,
+          borderColor: dark
         },
-        ...commonShadow,
+        ...commonShadow
       };
     case 'text':
     default:
@@ -80,9 +80,9 @@ function getColorStyle({ variant, color, theme }: ButtonStyleProps) {
         color: dark,
         '&:hover': {
           color: darker,
-          backgroundColor: lighter,
+          backgroundColor: lighter
         },
-        ...commonShadow,
+        ...commonShadow
       };
   }
 }
@@ -93,29 +93,29 @@ export default function Button(theme: Theme) {
   const primaryDashed = getColorStyle({
     variant: 'dashed',
     color: 'primary',
-    theme,
+    theme
   });
   const primaryShadow = getColorStyle({
     variant: 'shadow',
     color: 'primary',
-    theme,
+    theme
   });
 
   const disabledStyle = {
     '&.Mui-disabled': {
-      backgroundColor: theme.palette.grey[200],
-    },
+      backgroundColor: theme.palette.grey[200]
+    }
   };
   const iconStyle = {
     '&>*:nth-of-type(1)': {
-      fontSize: 'inherit',
-    },
+      fontSize: 'inherit'
+    }
   };
 
   return {
     MuiButton: {
       defaultProps: {
-        disableElevation: true,
+        disableElevation: true
       },
       styleOverrides: {
         root: {
@@ -130,7 +130,7 @@ export default function Button(theme: Theme) {
             height: '100%',
             borderRadius: 4,
             opacity: 0,
-            transition: 'all 0.5s',
+            transition: 'all 0.5s'
           },
 
           '&:active::after': {
@@ -139,26 +139,26 @@ export default function Button(theme: Theme) {
             left: 0,
             top: 0,
             opacity: 1,
-            transition: '0s',
-          },
+            transition: '0s'
+          }
         },
         contained: {
-          ...disabledStyle,
+          ...disabledStyle
         },
         outlined: {
-          ...disabledStyle,
+          ...disabledStyle
         },
         text: {
           boxShadow: 'none',
           '&:hover': {
-            boxShadow: 'none',
-          },
+            boxShadow: 'none'
+          }
         },
         endIcon: {
-          ...iconStyle,
+          ...iconStyle
         },
         startIcon: {
-          ...iconStyle,
+          ...iconStyle
         },
         dashed: {
           border: '1px dashed',
@@ -166,165 +166,165 @@ export default function Button(theme: Theme) {
           '&.MuiButton-dashedPrimary': getColorStyle({
             variant: 'dashed',
             color: 'primary',
-            theme,
+            theme
           }),
           '&.MuiButton-dashedSecondary': getColorStyle({
             variant: 'dashed',
             color: 'secondary',
-            theme,
+            theme
           }),
           '&.MuiButton-dashedError': getColorStyle({
             variant: 'dashed',
             color: 'error',
-            theme,
+            theme
           }),
           '&.MuiButton-dashedSuccess': getColorStyle({
             variant: 'dashed',
             color: 'success',
-            theme,
+            theme
           }),
           '&.MuiButton-dashedInfo': getColorStyle({
             variant: 'dashed',
             color: 'info',
-            theme,
+            theme
           }),
           '&.MuiButton-dashedWarning': getColorStyle({
             variant: 'dashed',
             color: 'warning',
-            theme,
+            theme
           }),
           '&.Mui-disabled': {
             color: `${theme.palette.grey[300]} !important`,
             borderColor: `${theme.palette.grey[400]} !important`,
-            backgroundColor: `${theme.palette.grey[200]} !important`,
-          },
+            backgroundColor: `${theme.palette.grey[200]} !important`
+          }
         },
         shadow: {
           ...primaryShadow,
           '&.MuiButton-shadowPrimary': getColorStyle({
             variant: 'shadow',
             color: 'primary',
-            theme,
+            theme
           }),
           '&.MuiButton-shadowSecondary': getColorStyle({
             variant: 'shadow',
             color: 'secondary',
-            theme,
+            theme
           }),
           '&.MuiButton-shadowError': getColorStyle({
             variant: 'shadow',
             color: 'error',
-            theme,
+            theme
           }),
           '&.MuiButton-shadowSuccess': getColorStyle({
             variant: 'shadow',
             color: 'success',
-            theme,
+            theme
           }),
           '&.MuiButton-shadowInfo': getColorStyle({
             variant: 'shadow',
             color: 'info',
-            theme,
+            theme
           }),
           '&.MuiButton-shadowWarning': getColorStyle({
             variant: 'shadow',
             color: 'warning',
-            theme,
+            theme
           }),
           '&.Mui-disabled': {
             color: `${theme.palette.grey[300]} !important`,
             borderColor: `${theme.palette.grey[400]} !important`,
-            backgroundColor: `${theme.palette.grey[200]} !important`,
-          },
+            backgroundColor: `${theme.palette.grey[200]} !important`
+          }
         },
         containedPrimary: getColorStyle({
           variant: 'contained',
           color: 'primary',
-          theme,
+          theme
         }),
         containedSecondary: getColorStyle({
           variant: 'contained',
           color: 'secondary',
-          theme,
+          theme
         }),
         containedError: getColorStyle({
           variant: 'contained',
           color: 'error',
-          theme,
+          theme
         }),
         containedSuccess: getColorStyle({
           variant: 'contained',
           color: 'success',
-          theme,
+          theme
         }),
         containedInfo: getColorStyle({
           variant: 'contained',
           color: 'info',
-          theme,
+          theme
         }),
         containedWarning: getColorStyle({
           variant: 'contained',
           color: 'warning',
-          theme,
+          theme
         }),
         outlinedPrimary: getColorStyle({
           variant: 'outlined',
           color: 'primary',
-          theme,
+          theme
         }),
         outlinedSecondary: getColorStyle({
           variant: 'outlined',
           color: 'secondary',
-          theme,
+          theme
         }),
         outlinedError: getColorStyle({
           variant: 'outlined',
           color: 'error',
-          theme,
+          theme
         }),
         outlinedSuccess: getColorStyle({
           variant: 'outlined',
           color: 'success',
-          theme,
+          theme
         }),
         outlinedInfo: getColorStyle({
           variant: 'outlined',
           color: 'info',
-          theme,
+          theme
         }),
         outlinedWarning: getColorStyle({
           variant: 'outlined',
           color: 'warning',
-          theme,
+          theme
         }),
         textPrimary: getColorStyle({
           variant: 'text',
           color: 'primary',
-          theme,
+          theme
         }),
         textSecondary: getColorStyle({
           variant: 'text',
           color: 'secondary',
-          theme,
+          theme
         }),
         textError: getColorStyle({ variant: 'text', color: 'error', theme }),
         textSuccess: getColorStyle({
           variant: 'text',
           color: 'success',
-          theme,
+          theme
         }),
         textInfo: getColorStyle({ variant: 'text', color: 'info', theme }),
         textWarning: getColorStyle({
           variant: 'text',
           color: 'warning',
-          theme,
+          theme
         }),
         sizeExtraSmall: {
           minWidth: 56,
           fontSize: '0.625rem',
-          padding: '2px 8px',
-        },
-      },
-    },
+          padding: '2px 8px'
+        }
+      }
+    }
   };
 }

@@ -24,7 +24,7 @@ import { messagesApi } from 'services/messagesApi';
 export default function SendMessage({
   priority,
   onSuccess,
-  onError,
+  onError
 }: {
   priority: number;
   onSuccess: () => void;
@@ -35,11 +35,11 @@ export default function SendMessage({
       initialValues={{
         sender: '',
         message: '',
-        submit: null,
+        submit: null
       }}
       validationSchema={Yup.object().shape({
         sender: Yup.string().max(255).required('Name is required'),
-        message: Yup.string().max(255).required('Message is required'),
+        message: Yup.string().max(255).required('Message is required')
       })}
       onSubmit={(
         values,
@@ -53,8 +53,8 @@ export default function SendMessage({
               values: {
                 sender: '',
                 message: '',
-                submit: null,
-              },
+                submit: null
+              }
             });
             onSuccess();
           })
@@ -73,7 +73,7 @@ export default function SendMessage({
         handleSubmit,
         isSubmitting,
         touched,
-        values,
+        values
       }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>

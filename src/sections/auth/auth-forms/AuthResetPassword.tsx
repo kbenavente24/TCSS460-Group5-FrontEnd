@@ -69,7 +69,7 @@ export default function AuthResetPassword() {
         token: '',
         password: '',
         confirmPassword: '',
-        submit: null,
+        submit: null
       }}
       validationSchema={Yup.object().shape({
         token: Yup.string().required('Reset token is required'),
@@ -82,13 +82,13 @@ export default function AuthResetPassword() {
             'confirmPassword',
             'Both Password must be match!',
             (confirmPassword, yup) => yup.parent.password === confirmPassword
-          ),
+          )
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           const response = await authApi.resetPasswordWithToken({
             token: values.token.trim(),
-            password: values.password,
+            password: values.password
           });
 
           if (response?.data?.success) {
@@ -101,8 +101,8 @@ export default function AuthResetPassword() {
                 'Password reset successful! You can now login with your new password.',
               variant: 'alert',
               alert: {
-                color: 'success',
-              },
+                color: 'success'
+              }
             } as SnackbarProps);
 
             setTimeout(() => {
@@ -121,7 +121,7 @@ export default function AuthResetPassword() {
               submit:
                 err.response?.data?.message ||
                 err.message ||
-                'Failed to reset password. Please check your token and try again.',
+                'Failed to reset password. Please check your token and try again.'
             });
             setSubmitting(false);
           }
@@ -135,7 +135,7 @@ export default function AuthResetPassword() {
         handleSubmit,
         isSubmitting,
         touched,
-        values,
+        values
       }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
@@ -208,7 +208,7 @@ export default function AuthResetPassword() {
                         bgcolor: level?.color,
                         width: 85,
                         height: 8,
-                        borderRadius: '7px',
+                        borderRadius: '7px'
                       }}
                     />
                   </Grid>

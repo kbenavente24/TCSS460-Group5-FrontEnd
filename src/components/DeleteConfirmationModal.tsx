@@ -29,7 +29,7 @@ export default function DeleteConfirmationModal({
   onClose,
   title,
   itemName,
-  itemType,
+  itemType
 }: DeleteConfirmationModalProps) {
   // DESIGN-ONLY: Prevent any delete action
   const handleDeleteClick = (e: React.MouseEvent) => {
@@ -77,8 +77,8 @@ export default function DeleteConfirmationModal({
           sx={{
             '&.Mui-disabled': {
               backgroundColor: 'action.disabledBackground',
-              color: 'action.disabled',
-            },
+              color: 'action.disabled'
+            }
           }}
         >
           Delete

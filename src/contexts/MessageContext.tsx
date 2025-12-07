@@ -7,13 +7,13 @@ import { IMessage, MessageContextProps } from 'types/message';
 const EMPTY_MSG = {
   name: 'Empty',
   priority: 0,
-  message: 'Empty',
+  message: 'Empty'
 };
 
 const initialState: MessageContextProps = {
   ...EMPTY_MSG,
   onChangeMessage: () => {},
-  clearContext: () => {},
+  clearContext: () => {}
 };
 
 // Create context

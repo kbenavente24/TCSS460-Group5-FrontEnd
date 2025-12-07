@@ -14,9 +14,9 @@ export default function TableCell(theme: Theme) {
         width: 1,
         height: 'calc(100% - 30px)',
         right: 0,
-        top: 16,
-      },
-    },
+        top: 16
+      }
+    }
   };
 
   return {
@@ -31,36 +31,36 @@ export default function TableCell(theme: Theme) {
             textAlign: 'right',
             '& > *': {
               justifyContent: 'flex-end',
-              margin: '0 0 0 auto',
+              margin: '0 0 0 auto'
             },
             '& .MuiOutlinedInput-input': {
-              textAlign: 'right',
-            },
+              textAlign: 'right'
+            }
           },
           '&.cell-center': {
             justifyContent: 'center',
             textAlign: 'center',
             '& > *': {
               justifyContent: 'center',
-              margin: '0 auto',
-            },
-          },
+              margin: '0 auto'
+            }
+          }
         },
         sizeSmall: {
-          padding: 8,
+          padding: 8
         },
         head: {
           fontSize: '0.75rem',
           fontWeight: 700,
           textTransform: 'uppercase',
-          ...commonCell,
+          ...commonCell
         },
         footer: {
           fontSize: '0.75rem',
           textTransform: 'uppercase',
-          ...commonCell,
-        },
-      },
-    },
+          ...commonCell
+        }
+      }
+    }
   };
 }

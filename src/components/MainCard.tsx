@@ -19,7 +19,7 @@ import { KeyedObject } from 'types/root';
 // header style
 const headerSX = {
   p: 2.5,
-  '& .MuiCardHeader-action': { m: '0px auto', alignSelf: 'center' },
+  '& .MuiCardHeader-action': { m: '0px auto', alignSelf: 'center' }
 };
 
 // ==============================|| CUSTOM - MAIN CARD ||============================== //
@@ -76,11 +76,11 @@ function MainCard(
             : 'none',
         border: border ? '1px solid' : 'none',
         ':hover': {
-          boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'none',
+          boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'none'
         },
         ...(theme.palette.mode === ThemeMode.DARK && {
           borderColor: 'divider',
-          backgroundImage: 'none',
+          backgroundImage: 'none'
         }),
         ...(modal && {
           top: '50%',
@@ -90,10 +90,10 @@ function MainCard(
           '& .MuiCardContent-root': {
             overflowY: 'auto',
             minHeight: 'auto',
-            maxHeight: `calc(100vh - 200px)`,
-          },
+            maxHeight: `calc(100vh - 200px)`
+          }
         }),
-        ...sx,
+        ...sx
       })}
       ref={ref}
       {...others}
@@ -106,7 +106,7 @@ function MainCard(
           action={secondary}
           subheader={subheader}
           slotProps={{
-            title: { variant: 'subtitle1' },
+            title: { variant: 'subtitle1' }
           }}
         />
       )}

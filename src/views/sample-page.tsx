@@ -18,7 +18,7 @@ export default function SamplePage() {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: 'calc(100vh - 200px)',
-        p: 3,
+        p: 3
       }}
     >
       <MainCard
@@ -26,7 +26,7 @@ export default function SamplePage() {
           maxWidth: 900,
           width: '100%',
           textAlign: 'center',
-          p: 4,
+          p: 4
         }}
       >
         <Typography variant="h1" gutterBottom sx={{ mb: 3 }}>

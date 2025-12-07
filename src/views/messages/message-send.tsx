@@ -22,7 +22,7 @@ interface IAlert {
 const EMPTY_ALERT: IAlert = {
   showAlert: false,
   alertMessage: '',
-  alertSeverity: '',
+  alertSeverity: ''
 };
 
 export default function MessageSend() {
@@ -33,7 +33,7 @@ export default function MessageSend() {
     setAlert({
       showAlert: true,
       alertMessage: 'The message was sent!',
-      alertSeverity: 'success',
+      alertSeverity: 'success'
     });
   };
 
@@ -41,7 +41,7 @@ export default function MessageSend() {
     setAlert({
       showAlert: true,
       alertMessage: 'Message NOT sent! Error: ' + message,
-      alertSeverity: 'error',
+      alertSeverity: 'error'
     });
   };
 
@@ -69,7 +69,7 @@ export default function MessageSend() {
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>

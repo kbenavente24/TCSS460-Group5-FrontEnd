@@ -15,7 +15,7 @@ const icons = {
   QuestionOutlined,
   StopOutlined,
   PhoneOutlined,
-  FullscreenOutlined,
+  FullscreenOutlined
 };
 
 // ==============================|| MENU ITEMS - SUPPORT ||============================== //
@@ -31,14 +31,14 @@ const other: NavItemType = {
       type: 'item',
       url: '#',
       icon: icons.StopOutlined,
-      disabled: true,
+      disabled: true
     },
     {
       id: 'full-page',
       title: <FormattedMessage id="full-page" />,
       type: 'item',
       url: '/full-page',
-      icon: icons.FullscreenOutlined,
+      icon: icons.FullscreenOutlined
     },
     {
       id: 'documentation',
@@ -47,9 +47,9 @@ const other: NavItemType = {
       url: 'https://uwt-set-tcss460-lecture-materials.github.io/TCSS460-phase-2/',
       icon: icons.QuestionOutlined,
       external: true,
-      target: true,
-    },
-  ],
+      target: true
+    }
+  ]
 };
 
 export default other;

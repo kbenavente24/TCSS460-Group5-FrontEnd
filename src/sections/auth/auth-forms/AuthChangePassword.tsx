@@ -75,7 +75,7 @@ export default function AuthChangePassword() {
         oldPassword: '',
         newPassword: '',
         confirmPassword: '',
-        submit: null,
+        submit: null
       }}
       validationSchema={Yup.object().shape({
         oldPassword: Yup.string().required('Current password is required'),
@@ -92,13 +92,13 @@ export default function AuthChangePassword() {
             'confirmPassword',
             'Both passwords must match!',
             (confirmPassword, yup) => yup.parent.newPassword === confirmPassword
-          ),
+          )
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           const response = await authApi.changePassword({
             oldPassword: values.oldPassword,
-            newPassword: values.newPassword,
+            newPassword: values.newPassword
           });
 
           if (response?.data?.success) {
@@ -110,8 +110,8 @@ export default function AuthChangePassword() {
               message: 'Password changed successfully!',
               variant: 'alert',
               alert: {
-                color: 'success',
-              },
+                color: 'success'
+              }
             } as SnackbarProps);
 
             setTimeout(() => {
@@ -130,7 +130,7 @@ export default function AuthChangePassword() {
               submit:
                 err.response?.data?.message ||
                 err.message ||
-                'Failed to change password. Please check your current password and try again.',
+                'Failed to change password. Please check your current password and try again.'
             });
             setSubmitting(false);
           }
@@ -144,7 +144,7 @@ export default function AuthChangePassword() {
         handleSubmit,
         isSubmitting,
         touched,
-        values,
+        values
       }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
@@ -238,7 +238,7 @@ export default function AuthChangePassword() {
                         bgcolor: level?.color,
                         width: 85,
                         height: 8,
-                        borderRadius: '7px',
+                        borderRadius: '7px'
                       }}
                     />
                   </Grid>

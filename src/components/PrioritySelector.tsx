@@ -4,7 +4,7 @@ import PriorityAvatar from '../components/Priority';
 
 export default function PrioritySelector({
   initialValue,
-  onClick,
+  onClick
 }: {
   initialValue: number;
   onClick: (event: React.MouseEvent<HTMLElement>, newPriority: number) => void;

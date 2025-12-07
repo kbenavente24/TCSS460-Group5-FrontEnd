@@ -18,42 +18,42 @@ export const MINI_DRAWER_WIDTH = 60;
 export const publicSans = Public_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '300', '700'],
-  display: 'swap',
+  display: 'swap'
 });
 
 export enum SimpleLayoutType {
   SIMPLE = 'simple',
-  LANDING = 'landing',
+  LANDING = 'landing'
 }
 
 export enum ThemeMode {
   LIGHT = 'light',
-  DARK = 'dark',
+  DARK = 'dark'
 }
 
 export enum MenuOrientation {
   VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal',
+  HORIZONTAL = 'horizontal'
 }
 
 export enum ThemeDirection {
   LTR = 'ltr',
-  RTL = 'rtl',
+  RTL = 'rtl'
 }
 
 export enum NavActionType {
   FUNCTION = 'function',
-  LINK = 'link',
+  LINK = 'link'
 }
 
 export enum Gender {
   MALE = 'Male',
-  FEMALE = 'Female',
+  FEMALE = 'Female'
 }
 
 export enum DropzoneType {
   DEFAULT = 'default',
-  STANDARD = 'standard',
+  STANDARD = 'standard'
 }
 
 // ==============================|| THEME CONFIG ||============================== //
@@ -66,7 +66,7 @@ const config: DefaultConfigProps = {
   container: true,
   mode: ThemeMode.LIGHT,
   presetColor: 'default',
-  themeDirection: ThemeDirection.LTR,
+  themeDirection: ThemeDirection.LTR
 };
 
 export default config;

@@ -27,8 +27,8 @@ export default function AnimateButton({
   offset = 10,
   scale = {
     hover: 1.05,
-    tap: 0.95,
-  },
+    tap: 0.95
+  }
 }: Props) {
   let offset1;
   let offset2;
@@ -58,7 +58,7 @@ export default function AnimateButton({
             repeat: Infinity,
             repeatType: 'loop',
             duration: 2,
-            repeatDelay: 0,
+            repeatDelay: 0
           }}
         >
           {children}
@@ -91,7 +91,7 @@ export default function AnimateButton({
       if (typeof scale === 'number') {
         scale = {
           hover: scale,
-          tap: scale,
+          tap: scale
         };
       }
       return (

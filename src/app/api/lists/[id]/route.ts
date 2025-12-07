@@ -68,7 +68,7 @@ export async function GET(
           movieId: item.contentId,
           title: item.title,
           posterUrl: item.posterUrl,
-          contentType: item.contentType,
+          contentType: item.contentType
         };
       } else {
         return { rank };
@@ -79,8 +79,8 @@ export async function GET(
       success: true,
       data: {
         ...list,
-        items,
-      },
+        items
+      }
     });
   } catch (error) {
     console.error('Error fetching list:', error);
@@ -121,7 +121,7 @@ export async function DELETE(
 
     return NextResponse.json({
       success: true,
-      message: 'List deleted successfully',
+      message: 'List deleted successfully'
     });
   } catch (error) {
     console.error('Error deleting list:', error);
@@ -171,7 +171,7 @@ export async function PUT(
       title,
       description || null,
       listId,
-      userId,
+      userId
     ]);
 
     if (result.rows.length === 0) {
@@ -180,7 +180,7 @@ export async function PUT(
 
     return NextResponse.json({
       success: true,
-      data: result.rows[0],
+      data: result.rows[0]
     });
   } catch (error) {
     console.error('Error updating list:', error);

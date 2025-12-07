@@ -29,9 +29,9 @@ export default function Dot({ color, size, variant, sx }: Props) {
         bgcolor: variant === 'outlined' ? '' : main,
         ...(variant === 'outlined' && {
           border: '1px solid',
-          borderColor: main,
+          borderColor: main
         }),
-        ...sx,
+        ...sx
       }}
     />
   );

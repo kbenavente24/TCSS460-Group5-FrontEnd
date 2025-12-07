@@ -60,7 +60,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
         initialValues={{
           email: '', // TODO for dev work, you can hardcode a known user and password here
           password: '',
-          submit: null,
+          submit: null
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
@@ -74,7 +74,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
               'Password cannot start or end with spaces',
               (value) => value === value.trim()
             )
-            .min(6, 'Password must be at least 6 characters'),
+            .min(6, 'Password must be at least 6 characters')
         })}
         onSubmit={(values, { setErrors, setSubmitting }) => {
           const trimmedEmail = values.email.trim();
@@ -82,7 +82,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
             redirect: false,
             email: trimmedEmail,
             password: values.password,
-            callbackUrl: APP_DEFAULT_PATH,
+            callbackUrl: APP_DEFAULT_PATH
           }).then(
             (res: any) => {
               if (res?.error) {
@@ -107,7 +107,7 @@ export default function AuthLogin({ providers, csrfToken }: any) {
           handleSubmit,
           isSubmitting,
           touched,
-          values,
+          values
         }) => (
           <form noValidate onSubmit={handleSubmit}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />

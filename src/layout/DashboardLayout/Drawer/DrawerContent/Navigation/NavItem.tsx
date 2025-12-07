@@ -25,7 +25,7 @@ import {
   handlerHorizontalActiveItem,
   handlerActiveItem,
   handlerDrawerOpen,
-  useGetMenuMaster,
+  useGetMenuMaster
 } from 'api/menu';
 
 // types
@@ -60,7 +60,7 @@ export default function NavItem({ item, level, isParents = false }: Props) {
       style={{
         fontSize: drawerOpen ? '1rem' : '1.25rem',
         ...(menuOrientation === MenuOrientation.HORIZONTAL &&
-          isParents && { fontSize: 20, stroke: '1.5' }),
+          isParents && { fontSize: 20, stroke: '1.5' })
       }}
     />
   ) : (
@@ -94,51 +94,51 @@ export default function NavItem({ item, level, isParents = false }: Props) {
             sx={[
               {
                 zIndex: 1201,
-                py: !drawerOpen && level === 1 ? 1.25 : 1,
+                py: !drawerOpen && level === 1 ? 1.25 : 1
               },
               drawerOpen
                 ? {
-                    pl: `${level * 28}px`,
+                    pl: `${level * 28}px`
                   }
                 : {
-                    pl: 1.5,
+                    pl: 1.5
                   },
               mode === ThemeMode.DARK
                 ? {
                     '&:hover': {
-                      bgcolor: 'divider',
-                    },
+                      bgcolor: 'divider'
+                    }
                   }
                 : {
                     '&:hover': {
-                      bgcolor: 'primary.lighter',
-                    },
+                      bgcolor: 'primary.lighter'
+                    }
                   },
               mode === ThemeMode.DARK
                 ? {
                     '&.Mui-selected': {
-                      bgcolor: 'divider',
-                    },
+                      bgcolor: 'divider'
+                    }
                   }
                 : {
                     '&.Mui-selected': {
-                      bgcolor: 'primary.lighter',
-                    },
+                      bgcolor: 'primary.lighter'
+                    }
                   },
               mode === ThemeMode.DARK
                 ? {
                     '&.Mui-selected': {
                       '&:hover': {
-                        bgcolor: 'divider',
-                      },
-                    },
+                        bgcolor: 'divider'
+                      }
+                    }
                   }
                 : {
                     '&.Mui-selected': {
                       '&:hover': {
-                        bgcolor: 'primary.lighter',
-                      },
-                    },
+                        bgcolor: 'primary.lighter'
+                      }
+                    }
                   },
               drawerOpen && {
                 '&.Mui-selected': {
@@ -146,49 +146,49 @@ export default function NavItem({ item, level, isParents = false }: Props) {
                   borderRightColor: 'primary.main',
                   color: iconSelectedColor,
                   '&:hover': {
-                    color: iconSelectedColor,
-                  },
-                },
+                    color: iconSelectedColor
+                  }
+                }
               },
               !drawerOpen && {
                 '&:hover': {
-                  bgcolor: 'transparent',
+                  bgcolor: 'transparent'
                 },
                 '&.Mui-selected': {
                   '&:hover': {
-                    bgcolor: 'transparent',
+                    bgcolor: 'transparent'
                   },
-                  bgcolor: 'transparent',
-                },
-              },
+                  bgcolor: 'transparent'
+                }
+              }
             ]}
             {...(downLG && {
-              onClick: () => handlerDrawerOpen(false),
+              onClick: () => handlerDrawerOpen(false)
             })}
           >
             {itemIcon && (
               <ListItemIcon
                 sx={[
                   {
-                    minWidth: 28,
+                    minWidth: 28
                   },
                   isSelected
                     ? {
-                        color: iconSelectedColor,
+                        color: iconSelectedColor
                       }
                     : {
-                        color: textColor,
+                        color: textColor
                       },
                   mode === ThemeMode.DARK
                     ? {
                         '&:hover': {
-                          bgcolor: 'secondary.light',
-                        },
+                          bgcolor: 'secondary.light'
+                        }
                       }
                     : {
                         '&:hover': {
-                          bgcolor: 'secondary.lighter',
-                        },
+                          bgcolor: 'secondary.lighter'
+                        }
                       },
                   !drawerOpen && {
                     borderRadius: 1.5,
@@ -200,17 +200,17 @@ export default function NavItem({ item, level, isParents = false }: Props) {
                       ? {
                           bgcolor: 'primary.900',
                           '&:hover': {
-                            bgcolor: 'primary.darker',
-                          },
+                            bgcolor: 'primary.darker'
+                          }
                         }
                       : {
                           bgcolor: 'primary.lighter',
                           '&:hover': {
-                            bgcolor: 'primary.lighter',
-                          },
-                        }),
+                            bgcolor: 'primary.lighter'
+                          }
+                        })
                   },
-                  !drawerOpen && isSelected && {},
+                  !drawerOpen && isSelected && {}
                 ]}
               >
                 {itemIcon}
@@ -224,11 +224,11 @@ export default function NavItem({ item, level, isParents = false }: Props) {
                     sx={[
                       isSelected
                         ? {
-                            color: iconSelectedColor,
+                            color: iconSelectedColor
                           }
                         : {
-                            color: textColor,
-                          },
+                            color: textColor
+                          }
                     ]}
                   >
                     {item.title}
@@ -258,12 +258,12 @@ export default function NavItem({ item, level, isParents = false }: Props) {
                     onClick: (event) => {
                       event.stopPropagation();
                       callAction();
-                    },
+                    }
                   })}
                   {...(action.type === NavActionType.LINK && {
                     component: Link,
                     href: action.url,
-                    target: action.target ? '_blank' : '_self',
+                    target: action.target ? '_blank' : '_self'
                   })}
                   color="secondary"
                   variant="outlined"
@@ -277,26 +277,26 @@ export default function NavItem({ item, level, isParents = false }: Props) {
                       height: 20,
                       mr: -1,
                       ml: 1,
-                      color: 'secondary.dark',
+                      color: 'secondary.dark'
                     },
                     isSelected
                       ? {
-                          borderColor: 'primary.light',
+                          borderColor: 'primary.light'
                         }
                       : {
-                          borderColor: 'secondary.light',
+                          borderColor: 'secondary.light'
                         },
                     isSelected
                       ? {
                           '&:hover': {
-                            borderColor: 'primary.main',
-                          },
+                            borderColor: 'primary.main'
+                          }
                         }
                       : {
                           '&:hover': {
-                            borderColor: 'secondary.main',
-                          },
-                        },
+                            borderColor: 'secondary.main'
+                          }
+                        }
                   ]}
                 >
                   <ActionIcon style={{ fontSize: '0.625rem' }} />
@@ -314,23 +314,23 @@ export default function NavItem({ item, level, isParents = false }: Props) {
           {...(isParents && {
             onClick: () => {
               handlerHorizontalActiveItem(item.id!);
-            },
+            }
           })}
           sx={[
             {
-              zIndex: 1201,
+              zIndex: 1201
             },
             isParents && {
               p: 1,
-              mr: 1,
-            },
+              mr: 1
+            }
           ]}
         >
           {itemIcon && (
             <ListItemIcon
               sx={[
                 {
-                  minWidth: 28,
+                  minWidth: 28
                 },
                 !drawerOpen && {
                   borderRadius: 1.5,
@@ -339,16 +339,16 @@ export default function NavItem({ item, level, isParents = false }: Props) {
                   alignItems: 'center',
                   justifyContent: 'flex-start',
                   '&:hover': {
-                    bgcolor: 'transparent',
-                  },
+                    bgcolor: 'transparent'
+                  }
                 },
                 !drawerOpen &&
                   isSelected && {
                     bgcolor: 'transparent',
                     '&:hover': {
-                      bgcolor: 'transparent',
-                    },
-                  },
+                      bgcolor: 'transparent'
+                    }
+                  }
               ]}
             >
               {itemIcon}
@@ -360,26 +360,26 @@ export default function NavItem({ item, level, isParents = false }: Props) {
               sx={[
                 isSelected
                   ? {
-                      color: 'primary.main',
+                      color: 'primary.main'
                     }
                   : {
-                      color: 'secondary.dark',
+                      color: 'secondary.dark'
                     },
                 !drawerOpen && {
                   borderRadius: 1.5,
                   alignItems: 'center',
                   justifyContent: 'flex-start',
                   '&:hover': {
-                    bgcolor: 'transparent',
-                  },
+                    bgcolor: 'transparent'
+                  }
                 },
                 !drawerOpen &&
                   isSelected && {
                     bgcolor: 'transparent',
                     '&:hover': {
-                      bgcolor: 'transparent',
-                    },
-                  },
+                      bgcolor: 'transparent'
+                    }
+                  }
               ]}
             >
               <Dot size={4} color={isSelected ? 'primary' : 'secondary'} />

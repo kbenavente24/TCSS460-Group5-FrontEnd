@@ -10,9 +10,9 @@ export default function AccordionDetails(theme: Theme) {
         root: {
           padding: theme.spacing(2),
           borderTop: '1px solid',
-          borderTopColor: theme.palette.secondary.light,
-        },
-      },
-    },
+          borderTopColor: theme.palette.secondary.light
+        }
+      }
+    }
   };
 }

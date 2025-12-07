@@ -14,5 +14,5 @@ export const authApi = {
   }) => credentialsService.post('/auth/register', data),
 
   changePassword: (data: { oldPassword: string; newPassword: string }) =>
-    credentialsService.post('/auth/user/password/change', data),
+    credentialsService.post('/auth/user/password/change', data)
 };

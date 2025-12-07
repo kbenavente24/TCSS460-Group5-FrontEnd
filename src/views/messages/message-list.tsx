@@ -55,8 +55,8 @@ export default function MessagesList() {
             sx={(theme) => ({
               borderColor: 'grey.A800',
               ...theme.applyStyles('dark', {
-                borderColor: '#555555',
-              }),
+                borderColor: '#555555'
+              })
             })}
             variant="middle"
             component="li"
@@ -73,7 +73,7 @@ export default function MessagesList() {
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>

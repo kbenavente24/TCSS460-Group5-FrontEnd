@@ -6,7 +6,7 @@ import { createContext, ReactElement } from 'react';
 import defaultConfig, {
   MenuOrientation,
   ThemeDirection,
-  ThemeMode,
+  ThemeMode
 } from 'config';
 import useLocalStorage from 'hooks/useLocalStorage';
 
@@ -15,7 +15,7 @@ import {
   CustomizationProps,
   FontFamily,
   I18n,
-  PresetColor,
+  PresetColor
 } from 'types/config';
 
 // initial state
@@ -29,7 +29,7 @@ const initialState: CustomizationProps = {
   onChangeMiniDrawer: () => {},
   onChangeThemeLayout: () => {},
   onChangeMenuOrientation: () => {},
-  onChangeFontFamily: () => {},
+  onChangeFontFamily: () => {}
 };
 
 // ==============================|| CONFIG CONTEXT & PROVIDER ||============================== //
@@ -49,42 +49,42 @@ function ConfigProvider({ children }: ConfigProviderProps) {
   const onChangeContainer = (container: boolean) => {
     setConfig({
       ...config,
-      container: container,
+      container: container
     });
   };
 
   const onChangeLocalization = (lang: I18n) => {
     setConfig({
       ...config,
-      i18n: lang,
+      i18n: lang
     });
   };
 
   const onChangeMode = (mode: ThemeMode) => {
     setConfig({
       ...config,
-      mode,
+      mode
     });
   };
 
   const onChangePresetColor = (theme: PresetColor) => {
     setConfig({
       ...config,
-      presetColor: theme,
+      presetColor: theme
     });
   };
 
   const onChangeDirection = (direction: ThemeDirection) => {
     setConfig({
       ...config,
-      themeDirection: direction,
+      themeDirection: direction
     });
   };
 
   const onChangeMiniDrawer = (miniDrawer: boolean) => {
     setConfig({
       ...config,
-      miniDrawer,
+      miniDrawer
     });
   };
 
@@ -95,21 +95,21 @@ function ConfigProvider({ children }: ConfigProviderProps) {
     setConfig({
       ...config,
       miniDrawer,
-      themeDirection: direction,
+      themeDirection: direction
     });
   };
 
   const onChangeMenuOrientation = (layout: MenuOrientation) => {
     setConfig({
       ...config,
-      menuOrientation: layout,
+      menuOrientation: layout
     });
   };
 
   const onChangeFontFamily = (fontFamily: FontFamily) => {
     setConfig({
       ...config,
-      fontFamily,
+      fontFamily
     });
   };
 
@@ -125,7 +125,7 @@ function ConfigProvider({ children }: ConfigProviderProps) {
         onChangeMiniDrawer,
         onChangeThemeLayout,
         onChangeMenuOrientation,
-        onChangeFontFamily,
+        onChangeFontFamily
       }}
     >
       {children}

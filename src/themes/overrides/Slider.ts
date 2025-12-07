@@ -21,7 +21,7 @@ export default function Slider(theme: Theme) {
     MuiSlider: {
       styleOverrides: {
         track: {
-          height: '1px',
+          height: '1px'
         },
         thumb: {
           width: 14,
@@ -31,25 +31,25 @@ export default function Slider(theme: Theme) {
           backgroundColor: theme.palette.background.paper,
           '&.MuiSlider-thumbColorPrimary': getColorStyle({
             color: 'primary',
-            theme,
+            theme
           }),
           '&.MuiSlider-thumbColorSecondary': getColorStyle({
             color: 'secondary',
-            theme,
+            theme
           }),
           '&.MuiSlider-thumbColorSuccess': getColorStyle({
             color: 'success',
-            theme,
+            theme
           }),
           '&.MuiSlider-thumbColorWarning': getColorStyle({
             color: 'warning',
-            theme,
+            theme
           }),
           '&.MuiSlider-thumbColorInfo': getColorStyle({ color: 'info', theme }),
           '&.MuiSlider-thumbColorError': getColorStyle({
             color: 'error',
-            theme,
-          }),
+            theme
+          })
         },
         mark: {
           width: 4,
@@ -61,31 +61,31 @@ export default function Slider(theme: Theme) {
           '&.MuiSlider-markActive': {
             opacity: 1,
             borderColor: 'inherit',
-            borderWidth: 2,
-          },
+            borderWidth: 2
+          }
         },
         rail: {
-          color: theme.palette.secondary.light,
+          color: theme.palette.secondary.light
         },
         root: {
           '&.Mui-disabled': {
             '.MuiSlider-rail': {
-              opacity: 0.25,
+              opacity: 0.25
             },
             '.MuiSlider-track': {
-              color: theme.palette.secondary.lighter,
+              color: theme.palette.secondary.lighter
             },
             '.MuiSlider-thumb': {
               border: '2px solid',
-              borderColor: theme.palette.secondary.lighter,
-            },
-          },
+              borderColor: theme.palette.secondary.lighter
+            }
+          }
         },
         valueLabel: {
           backgroundColor: theme.palette.grey[600],
-          color: theme.palette.grey[0],
-        },
-      },
-    },
+          color: theme.palette.grey[0]
+        }
+      }
+    }
   };
 }

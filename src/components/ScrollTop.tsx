@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 // ==============================|| NAVIGATION - SCROLL TO TOP ||============================== //
 
 export default function ScrollTop({
-  children,
+  children
 }: {
   children: ReactElement | null;
 }) {
@@ -14,7 +14,7 @@ export default function ScrollTop({
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth',
+      behavior: 'smooth'
     });
   }, [pathname]);
 

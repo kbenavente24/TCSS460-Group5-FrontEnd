@@ -5,7 +5,7 @@ import { alpha, createTheme } from '@mui/material/styles';
 import {
   presetDarkPalettes,
   presetPalettes,
-  PalettesProps,
+  PalettesProps
 } from '@ant-design/colors';
 
 // project import
@@ -33,7 +33,7 @@ export default function Palette(mode: ThemeMode, presetColor: PresetColor) {
     '#595959',
     '#262626',
     '#141414',
-    '#000000',
+    '#000000'
   ];
   let greyAscent = ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'];
   let greyConstant = ['#fafafb', '#e6ebf1'];
@@ -50,7 +50,7 @@ export default function Palette(mode: ThemeMode, presetColor: PresetColor) {
       '#f0f0f0',
       '#f5f5f5',
       '#fafafa',
-      '#ffffff',
+      '#ffffff'
     ];
     // greyPrimary.reverse();
     greyAscent = ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'];
@@ -69,7 +69,7 @@ export default function Palette(mode: ThemeMode, presetColor: PresetColor) {
       mode,
       common: {
         black: '#000',
-        white: '#fff',
+        white: '#fff'
       },
       ...paletteColor,
       text: {
@@ -84,10 +84,10 @@ export default function Palette(mode: ThemeMode, presetColor: PresetColor) {
         disabled:
           mode === ThemeMode.DARK
             ? alpha(paletteColor.grey[900]!, 0.1)
-            : paletteColor.grey[400],
+            : paletteColor.grey[400]
       },
       action: {
-        disabled: paletteColor.grey[300],
+        disabled: paletteColor.grey[300]
       },
       divider:
         mode === ThemeMode.DARK
@@ -98,8 +98,8 @@ export default function Palette(mode: ThemeMode, presetColor: PresetColor) {
           mode === ThemeMode.DARK
             ? paletteColor.grey[100]
             : paletteColor.grey[0],
-        default: paletteColor.grey.A50,
-      },
-    },
+        default: paletteColor.grey.A50
+      }
+    }
   });
 }

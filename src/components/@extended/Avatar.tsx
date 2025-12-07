@@ -14,7 +14,7 @@ import {
   AvatarTypeProps,
   ColorProps,
   ExtendedStyleProps,
-  SizeProps,
+  SizeProps
 } from 'types/extended';
 
 // ==============================|| AVATAR - COLOR STYLE ||============================== //
@@ -31,26 +31,26 @@ function getColorStyle({ theme, color, type }: AvatarStyleProps) {
     case 'filled':
       return {
         color: contrastText,
-        background: main,
+        background: main
       };
     case 'outlined':
       return {
         color: main,
         border: '1px solid',
         borderColor: main,
-        background: 'transparent',
+        background: 'transparent'
       };
     case 'combined':
       return {
         color: main,
         border: '1px solid',
         borderColor: light,
-        background: lighter,
+        background: lighter
       };
     default:
       return {
         color: main,
-        background: lighter,
+        background: lighter
       };
   }
 }
@@ -64,38 +64,38 @@ function getSizeStyle(size?: SizeProps) {
         border: '2px solid',
         fontSize: '0.675rem',
         width: 20,
-        height: 20,
+        height: 20
       };
     case 'xs':
       return {
         fontSize: '0.75rem',
         width: 24,
-        height: 24,
+        height: 24
       };
     case 'sm':
       return {
         fontSize: '0.875rem',
         width: 32,
-        height: 32,
+        height: 32
       };
     case 'lg':
       return {
         fontSize: '1.2rem',
         width: 52,
-        height: 52,
+        height: 52
       };
     case 'xl':
       return {
         fontSize: '1.5rem',
         width: 64,
-        height: 64,
+        height: 64
       };
     case 'md':
     default:
       return {
         fontSize: '1rem',
         width: 40,
-        height: 40,
+        height: 40
       };
   }
 }
@@ -110,20 +110,20 @@ interface AvatarStyledProps {
 
 const AvatarStyle = styled(MuiAvatar, {
   shouldForwardProp: (prop) =>
-    prop !== 'color' && prop !== 'type' && prop !== 'size',
+    prop !== 'color' && prop !== 'type' && prop !== 'size'
 })<AvatarStyledProps>(({ theme, size, color, type }) => ({
   ...getSizeStyle(size),
   ...getColorStyle({ theme, color, type }),
   variants: [
     {
       props: {
-        size: 'badge',
+        size: 'badge'
       },
       style: {
-        borderColor: theme.palette.background.default,
-      },
-    },
-  ],
+        borderColor: theme.palette.background.default
+      }
+    }
+  ]
 }));
 
 // ==============================|| EXTENDED - AVATAR ||============================== //

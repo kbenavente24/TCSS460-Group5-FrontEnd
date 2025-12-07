@@ -33,8 +33,8 @@ export default function HeaderContent() {
           ml: 2,
           whiteSpace: 'nowrap',
           '&:hover': {
-            color: '#E0E0E0',
-          },
+            color: '#E0E0E0'
+          }
         }}
       >
         Group 5&apos;s Movie & TV Show App
@@ -53,7 +53,7 @@ export default function HeaderContent() {
               whiteSpace: 'nowrap',
               fontSize: '1.1rem',
               fontWeight: 500,
-              '&:hover': { color: '#E0E0E0' },
+              '&:hover': { color: '#E0E0E0' }
             }}
           >
             Home
@@ -66,7 +66,7 @@ export default function HeaderContent() {
               whiteSpace: 'nowrap',
               fontSize: '1.1rem',
               fontWeight: 500,
-              '&:hover': { color: '#E0E0E0' },
+              '&:hover': { color: '#E0E0E0' }
             }}
           >
             Movies
@@ -79,7 +79,7 @@ export default function HeaderContent() {
               whiteSpace: 'nowrap',
               fontSize: '1.1rem',
               fontWeight: 500,
-              '&:hover': { color: '#E0E0E0' },
+              '&:hover': { color: '#E0E0E0' }
             }}
           >
             TV Shows
@@ -92,7 +92,7 @@ export default function HeaderContent() {
               whiteSpace: 'nowrap',
               fontSize: '1.1rem',
               fontWeight: 500,
-              '&:hover': { color: '#E0E0E0' },
+              '&:hover': { color: '#E0E0E0' }
             }}
           >
             Search
@@ -105,7 +105,7 @@ export default function HeaderContent() {
               whiteSpace: 'nowrap',
               fontSize: '1.1rem',
               fontWeight: 500,
-              '&:hover': { color: '#E0E0E0' },
+              '&:hover': { color: '#E0E0E0' }
             }}
           >
             My Top 10s

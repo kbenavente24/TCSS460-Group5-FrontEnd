@@ -9,8 +9,8 @@ const API_BASE_URL = '/api/movies';
 const movieApiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    accept: 'application/json',
-  },
+    accept: 'application/json'
+  }
 });
 
 export interface Movie {
@@ -66,7 +66,7 @@ export const movieApi = {
       console.log('API Base URL:', API_BASE_URL);
 
       const response = await movieApiClient.get('', {
-        params: filters,
+        params: filters
       });
 
       console.log('API Response:', response.data);
@@ -99,14 +99,14 @@ export const movieApi = {
               page: responseData.meta.page || 1,
               limit: responseData.meta.limit || filters?.limit || 20,
               total: responseData.meta.total || movies.length,
-              totalPages: responseData.meta.pages || 1,
+              totalPages: responseData.meta.pages || 1
             }
           : {
               page: 1,
               limit: filters?.limit || 20,
               total: movies.length,
-              totalPages: 1,
-            },
+              totalPages: 1
+            }
       };
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -117,8 +117,8 @@ export const movieApi = {
           page: 1,
           limit: filters?.limit || 20,
           total: 0,
-          totalPages: 0,
-        },
+          totalPages: 0
+        }
       };
     }
   },
@@ -136,7 +136,7 @@ export const movieApi = {
     limit = 20
   ): Promise<MoviesResponse> => {
     return movieApi.getMovies({ title, page, limit });
-  },
+  }
 };
 
 export default movieApi;

@@ -52,7 +52,7 @@ const MOCK_MOVIES = [
     revenue: '150367300',
     mpa_rating: 'R',
     poster_url: '/mIg1qCkVxnAlM2TK3RUF0tdEXlE.jpg',
-    backdrop_url: '/zav0v7gLWMu6pVwgsIAwt11GJ4C.jpg',
+    backdrop_url: '/zav0v7gLWMu6pVwgsIAwt11GJ4C.jpg'
   },
   {
     movie_id: 127,
@@ -68,7 +68,7 @@ const MOCK_MOVIES = [
     revenue: '852000',
     mpa_rating: 'R',
     poster_url: '/3kcQOLwYKGPwyjiynFsvP8vHvRn.jpg',
-    backdrop_url: '/nEH7XUCeWsEuJtGgWUVUl6MEQW0.jpg',
+    backdrop_url: '/nEH7XUCeWsEuJtGgWUVUl6MEQW0.jpg'
   },
   {
     movie_id: 101,
@@ -84,7 +84,7 @@ const MOCK_MOVIES = [
     revenue: '138003641',
     mpa_rating: 'R',
     poster_url: '/llWl3GtNoXosbvYboelmoT459NM.jpg',
-    backdrop_url: '/d2faCjeaynI2nPDVh9PiRapcLcl.jpg',
+    backdrop_url: '/d2faCjeaynI2nPDVh9PiRapcLcl.jpg'
   },
   {
     movie_id: 189,
@@ -100,7 +100,7 @@ const MOCK_MOVIES = [
     revenue: '1169365',
     mpa_rating: 'R',
     poster_url: '/lZZKTEvo92u1J5pm7QoEA5yN3du.jpg',
-    backdrop_url: '/xSqaVqkbeSaPmeEyurWBaTSkgL9.jpg',
+    backdrop_url: '/xSqaVqkbeSaPmeEyurWBaTSkgL9.jpg'
   },
   {
     movie_id: 223,
@@ -116,7 +116,7 @@ const MOCK_MOVIES = [
     revenue: '0',
     mpa_rating: 'PG-13',
     poster_url: '/l0CaVyqnTsWwNd4hWsrLNEk1Wjd.jpg',
-    backdrop_url: '/ngLxW9WqQAkTCBTcjOSt2Pnz5qZ.jpg',
+    backdrop_url: '/ngLxW9WqQAkTCBTcjOSt2Pnz5qZ.jpg'
   },
   {
     movie_id: 260,
@@ -132,7 +132,7 @@ const MOCK_MOVIES = [
     revenue: '84058132',
     mpa_rating: '6',
     poster_url: '/hhL8QC7O6fFfwgV6pDf1WSOxGcY.jpg',
-    backdrop_url: '/rTNMyZ5JcrfKnPamaYOo9wzq3m5.jpg',
+    backdrop_url: '/rTNMyZ5JcrfKnPamaYOo9wzq3m5.jpg'
   },
   {
     movie_id: 49,
@@ -148,7 +148,7 @@ const MOCK_MOVIES = [
     revenue: '955149195',
     mpa_rating: 'PG',
     poster_url: '/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg',
-    backdrop_url: '/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg',
+    backdrop_url: '/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg'
   },
   {
     movie_id: 225,
@@ -164,7 +164,7 @@ const MOCK_MOVIES = [
     revenue: '261907653',
     mpa_rating: 'PG-13',
     poster_url: '/hU42CRk14JuPEdqZG3AWmagiPAP.jpg',
-    backdrop_url: '/6XjMwQTvnICBz6TguiDKkDVHvgS.jpg',
+    backdrop_url: '/6XjMwQTvnICBz6TguiDKkDVHvgS.jpg'
   },
   {
     movie_id: 131,
@@ -180,7 +180,7 @@ const MOCK_MOVIES = [
     revenue: '24856027',
     mpa_rating: 'R',
     poster_url: '/67xRIXm5TxXRT4nV2V4AEJ9yq2d.jpg',
-    backdrop_url: '/fViElUGfdoZjtnVxvSpJX8TwxY6.jpg',
+    backdrop_url: '/fViElUGfdoZjtnVxvSpJX8TwxY6.jpg'
   },
   {
     movie_id: 53,
@@ -196,7 +196,7 @@ const MOCK_MOVIES = [
     revenue: '99068160',
     mpa_rating: 'R',
     poster_url: '/6FRFIogh3zFnVWn7Z6zcYnIbRcX.jpg',
-    backdrop_url: '/fTrQsdMS2MUw00RnzH0r3JWHhts.jpg',
+    backdrop_url: '/fTrQsdMS2MUw00RnzH0r3JWHhts.jpg'
   },
   {
     movie_id: 263,
@@ -212,7 +212,7 @@ const MOCK_MOVIES = [
     revenue: '43015969',
     mpa_rating: 'R',
     poster_url: '/5gKKSoD3iezjoL7YqZONjmyAiRA.jpg',
-    backdrop_url: '/2TPoqmatGDfBOiRxqNoL11ncCJe.jpg',
+    backdrop_url: '/2TPoqmatGDfBOiRxqNoL11ncCJe.jpg'
   },
   {
     movie_id: 133,
@@ -228,8 +228,8 @@ const MOCK_MOVIES = [
     revenue: '3854594',
     mpa_rating: 'R',
     poster_url: '/gt70JOD9xsPlpJnuBJAWdOT4yRg.jpg',
-    backdrop_url: '/7bIWKyWdT04HTY3PqLETT8CH7jo.jpg',
-  },
+    backdrop_url: '/7bIWKyWdT04HTY3PqLETT8CH7jo.jpg'
+  }
 ];
 
 // ==============================|| MOVIES PAGE ||============================== //
@@ -289,7 +289,7 @@ export default function MoviesPage() {
         const response = await movieApi.getMovies({
           title: titleFilter,
           page: currentPage,
-          limit: limit,
+          limit: limit
         });
 
         setMovies(response.data);
@@ -302,7 +302,7 @@ export default function MoviesPage() {
               prevCache.set(cacheKey, {
                 data: response.data,
                 totalPages: response.pagination.totalPages,
-                timestamp: now,
+                timestamp: now
               })
             )
         );
@@ -340,7 +340,7 @@ export default function MoviesPage() {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 0,
+      minimumFractionDigits: 0
     }).format(num);
   };
 
@@ -348,7 +348,7 @@ export default function MoviesPage() {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
+      day: 'numeric'
     });
   };
 
@@ -401,7 +401,7 @@ export default function MoviesPage() {
           p: 3,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}
       >
         <Typography variant="h4">Loading movies...</Typography>
@@ -417,7 +417,7 @@ export default function MoviesPage() {
           p: 3,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}
       >
         <Typography variant="h4" color="error">
@@ -477,22 +477,22 @@ export default function MoviesPage() {
               backgroundColor: 'background.paper',
               '& fieldset': {
                 borderWidth: 2,
-                borderColor: 'primary.main',
+                borderColor: 'primary.main'
               },
               '&:hover fieldset': {
-                borderColor: 'primary.dark',
+                borderColor: 'primary.dark'
               },
               '&.Mui-focused fieldset': {
-                borderColor: 'primary.main',
-              },
-            },
+                borderColor: 'primary.main'
+              }
+            }
           }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
                 <SearchOutlined style={{ fontSize: '1.2rem' }} />
               </InputAdornment>
-            ),
+            )
           }}
         />
       </Stack>
@@ -507,18 +507,18 @@ export default function MoviesPage() {
           display: 'flex',
           flexDirection: 'column',
           '&::-webkit-scrollbar': {
-            width: '12px',
+            width: '12px'
           },
           '&::-webkit-scrollbar-track': {
-            backgroundColor: 'background.paper',
+            backgroundColor: 'background.paper'
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#424242',
             borderRadius: '6px',
             '&:hover': {
-              backgroundColor: '#303030',
-            },
-          },
+              backgroundColor: '#303030'
+            }
+          }
         }}
       >
         {movies.length === 0 ? (
@@ -528,7 +528,7 @@ export default function MoviesPage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '100%',
+              height: '100%'
             }}
           >
             <Typography variant="h4" color="text.secondary">
@@ -542,7 +542,7 @@ export default function MoviesPage() {
               display: 'flex',
               alignItems: 'center',
               gap: 2,
-              height: '100%',
+              height: '100%'
             }}
           >
             {/* Left Arrow */}
@@ -565,8 +565,8 @@ export default function MoviesPage() {
                     transition: 'transform 0.2s, box-shadow 0.2s',
                     '&:hover': {
                       transform: 'scale(1.02)',
-                      boxShadow: 4,
-                    },
+                      boxShadow: 4
+                    }
                   }}
                   onClick={() =>
                     router.push(`/movies/${selectedMovie.movie_id}`)
@@ -591,7 +591,7 @@ export default function MoviesPage() {
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'flex-start',
-                        mb: 1,
+                        mb: 1
                       }}
                     >
                       <Typography variant="h2" gutterBottom>
@@ -730,8 +730,8 @@ export default function MoviesPage() {
                         position: 'relative',
                         '&:hover': {
                           transform: 'scale(1.02)',
-                          boxShadow: 4,
-                        },
+                          boxShadow: 4
+                        }
                       }}
                       onClick={() => handleMovieClick(movie)}
                     >
@@ -746,8 +746,8 @@ export default function MoviesPage() {
                           backgroundColor: 'rgba(255, 255, 255, 0.9)',
                           '&:hover': {
                             backgroundColor: 'error.light',
-                            color: 'error.contrastText',
-                          },
+                            color: 'error.contrastText'
+                          }
                         }}
                         color="error"
                         size="small"
@@ -765,7 +765,7 @@ export default function MoviesPage() {
                           p: 2,
                           flex: 1,
                           display: 'flex',
-                          flexDirection: 'column',
+                          flexDirection: 'column'
                         }}
                       >
                         <Typography variant="h5" gutterBottom>
@@ -798,7 +798,7 @@ export default function MoviesPage() {
                             textOverflow: 'ellipsis',
                             display: '-webkit-box',
                             WebkitLineClamp: 3,
-                            WebkitBoxOrient: 'vertical',
+                            WebkitBoxOrient: 'vertical'
                           }}
                         >
                           {movie.overview}

@@ -24,8 +24,8 @@ export async function GET(request: NextRequest) {
       params,
       headers: {
         'X-API-Key': MOVIE_API_KEY,
-        accept: 'application/json',
-      },
+        accept: 'application/json'
+      }
     });
 
     console.log('✅ Movies API response status:', response.status);
@@ -44,8 +44,8 @@ export async function GET(request: NextRequest) {
             page: 1,
             limit: 20,
             total: 0,
-            pages: 0,
-          },
+            pages: 0
+          }
         });
       }
 

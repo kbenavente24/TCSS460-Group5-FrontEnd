@@ -25,8 +25,8 @@ export default function Header() {
       borderBottom: '1px solid',
       borderBottomColor: '#333',
       zIndex: 1200,
-      width: '100%',
-    },
+      width: '100%'
+    }
   };
 
   return <AppBar {...appBar}>{mainHeader}</AppBar>;

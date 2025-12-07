@@ -12,9 +12,9 @@ export default function TableFooter(theme: Theme) {
           borderTop: '2px solid',
           borderTopColor: theme.palette.divider,
           borderBottom: '1px solid',
-          borderBottomColor: theme.palette.divider,
-        },
-      },
-    },
+          borderBottomColor: theme.palette.divider
+        }
+      }
+    }
   };
 }

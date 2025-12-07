@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemButton,
-  ListItemText,
+  ListItemText
 } from '@mui/material';
 
 // project import
@@ -17,7 +17,7 @@ import { useMessage } from 'contexts/MessageContext';
 
 export function MessageListItem({
   message,
-  onDelete,
+  onDelete
 }: {
   message: IMessage;
   onDelete: (name: string) => void;
@@ -63,7 +63,7 @@ export function MessageListItem({
           primary={message.message}
           secondary={message.name}
           slotProps={{
-            secondary: { color: 'gray' },
+            secondary: { color: 'gray' }
           }}
         />
       </ListItemButton>

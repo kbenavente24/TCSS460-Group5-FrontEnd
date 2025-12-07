@@ -20,8 +20,8 @@ export async function GET(request: NextRequest) {
       params,
       headers: {
         'X-API-Key': TV_SHOW_API_KEY,
-        accept: 'application/json',
-      },
+        accept: 'application/json'
+      }
     });
 
     return NextResponse.json(response.data);
