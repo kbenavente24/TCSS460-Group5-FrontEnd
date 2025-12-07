@@ -4,9 +4,9 @@ import axios from 'axios';
 const TV_SHOW_API_URL = process.env.NEXT_PUBLIC_TV_SHOW_API_URL;
 const TV_SHOW_API_KEY = process.env.NEXT_PUBLIC_TV_SHOW_API_KEY;
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     console.log('📡 Proxying TV show by ID request:', id);
 
