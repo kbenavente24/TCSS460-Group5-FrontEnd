@@ -87,7 +87,7 @@ Discord (text + voice) throughout the sprint.
 - All pages are stable, thoroughly tested, and match the final Figma design.
 
 ### Note on Credentials API Development
-Before the final sprint, our team implemented our **own custom Credentials API** because Group 8's Credentials API was not functional at the time. We wanted to demonstrate that we fully understood the authentication workflow, including email verification, login, registration, and secure session handling. Our repository contains commits showing a more complete and fully functional verification workflow that we had integrated into the front end.
+Before the final sprint, our team implemented our **own custom Credentials API** because Group 8's Credentials API was not functional at the time. We wanted to demonstrate that we fully understood the authentication workflow, including email verification, login, registration, and secure session handling. Our repository contains commits showing a more complete and fully functional verification workflow that we had integrated into the front end. Another thing is that we mentioned to the credentials API team that we require the admin account to further flesh out admin functionality (such as delete) but we did not get a response to that is not a thing.
 
 For the **final production sprint**, we switched back to using **Group 8's third-party Credentials API**, as required by the project specifications. Although the verification endpoint never became functional, we aligned our final implementation with the course requirement to use the provided third-party APIs rather than our personal API.
 
