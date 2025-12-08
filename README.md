@@ -47,7 +47,7 @@ Worked extensively through the Credentials API functionality bugs. Fixed TV Show
 ### **MD Khan (Shanto)**
 Contributed to final UI adjustments, cleaned up layout components, and assisted with connecting the remaining pages to their respective API endpoints. Helped ensure search results and detail pages rendered uniformly across the application.
 
-### **Pham "Yenni" Nguyen**
+### **Pham Nguyen**
 Helped polish the final UI, corrected styling inconsistencies, and assisted in preparing the application for production deployment. Contributed to validating API responses and making sure components handled real data cleanly.
 
 ---
