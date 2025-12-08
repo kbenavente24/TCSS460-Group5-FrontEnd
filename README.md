@@ -1,138 +1,232 @@
-# 📺 TCSS 460 Group 5 Front-end Version Beta II
+# 📺 TCSS 460 Group 5 — Front-End Project
+Combined README: Beta I, Beta II, and Front-End Project
+---
 
-Production URL: https://tcss460-group5.vercel.app
+# Published Front End Production
+**Production URL:** https://tcss460-group5.vercel.app
+*Due: Sun Dec 7, 2025 11:59pm*
 
-This repository contains the Group 5 Front-End application for the TCSS 460 course project. This web interface provides an interactive platform for discovering and ranking TV shows and movies, connecting to our assigned TV show, Movies, and Credentials API backend.
+## Web API Connection
+All front-end functionality is fully connected to the required 3rd-party APIs.
+Our project did not use any Heroku-hosted APIs. All APIs provided to our group were Render-hosted.
 
-## 🎯 Overview
+### APIs Used
+- **TV Shows API (Group 7)** — https://tcss-460-group-7-tv-shows-dataset-api-g4kq.onrender.com/api-docs
+- **Movies API (Group 6)** — https://tcss460-api.onrender.com/api-docs
+- **Credentials API (Group 8)** — https://credential-api-giuj.onrender.com/
 
-Our web application allows users to interact with comprehensive TV show and movie information. Users are able to search, filter, and view detailed information all in one place.
+---
 
-The standout feature of our application is the **personalized Top 10 ranking system**. Rather than simply browsing content, users can create custom-themed Top 10 lists that reflect their unique tastes and preferences.
+## Functionality
+Everything on our front end is fully functional with the provided APIs.
+All pages are consistent, match our Figma designs, and the application is thoroughly tested.
 
-**Example Top 10 Lists:**
--  My Top 10 Action Movies
--  My Top 10 Shows of 2024
--  My Top 10 Netflix Originals
--  My Top 10 Comfort Watches
--  My Top 10 Underrated Gems
+### Front-End Highlights
+- **Advanced Search with Tabbed Interface** — Real-time search with tabs for switching between Movies and TV Shows
+- **Multiple Search Filters** — Genre, year, director, actor, studio, network, and status filters for precise results
+- **Pagination System** — Handles large datasets with page-based navigation for optimal performance
+- **Custom Top 10 Lists Feature** — Create personalized lists with three types: Movies-only, TV Shows-only, or Mixed
+- **User-Scoped Data** — All lists are private and securely tied to authenticated users
+- **Dark/Light Theme Toggle** — Persistent theme preference using local storage
+- **Responsive Navigation** — Adaptive drawer/sidebar with mobile support for seamless experience across devices
+- **All Pages Connected to Real API Data** — Live data from all three third-party APIs
+- **Clean and Consistent UI** — Matches final Figma design specifications across all pages
 
-### 🔄 How It Works
+---
 
-1. **Create a List Category** - Define your custom theme or category
-2. **Search the Database** - Use provided API endpoints to search by:
-   - Genre
-   - Release year
-   - Title/name
-   - Network/platform
-   - And more...
-3. **Select Your Favorites** - Browse results and pick shows or movies
-4. **Rank Your Top 10** - Arrange your selections in your preferred order
+# Final Sprint Contribution (Production)
 
-## 🎨 Design Assets
+## 👥 Group Members & Contributions
+### **Kobe Benavente**
+Configured and deployed the web application on Vercel. Contributed to final front-end updates and search functionality. Adapted the search feature to work with the TV Show API and assisted with debugging issues related to the Credentials API.
 
-View our complete mockup designs and user flow diagrams on Figma:
+### **Balkirat Singh**
+Worked extensively through the Credentials API functionality bugs. Fixed TV Show API filtering issues, specifically where the year filter was not functional. Ensured the final front end was clean, stable, and consistent with both APIs and performed final testing and UI cleanup.
 
-[Group 5 Design File](https://www.figma.com/design/Rd5diwQyQHicwcu4e7WKx7/group-5?node-id=18-2&t=BP7qIy3ceWIuPv9N-1)
+### **MD Khan (Shanto)**
+Contributed to final UI adjustments, cleaned up layout components, and assisted with connecting the remaining pages to their respective API endpoints. Helped ensure search results and detail pages rendered uniformly across the application.
 
-## 📊 Current Status
+### **Pham "Yenni" Nguyen**
+Helped polish the final UI, corrected styling inconsistencies, and assisted in preparing the application for production deployment. Contributed to validating API responses and making sure components handled real data cleanly.
 
-**Beta Version II** - The application is now nearing the final production stage with core features implemented. Users can browse movies and tv shows, manage authentication, and navigate through a responsive UI.
+---
 
-## ✨ Current Features
+# Final Sprint Meetings
 
-### 🎥 Movies and TV Shows
-- **Browse** - View paginated grid of movies/show.
-- **Navigation** - Cycle through movies/shows using left/right arrows and via a paginated list.
-- **Toggle View Modes** - Toggle between single movie/shows view and multi-movie/shows grid.
-- **Search Bar and Search Page** - Advanced Searching Features tailored to our assigned apis.
+### **Meeting 1 — Thursday, 7:00pm–7:40pm (Discord)**
+**Topics Discussed:**
+- Verified the final UI layout and cross-checked with Figma
+- Assigned production tasks and prioritized the remaining bugs
+- Reviewed API integration behavior for search and detail pages
+
+### **Meeting 2 — Friday, 7:15pm–7:55pm (Discord)**
+**Topics Discussed:**
+- Re-tested the TV Show API year filtering issue
+- Debugged Credentials API interactions and verified login/registration stability
+- Synced progress on Top 10 List feature and search consistency
+
+### **Meeting 3 — Saturday, 7:30pm–8:10pm (Discord)**
+**Topics Discussed:**
+- Final UI cleanup, spacing, and responsive behavior
+- Confirmed removal of broken "Forgot Password" feature due to API verification endpoint failures
+- Prepared README updates and confirmed production readiness
+
+**Primary Communication:**
+Discord (text + voice) throughout the sprint.
+
+---
+
+# Final Sprint Comments
+
+- Our team went extensively back and forth with **Group 8's Credentials API** team to resolve verification and reset-password behavior.
+- The verification workflow did not function even after multiple tests using multiple emails.
+- Because of this, we removed the **Forgot Password** button from the login page to avoid having a broken feature on the front end.
+- All other API features work as expected.
+- The **Top 10 Lists feature** is fully functional and integrated with both APIs.
+- The search functionality works for both Movie and TV Show endpoints.
+- All pages are stable, thoroughly tested, and match the final Figma design.
+
+### Note on Credentials API Development
+Before the final sprint, our team implemented our **own custom Credentials API** because Group 8's Credentials API was not functional at the time. We wanted to demonstrate that we fully understood the authentication workflow, including email verification, login, registration, and secure session handling. Our repository contains commits showing a more complete and fully functional verification workflow that we had integrated into the front end.
+
+For the **final production sprint**, we switched back to using **Group 8's third-party Credentials API**, as required by the project specifications. Although the verification endpoint never became functional, we aligned our final implementation with the course requirement to use the provided third-party APIs rather than our personal API.
+
+---
+
+# Beta I Sprint
+
+## 📊 Current Status — Beta Version I
+The application entered active development with foundational and core features implemented. Users could browse movies and TV shows via mock data, manage authentication, and navigate the responsive UI.
+
+## ✨ Features Implemented in Beta I
+
+### 🎥 Movies
+- Paginated grid
+- Single movie view
+- Arrow navigation
+- Toggle grid/single view
+- Search bar UI (functionality pending)
+
+### 📺 TV Shows
+- TV shows list and detail pages using mock data
+- Pagination and navigation
 
 ### 🔐 Authentication
-- **User Login** - Sign in with email and password
-- **User Registration** - Create new accounts
-- **Session Management** - Persistent login sessions (1 day duration)
-- **Logout** - Secure sign out functionality
-- **Password Reset** - Reset password option in profile menu as well as in the login page.
+- Login and registration
+- Persistent sessions
+- Logout
+- Password reset
 
 ### 🎨 User Interface
-- **Responsive Design** - Clean, modern interface
-- **Dark/Light Theme** - Toggle between themes from profile menu
-- **Custom Branding** - "Group 5's Movie & TV Show App" branding
-- **Navigation Header** - Quick access to Home, My Top 10s, Movies, and TV Shows
-- **Welcome Page** - Homepage with current functionality overview
-  
-## 🔌 API Integration
+- Responsive design
+- Light/Dark mode toggle
+- Navigation header
+- Welcome homepage
 
-This front-end application connects to:
-- **Group 8's Credentials API** - User authentication and management
-- **Group 7's Movies API** - Movie data and search
-- **Group 6's TV Show API** - TV show data and search
+### 🔌 API Integration
+Connected to:
+- Group 8 Credentials API
+- Group 7 Movies API
+- Group 6 TV Shows API
 
-## 🗺️ Development Roadmap
+## 🗺️ Development Roadmap (Beta I)
+- Phase 1 — Complete
+- Phase 2 — In Progress
+- Phase 3 — Planned
+- Phase 4 — Upcoming
 
-### Phase 1: Foundation ✅ (Complete)
-- [x] Project planning
-- [x] Mockup design
-- [x] Project setup
+## 👥 Team Contributions — Beta I
+- **MD Khan (Shanto)** — TV shows mock pages, change password UI, fixed env issues
+- **Kobe Benavente** — Movies page, pagination, UI redesign, Vercel deployment
+- **Pham Nguyen** — Updated forms to match Auth API, integrated login/register
+- **Balkirat Singh** — Rebuilt database for Credentials API, assisted with mock data + validation
 
-### Phase 2: Minimum Requirements ✅ (Complete)
-- [x] User authentication flow (Register/Login/Forgot Password/Change Password)
-- [x] Movies: Search, view (paginated list + individual)
-- [x] TV Shows: Search, view (paginated list + individual)
-- [x] Basic UI components and layouts
+## 📅 Beta Sprint I Meetings
 
-### Phase 3: Top 10 Lists Feature ✅ (Complete)
-- [x] List creation interface
-- [x] List management system
-- [x] Ranking functionality
-- [x] Save lists
+### **Meeting 1 — Thursday, 7:00pm–7:40pm (Discord)**
+**Topics Discussed:**
+- Assigned responsibilities for Movies page, TV Shows page, authentication, and UI structure
+- Reviewed overall mockups and layout plan
+- Established environment setup steps and API integration expectations
 
-### Phase 4: Polish & Deploy Final Production
-- [ ] Responsive design optimization
-- [ ] Testing and bug fixes
-- [ ] Performance optimization
-- [ ] Production deployment
+### **Meeting 2 — Friday, 7:15pm–7:55pm (Discord)**
+**Topics Discussed:**
+- Debugged the Credentials API crash caused by database issues
+- Synced on mock data for TV shows and movies
+- Verified login/registration behavior against the Auth API rules
 
-## 👥 Team Contributions
+### **Meeting 3 — Saturday, 7:30pm–8:10pm (Discord)**
+**Topics Discussed:**
+- Reviewed progress toward Beta I milestones
+- Coordinated merging changes and resolving conflicts
+- Finalized Beta I documentation updates and confirmed deployment to Vercel
 
-- **MD Khan (Shanto)** - For this sprint, with the help of my team, I built the Create Movie/Show page, including a full form with all required fields based on the 3rd-party Web API, while keeping it UI-only to avoid affecting the live database. I also helped implement the Search page, allowing logged-in users to search Movies and TV Shows in all supported ways and displaying live results using the list component from the previous sprint. In addition, I designed the Delete feature UI/UX, including the delete button and confirmation modal, as a design-only requirement without connecting it to the backend.
-- **Kobe Benavente** - Helped implement our unique feature of creating top 10s list. Also helped with configuring the credentials API for user authentication functionality. Collaborated with group members to fix various bugs and UI issues.
-- **Pham Nguyen** - Implemented a page in the web app that allows users to view a list of Movies and Shows after logging in. Developed a detailed view for individual Movies and Shows to improve user interaction. Tested and refined the UI to enhance consistency, usability, and overall user experience.
-- **Balkirat Singh** -  Worked on getting the credentials API bug where verification wasn't working to resolve. Kobe was a big help and main factor in fixing. All work together on fixing the small bugs such as:
-- delete button not being on our front-end
-- some linking issues
-Updated the README file slightly.
-
-
-## 📅 Beta Sprint Meetings
-
-### Meeting Overview
-The team conducted regular meetings throughout the Beta Sprint II to coordinate development efforts and resolve technical challenges.
-
-**Primary Communication Channel:** Discord
-
-**Meeting Activities:**
-- **Role & Responsibility Division** - Team members met to assign development tasks and establish ownership of different features (Movies page, TV Shows page, authentication, UI/UX design)
-- **Initial Setup & Configuration** - Coordinated environment setup, API integration planning, and development workflow establishment
-- **Bug Resolution** - Collaborated to identify and fix a critical bug in the Credentials API integration affecting user authentication
-- **Progress Sync** - Regular check-ins to discuss implementation progress, share code updates, and resolve merge conflicts
-
-**Meeting Format:**
-- Platform: Discord voice channels and text chat
-- Frequency: Multiple sessions throughout the sprint as needed
-- Format: Synchronous discussions for decision-making and asynchronous updates via text channels
 ---
-## Issues We Faced in Beta II
 
-- **API Configuration**: Resolved challenges with configuring credentials for API authentication and integration.
-- **Movie Navigation Links**: Fixed an issue where clicking on movies in multi-view and search results wasn't navigating to the correct movie detail page.
-- **Next.js Search Crash**: Resolved a critical bug that was causing Next.js to crash when performing search operations.
-- **Advanced Search Implementation**: Successfully integrated the advanced search feature to allow filtering by multiple criteria.
-- **Top 10 Lists Feature**: Implemented the top 10 movies and TV shows list functionality.
-- **Delete Button Inconsistencies**: Addressed UI issues where the delete button had incorrect behavior when selecting specific movies. Newly created movies
-  still lack a delete button implementation.
- - **TV Show Creation Backend**: Unable to fully implement the create TV show backend functionality due to missing Group 7 API credentials. The UI button remains
-  visible but is not fully functional.
+# Beta II Sprint
 
-**Version:** Beta II
-**Last Updated:** November 2025
+## 📊 Current Status — Beta Version II
+The application is nearing final production. It now uses real API data, supports full authentication, and includes the Top 10 lists feature.
+
+## ✨ Features Implemented in Beta II
+
+### 🎥 Movies and TV Shows
+- Browse both categories
+- Pagination
+- Single/multi-view
+- Advanced search
+- Real-time results rendering
+
+### 🔐 Authentication
+- Login, register, logout
+- Persistent sessions
+- Reset password options
+
+### ⭐ Top 10 Lists
+- Create custom list categories
+- Add/remove items
+- Drag-and-drop ranking
+- Save lists
+
+### 🎨 User Interface
+- Responsive UI
+- Dark/light toggle
+- Updated navigation/header
+
+### 🔌 API Connectivity
+Integrated with:
+- Group 8 Credentials API
+- Group 7 Movies API
+- Group 6 TV Shows API
+
+## 🗺️ Development Roadmap (Beta II)
+- Phase 1 — Complete
+- Phase 2 — Complete
+- Phase 3 — Complete
+- Phase 4 — In Progress
+
+## 👥 Team Contributions — Beta II
+- **MD Khan (Shanto)** — Create Movie/Show UI, Search page, Delete UI
+- **Kobe Benavente** — Top 10 feature, Credentials API debugging, UI fixes
+- **Pham Nguyen** — Movie/show list pages with live API data, detail pages
+- **Balkirat Singh** — Helped fix Credentials API verification bug, fixed delete/linking issues, updated README
+
+## 📅 Beta Sprint II Meetings
+
+### **Meeting 1 — Thursday, 7:05pm–7:45pm (Discord)**
+**Topics Discussed:**
+- Planned Top 10 feature workflow and UI behavior
+- Reviewed API endpoints for search and filtering
+- Assigned tasks for advanced search and list management
+
+### **Meeting 2 — Friday, 7:20pm–8:00pm (Discord)**
+**Topics Discussed:**
+- Investigated and fixed the Credentials API email verification failure
+- Synced on Movie/Show navigation bugs
+- Coordinated work on live search integration and pagination updates
+
+### **Meeting 3 — Saturday, 7:40pm–8:20pm (Discord)**
+**Topics Discussed:**
+- Finalized UI polish and theme toggle adjustments
+- Reviewed incomplete TV Show creation backend due to missing Group 7 credentials
+- Confirmed readiness for Beta II submission and updated README sections
