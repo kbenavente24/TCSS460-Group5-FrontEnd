@@ -79,6 +79,10 @@ Discord (text + voice) throughout the sprint.
 
 # Final Sprint Comments
 
+### ⚠️ Performance Note on Loading Times
+Our front end is fully functional, but some actions take longer to complete because the APIs we rely on can be slow to respond. Registering an account can take up to about one minute before the verification returns. Logging in may also take noticeably longer than expected. The same delay can happen when navigating to Movies or TV Shows, especially when the TV Shows API is waking up from an inactive state. Everything will load successfully, but you may need to wait a little for the response. This is normal behavior for the Render hosted APIs we are using.
+
+
 - Our team went extensively back and forth with **Group 8's Credentials API** team to resolve verification and reset-password behavior.
 - The verification workflow did not function even after multiple tests using multiple emails.
 - Because of this, we removed the **Forgot Password** button from the login page to avoid having a broken feature on the front end.
