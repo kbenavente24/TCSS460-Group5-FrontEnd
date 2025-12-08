@@ -12,6 +12,7 @@ Our project did not use any Heroku-hosted APIs. All APIs provided to our group w
 
 ### APIs Used
 - **TV Shows API (Group 7)** — https://tcss-460-group-7-tv-shows-dataset-api-g4kq.onrender.com/api-docs
+  Their API went down on December 7th 6:30 pm. All our stuff was fully functional. But their render was not loading at all. Update: communicated and got the API back up and running. should be fully functional again. 
 - **Movies API (Group 6)** — https://tcss460-api.onrender.com/api-docs
 - **Credentials API (Group 8)** — https://credential-api-giuj.onrender.com/
 
